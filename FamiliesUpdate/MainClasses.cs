@@ -32,7 +32,7 @@ namespace DS.RevitApp.FamiliesUpdate
             int i = 0;
             //Through each file iterating
             foreach (string file in files)
-            {
+            { 
                 i++;
                 docs.OpenDoc(file, out Document doc);
 
