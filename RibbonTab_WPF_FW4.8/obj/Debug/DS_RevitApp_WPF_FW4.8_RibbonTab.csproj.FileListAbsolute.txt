@@ -20,3 +20,9 @@ C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_WPF_FW4.8_RibbonTab\DS_RevitApp_W
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_WPF_FW4.8_RibbonTab\DS_RevitApp_WPF_FW4.8_RibbonTab\obj\Debug\DS_RevitApp_WPF_FW4.8_RibbonTab.csproj.CoreCompileInputs.cache
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_WPF_FW4.8_RibbonTab\DS_RevitApp_WPF_FW4.8_RibbonTab\obj\Debug\DS_RevitApp_WPF_FW4.8_RibbonTab.dll
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_WPF_FW4.8_RibbonTab\DS_RevitApp_WPF_FW4.8_RibbonTab\obj\Debug\DS_RevitApp_WPF_FW4.8_RibbonTab.pdb
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\RibbonTab_WPF_FW4.8\bin\Debug\DS_RevitApp_WPF_FW4.8_RibbonTab.dll
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\RibbonTab_WPF_FW4.8\bin\Debug\DS_RevitApp_WPF_FW4.8_RibbonTab.pdb
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\RibbonTab_WPF_FW4.8\obj\Debug\DS_RevitApp_WPF_FW4.8_RibbonTab.csprojAssemblyReference.cache
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\RibbonTab_WPF_FW4.8\obj\Debug\DS_RevitApp_WPF_FW4.8_RibbonTab.csproj.CoreCompileInputs.cache
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\RibbonTab_WPF_FW4.8\obj\Debug\DS_RevitApp_WPF_FW4.8_RibbonTab.dll
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\RibbonTab_WPF_FW4.8\obj\Debug\DS_RevitApp_WPF_FW4.8_RibbonTab.pdb

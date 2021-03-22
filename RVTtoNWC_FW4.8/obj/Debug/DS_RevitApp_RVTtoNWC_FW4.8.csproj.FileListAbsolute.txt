@@ -1,0 +1,6 @@
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\RVTtoNWC_FW4.8\obj\Debug\DS_RevitApp_RVTtoNWC_FW4.8.csprojAssemblyReference.cache
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\RVTtoNWC_FW4.8\obj\Debug\DS_RevitApp_RVTtoNWC_FW4.8.csproj.CoreCompileInputs.cache
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\RVTtoNWC_FW4.8\bin\Debug\DS_RevitApp_RVTtoNWC_FW4.8.dll
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\RVTtoNWC_FW4.8\bin\Debug\DS_RevitApp_RVTtoNWC_FW4.8.pdb
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\RVTtoNWC_FW4.8\obj\Debug\DS_RevitApp_RVTtoNWC_FW4.8.dll
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\RVTtoNWC_FW4.8\obj\Debug\DS_RevitApp_RVTtoNWC_FW4.8.pdb
