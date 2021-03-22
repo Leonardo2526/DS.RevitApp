@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS_RevitApp_FamiliesUpdate_FW4.8", "FamiliesUpdate_FW4.8\DS_RevitApp_FamiliesUpdate_FW4.8.csproj", "{E893AF79-15A5-44A7-B47B-BE4248BDD56D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS_RevitApp_20_FamiliesUpdate_ClassLib_FW4.8", "FamiliesUpdate\DS_RevitApp_20_FamiliesUpdate_ClassLib_FW4.8.csproj", "{E893AF79-15A5-44A7-B47B-BE4248BDD56D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS_RevitTools.v1", "MainTools_FW4.7.2\DS_RevitTools.v1.csproj", "{B53658F6-B599-4DA4-88D6-CFDB602FE1A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS_RevitApp_20_RevitTools_ClassLib_FW4.8", "MainTools\DS_RevitApp_20_RevitTools_ClassLib_FW4.8.csproj", "{B53658F6-B599-4DA4-88D6-CFDB602FE1A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS_RevitApp_WPF_FW4.8_RibbonTab", "RibbonTab_WPF_FW4.8\DS_RevitApp_WPF_FW4.8_RibbonTab.csproj", "{2149EA0E-3A42-44C7-98D7-0AA5E7FE340E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS_RevitApp_20_RibbonTab_ClassLib_FW4.8", "RibbonTab\DS_RevitApp_20_RibbonTab_ClassLib_FW4.8.csproj", "{2149EA0E-3A42-44C7-98D7-0AA5E7FE340E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS_RevitApp_RVTtoNWC_FW4.8", "RVTtoNWC_FW4.8\DS_RevitApp_RVTtoNWC_FW4.8.csproj", "{F0118ACD-554B-4E04-B753-29488249F26F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS_RevitApp_20_RVTtoNWC_ClassLib_FW4.8", "RVTtoNWC\DS_RevitApp_20_RVTtoNWC_ClassLib_FW4.8.csproj", "{F0118ACD-554B-4E04-B753-29488249F26F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

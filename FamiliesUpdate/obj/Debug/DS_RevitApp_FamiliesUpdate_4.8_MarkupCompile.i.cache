@@ -4,7 +4,7 @@
 library
 C#
 .cs
-C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\FamiliesUpdate_FW4.8\obj\Debug\
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\FamiliesUpdate\obj\Debug\
 DS.RevitApp.FamiliesUpdate
 none
 false
@@ -13,8 +13,8 @@ DEBUG;TRACE
 31921629658
 
 9-1308603173
-17158756779
+17869320061
 FamiliesFilesList.xaml;ProjectFilesList.xaml;StartForms.xaml;
 
-True
+False
 
