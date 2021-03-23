@@ -5,9 +5,6 @@ namespace AddProjectParameters
 {
     public class ExternalEventHandler : IExternalEventHandler
     {
-        public List<string> FileList = new List<string>();
-        public List<string> FamiliesList = new List<string>();
-
         public UIApplication App;
         public ExternalEventHandler(UIApplication app)
         {
@@ -22,7 +19,7 @@ namespace AddProjectParameters
         public void Execute(UIApplication app)
         {
             Main main = new Main(app);
-            main.ExecuteLoadProcess(FileList, FamiliesList);
+            main.ExecuteLoadProcess();
         }
     }
 

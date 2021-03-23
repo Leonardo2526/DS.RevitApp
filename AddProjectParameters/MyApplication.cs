@@ -1,5 +1,6 @@
 ﻿using Autodesk.Revit.UI;
 using System.Windows.Forms;
+using RvtApplication = Autodesk.Revit.ApplicationServices.Application;
 
 namespace AddProjectParameters
 {
@@ -26,12 +27,13 @@ namespace AddProjectParameters
             m_MyForm = null;   // no dialog needed yet; the command will bring it
             thisApp = this;  // static access to this application instance
 
+
             return Result.Succeeded;
         }
 
         public void ShowForm(UIApplication uiapp)
         {
-            MessageBox.Show("New");
+            
             // If we do not have a dialog yet, create and show it
             if (m_MyForm == null || !m_MyForm.IsActive)
             {
@@ -47,6 +49,8 @@ namespace AddProjectParameters
                 m_MyForm.Show();
             }
         }
+
+      
 
     }
 

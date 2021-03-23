@@ -19,10 +19,6 @@ namespace AddProjectParameters
             try
             {
                 MyApplication.thisApp.ShowForm(revit.Application);
-                /*
-                UserControl1 userControl = new UserControl1();
-                userControl.Show();
-                */
                 return Result.Succeeded;
             }
             catch (Exception ex)
