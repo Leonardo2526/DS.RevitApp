@@ -61,6 +61,7 @@
     <Reference Include="DS_MainTools_Net_FW_4.7.2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\DS_WindowsFormsApp\DS_WindowsFormsApp_MainTools_FW4.7.2\DS_MainTools.v1\bin\Debug\DS_MainTools_Net_FW_4.7.2.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

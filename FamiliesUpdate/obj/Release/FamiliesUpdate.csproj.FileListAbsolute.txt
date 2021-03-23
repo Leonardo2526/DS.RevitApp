@@ -1,0 +1,8 @@
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\FamiliesUpdate\obj\Release\FamiliesUpdate.csprojAssemblyReference.cache
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\FamiliesUpdate\obj\Release\FamiliesFilesList.baml
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\FamiliesUpdate\obj\Release\ProjectFilesList.baml
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\FamiliesUpdate\obj\Release\FamiliesFilesList.g.cs
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\FamiliesUpdate\obj\Release\ProjectFilesList.g.cs
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\FamiliesUpdate\obj\Release\StartForms.g.cs
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\FamiliesUpdate\obj\Release\DS.FamiliesUpdate_MarkupCompile.cache
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\FamiliesUpdate\obj\Release\DS.FamiliesUpdate_MarkupCompile.lref
