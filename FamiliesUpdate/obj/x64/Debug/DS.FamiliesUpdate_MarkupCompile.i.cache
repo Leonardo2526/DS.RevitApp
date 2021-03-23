@@ -1,10 +1,10 @@
-﻿DS_RevitApp_FamiliesUpdate_4.8
+﻿DS.FamiliesUpdate
 
 
 library
 C#
 .cs
-C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\FamiliesUpdate\obj\Debug\
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\FamiliesUpdate\obj\x64\Debug\
 DS.RevitApp.FamiliesUpdate
 none
 false
@@ -12,9 +12,9 @@ DEBUG;TRACE
 
 31921629658
 
-9-1308603173
-17869320061
+9-1367029754
+161094808647
 FamiliesFilesList.xaml;ProjectFilesList.xaml;StartForms.xaml;
 
-True
+False
 

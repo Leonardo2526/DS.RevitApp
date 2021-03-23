@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DS_RevitApp_FamiliesUpdate_FW4.8")]
+[assembly: AssemblyTitle("FamiliesUpdate")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DS_RevitApp_FamiliesUpdate_FW4.8")]
+[assembly: AssemblyCompany("DS")]
+[assembly: AssemblyProduct("FamiliesUpdate")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

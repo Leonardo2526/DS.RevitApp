@@ -1,4 +1,4 @@
-﻿DS_RevitApp_FamiliesUpdate_4.8
+﻿DS.FamiliesUpdate
 
 
 library
@@ -16,5 +16,5 @@ DEBUG;TRACE
 17869320061
 FamiliesFilesList.xaml;ProjectFilesList.xaml;StartForms.xaml;
 
-True
+False
 
