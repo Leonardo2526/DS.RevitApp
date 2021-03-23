@@ -116,10 +116,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DS_FamiliesUpdate.addin" />
+    <None Include="DS.FamiliesUpdate.addin" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y  "$(TargetDir)$(TargetName).dll" "$(AppData)\Autodesk\Revit\Addins\2020\$(TargetName)\"</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y  "$(TargetDir)$(TargetName).dll" "$(AppData)\Autodesk\Revit\Addins\2020\$(TargetName)\"
+Copy "$(ProjectDir)$(TargetName).addin" "$(AppData)\Autodesk\Revit\Addins\2020"</PostBuildEvent>
   </PropertyGroup>
 </Project>
