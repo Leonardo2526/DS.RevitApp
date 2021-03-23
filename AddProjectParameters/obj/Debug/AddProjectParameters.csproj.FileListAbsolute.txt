@@ -1,0 +1,10 @@
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\AddProjectParameters\obj\Debug\AddProjectParameters.csprojAssemblyReference.cache
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\AddProjectParameters\obj\Debug\StartForm.baml
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\AddProjectParameters\obj\Debug\StartForm.g.cs
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\AddProjectParameters\obj\Debug\DS.AddProjectParameters_MarkupCompile.cache
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\AddProjectParameters\obj\Debug\DS.AddProjectParameters.g.resources
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\AddProjectParameters\obj\Debug\AddProjectParameters.csproj.CoreCompileInputs.cache
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\AddProjectParameters\bin\Debug\DS.AddProjectParameters.dll
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\AddProjectParameters\bin\Debug\DS.AddProjectParameters.pdb
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\AddProjectParameters\obj\Debug\DS.AddProjectParameters.dll
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\AddProjectParameters\obj\Debug\DS.AddProjectParameters.pdb
