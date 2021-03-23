@@ -75,7 +75,7 @@ namespace DS.RevitApp.FamiliesUpdate {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DS_RevitApp_FamiliesUpdate_4.8;component/familiesfileslist.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DS.FamiliesUpdate;component/familiesfileslist.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\FamiliesFilesList.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
