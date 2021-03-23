@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RibbonTab", "RibbonTab\Ribb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RVTtoNWC", "RVTtoNWC\RVTtoNWC.csproj", "{F0118ACD-554B-4E04-B753-29488249F26F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Revit_20", "Revit_20", "{3C01E7EE-A6DB-4158-B213-B05F18ECE35E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E893AF79-15A5-44A7-B47B-BE4248BDD56D} = {3C01E7EE-A6DB-4158-B213-B05F18ECE35E}
+		{B53658F6-B599-4DA4-88D6-CFDB602FE1A3} = {3C01E7EE-A6DB-4158-B213-B05F18ECE35E}
+		{2149EA0E-3A42-44C7-98D7-0AA5E7FE340E} = {3C01E7EE-A6DB-4158-B213-B05F18ECE35E}
+		{F0118ACD-554B-4E04-B753-29488249F26F} = {3C01E7EE-A6DB-4158-B213-B05F18ECE35E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {81D735BC-41D8-48E5-8A88-8E69565128CB}
