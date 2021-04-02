@@ -19,10 +19,10 @@ namespace DS.RevitApp.RibbonTab
         public Result OnStartup(UIControlledApplication application)
         {
             // Create a custom ribbon tab
-            string tabName = "DS.Tab";
+            string tabName = "ГЦМ_ДС";
             application.CreateRibbonTab(tabName);
 
-            var button1Path = Environment.ExpandEnvironmentVariables(@"%AppData%\Autodesk\Revit\Addins\2020\DS_RevitApp_RVTtoNWC_FW4.8\DS_RevitApp_RVTtoNWC_FW4.8.dll");
+            var button1Path = Environment.ExpandEnvironmentVariables(@"%AppData%\Autodesk\Revit\Addins\2020\DS.RVTtoNWC\DS.RVTtoNWC.dll");
             var button2Path = Environment.ExpandEnvironmentVariables(@"%AppData%\Autodesk\Revit\Addins\2020\DS_RevitApp_FamiliesUpdate_4.8\DS_RevitApp_FamiliesUpdate_4.8.dll");
             var button3Path = Environment.ExpandEnvironmentVariables(@"%AppData%\Autodesk\Revit\Addins\2020\DS.AddProjectParameters\DS.AddProjectParameters.dll");
 
@@ -33,7 +33,7 @@ namespace DS.RevitApp.RibbonTab
             PushButtonData button2 = new PushButtonData("Button2", "FamiliesUpdate", button2Path, "DS.RevitApp.FamiliesUpdate.EntryCommand");
             PushButtonData button3 = new PushButtonData("Button3", "AddProjectParameters", button3Path, "AddProjectParameters.EntryCommand");
 
-
+            button1.ToolTip = "Export files from *.rvt to *.nwc. \nVer.2";
 
             // Create a ribbon panel
             RibbonPanel m_projectPanel_1 = application.CreateRibbonPanel(tabName, "Tools");

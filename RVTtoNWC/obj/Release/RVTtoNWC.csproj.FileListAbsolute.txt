@@ -1,0 +1,10 @@
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\obj\Release\RVTtoNWC.csprojAssemblyReference.cache
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\obj\Release\RVTtoNWC.csproj.CoreCompileInputs.cache
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\bin\Release\DS.RVTtoNWC.dll
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\bin\Release\DS.RVTtoNWC.pdb
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\obj\Release\DS.RVTtoNWC.dll
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\obj\Release\DS.RVTtoNWC.pdb
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\bin\Release\DS_MainTools_Net_FW_4.7.2.dll
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\bin\Release\DS_MainTools_Net_FW_4.7.2.pdb
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\bin\Release\DS_MainTools_Net_FW_4.7.2.dll.config
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\obj\Release\RVTtoNWC.csproj.CopyComplete
