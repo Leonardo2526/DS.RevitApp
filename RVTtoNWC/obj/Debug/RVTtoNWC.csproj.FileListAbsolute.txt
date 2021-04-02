@@ -4,3 +4,7 @@ C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\obj\Debug\RVTtoNWC.cs
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\obj\Debug\RVTtoNWC.csproj.CoreCompileInputs.cache
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\obj\Debug\DS.RVTtoNWC.dll
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\obj\Debug\DS.RVTtoNWC.pdb
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\bin\Debug\DS_MainTools_Net_FW_4.7.2.dll
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\bin\Debug\DS_MainTools_Net_FW_4.7.2.pdb
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\bin\Debug\DS_MainTools_Net_FW_4.7.2.dll.config
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\obj\Debug\RVTtoNWC.csproj.CopyComplete
