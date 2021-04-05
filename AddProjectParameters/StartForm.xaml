@@ -18,11 +18,11 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal">
-                    <Button Grid.Row="0" HorizontalAlignment="Left" Content="Load pathes" Click ="Button_LoadPathes_Click" Margin="10,10,0,10" Padding="10" Height="40" Background="LightBlue"
-                            ToolTip="Push this button to set path for *.rvt project files search."/>
+                    <Button Grid.Row="0" HorizontalAlignment="Left" Content="Add parameters to shared" Click ="Button_AddParametersToSFP_Click" Margin="10,10,0,10" Padding="10" Height="40" Background="LightBlue"
+                            ToolTip="Push this button to add new parameters to shared parameters file."/>
                 </StackPanel>
-                <Button Grid.Row="1" HorizontalAlignment="Left" Content="Add parameter" ToolTip="Push this button to set path for *.rfa family files search."
-                        Click ="Button_AddParameter_Click" Margin="10,10,0,10" Padding="10" Height="40" Background="LightBlue"/>
+                <Button Grid.Row="1" HorizontalAlignment="Left" Content="Add parameters to project" ToolTip="Push this button to set path for *.rfa family files search."
+                        Click ="Button_AddParametersToProject_Click" Margin="10,10,0,10" Padding="10" Height="40" Background="LightBlue"/>
                 <Button Grid.Row="2" HorizontalAlignment="Left" Content="Start loading" 
                         Click ="Button_StartLoading_Click" Margin="10,10,0,10" Padding="10" Height="40" Background="LightGreen"/>
             </Grid>

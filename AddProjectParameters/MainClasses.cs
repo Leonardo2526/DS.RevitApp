@@ -11,6 +11,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using RvtApplication = Autodesk.Revit.ApplicationServices.Application;
 
+
+using DS_Forms;
+using DS_SystemTools;
+
 namespace AddProjectParameters
 {
     class Main
@@ -34,12 +38,11 @@ namespace AddProjectParameters
             cats1.Insert(wall);
             cats1.Insert(door);
 
-            CreateProjectParameter(App.Application, doc, "NewParameter1", ParameterType.Text, true, cats1, BuiltInParameterGroup.PG_DATA, false);
+            AddParameterToSPF(App.Application, doc, "NewParameter1", ParameterType.Text, true, cats1, BuiltInParameterGroup.PG_DATA, false);
 
-            TaskDialog.Show("Revit", "Process completed successfully!");
 
             MyApplication.thisApp.m_MyForm.Close();
-
+             
         }
 
         public void CreateProjectParameter(RvtApplication app, Document doc, string name, ParameterType type, bool visible, CategorySet cats, BuiltInParameterGroup group, bool inst)
@@ -57,7 +60,7 @@ namespace AddProjectParameters
                 Visible = visible
             };
 
-            ExternalDefinition def = app.OpenSharedParameterFile().Groups.Create("TemporaryDefintionGroup").Definitions.Create(opt) as ExternalDefinition;
+            ExternalDefinition def = app.OpenSharedParameterFile().Groups.Create(AddParametersToSFPOptions.GroupName).Definitions.Create(opt) as ExternalDefinition;
             app.SharedParametersFilename = oriFile;
             File.Delete(tempFile);
 
@@ -66,6 +69,26 @@ namespace AddProjectParameters
 
             TransactionCommit(doc, def, binding, group);
 
+            TaskDialog.Show("Revit", "Process completed successfully!");
+
+        }
+
+        public void AddParameterToSPF(RvtApplication app, Document doc, string name, ParameterType type, bool visible, CategorySet cats, BuiltInParameterGroup group, bool inst)
+        {
+            //InternalDefinition def = new InternalDefinition();
+            //Definition def = new Definition();
+
+            string oriFile = app.SharedParametersFilename;
+            app.SharedParametersFilename = StartForm.SPFPath;
+
+            ExternalDefinitionCreationOptions opt = new ExternalDefinitionCreationOptions(name, type)
+            {
+                Visible = visible
+            };
+
+            ExternalDefinition def = app.OpenSharedParameterFile().Groups.Create(AddParametersToSFPOptions.GroupName).Definitions.Create(opt) as ExternalDefinition;
+
+            TaskDialog.Show("Revit", "Parameters added to \n" + StartForm.SPFPath + "\nsuccessfully!");
         }
 
 
