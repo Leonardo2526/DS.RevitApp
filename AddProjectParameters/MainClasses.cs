@@ -38,8 +38,17 @@ namespace AddProjectParameters
             cats1.Insert(wall);
             cats1.Insert(door);
 
-            AddParameterToSPF(App.Application, doc, "NewParameter1", ParameterType.Text, true, cats1, BuiltInParameterGroup.PG_DATA, false);
+            /*
+            CategorySet cats;
 
+            List<BuiltInCategory> bc = new List<BuiltInCategory>();
+            foreach (BuiltInCategory cat in bc)
+            {
+                cat.
+            }
+            bc.
+            //AddParameterToSPF(App.Application, doc, "NewParameter1", ParameterType.Text, true, cats1, BuiltInParameterGroup.PG_DATA, false);
+            */
 
             MyApplication.thisApp.m_MyForm.Close();
              
@@ -60,7 +69,7 @@ namespace AddProjectParameters
                 Visible = visible
             };
 
-            ExternalDefinition def = app.OpenSharedParameterFile().Groups.Create(AddParametersToSFPOptions.GroupName).Definitions.Create(opt) as ExternalDefinition;
+            ExternalDefinition def = app.OpenSharedParameterFile().Groups.Create("AddParametersToSFPOptions.GroupName").Definitions.Create(opt) as ExternalDefinition;
             app.SharedParametersFilename = oriFile;
             File.Delete(tempFile);
 
@@ -73,23 +82,7 @@ namespace AddProjectParameters
 
         }
 
-        public void AddParameterToSPF(RvtApplication app, Document doc, string name, ParameterType type, bool visible, CategorySet cats, BuiltInParameterGroup group, bool inst)
-        {
-            //InternalDefinition def = new InternalDefinition();
-            //Definition def = new Definition();
-
-            string oriFile = app.SharedParametersFilename;
-            app.SharedParametersFilename = StartForm.SPFPath;
-
-            ExternalDefinitionCreationOptions opt = new ExternalDefinitionCreationOptions(name, type)
-            {
-                Visible = visible
-            };
-
-            ExternalDefinition def = app.OpenSharedParameterFile().Groups.Create(AddParametersToSFPOptions.GroupName).Definitions.Create(opt) as ExternalDefinition;
-
-            TaskDialog.Show("Revit", "Parameters added to \n" + StartForm.SPFPath + "\nsuccessfully!");
-        }
+       
 
 
 

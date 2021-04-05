@@ -1,4 +1,5 @@
-﻿using Autodesk.Revit.UI;
+﻿using Autodesk.Revit.DB;
+using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace AddProjectParameters
         public UIApplication App;
 
         public static string SPFPath;
+        public static string ParametersNamesPath;
+
 
         public StartForm(UIApplication app, ExternalEvent exEvent, ExternalEventHandler handler)
         {
@@ -37,15 +40,22 @@ namespace AddProjectParameters
             {
                 TopLevel = true
             };
-
-            SPFPath = newForm.DS_OpenFileDialogForm_txt().ToString();
+            
+            SPFPath = newForm.DS_OpenFileDialogForm_txt("Select shared parameter file for loading.").ToString();
             if (SPFPath == "")
             {
                 newForm.Close();
                 return;
             }
 
-            AddParametersToSFPOptions addParametersToSFPOptions = new AddParametersToSFPOptions(App, m_ExEvent);
+            ParametersNamesPath = newForm.DS_OpenFileDialogForm_txt("Select file with parameters names.").ToString();
+            if (ParametersNamesPath == "")
+            {
+                newForm.Close();
+                return;
+            }
+
+            AddParametersToSFPOptions addParametersToSFPOptions = new AddParametersToSFPOptions(App);
             addParametersToSFPOptions.Show();
         }
 
@@ -73,7 +83,8 @@ namespace AddProjectParameters
 
         private void Button_StartLoading_Click(object sender, RoutedEventArgs e)
         {
-
+           
         }
+
     }
 }

@@ -4,15 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AddProjectParameters"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="Bisque">
+             mc:Ignorable="d" Background="Bisque" Height="300" Width="500">
     <Grid>
         <StackPanel Background="Bisque" Margin="10,10,10,10" >
             <Label Content="Enter a name of the group for new parameters in shared parameters file:" HorizontalAlignment="Left" />
-            <TextBox x:Name="GroupNameText" Height="40" Width="300" TextWrapping="Wrap" Text="" VerticalContentAlignment="Center" HorizontalAlignment="Left" />
+            <TextBox x:Name="GroupNameText" Height="40" Width="200" TextWrapping="Wrap" Text="" VerticalContentAlignment="Center" HorizontalAlignment="Left" />
+            <Label Content="Select parameters type: " HorizontalAlignment="Left" Margin="0,30,0,0" />
+            <ComboBox x:Name="TypesNames" Height="40" Width="200" HorizontalAlignment="Left" 
+                      SelectionChanged="TypesNames_SelectionChanged" VerticalContentAlignment="Center" />
 
-            <Button x:Name="OK" HorizontalAlignment="Left" Content="OK" Margin="0,10,10,10" 
-                        Click ="Button_OK_Click" Padding="10" Height="40" Background="LightGreen"/>
+            <Button x:Name="OK" HorizontalAlignment="Left" Content="OK" Margin="0,20,10,10" 
+                        Click ="Button_OK_Click" Padding="10" Height="40" Width="70" Background="LightGreen"/>
 
         </StackPanel>
     </Grid>
