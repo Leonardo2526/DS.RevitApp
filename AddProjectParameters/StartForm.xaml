@@ -1,0 +1,31 @@
+﻿<Window
+    x:Class="AddProjectParameters.StartForm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    mc:Ignorable="d"
+    Title="AddProjectParameters" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+    Name="AddProjectParameters">
+    
+    <!--Closing="Window_Closing"-->
+    <Grid>
+        <StackPanel Background="Bisque">
+            <Grid Margin="10 0 10 10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <Button Grid.Row="0" HorizontalAlignment="Left" Content="Load pathes" Click ="Button_LoadPathes_Click" Margin="10,10,0,10" Padding="10" Height="40" Background="LightBlue"
+                            ToolTip="Push this button to set path for *.rvt project files search."/>
+                </StackPanel>
+                <Button Grid.Row="1" HorizontalAlignment="Left" Content="Add parameter" ToolTip="Push this button to set path for *.rfa family files search."
+                        Click ="Button_AddParameter_Click" Margin="10,10,0,10" Padding="10" Height="40" Background="LightBlue"/>
+                <Button Grid.Row="2" HorizontalAlignment="Left" Content="Start loading" 
+                        Click ="Button_StartLoading_Click" Margin="10,10,0,10" Padding="10" Height="40" Background="LightGreen"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>
