@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using View = Autodesk.Revit.DB.View; 
 
 namespace DS.RevitApp.RVTtoNWC
-{
+{ 
     [Transaction(TransactionMode.Manual)]
     [Regeneration(RegenerationOption.Manual)]
     public class DS_MainClass : IExternalCommand 
@@ -185,7 +185,7 @@ namespace DS.RevitApp.RVTtoNWC
                 LinkedDocs.Add(FileName);
                 doc.Close(false);
                 return;
-            }
+            } 
              
             string dirName = GetDirNWC(NWCFileName);
 
@@ -197,7 +197,8 @@ namespace DS.RevitApp.RVTtoNWC
             {
                 ExportScope = NavisworksExportScope.View,
                 ViewId = NW_View(doc).Id,
-                ExportRoomGeometry = false
+                ExportRoomGeometry = false,
+                DivideFileIntoLevels = false
             };
             doc.Export(OutputPath, NWCFileName, nweo);
 
