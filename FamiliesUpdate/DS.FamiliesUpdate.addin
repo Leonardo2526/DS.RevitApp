@@ -2,7 +2,7 @@
 <RevitAddIns>	
   <AddIn Type="Application">
     <Name>FamiliesUpdate</Name>
-    <Assembly>DS_RevitApp_FamiliesUpdate_4.8\DS_RevitApp_FamiliesUpdate_4.8.dll</Assembly>
+    <Assembly>DS.FamiliesUpdate\DS.FamiliesUpdate.dll</Assembly>
     <ClientId>3711d808-05ec-4134-8acb-1ea6458936e9</ClientId>
     <FullClassName>DS.RevitApp.FamiliesUpdate.MyApplication</FullClassName>
     <VendorId>ADSK</VendorId>

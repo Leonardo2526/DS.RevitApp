@@ -9,7 +9,7 @@ namespace DS.RevitApp.RibbonTab
     {
         // class instance
         internal static MyApplication thisApp = null;
-
+         
 
         public Result OnShutdown(UIControlledApplication application)
         {
@@ -23,7 +23,7 @@ namespace DS.RevitApp.RibbonTab
             application.CreateRibbonTab(tabName);
 
             var button1Path = Environment.ExpandEnvironmentVariables(@"%AppData%\Autodesk\Revit\Addins\2020\DS.RVTtoNWC\DS.RVTtoNWC.dll");
-            var button2Path = Environment.ExpandEnvironmentVariables(@"%AppData%\Autodesk\Revit\Addins\2020\DS_RevitApp_FamiliesUpdate_4.8\DS_RevitApp_FamiliesUpdate_4.8.dll");
+            var button2Path = Environment.ExpandEnvironmentVariables(@"%AppData%\Autodesk\Revit\Addins\2020\DS.FamiliesUpdate\DS.FamiliesUpdate.dll");
             var button3Path = Environment.ExpandEnvironmentVariables(@"%AppData%\Autodesk\Revit\Addins\2020\DS.AddProjectParameters\DS.AddProjectParameters.dll");
 
 

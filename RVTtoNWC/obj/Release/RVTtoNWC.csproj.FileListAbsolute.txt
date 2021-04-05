@@ -8,3 +8,12 @@ C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\bin\Release\DS_MainTo
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\bin\Release\DS_MainTools_Net_FW_4.7.2.pdb
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\bin\Release\DS_MainTools_Net_FW_4.7.2.dll.config
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\obj\Release\RVTtoNWC.csproj.CopyComplete
+D:\Repository\DS_RevitApp_20\RVTtoNWC\bin\Release\DS.RVTtoNWC.dll
+D:\Repository\DS_RevitApp_20\RVTtoNWC\bin\Release\DS.RVTtoNWC.pdb
+D:\Repository\DS_RevitApp_20\RVTtoNWC\bin\Release\DS_MainTools_Net_FW_4.7.2.pdb
+D:\Repository\DS_RevitApp_20\RVTtoNWC\bin\Release\DS_MainTools_Net_FW_4.7.2.dll.config
+D:\Repository\DS_RevitApp_20\RVTtoNWC\obj\Release\RVTtoNWC.csprojAssemblyReference.cache
+D:\Repository\DS_RevitApp_20\RVTtoNWC\obj\Release\RVTtoNWC.csproj.CoreCompileInputs.cache
+D:\Repository\DS_RevitApp_20\RVTtoNWC\obj\Release\RVTtoNWC.csproj.CopyComplete
+D:\Repository\DS_RevitApp_20\RVTtoNWC\obj\Release\DS.RVTtoNWC.dll
+D:\Repository\DS_RevitApp_20\RVTtoNWC\obj\Release\DS.RVTtoNWC.pdb

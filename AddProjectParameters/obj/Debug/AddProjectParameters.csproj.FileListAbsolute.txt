@@ -8,3 +8,13 @@ C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\AddProjectParameters\bin\Debug
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\AddProjectParameters\bin\Debug\DS.AddProjectParameters.pdb
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\AddProjectParameters\obj\Debug\DS.AddProjectParameters.dll
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\AddProjectParameters\obj\Debug\DS.AddProjectParameters.pdb
+D:\Repository\DS_RevitApp_20\AddProjectParameters\bin\Debug\DS.AddProjectParameters.dll
+D:\Repository\DS_RevitApp_20\AddProjectParameters\bin\Debug\DS.AddProjectParameters.pdb
+D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\AddProjectParameters.csprojAssemblyReference.cache
+D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\StartForm.baml
+D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\StartForm.g.cs
+D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\DS.AddProjectParameters_MarkupCompile.cache
+D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\DS.AddProjectParameters.g.resources
+D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\AddProjectParameters.csproj.CoreCompileInputs.cache
+D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\DS.AddProjectParameters.dll
+D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\DS.AddProjectParameters.pdb

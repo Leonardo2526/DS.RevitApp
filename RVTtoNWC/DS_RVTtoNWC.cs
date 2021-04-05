@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using View = Autodesk.Revit.DB.View; 
 
 namespace DS.RevitApp.RVTtoNWC
-{
+{ 
     [Transaction(TransactionMode.Manual)]
     [Regeneration(RegenerationOption.Manual)]
     public class DS_MainClass : IExternalCommand 
