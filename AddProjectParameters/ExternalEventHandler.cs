@@ -19,7 +19,7 @@ namespace AddProjectParameters
         public void Execute(UIApplication app)
         {
             Main main = new Main(app);
-            main.ExecuteLoadProcess();
+            main.IterateThroughtFiles();
         }
     }
 

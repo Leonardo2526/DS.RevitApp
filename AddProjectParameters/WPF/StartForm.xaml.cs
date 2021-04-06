@@ -24,6 +24,9 @@ namespace AddProjectParameters
         public static string ParametersNamesPath;
         public static string FileWithProjectsPathes;
 
+        public static List<string> SelectesParameters = new List<string>();
+        public static List<string> FilesPathes = new List<string>();
+
 
 
         public StartForm(UIApplication app, ExternalEvent exEvent, ExternalEventHandler handler)
@@ -32,6 +35,9 @@ namespace AddProjectParameters
             this.App = app;
             m_ExEvent = exEvent;
             m_Handler = handler;
+
+            FilesPathes.Clear();
+            SelectesParameters.Clear();
         }
 
 
@@ -67,39 +73,51 @@ namespace AddProjectParameters
             {
                 TopLevel = true
             };
-            
-                SPFPath = newForm.DS_OpenFileDialogForm_txt("", "Select shared parameter file for loading.").ToString();
 
-                if (SPFPath == "")
-                {
-                    newForm.Close();
-                    return;
-                }
-
-                this.Close();
-
-            SelectGroup selectGroup = new SelectGroup(App);
-            selectGroup.Show();
-
-            /*
             FileWithProjectsPathes = newForm.DS_OpenFileDialogForm_txt("", "Select file with pathes to *.rvt projects.").ToString();
             if (SPFPath == "")
             {
                 newForm.Close();
                 return;
             }
+            CreateFilesPathesList();
 
-          
+            SPFPath = newForm.DS_OpenFileDialogForm_txt("", "Select shared parameter file for loading.").ToString();
+                if (SPFPath == "")
+                {
+                    newForm.Close();
+                    return;
+                }
+                this.Close();
 
-            //Start loading process
-            m_ExEvent.Raise();
-            */
+            SelectParameters selectParameters = new SelectParameters(App, m_ExEvent, m_Handler);
+            selectParameters.Show();
         }
 
-        private void Button_StartLoading_Click(object sender, RoutedEventArgs e)
+        void CreateFilesPathesList()
         {
-           
-        }
 
+            string[] names = File.ReadAllLines(FileWithProjectsPathes);
+            try
+            {
+                foreach (string name in names)
+                {
+                    char[] MyChar = { (char)34 };
+                    string trimedName = name.Trim(MyChar);
+
+                    if (File.Exists(trimedName))
+                        FilesPathes.Add(trimedName);
+                    else
+                    {
+                        MessageBox.Show("No such file path exist : \n" + trimedName);
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occured: " + ex.Message);
+            }
+        }
     }
 }

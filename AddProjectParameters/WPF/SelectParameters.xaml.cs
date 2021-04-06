@@ -13,26 +13,29 @@ namespace AddProjectParameters
     /// <summary>
     /// Interaction logic for AddParametersToSFPOptions.xaml
     /// </summary>
-    public partial class SelectGroup : Window
+    public partial class SelectParameters : Window
     {
+        private ExternalEvent m_ExEvent;
+        private ExternalEventHandler m_Handler;
         public UIApplication App;
 
         //Lists for log
         List<string> ParametersAdded = new List<string>();
         List<string> GroupsNamesList = new List<string>();
         List<string> ParametersNamesList = new List<string>();
-        public List<string> SelectesParameters = new List<string>();
 
-        string selectedGroupName;
+        public static string SelectedGroupName;
 
         //Get current date and time    
         readonly string CurDate = DateTime.Now.ToString("yyMMdd");
         readonly string CurDateTime = DateTime.Now.ToString("yyMMdd_HHmmss");
 
-        public SelectGroup(UIApplication app)
+        public SelectParameters(UIApplication app, ExternalEvent exEvent, ExternalEventHandler handler)
         {
             InitializeComponent();
             this.App = app;
+            m_ExEvent = exEvent;
+            m_Handler = handler;
 
             //Fill groups names comboBox
             GetGroupsNames();
@@ -41,21 +44,21 @@ namespace AddProjectParameters
 
         void ApplySelectedParameters()
         {
-            string delimiter = "\n";
-            string StringOutput = SelectesParameters.Aggregate((i, j) => i + delimiter + j);
-            MessageBox.Show(StringOutput);
-
-            /*
-            if (selectedGroupName != "")
+           
+            if (StartForm.SelectesParameters.Count != 0)
             {
-                //LoadParametersToSPF();
+                //Start loading process
+                m_ExEvent.Raise();
+
+              
+
                 this.Close();
             }
             else
             {
                 System.Windows.MessageBox.Show("Fill a group name!");
             }
-            */
+            
         }
 
         void GetGroupsNames()
@@ -78,7 +81,7 @@ namespace AddProjectParameters
         {
             App.Application.SharedParametersFilename = StartForm.SPFPath;
             DefinitionGroup def = App.Application.OpenSharedParameterFile().
-                Groups.get_Item(selectedGroupName);
+                Groups.get_Item(SelectedGroupName);
 
             IEnumerator<Definition> enumerate = def.Definitions.GetEnumerator();
 
@@ -94,7 +97,7 @@ namespace AddProjectParameters
         void WriteLogToFile(DS_Tools dS_Tools)
         {
             dS_Tools.DS_StreamWriter("Path to shared parameters file: " + "\n" + StartForm.SPFPath + "\n");
-            dS_Tools.DS_StreamWriter("Group: " + selectedGroupName + "\n");
+            dS_Tools.DS_StreamWriter("Group: " + SelectedGroupName + "\n");
             dS_Tools.DS_StreamWriter("Added parameters:");
 
             //Saved file names with empty models
@@ -109,7 +112,7 @@ namespace AddProjectParameters
         private void GroupsNames_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             ParametersNames.Items.Clear();
-            selectedGroupName = GroupsNames.SelectedItem.ToString();
+            SelectedGroupName = GroupsNames.SelectedItem.ToString();
             GetParametersNames();
         }
 
@@ -125,7 +128,7 @@ namespace AddProjectParameters
 
                 foreach (object it in ParametersNames.SelectedItems)
                 {
-                    SelectesParameters.Add(it.ToString());
+                    StartForm.SelectesParameters.Add(it.ToString());
                 }
 
                 ParametersNames.SelectedItems.Clear();
@@ -142,11 +145,13 @@ namespace AddProjectParameters
         {
             foreach (object it in ParametersNames.Items)
             {
-                SelectesParameters.Add(it.ToString());
+                StartForm.SelectesParameters.Add(it.ToString());
             }
 
             this.Close();
             ApplySelectedParameters();
         }
+
+      
     }
 }

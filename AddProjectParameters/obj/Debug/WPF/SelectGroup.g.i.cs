@@ -38,7 +38,7 @@ namespace AddProjectParameters {
     /// <summary>
     /// SelectGroup
     /// </summary>
-    public partial class SelectGroup : System.Windows.Window, System.Windows.Markup.IComponentConnector {
+    public partial class SelectParameters : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
         #line 14 "..\..\..\WPF\SelectGroup.xaml"
