@@ -38,17 +38,9 @@ namespace AddProjectParameters
             cats1.Insert(wall);
             cats1.Insert(door);
 
-            /*
-            CategorySet cats;
 
-            List<BuiltInCategory> bc = new List<BuiltInCategory>();
-            foreach (BuiltInCategory cat in bc)
-            {
-                cat.
-            }
-            bc.
-            //AddParameterToSPF(App.Application, doc, "NewParameter1", ParameterType.Text, true, cats1, BuiltInParameterGroup.PG_DATA, false);
-            */
+            CreateProjectParameter(App.Application, doc, "NewParameter1", ParameterType.Text, true, cats1, BuiltInParameterGroup.PG_DATA, false);
+           
 
             MyApplication.thisApp.m_MyForm.Close();
              
@@ -69,7 +61,8 @@ namespace AddProjectParameters
                 Visible = visible
             };
 
-            ExternalDefinition def = app.OpenSharedParameterFile().Groups.Create("AddParametersToSFPOptions.GroupName").Definitions.Create(opt) as ExternalDefinition;
+            ExternalDefinition def = app.OpenSharedParameterFile().Groups.Create("AddParametersToSFPOptions.GroupName").
+                Definitions.Create(opt) as ExternalDefinition;
             app.SharedParametersFilename = oriFile;
             File.Delete(tempFile);
 

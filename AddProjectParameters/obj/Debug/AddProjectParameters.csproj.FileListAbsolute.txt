@@ -11,8 +11,6 @@ C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\AddProjectParameters\obj\Debug
 D:\Repository\DS_RevitApp_20\AddProjectParameters\bin\Debug\DS.AddProjectParameters.dll
 D:\Repository\DS_RevitApp_20\AddProjectParameters\bin\Debug\DS.AddProjectParameters.pdb
 D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\AddProjectParameters.csprojAssemblyReference.cache
-D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\StartForm.baml
-D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\StartForm.g.cs
 D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\DS.AddProjectParameters_MarkupCompile.cache
 D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\DS.AddProjectParameters.g.resources
 D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\AddProjectParameters.csproj.CoreCompileInputs.cache
@@ -21,8 +19,12 @@ D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\DS.AddProjectParamet
 D:\Repository\DS_RevitApp_20\AddProjectParameters\bin\Debug\DS_MainTools_Net_FW_4.7.2.pdb
 D:\Repository\DS_RevitApp_20\AddProjectParameters\bin\Debug\DS_MainTools_Net_FW_4.7.2.dll.config
 D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\AddProjectParameters.csproj.CopyComplete
-D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\AddParametersToSFPOptions.g.cs
 D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\DS.AddProjectParameters_MarkupCompile.lref
-D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\AddParametersToSFPOptions.baml
-D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\AddGroup.g.cs
-D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\AddGroup.baml
+D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\WPF\StartForm.baml
+D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\WPF\SelectGroup.g.cs
+D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\WPF\AddParametersToSFPOptions.g.cs
+D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\WPF\StartForm.g.cs
+D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\WPF\AddGroup.g.cs
+D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\WPF\SelectGroup.baml
+D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\WPF\AddParametersToSFPOptions.baml
+D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\WPF\AddGroup.baml

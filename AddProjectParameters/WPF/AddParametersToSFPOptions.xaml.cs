@@ -4,9 +4,6 @@ using DS_SystemTools;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 
@@ -21,8 +18,6 @@ namespace AddProjectParameters
 
         //Lists for log
         List<string> ParametersAdded = new List<string>();
-        List<string> ParametersNames = new List<string>();
-        List<string> ParametersTypes = new List<string>();
         List<string> GroupsNamesList = new List<string>();
 
         string selectedGroupName;
@@ -46,14 +41,14 @@ namespace AddProjectParameters
             TypesNames.Text = ParameterType.Text.ToString();
         }
 
-       
+
 
         private void Button_OK_Click(object sender, RoutedEventArgs e)
         {
             selectedGroupName = GroupsNames.SelectedItem.ToString();
             selectedTypeName = TypesNames.SelectedItem.ToString();
 
-            if (selectedGroupName != "" & selectedTypeName !="")
+            if (selectedGroupName != "" & selectedTypeName != "")
             {
                 LoadParametersToSPF();
                 this.Close();
@@ -101,7 +96,7 @@ namespace AddProjectParameters
             {
                 Visible = visible
             };
-          
+
             def.Definitions.Create(opt);
 
             //Add parameter name to list
@@ -124,7 +119,7 @@ namespace AddProjectParameters
             enume.Reset(); // сбрасываем указатель в начало массива
 
             //GroupsNamesList.AddRange((IEnumerable<string>)def.Groups);
-           
+
 
         }
 

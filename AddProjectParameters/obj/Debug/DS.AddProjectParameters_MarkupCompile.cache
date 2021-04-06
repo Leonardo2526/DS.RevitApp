@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 
-3-265343163
+41832236494
 
-8-1443327437
+91164178801
 17231197702
-AddParametersToSFPOptions.xaml;StartForm.xaml;AddGroup.xaml;
+WPF\SelectGroup.xaml;WPF\AddParametersToSFPOptions.xaml;WPF\StartForm.xaml;WPF\AddGroup.xaml;
 
 False
 

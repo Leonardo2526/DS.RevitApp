@@ -22,6 +22,8 @@ namespace AddProjectParameters
 
         public static string SPFPath;
         public static string ParametersNamesPath;
+        public static string FileWithProjectsPathes;
+
 
 
         public StartForm(UIApplication app, ExternalEvent exEvent, ExternalEventHandler handler)
@@ -41,14 +43,14 @@ namespace AddProjectParameters
                 TopLevel = true
             };
             
-            SPFPath = newForm.DS_OpenFileDialogForm_txt("Select shared parameter file for loading.").ToString();
+            SPFPath = newForm.DS_OpenFileDialogForm_txt("", "Select shared parameter file for loading.").ToString();
             if (SPFPath == "")
             {
                 newForm.Close();
                 return;
             }
 
-            ParametersNamesPath = newForm.DS_OpenFileDialogForm_txt("Select file with parameters names.").ToString();
+            ParametersNamesPath = newForm.DS_OpenFileDialogForm_txt("", "Select file with parameters names.").ToString();
             if (ParametersNamesPath == "")
             {
                 newForm.Close();
@@ -61,24 +63,37 @@ namespace AddProjectParameters
 
         private void Button_AddParametersToProject_Click(object sender, RoutedEventArgs e)
         {
-            if (SPFPath == "")
+            DS_Form newForm = new DS_Form
             {
-                DS_Form newForm = new DS_Form
-                {
-                    TopLevel = true
-                };
+                TopLevel = true
+            };
+            
+                SPFPath = newForm.DS_OpenFileDialogForm_txt("", "Select shared parameter file for loading.").ToString();
 
-                SPFPath = newForm.DS_OpenFileDialogForm_txt().ToString();
                 if (SPFPath == "")
                 {
                     newForm.Close();
                     return;
                 }
-            }
-            
 
-                    //Start loading process
+                this.Close();
+
+            SelectGroup selectGroup = new SelectGroup(App);
+            selectGroup.Show();
+
+            /*
+            FileWithProjectsPathes = newForm.DS_OpenFileDialogForm_txt("", "Select file with pathes to *.rvt projects.").ToString();
+            if (SPFPath == "")
+            {
+                newForm.Close();
+                return;
+            }
+
+          
+
+            //Start loading process
             m_ExEvent.Raise();
+            */
         }
 
         private void Button_StartLoading_Click(object sender, RoutedEventArgs e)
