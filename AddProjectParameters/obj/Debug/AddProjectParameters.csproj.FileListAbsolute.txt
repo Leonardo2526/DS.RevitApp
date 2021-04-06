@@ -24,3 +24,5 @@ D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\AddProjectParameters
 D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\AddParametersToSFPOptions.g.cs
 D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\DS.AddProjectParameters_MarkupCompile.lref
 D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\AddParametersToSFPOptions.baml
+D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\AddGroup.g.cs
+D:\Repository\DS_RevitApp_20\AddProjectParameters\obj\Debug\AddGroup.baml

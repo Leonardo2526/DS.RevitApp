@@ -19,13 +19,14 @@ namespace AddProjectParameters
     {
         public UIApplication App;
 
-        string GroupName;
-
         //Lists for log
         List<string> ParametersAdded = new List<string>();
         List<string> ParametersNames = new List<string>();
         List<string> ParametersTypes = new List<string>();
+        List<string> GroupsNamesList = new List<string>();
 
+        string selectedGroupName;
+        string selectedTypeName;
 
         //Get current date and time    
         readonly string CurDate = DateTime.Now.ToString("yyMMdd");
@@ -35,8 +36,13 @@ namespace AddProjectParameters
         {
             InitializeComponent();
             this.App = app;
-            GetParameterTypes();
 
+            //Fill groups names comboBox
+            GetGroupsNames();
+            GroupsNames.Text = GroupsNamesList[0];
+
+            //Fill parameter types comboBox
+            GetParameterTypes();
             TypesNames.Text = ParameterType.Text.ToString();
         }
 
@@ -44,12 +50,12 @@ namespace AddProjectParameters
 
         private void Button_OK_Click(object sender, RoutedEventArgs e)
         {
-            if (GroupNameText.Text != "")
+            selectedGroupName = GroupsNames.SelectedItem.ToString();
+            selectedTypeName = TypesNames.SelectedItem.ToString();
+
+            if (selectedGroupName != "" & selectedTypeName !="")
             {
-                GroupName = GroupNameText.Text;
-
                 LoadParametersToSPF();
-
                 this.Close();
             }
             else
@@ -60,8 +66,9 @@ namespace AddProjectParameters
 
         public void LoadParametersToSPF()
         {
-           
-            string selectedTypeName = TypesNames.SelectedItem.ToString();
+            App.Application.SharedParametersFilename = StartForm.SPFPath;
+            DefinitionGroup def = App.Application.OpenSharedParameterFile().
+                Groups.get_Item(selectedGroupName);
 
             ParameterType type = (ParameterType)Enum.Parse(typeof(ParameterType), selectedTypeName, true);
 
@@ -71,7 +78,7 @@ namespace AddProjectParameters
                 foreach (string name in names)
                 {
                     //Add curent parameter name
-                    AddParameterToSPF(name, type, true);
+                    AddParameterToSPF(def, name, type, true);
                 }
             }
             catch (Exception ex)
@@ -88,34 +95,43 @@ namespace AddProjectParameters
             WriteLogToFile(dS_Tools);
         }
 
-        public void AddParameterToSPF(string name, ParameterType type, bool visible)
+        public void AddParameterToSPF(DefinitionGroup def, string name, ParameterType type, bool visible)
         {
-            App.Application.SharedParametersFilename = StartForm.SPFPath;
-
             ExternalDefinitionCreationOptions opt = new ExternalDefinitionCreationOptions(name, type)
             {
                 Visible = visible
             };
-
-            DefinitionFile def = App.Application.OpenSharedParameterFile();
           
-            try 
-            {
-                def.Groups.Create(GroupName).Definitions.Create(opt);
-            }
-            catch
-            {
-                def.Groups.get_Item(GroupName).Definitions.Create(opt);
-            }
+            def.Definitions.Create(opt);
 
             //Add parameter name to list
             ParametersAdded.Add(name);
         }
 
+        public void GetGroupsNames()
+        {
+            App.Application.SharedParametersFilename = StartForm.SPFPath;
+            DefinitionFile def = App.Application.OpenSharedParameterFile();
+
+            IEnumerator<DefinitionGroup> enume = def.Groups.GetEnumerator();
+
+            while (enume.MoveNext())   // пока не будет возвращено false
+            {
+                string item = enume.Current.Name;     // берем элемент на текущей позиции
+                GroupsNamesList.Add(item);
+                GroupsNames.Items.Add(item);
+            }
+            enume.Reset(); // сбрасываем указатель в начало массива
+
+            //GroupsNamesList.AddRange((IEnumerable<string>)def.Groups);
+           
+
+        }
+
         void WriteLogToFile(DS_Tools dS_Tools)
         {
             dS_Tools.DS_StreamWriter("Path to shared parameters file: " + "\n" + StartForm.SPFPath + "\n");
-            dS_Tools.DS_StreamWriter("Group: " + GroupName + "\n");
+            dS_Tools.DS_StreamWriter("Group: " + selectedGroupName + "\n");
             dS_Tools.DS_StreamWriter("Added parameters:");
 
             //Saved file names with empty models
@@ -132,13 +148,20 @@ namespace AddProjectParameters
         {
             foreach (var typeName in Enum.GetValues(typeof(ParameterType)))
             {
-                //ParametersTypes.Add(typeName.ToString());
                 TypesNames.Items.Add(typeName.ToString());
             }
         }
 
         private void TypesNames_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+
+        }
+
+        private void Button_AddGroup_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            GroupAddWindow groups = new GroupAddWindow(App);
+            groups.Show();
 
         }
     }
