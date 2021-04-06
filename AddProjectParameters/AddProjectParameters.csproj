@@ -60,8 +60,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WPF\SelectGroup.xaml.cs">
-      <DependentUpon>SelectGroup.xaml</DependentUpon>
+    <Compile Include="WPF\SelectParameters.xaml.cs">
+      <DependentUpon>SelectParameters.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\AddParametersToSFPOptions.xaml.cs">
       <DependentUpon>AddParametersToSFPOptions.xaml</DependentUpon>
@@ -79,7 +79,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="WPF\SelectGroup.xaml">
+    <Page Include="WPF\SelectParameters.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
