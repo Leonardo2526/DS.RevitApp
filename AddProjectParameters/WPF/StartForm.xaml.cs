@@ -12,6 +12,7 @@ using DS_Forms;
 using DS_SystemTools;
 using System.IO;
 using System.Security.AccessControl;
+using System.Collections;
 
 namespace AddProjectParameters
 {
@@ -28,6 +29,8 @@ namespace AddProjectParameters
         public static List<string> SelectesParameters = new List<string>();
         public static List<string> FilesPathes = new List<string>();
 
+        readonly string CurDate = DateTime.Now.ToString("yyMMdd");
+        readonly string CurDateTime = DateTime.Now.ToString("yyMMdd_HHmmss");
 
         public StartForm(UIApplication app, ExternalEvent exEvent, ExternalEventHandler handler)
         {
@@ -167,5 +170,71 @@ namespace AddProjectParameters
                 return true;
             return false;
         }
+
+        public void GetAllCategoryItems()
+        {
+            DS_Tools dS_Tools = new DS_Tools
+            {
+                DS_LogName = CurDateTime + "_Log.txt",
+                DS_LogOutputPath = @"C:\Users\leona\OneDrive\Рабочий стол\" + "Log" + "\\"
+            };
+
+            Document doc = App.ActiveUIDocument.Document;
+            Categories categories = doc.Settings.Categories;
+            
+            List<string> namelist = new List<string>();
+            List<string> catlist = new List<string>();
+            CategorySet cats = App.Application.Create.NewCategorySet();
+
+            foreach (Category c in categories) 
+            {
+                if (c.CategoryType == CategoryType.Model)
+                {
+                    cats.Insert(c);
+                    namelist.Add(c.Name);
+                }
+               
+            }
+
+            List<string> disciplineList = new List<string>();
+            foreach (var typeName in Enum.GetValues(typeof(BuiltInParameter)))
+            {
+                disciplineList.Add(typeName.GetType().Name);
+            }
+
+
+            string delimiter = "\n";
+            string StringOutput = disciplineList.Aggregate((i, j) => i + delimiter + j);
+            dS_Tools.DS_StreamWriter("disciplineList \n" + StringOutput + "\n");
+
+            StringOutput = namelist.Aggregate((i, j) => i + delimiter + j);
+            dS_Tools.DS_StreamWriter("Name \n" + StringOutput + "\n");
+
+            StringOutput = catlist.Aggregate((i, j) => i + delimiter + j);
+            dS_Tools.DS_StreamWriter("CategoryType \n" + StringOutput + "\n");
+
+            //GroupsNamesList.AddRange((IEnumerable<string>)def.Groups);
+
+
+
+            List<string> list = new List<string>();
+            foreach (var typeName in Enum.GetValues(typeof(BuiltInCategory)))
+            {
+                list.Add(typeName.ToString());
+            }
+            StringOutput = list.Aggregate((i, j) => i + delimiter + j);
+            dS_Tools.DS_StreamWriter(StringOutput);
+
+
+
+
+            dS_Tools.DS_FileExistMessage();
+        }
+
+        private void Button_Test_Click(object sender, RoutedEventArgs e)
+        {
+            GetAllCategoryItems();
+        }
+     
     }
 }

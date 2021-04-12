@@ -1,19 +1,10 @@
-﻿using Autodesk.Revit.ApplicationServices;
-using Autodesk.Revit.DB;
+﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using DS_SystemTools;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using RvtApplication = Autodesk.Revit.ApplicationServices.Application;
-
-
-using DS_Forms;
-using DS_SystemTools;
 
 namespace AddProjectParameters
 {
@@ -35,6 +26,9 @@ namespace AddProjectParameters
         public void IterateThroughtFiles()
         {
             int i = 0;
+
+            CategorySet cats = SetCatergoty();
+
             try
             {
                 //Through each file iterating
@@ -42,7 +36,7 @@ namespace AddProjectParameters
                 {
                     i++;
                     Document doc = App.Application.OpenDocumentFile(file);
-                    CategorySet cats = SetCatergoty(doc);
+
 
                     //Logs write
                     FilesUpdated.Add(i + ". File path: " + doc.PathName);
@@ -50,16 +44,16 @@ namespace AddProjectParameters
                     foreach (string parameter in StartForm.SelectesParameters)
                         AddParameterToProject(doc, cats, false, BuiltInParameterGroup.PG_DATA, parameter);
 
-                    doc.Close(true);  
+                    doc.Close(true);
                 }
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.ToString());
             }
-        
 
-            
+
+
             DS_Tools dS_Tools = new DS_Tools
             {
                 DS_LogName = CurDateTime + "_Log.txt",
@@ -73,18 +67,21 @@ namespace AddProjectParameters
 
         }
 
-        CategorySet SetCatergoty(Document doc)
+
+        CategorySet SetCatergoty()
         {
-            //Category set forming
-            Category wall = doc.Settings.Categories.get_Item(BuiltInCategory.OST_Walls);
-            Category door = doc.Settings.Categories.get_Item(BuiltInCategory.OST_Doors);
+            Document doc = App.ActiveUIDocument.Document;
+            Categories categories = doc.Settings.Categories;
             CategorySet cats = App.Application.Create.NewCategorySet();
-            cats.Insert(wall);
-            cats.Insert(door);
+
+            //Category set forming
+            foreach (Category c in categories)
+            {
+                if (c.CategoryType == CategoryType.Model && c.AllowsBoundParameters)
+                    cats.Insert(c);
+            }
 
             return cats;
-            //CreateProjectParameter(App.Application, doc, "NewParameter1", ParameterType.Text, true, cats1, BuiltInParameterGroup.PG_DATA, false);        
-             
         }
 
 
@@ -102,39 +99,7 @@ namespace AddProjectParameters
         }
 
 
-        public void CreateProjectParameter(RvtApplication app, Document doc, string name, 
-            ParameterType type, bool visible, CategorySet cats, BuiltInParameterGroup group, bool inst)
-        {
-            //InternalDefinition def = new InternalDefinition();
-            //Definition def = new Definition();
-
-            string oriFile = app.SharedParametersFilename;
-            string tempFile = Path.GetTempFileName() + ".txt";
-            using (File.Create(tempFile)) { }
-            app.SharedParametersFilename = tempFile;
-
-            ExternalDefinitionCreationOptions opt = new ExternalDefinitionCreationOptions(name, type)
-            {
-                Visible = visible
-            };
-
-            ExternalDefinition def = app.OpenSharedParameterFile().Groups.Create("AddParametersToSFPOptions.GroupName").
-                Definitions.Create(opt) as ExternalDefinition;
-            app.SharedParametersFilename = oriFile;
-            File.Delete(tempFile);
-
-            Autodesk.Revit.DB.Binding binding = app.Create.NewTypeBinding(cats);
-            if (inst) binding = app.Create.NewInstanceBinding(cats);
-
-            TransactionCommit(doc, def, binding, group);
-
-            TaskDialog.Show("Revit", "Process completed successfully!");
-
-        }
-
-       
-
-        private void TransactionCommit(Document doc, ExternalDefinition def, Autodesk.Revit.DB.Binding binding , BuiltInParameterGroup group)
+        private void TransactionCommit(Document doc, ExternalDefinition def, Autodesk.Revit.DB.Binding binding, BuiltInParameterGroup group)
         {
             using (Transaction transNew = new Transaction(doc, "Create project parameter"))
             {
@@ -143,6 +108,7 @@ namespace AddProjectParameters
                     transNew.Start();
 
                     BindingMap map = doc.ParameterBindings;
+                    map.ReInsert(def, binding, group);
                     map.Insert(def, binding, group);
                 }
 

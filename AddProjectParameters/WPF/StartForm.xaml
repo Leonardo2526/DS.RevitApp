@@ -23,6 +23,8 @@
                 </StackPanel>
                 <Button Grid.Row="1" HorizontalAlignment="Left" Content="Add parameters to project" ToolTip="Push this button to set path for *.rfa family files search."
                         Click ="Button_AddParametersToProject_Click" Margin="10,10,0,10" Padding="10" Height="40" Background="LightBlue"/>
+                <Button Grid.Row="2" HorizontalAlignment="Left" Content="Test" ToolTip="Push this button to set path for *.rfa family files search."
+                        Click ="Button_Test_Click" Margin="10,10,0,10" Padding="10" Height="40" Background="LightBlue"/>
             </Grid>
         </StackPanel>
     </Grid>
