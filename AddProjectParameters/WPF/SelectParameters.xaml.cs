@@ -22,7 +22,7 @@ namespace AddProjectParameters
         //Lists for log
         List<string> ParametersAdded = new List<string>();
         List<string> GroupsNamesList = new List<string>();
-        List<string> ParametersNamesList = new List<string>();
+        
 
         public static string SelectedGroupName;
 
@@ -50,13 +50,11 @@ namespace AddProjectParameters
                 //Start loading process
                 m_ExEvent.Raise();
 
-              
-
                 this.Close();
             }
             else
             {
-                System.Windows.MessageBox.Show("Fill a group name!");
+                System.Windows.MessageBox.Show("Select parameters!");
             }
             
         }
@@ -93,7 +91,7 @@ namespace AddProjectParameters
             enumerate.Reset();
         }
 
-
+         
         void WriteLogToFile(DS_Tools dS_Tools)
         {
             dS_Tools.DS_StreamWriter("Path to shared parameters file: " + "\n" + StartForm.SPFPath + "\n");
@@ -114,6 +112,12 @@ namespace AddProjectParameters
             ParametersNames.Items.Clear();
             SelectedGroupName = GroupsNames.SelectedItem.ToString();
             GetParametersNames();
+
+            if (ParametersNames.Items.Count != 0)
+            {
+                ApplySelection.IsEnabled = true;
+                ApplyAllSelection.IsEnabled = true;
+            }
         }
 
         private void ParametersNames_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -135,23 +139,22 @@ namespace AddProjectParameters
 
                 this.Close();
             }
-            else
-                MessageBox.Show("No files selected!");
 
             ApplySelectedParameters();
         }
 
         private void ApplyAllSelection_Click(object sender, RoutedEventArgs e)
         {
-            foreach (object it in ParametersNames.Items)
+            if (ParametersNames.SelectedItems.Count != 0)
             {
-                StartForm.SelectesParameters.Add(it.ToString());
+                foreach (object it in ParametersNames.Items)
+                {
+                    StartForm.SelectesParameters.Add(it.ToString());
+                }
+                this.Close();
             }
 
-            this.Close();
             ApplySelectedParameters();
         }
-
-      
     }
 }

@@ -22,8 +22,8 @@
                      SelectionMode="Multiple" SelectionChanged="ParametersNames_SelectionChanged">
                     </ListBox>
                     <StackPanel Grid.Row="3"  Orientation="Horizontal" Margin="0,0,0,0" VerticalAlignment="Bottom" Height="70" >
-                        <Button  x:Name="ApplySelection" Content="Apply selected" Click="ApplySelection_Click" Margin="0,10,0,10" Padding="10" Height="40" Background="LightBlue"/>
-                        <Button x:Name="ApplyAllSelection" Content="Select all" Click="ApplyAllSelection_Click" Margin="10,10,0,10" Padding="10" Height="40" Background="LightBlue"/>
+                        <Button  x:Name="ApplySelection" Content="Apply selected" Click="ApplySelection_Click" Margin="0,10,0,10" Padding="10" Height="40" Background="LightBlue" IsEnabled="False"/>
+                        <Button x:Name="ApplyAllSelection" Content="Select all" Click="ApplyAllSelection_Click" Margin="10,10,0,10" Padding="10" Height="40" Background="LightBlue" IsEnabled="False"/>
                     </StackPanel>
                 </StackPanel>
             </Border>           
