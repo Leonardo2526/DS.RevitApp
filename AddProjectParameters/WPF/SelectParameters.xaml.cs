@@ -145,7 +145,7 @@ namespace AddProjectParameters
 
         private void ApplyAllSelection_Click(object sender, RoutedEventArgs e)
         {
-            if (ParametersNames.SelectedItems.Count != 0)
+            if (ParametersNames.Items.Count != 0)
             {
                 foreach (object it in ParametersNames.Items)
                 {
