@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RevitAddIns>
 	<AddIn Type="Application">
-		<Name>DS.RibbonTab.v1.1</Name>
+		<Name>DS.RibbonTab.v1.2</Name>
 		<Assembly>DS.RibbonTab\DS.RibbonTab.dll</Assembly>
 		<ClientId>438331ee-85b4-46ad-9bd4-b3a788e3d410</ClientId>
 		<FullClassName>DS.RevitApp.RibbonTab.MyApplication</FullClassName>
