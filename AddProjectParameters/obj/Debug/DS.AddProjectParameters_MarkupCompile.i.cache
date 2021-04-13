@@ -16,5 +16,5 @@ DEBUG;TRACE
 17231197702
 WPF\SelectParameters.xaml;WPF\AddParametersToSFPOptions.xaml;WPF\StartForm.xaml;WPF\AddGroup.xaml;
 
-False
+True
 

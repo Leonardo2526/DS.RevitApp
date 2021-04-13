@@ -22,7 +22,7 @@ namespace AddProjectParameters
         //Lists for log
         List<string> ParametersAdded = new List<string>();
         List<string> GroupsNamesList = new List<string>();
-        
+        public static bool OverwriteParam;
 
         public static string SelectedGroupName;
 
@@ -155,6 +155,16 @@ namespace AddProjectParameters
             }
 
             ApplySelectedParameters();
+        }
+
+        private void OverwriteParameters_Checked(object sender, RoutedEventArgs e)
+        {
+            OverwriteParam= true;
+        }
+
+        private void OverwriteParameters_Unchecked(object sender, RoutedEventArgs e)
+        {
+            OverwriteParam = false;
         }
     }
 }

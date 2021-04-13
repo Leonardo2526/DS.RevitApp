@@ -21,6 +21,9 @@
                     <ListBox x:Name="ParametersNames" Height =" 200" VerticalAlignment="Top"  Background="White"
                      SelectionMode="Multiple" SelectionChanged="ParametersNames_SelectionChanged">
                     </ListBox>
+                    <CheckBox x:Name="OverwriteParameters" Content="Overwrite parameters" Margin="0,10,0,10" 
+                              IsChecked="True" ToolTip="Check this box if you want to overwrite parameters with similar names in *.rvt files ." 
+                              Checked="OverwriteParameters_Checked" Unchecked="OverwriteParameters_Unchecked"/>
                     <StackPanel Grid.Row="3"  Orientation="Horizontal" Margin="0,0,0,0" VerticalAlignment="Bottom" Height="70" >
                         <Button  x:Name="ApplySelection" Content="Apply selected" Click="ApplySelection_Click" Margin="0,10,0,10" Padding="10" Height="40" Background="LightBlue" IsEnabled="False"/>
                         <Button x:Name="ApplyAllSelection" Content="Select all" Click="ApplyAllSelection_Click" Margin="10,10,0,10" Padding="10" Height="40" Background="LightBlue" IsEnabled="False"/>

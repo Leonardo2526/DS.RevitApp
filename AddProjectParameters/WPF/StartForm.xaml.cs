@@ -231,10 +231,6 @@ namespace AddProjectParameters
             dS_Tools.DS_FileExistMessage();
         }
 
-        private void Button_Test_Click(object sender, RoutedEventArgs e)
-        {
-            GetAllCategoryItems();
-        }
      
     }
 }

@@ -108,7 +108,10 @@ namespace AddProjectParameters
                     transNew.Start();
 
                     BindingMap map = doc.ParameterBindings;
+
+                    if (SelectParameters.OverwriteParam == true)
                     map.ReInsert(def, binding, group);
+
                     map.Insert(def, binding, group);
                 }
 
