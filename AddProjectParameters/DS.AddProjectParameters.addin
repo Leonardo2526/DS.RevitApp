@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>	
+  <AddIn Type="Application">
+    <Name>DS.AddProjectParameters</Name>
+    <Assembly>DS.AddProjectParameters\DS.AddProjectParameters.dll</Assembly>
+    <ClientId>2f8e5b51-483a-4030-8535-c722bd06451f</ClientId>
+    <FullClassName>AddProjectParameters.MyApplication</FullClassName>
+    <VendorId>ADSK</VendorId>
+    <VendorDescription>Autodesk, www.autodesk.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>

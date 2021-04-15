@@ -1,0 +1,35 @@
+﻿<Window x:Class="AddProjectParameters.SelectParameters"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AddProjectParameters"
+             mc:Ignorable="d" Background="Bisque" Height="500" Width="400">
+    <Grid>
+        <StackPanel Background="Bisque" Margin="10,10,10,10" >
+            <Label Content="Groups" HorizontalAlignment="Left" />
+            <Border BorderBrush="Gray" BorderThickness="1" >
+                <StackPanel Margin="10,10,10,10" >
+                    <Label Content="Select group name: " HorizontalAlignment="Left" />
+                    <ComboBox x:Name="GroupsNames" Width="200" HorizontalAlignment="Left" 
+                      SelectionChanged="GroupsNames_SelectionChanged" VerticalContentAlignment="Center" />
+                </StackPanel>
+            </Border>
+            <Label Content="Parameters" HorizontalAlignment="Left" Margin="0,10,0,0"/>
+            <Border BorderBrush="Gray" BorderThickness="1" >
+                <StackPanel Margin="10,10,10,10" >
+                    <ListBox x:Name="ParametersNames" Height =" 200" VerticalAlignment="Top"  Background="White"
+                     SelectionMode="Multiple" SelectionChanged="ParametersNames_SelectionChanged">
+                    </ListBox>
+                    <CheckBox x:Name="OverwriteParameters" Content="Overwrite parameters" Margin="0,10,0,10" 
+                              IsChecked="True" ToolTip="Check this box if you want to overwrite parameters with similar names in *.rvt files ." 
+                              Checked="OverwriteParameters_Checked" Unchecked="OverwriteParameters_Unchecked"/>
+                    <StackPanel Grid.Row="3"  Orientation="Horizontal" Margin="0,0,0,0" VerticalAlignment="Bottom" Height="70" >
+                        <Button  x:Name="ApplySelection" Content="Apply selected" Click="ApplySelection_Click" Margin="0,10,0,10" Padding="10" Height="40" Background="LightBlue" IsEnabled="False"/>
+                        <Button x:Name="ApplyAllSelection" Content="Select all" Click="ApplyAllSelection_Click" Margin="10,10,0,10" Padding="10" Height="40" Background="LightBlue" IsEnabled="False"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>           
+        </StackPanel>
+    </Grid>
+</Window>
