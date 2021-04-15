@@ -1,9 +1,0 @@
-C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\MainTools_FW4.7.2\obj\Debug\DS_RevitTools.v1.csprojAssemblyReference.cache
-C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\MainTools_FW4.7.2\obj\Debug\DS_RevitTools.v1.csproj.CoreCompileInputs.cache
-C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\MainTools_FW4.7.2\bin\Debug\DS_RevitTools_Net_FW_4.7.2.dll
-C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\MainTools_FW4.7.2\bin\Debug\DS_RevitTools_Net_FW_4.7.2.pdb
-C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\MainTools_FW4.7.2\bin\Debug\DS_MainTools_Net_FW_4.7.2.pdb
-C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\MainTools_FW4.7.2\bin\Debug\DS_MainTools_Net_FW_4.7.2.dll.config
-C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\MainTools_FW4.7.2\obj\Debug\DS_RevitTools.v1.csproj.CopyComplete
-C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\MainTools_FW4.7.2\obj\Debug\DS_RevitTools_Net_FW_4.7.2.dll
-C:\Users\d.saraev.GCM\source\repos\DS_RevitApp\MainTools_FW4.7.2\obj\Debug\DS_RevitTools_Net_FW_4.7.2.pdb
