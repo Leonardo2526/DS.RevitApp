@@ -36,7 +36,7 @@ namespace DS.RevitApp.RibbonTab
             PushButtonData button5 = new PushButtonData("Button5", "DisallowjoinStructure", button5Path, "DisallowjoinStructure.EntryCommand");
 
 
-            // Create tool tips
+            // Create tool tips 
             button1.ToolTip = "Export files from *.rvt to *.nwc.\nv1.2";
             button2.ToolTip = "Update families in *.rvt files.\nv1.2";
             button3.ToolTip = "Add new parameters to shared parameters file.\nv1.0";

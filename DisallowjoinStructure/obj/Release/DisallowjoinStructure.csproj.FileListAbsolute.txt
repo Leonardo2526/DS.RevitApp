@@ -1,0 +1,10 @@
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\DisallowjoinStructure\bin\Release\DS.DisallowjoinStructure.dll
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\DisallowjoinStructure\bin\Release\DS.DisallowjoinStructure.pdb
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\DisallowjoinStructure\bin\Release\DS_MainTools_Net_FW_4.7.2.dll
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\DisallowjoinStructure\bin\Release\DS_MainTools_Net_FW_4.7.2.pdb
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\DisallowjoinStructure\bin\Release\DS_MainTools_Net_FW_4.7.2.dll.config
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\DisallowjoinStructure\obj\Release\DisallowjoinStructure.csprojAssemblyReference.cache
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\DisallowjoinStructure\obj\Release\DisallowjoinStructure.csproj.CoreCompileInputs.cache
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\DisallowjoinStructure\obj\Release\DisallowjoinStructure.csproj.CopyComplete
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\DisallowjoinStructure\obj\Release\DS.DisallowjoinStructure.dll
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\DisallowjoinStructure\obj\Release\DS.DisallowjoinStructure.pdb
