@@ -40,8 +40,7 @@ namespace DisallowjoinStructure
         {
             Document doc = uiapp.ActiveUIDocument.Document;
 
-
-            using (Transaction transNew = new Transaction(doc, "Create project parameter"))
+            using (Transaction transNew = new Transaction(doc, "Disallow join"))
             {
                 try
                 {
@@ -49,7 +48,6 @@ namespace DisallowjoinStructure
                     DisconnectElements(doc);
 
                 }
-
 
                 catch (Exception e)
                 {
@@ -64,21 +62,7 @@ namespace DisallowjoinStructure
         private void DisconnectElements(Document doc)
         {
 
-            FilteredElementCollector docCollector = GetStructuralElements1(doc);
-
-            string DirName = @"%USERPROFILE%\Desktop\Logs\";
-            string ExpDirName = Environment.ExpandEnvironmentVariables(DirName);
-
-            DS_Tools dS_Tools = new DS_Tools
-            {
-                DS_LogName = CurDateTime + "_Log.txt",
-                DS_LogOutputPath = ExpDirName
-            };
-            foreach (Element el in docCollector)
-            {
-                dS_Tools.DS_StreamWriter(el.Name + "_" + el.Category + "_" + el.DesignOption + "_" + el.DesignOption + "_" + el.Parameters + "_" + el.Id);
-            }
-
+            FilteredElementCollector docCollector = GetStructuralElements(doc); 
             
             foreach (Element el in docCollector)
             { 
@@ -86,19 +70,14 @@ namespace DisallowjoinStructure
                 Autodesk.Revit.DB.Structure.StructuralFramingUtils.DisallowJoinAtEnd((FamilyInstance)el, 1);
             }
 
-            MessageBox.Show("Done!");
+            MessageBox.Show("Балочные конструкции отсоединены!");
         }
 
-        FilteredElementCollector GetStructuralElements1(Document doc)
+        FilteredElementCollector GetStructuralElements(Document doc)
         {
             // what categories of family instances
             // are we interested in?
-
-            BuiltInCategory[] bics = new BuiltInCategory[] {
-    BuiltInCategory.OST_StructuralColumns,
-    BuiltInCategory.OST_StructuralFraming,
-    BuiltInCategory.OST_StructuralFoundation
-  };
+            BuiltInCategory[] bics = new BuiltInCategory[] {BuiltInCategory.OST_StructuralFraming};
 
             IList<ElementFilter> a
               = new List<ElementFilter>(bics.Count());
@@ -117,9 +96,10 @@ namespace DisallowjoinStructure
                   typeof(FamilyInstance)));
 
             IList<ElementFilter> b
-              = new List<ElementFilter>(6);
-
-            b.Add(familyInstanceFilter);
+              = new List<ElementFilter>(6)
+              {
+                  familyInstanceFilter
+              };
 
             LogicalOrFilter classFilter
               = new LogicalOrFilter(b);
@@ -131,42 +111,6 @@ namespace DisallowjoinStructure
 
             return collector;
         }
-
-        FilteredElementCollector GetStructuralElements2(Document doc)
-        {
-            BuiltInCategory[] bics = new BuiltInCategory[] {
-    BuiltInCategory.OST_StructuralColumns,
-    BuiltInCategory.OST_StructuralFraming,
-    BuiltInCategory.OST_StructuralFoundation
-  };
-
-            IList<ElementFilter> a
-              = new List<ElementFilter>(bics.Count());
-
-            LogicalOrFilter categoryFilter
-    = new LogicalOrFilter(a);
-
-            LogicalAndFilter familyInstanceFilter
-    = new LogicalAndFilter(categoryFilter,
-      new ElementClassFilter(
-        typeof(FamilyInstance)));
-
-            IList<ElementFilter> b
-              = new List<ElementFilter>(6);
-
-            b.Add(new ElementClassFilter(
-              typeof(BeamSystem)));
-            LogicalOrFilter classFilter
-    = new LogicalOrFilter(b);
-
-            FilteredElementCollector collector
-              = new FilteredElementCollector(doc);
-
-            collector.WherePasses(classFilter);
-
-            return collector;
-        }
-
 
     }
 

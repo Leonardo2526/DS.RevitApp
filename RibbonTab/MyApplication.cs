@@ -41,6 +41,8 @@ namespace DS.RevitApp.RibbonTab
             button2.ToolTip = "Update families in *.rvt files.\nv1.2";
             button3.ToolTip = "Add new parameters to shared parameters file.\nv1.0";
             button4.ToolTip = "Add new parameters from shared parameters file to *.rvt projects.\nv1.0";
+            button5.ToolTip = "Disallow beams joining in current document.\nv1.0";
+
 
             // Create a ribbon panel
             RibbonPanel m_projectPanel_1 = application.CreateRibbonPanel(tabName, "Tools");

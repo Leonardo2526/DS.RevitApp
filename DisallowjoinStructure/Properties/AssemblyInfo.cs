@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DisallowjoinStructure")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Открепление балок друг от друга")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("DS")]
 [assembly: AssemblyProduct("DisallowjoinStructure")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
