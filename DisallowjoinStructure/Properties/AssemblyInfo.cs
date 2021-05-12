@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("RevitTools")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("DisallowjoinStructure")]
+[assembly: AssemblyDescription("Открепление балок друг от друга")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("DS")]
-[assembly: AssemblyProduct("RevitTools")]
+[assembly: AssemblyProduct("DisallowjoinStructure")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f0118acd-554b-4e04-b753-29488249f26f")]
+[assembly: Guid("9355c6a0-b3be-4c0c-9921-7e7d33339eda")]
 
 // Version information for an assembly consists of the following four values:
 //
