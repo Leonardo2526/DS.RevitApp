@@ -26,6 +26,7 @@ namespace DS.RevitApp.RibbonTab
             var button3Path = Environment.ExpandEnvironmentVariables(@"%AppData%\Autodesk\Revit\Addins\2020\DS.AddSharedParameters\DS.AddSharedParameters.dll");
             var button4Path = Environment.ExpandEnvironmentVariables(@"%AppData%\Autodesk\Revit\Addins\2020\DS.AddProjectParameters\DS.AddProjectParameters.dll");
             var button5Path = Environment.ExpandEnvironmentVariables(@"%AppData%\Autodesk\Revit\Addins\2020\DS.DisallowjoinStructure\DS.DisallowjoinStructure.dll");
+            
 
 
             // Create push buttons
@@ -34,8 +35,7 @@ namespace DS.RevitApp.RibbonTab
             PushButtonData button3 = new PushButtonData("Button3", "AddSharedParameters", button3Path, "AddSharedParameters.EntryCommand");
             PushButtonData button4 = new PushButtonData("Button4", "AddProjectParameters", button4Path, "AddProjectParameters.EntryCommand");
             PushButtonData button5 = new PushButtonData("Button5", "DisallowjoinStructure", button5Path, "DisallowjoinStructure.EntryCommand");
-
-
+           
             // Create tool tips 
             button1.ToolTip = "Export files from *.rvt to *.nwc.\nv1.2";
             button2.ToolTip = "Update families in *.rvt files.\nv1.2";
@@ -53,7 +53,6 @@ namespace DS.RevitApp.RibbonTab
             List<RibbonItem> projectButtons = new List<RibbonItem>();
             projectButtons.AddRange(m_projectPanel_1.AddStackedItems(button1, button2));
             projectButtons.AddRange(m_projectPanel_2.AddStackedItems(button3, button4, button5));
-
 
             return Result.Succeeded;
         }
