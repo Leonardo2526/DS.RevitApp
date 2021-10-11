@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>  
+	<AddIn Type="Application"> 
+    <Name>AddID</Name>
+		<Assembly>.\DS.AddID\DS.AddID.dll</Assembly>
+		 <ClientId>890b1c75-0be7-4782-b8ad-2125032e7feb</ClientId>
+		<FullClassName>AddIns.AddID</FullClassName>
+		<VendorId>DS</VendorId> 
+	</AddIn>
+</RevitAddIns>

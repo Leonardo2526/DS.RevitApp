@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>  
+	<AddIn Type="Application">
+    <Name>OpDoc</Name>
+		<Assembly>.\WallUpdaterApplication\WallUpdaterApplication.dll</Assembly>
+		 <ClientId>48f1f30f-1459-496d-bcd1-b32b713045ce</ClientId>
+		<FullClassName>AddIns.WallUpdaterApplication</FullClassName>
+		<VendorId>DS</VendorId> 
+	</AddIn>
+</RevitAddIns>

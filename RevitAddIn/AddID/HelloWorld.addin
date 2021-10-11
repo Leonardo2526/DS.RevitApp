@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Name>HelloWorld</Name>
+    <FullClassName>AddID.HelloWorld</FullClassName>
+    <Text>HelloWorld</Text>
+    <Description>HelloWorld text</Description>
+    <VisibilityMode>AlwaysVisible</VisibilityMode>
+    <Assembly>D:\OneDrive\Repository\RevitAddIn\AddID\bin\Debug\AddIns.dll</Assembly>
+    <AddInId>11713ec2-fcdd-4523-8b09-315a152875d1</AddInId>
+    <VendorId>ADSK</VendorId>
+    <VendorDescription>Autodesk, Inc, www.autodesk.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>

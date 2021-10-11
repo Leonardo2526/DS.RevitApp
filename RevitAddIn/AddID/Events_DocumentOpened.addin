@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>  
+	<AddIn Type="Application">
+    <Name>OpDoc</Name>
+		<Assembly>.\Events_DocumentOpened\Events_DocumentOpened.dll</Assembly>
+		 <ClientId>e1e73d65-5e55-4380-bb3e-2ef69a14f348</ClientId>
+		<FullClassName>AddIn.Application_DocumentOpened</FullClassName>
+		<VendorId>DS</VendorId> 
+	</AddIn>
+</RevitAddIns>

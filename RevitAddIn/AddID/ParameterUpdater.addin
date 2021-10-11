@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Name>CommandB</Name>
+    <ClientId>c1f5f009-8ba9-4f1d-b0fb-ba41a0f69942</ClientId>
+    <Assembly>D:\OneDrive\Repository\RevitAddIn\AddID\bin\Debug\AddIns.dll</Assembly>
+    <FullClassName>AddID.CommandB</FullClassName>
+    <VendorId>ADSK</VendorId>
+  </AddIn>
+</RevitAddIns>
