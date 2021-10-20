@@ -12,7 +12,7 @@ namespace DS.RevitApp.RibbonTab
 
         public Result OnShutdown(UIControlledApplication application)
         {
-            return Result.Succeeded;
+            return Result.Succeeded; 
         }
 
         public Result OnStartup(UIControlledApplication application)
