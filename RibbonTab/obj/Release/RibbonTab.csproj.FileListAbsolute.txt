@@ -1,6 +1,5 @@
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RibbonTab\bin\Release\DS.RibbonTab.dll
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RibbonTab\bin\Release\DS.RibbonTab.pdb
-C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RibbonTab\obj\Release\RibbonTab.csprojAssemblyReference.cache
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RibbonTab\obj\Release\RibbonTab.csproj.CoreCompileInputs.cache
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RibbonTab\obj\Release\DS.RibbonTab.dll
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RibbonTab\obj\Release\DS.RibbonTab.pdb
@@ -10,3 +9,4 @@ D:\Repository\DS_RevitApp_20\RibbonTab\obj\Release\RibbonTab.csprojAssemblyRefer
 D:\Repository\DS_RevitApp_20\RibbonTab\obj\Release\RibbonTab.csproj.CoreCompileInputs.cache
 D:\Repository\DS_RevitApp_20\RibbonTab\obj\Release\DS.RibbonTab.dll
 D:\Repository\DS_RevitApp_20\RibbonTab\obj\Release\DS.RibbonTab.pdb
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RibbonTab\obj\Release\RibbonTab.csproj.AssemblyReference.cache

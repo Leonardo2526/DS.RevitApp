@@ -12,7 +12,7 @@ namespace DS.RevitApp.RibbonTab
 
         public Result OnShutdown(UIControlledApplication application)
         {
-            return Result.Succeeded;
+            return Result.Succeeded; 
         }
 
         public Result OnStartup(UIControlledApplication application)
@@ -37,7 +37,7 @@ namespace DS.RevitApp.RibbonTab
 
 
             // Create tool tips 
-            button1.ToolTip = "Export files from *.rvt to *.nwc.\nv1.2";
+            button1.ToolTip = "Export files from *.rvt to *.nwc.\nv2.0";
             button2.ToolTip = "Update families in *.rvt files.\nv1.2";
             button3.ToolTip = "Add new parameters to shared parameters file.\nv1.0";
             button4.ToolTip = "Add new parameters from shared parameters file to *.rvt projects.\nv1.0";
