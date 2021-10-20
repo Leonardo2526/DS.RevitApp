@@ -1,4 +1,3 @@
-C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\obj\Release\RVTtoNWC.csprojAssemblyReference.cache
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\obj\Release\RVTtoNWC.csproj.CoreCompileInputs.cache
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\bin\Release\DS.RVTtoNWC.dll
 C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\bin\Release\DS.RVTtoNWC.pdb
@@ -17,3 +16,6 @@ D:\Repository\DS_RevitApp_20\RVTtoNWC\obj\Release\RVTtoNWC.csproj.CoreCompileInp
 D:\Repository\DS_RevitApp_20\RVTtoNWC\obj\Release\RVTtoNWC.csproj.CopyComplete
 D:\Repository\DS_RevitApp_20\RVTtoNWC\obj\Release\DS.RVTtoNWC.dll
 D:\Repository\DS_RevitApp_20\RVTtoNWC\obj\Release\DS.RVTtoNWC.pdb
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\obj\Release\RVTtoNWC.csproj.AssemblyReference.cache
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\obj\Release\DS_FilterForm.DS_Filter.resources
+C:\Users\d.saraev.GCM\source\repos\DS_RevitApp_20\RVTtoNWC\obj\Release\RVTtoNWC.csproj.GenerateResource.cache
