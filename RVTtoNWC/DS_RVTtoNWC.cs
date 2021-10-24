@@ -34,7 +34,7 @@ namespace DS.RevitApp.RVTtoNWC
         List<string> NewDirNWClist = new List<string>();
         List<string> LinkedDocs = new List<string>();
          
-
+         
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             //Get application and documnet objects
@@ -123,7 +123,7 @@ namespace DS.RevitApp.RVTtoNWC
             string ext = "rvt";
             List<string> FileFullNames_Filtered = FileFilter(dir, ext);
 
-            foreach (string FileName in FileFullNames_Filtered)
+            foreach (string FileName in FileFullNames_Filtered) 
             {
                 string NWCFileName = Path.GetFileNameWithoutExtension(FileName);
                 NWC_Export(uiapp, FileName, NWCFileName);
@@ -141,17 +141,17 @@ namespace DS.RevitApp.RVTtoNWC
 
             List<string> FileFullNames_Filtered = new List<string>();
 
-            FileFullNames_Filtered.AddRange(FileFullNames);
+            FileFullNames_Filtered.AddRange(FileFullNames); 
 
             //Extract elements by filter from list
             foreach (string fn in FileFullNames)
             {
-                FileInfo f = new FileInfo(fn);
+                FileInfo f = new FileInfo(fn); 
                 if (FileSize != 0 && f.Length < FileSize)
                     FileFullNames_Filtered.Remove(fn);
                 if (FileDate != 0 && f.LastWriteTime < DateTime.Now.AddDays(-FileDate))
                     FileFullNames_Filtered.Remove(fn);
-                if (fn.Contains("Архив")| fn.Contains("восстановление"))
+                if (fn.Contains("Архив") | fn.Contains("восстановление") | fn.Contains("backup"))
                     FileFullNames_Filtered.Remove(fn);
             }
 
@@ -198,8 +198,10 @@ namespace DS.RevitApp.RVTtoNWC
                 ExportScope = NavisworksExportScope.View,
                 ViewId = NW_View(doc).Id,
                 ExportRoomGeometry = false,
-                DivideFileIntoLevels = false
+                DivideFileIntoLevels = false,
+                ExportParts = true
             };
+
             doc.Export(OutputPath, NWCFileName, nweo);
 
             FileFiltered.Add(OutputPath + NWCFileName + ".nwc");
@@ -220,7 +222,7 @@ namespace DS.RevitApp.RVTtoNWC
                 View3D view = (View3D)viewElement;
 
                 if (view.Name.Contains("Navisworks"))
-                    return view;
+                    return view; 
             }
 
             //{3D} view searching
@@ -254,22 +256,51 @@ namespace DS.RevitApp.RVTtoNWC
             }
         }
       
+
+        string GetNWCFolder (string NWCFileName)
+        {
+            //Get folder for NWC file
+            char separator = Convert.ToChar("_");
+            string[] splitedString = NWCFileName.Split(separator);
+
+            string NWCFolder = "";
+            int i = 0;
+            foreach (var str in splitedString)
+            {
+                i++;
+                if (i==3)
+                    continue;
+                if (i == 7)
+                    break;
+                NWCFolder = NWCFolder + str + "_";
+            }
+
+            NWCFolder = NWCFolder.Trim(separator);
+
+            return NWCFolder;
+        }
+
+
         public string GetDirNWC(string NWCFileName)
         //Get directories for export Navisworks files.
         {
-            string DefaultOutputPath = DestinationPath + "\\" + NWCFileName + "\\";
+            string NWCFolder = GetNWCFolder(NWCFileName);
+            string DefaultOutputPath = DestinationPath + "\\" + NWCFolder + "\\";
            
             try
             {
                 //Check folders
                 foreach (string dirname in DirNWClist)
                 {
-                    if (NWCFileName.Contains(dirname))
-                    return dirname;
+                    if (NWCFolder == dirname)
+                    return NWCFolder;
                 }
                 Directory.CreateDirectory(DefaultOutputPath);
+
+                if (!NewDirNWClist.Contains(DefaultOutputPath))
                 NewDirNWClist.Add(DefaultOutputPath);
-                return NWCFileName;
+
+                return NWCFolder;
             }
             catch (System.Exception ex)
             {

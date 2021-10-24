@@ -92,7 +92,7 @@ namespace DS_FilterForm
             // 
             this.NoFilter.Location = new System.Drawing.Point(120, 3);
             this.NoFilter.Name = "NoFilter";
-            this.NoFilter.Size = new System.Drawing.Size(141, 42);
+            this.NoFilter.Size = new System.Drawing.Size(195, 42);
             this.NoFilter.TabIndex = 1;
             this.NoFilter.Text = "Continue without filer";
             this.NoFilter.UseVisualStyleBackColor = true;
