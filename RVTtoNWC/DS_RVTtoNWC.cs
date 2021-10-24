@@ -219,20 +219,18 @@ namespace DS.RevitApp.RVTtoNWC
             //Navisworks view searching
             foreach (Element viewElement in viewCollector)
             {
-                View3D view = (View3D)viewElement;
-
-                if (view.Name.Contains("Navisworks"))
-                    return view; 
+                if (viewElement is View3D view)
+                {
+                    if (!view.IsTemplate)
+                    {
+                        if (view.Name.Contains("Navisworks"))
+                            return view;
+                        else if (view.Name.Contains("{3D}"))
+                            return view;
+                    }
+                }
             }
 
-            //{3D} view searching
-            foreach (Element viewElement in viewCollector)
-            {
-                View3D view = (View3D)viewElement;
-
-                if (view.Name.Contains("{3D}"))
-                    return view;
-            }
 
             return null;
         }
