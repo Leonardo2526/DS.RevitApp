@@ -1,8 +1,9 @@
 ﻿using Autodesk.Revit.DB;
 using System.Collections.Generic;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
+
 
     interface IElementCenterLine
     {
@@ -156,7 +157,7 @@ namespace DS.CollisionsElliminator
                     generalLines.Add(generalLine);
 
                     if (show)
-                        transactionUtils.CreateModelCurve(new CreateModelCurveTransaction(Data.Elem1.Document, glStartPoints[j] + offset, glEndPoints[j + 1] + offset));
+                        transactionUtils.CreateModelCurve(new CreateModelCurveTransaction(Data.Doc, glStartPoints[j] + offset, glEndPoints[j + 1] + offset));
 
                 }
                 else if (!Data.Elem1IsRectangular)
@@ -207,7 +208,7 @@ namespace DS.CollisionsElliminator
                     generalLines.Add(generalLine);
 
                     if (show)
-                        transactionUtils.CreateModelCurve(new CreateModelCurveTransaction(Data.Elem1.Document, staticPoints[j], movablePoints[j + 1] + offset));
+                        transactionUtils.CreateModelCurve(new CreateModelCurveTransaction(Data.Doc, staticPoints[j], movablePoints[j + 1] + offset));
 
                 }
                 else if (!Data.Elem1IsRectangular)

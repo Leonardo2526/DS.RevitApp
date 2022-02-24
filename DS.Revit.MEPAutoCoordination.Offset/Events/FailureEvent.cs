@@ -5,8 +5,9 @@ using Autodesk.Revit.UI;
 using System;
 using System.Linq;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
+
     class FailureEvent
     {
         readonly Application App;

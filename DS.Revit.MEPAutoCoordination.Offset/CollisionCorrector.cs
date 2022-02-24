@@ -3,19 +3,11 @@ using Autodesk.Revit.DB;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
+
     class CollisionCorrector
-    {
-        readonly Document Doc;
-        readonly Data data;
-
-        public CollisionCorrector(Document doc, Data dat)
-        {
-            Doc = doc;
-            data = dat;
-        }
-
+    {       
         List<int> startMovableElementCollisions = new List<int>();
         public static int StartColllisionsCount;
 
@@ -43,9 +35,9 @@ namespace DS.CollisionsElliminator
             int i;
             for (i = 0; i < dxy.Count; i++)
             {
-                moveVector = data.GetNormOffset(Data.ElementClearence, dxy[i], dz[i]);
+                moveVector = Data.GetNormOffset(Data.ElementClearence, dxy[i], dz[i]);
 
-                MovableElement movableElement = new MovableElement(Doc, data, moveVector);
+                MovableElement movableElement = new MovableElement(moveVector);
                 startMovableElementCollisions = movableElement.GetCollisions();
 
                 if (!movableElement.IsMovableElementsCountValid)

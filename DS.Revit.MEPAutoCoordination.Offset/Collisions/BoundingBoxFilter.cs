@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Autodesk.Revit.DB;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
+
     class BoundingBoxFilter
     {
         public BoundingBoxIntersectsFilter GetBoundingBoxFilter(IBoundingBoxFilter boundingBoxFilter)

@@ -1,14 +1,15 @@
 ﻿using Autodesk.Revit.DB;
 using System;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
-    interface ICollisionType
+
+    public interface ICollisionType
     {
         bool Check();
     }
 
-    class CollisionType2 : ICollisionType
+    public class CollisionType2 : ICollisionType
     {
         readonly Element Elem1;
         readonly Element Elem2;

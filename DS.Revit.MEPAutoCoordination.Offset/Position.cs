@@ -2,8 +2,9 @@
 using Autodesk.Revit.DB;
 using System.Collections.Generic;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
+
     class Position
     {
         /// <summary>
@@ -12,7 +13,7 @@ namespace DS.CollisionsElliminator
         /// </summary>
         public static bool IfAvailableExist(XYZ moveVector, MovableElement movableElement, Dictionary<Element, XYZ> staticCenterPoints)
         {
-            Application App = Data.Elem1.Document.Application;
+            Application App = Data.Doc.Application;
             PointUtils pointUtils = new PointUtils();
 
             int i;
@@ -37,10 +38,10 @@ namespace DS.CollisionsElliminator
                     if (movableElement.CheckCurrentCollisions(movableElement, moveVector,
                     CollisionCorrector.StartColllisionsCount, staticCenterPoints))
                     {
-                        if (VectorForFamInst != null && !ElementMover.Move(movableElement.FamInstToMove.Id, Data.Elem1.Document.Application, VectorForFamInst))
+                        if (VectorForFamInst != null && !ElementMover.Move(movableElement.FamInstToMove.Id, Data.Doc.Application, VectorForFamInst))
                             break;
 
-                        if (!ElementMover.Move(Data.Elem1.Id, App, moveVector))
+                        if (!ElementMover.Move(Data.Elem1Curve.Id, App, moveVector))
                             break;
                         else
                             return true;

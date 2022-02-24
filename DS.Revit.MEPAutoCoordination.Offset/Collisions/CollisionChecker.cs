@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
-    class CollisionChecker
+
+   public class CollisionChecker
     {
         public bool CheckCollisionType(ICollisionType collisionType)
         {
