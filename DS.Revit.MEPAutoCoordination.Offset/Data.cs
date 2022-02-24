@@ -1,48 +1,41 @@
 ﻿using Autodesk.Revit.DB;
-using Autodesk.Revit.DB.Mechanical;
-using Autodesk.Revit.DB.Plumbing;
-using iUtils;
-using MEPAutoCoordination;
+using DS.Revit.ExternalUtils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
+
     class Data
     {
-        readonly Document Doc;
-        readonly ElementToFindCollision Element1;
-        readonly ElementToFindCollision Element2;
-
+        public static Document Doc { get; set; }
         public static double MaxZCoordinate;
 
         public static double MinZCoordinate;
 
-        public Data(Document doc, ElementToFindCollision elem1, ElementToFindCollision elem2, double maxZCoordinate, double minZCoordinate)
-        {
-            Doc = doc;
-            Element1 = elem1;
-            Element2 = elem2;
-            MaxZCoordinate = maxZCoordinate;
-            MinZCoordinate = minZCoordinate;
-        }
-
         //AllModelElements
-        public static List<Element> AllModelElements;
+        public static List<Element> AllModelElements { get; set; }
+
         public static List<ElementId> AllModelElementsIds;
         public static List<ElementId> NotConnectedToElem1ElementIds;
 
-        public static List<Element> AllLinkedElements;
-        public static List<ElementId> AllLinkedElementsIds;
-        public static List<RevitLinkInstance> AllLinks;
+        public static List<Element> AllLinkedElements { get; set; }
+    
+        public static List<ElementId> AllLinkedElementsIds 
+        { 
+            get
+            { return AllLinkedElements.Select(x => x.Id).ToList(); }
+            set { }
+        }
+        public static List<RevitLinkInstance> AllLinks { get; set; }
 
         public static double SearchStep = 100;
         public static double ElementClearence = 100;
         public static double ElementClearenceInFeets;
 
-        public static Element Elem1;
-        public static Element Elem2;
+        public static MEPCurve Elem1Curve { get; set; }
+        public static MEPCurve Elem2Curve { get; set; }
 
         public static string Elem1SystemName;
 
@@ -65,29 +58,18 @@ namespace DS.CollisionsElliminator
 
         public static List<ElementId> ConnectedToElem1Elements;
 
-        ElementUtils elementUtils = new ElementUtils();
 
         public void GetAllData()
         {
-            
-            //Set element as Elem1 with less size
-            Elem1 = Element1.MEPCurve;
-            Elem2 = Element2.MEPCurve;
-
-            var dims1 = Utils.GetMEPCurveDimensions(Element1.MEPCurve);
-            var dims2 = Utils.GetMEPCurveDimensions(Element2.MEPCurve);
+            var dims1 = IvanovUtils.GetMEPCurveDimensions(Elem1Curve);
+            var dims2 = IvanovUtils.GetMEPCurveDimensions(Elem2Curve);
             if (Math.Abs(dims1.area - dims2.area) < 0.01)
                 CheckLength();
-
-            //Get all model elements
-            AllModelElements = MEPAutoCoordination.MEPAutoCoordinationCommand.
-           Container.GetInstance<AllElementsGeometryService>().CurrentDocElements.
-           Select(x => x.Element).Where(x=>x.IsValidObject).ToList();
 
             //Get all model elements Ids
             AllModelElementsIds = new List<ElementId>();
             foreach (Element element in AllModelElements)
-                    AllModelElementsIds.Add(element.Id);
+                AllModelElementsIds.Add(element.Id);
 
             if (AllModelElementsIds.Count != 0)
             {
@@ -100,36 +82,36 @@ namespace DS.CollisionsElliminator
                 foreach (Element element in AllModelElements)
                     AllModelElementsIds.Add(element.Id);
             }
-                
+
 
             GetLinkedElements();
 
-            ElementClearenceInFeets =  UnitUtils.Convert(ElementClearence/1000,
+            ElementClearenceInFeets = UnitUtils.Convert(ElementClearence / 1000,
                                            DisplayUnitType.DUT_METERS,
                                            DisplayUnitType.DUT_DECIMAL_FEET);
 
             LinesUtils linesUtils = new LinesUtils(null);
 
-            Elem1StartCenterLine = linesUtils.CreateCenterLine(new ElementCenterLine(Elem1));
-            Elem1StartGeneralLines = linesUtils.CreateGeneralLines(new ElementGeneralLines(Elem1));
+            Elem1StartCenterLine = linesUtils.CreateCenterLine(new ElementCenterLine(Elem1Curve));
+            Elem1StartGeneralLines = linesUtils.CreateGeneralLines(new ElementGeneralLines(Elem1Curve));
 
             MaxZCoordinate = MaxZCoordinate - ElementClearenceInFeets;
 
-            ConnectedToElem1Elements = GetConnectedElemenets(Element1.MEPCurve);
+            ConnectedToElem1Elements = GetConnectedElemenets(Elem1Curve);
 
             NotConnectedToElem1ElementIds = Data.AllModelElementsIds;
             foreach (ElementId elementId in ConnectedToElem1Elements)
             {
                 NotConnectedToElem1ElementIds.Remove(elementId);
-                NotConnectedToElem1ElementIds.Remove(this.Element1.MEPCurve.Id);
+                NotConnectedToElem1ElementIds.Remove(Elem1Curve.Id);
             }
         }
-       
-        public XYZ GetNormOffset(double offsetNorm, int dxy, int dz)
-        {
 
-            elementUtils.GetPoints(Elem1, out XYZ startPoint1, out XYZ endPoint1, out XYZ centerPointElement1);
-            elementUtils.GetPoints(Elem2, out XYZ startPoint2, out XYZ endPoint2, out XYZ centerPointElement2);
+        public static XYZ GetNormOffset(double offsetNorm, int dxy, int dz)
+        {
+            ElementUtils elementUtils = new ElementUtils();
+            elementUtils.GetPoints(Elem1Curve, out XYZ startPoint1, out XYZ endPoint1, out XYZ centerPointElement1);
+            elementUtils.GetPoints(Elem2Curve, out XYZ startPoint2, out XYZ endPoint2, out XYZ centerPointElement2);
 
             double alfa;
             double beta;
@@ -138,7 +120,7 @@ namespace DS.CollisionsElliminator
             double fullOffsetX = 0;
             double fullOffsetY = 0;
             double fullOffsetZ = 0;
-            Elem1A = 0; 
+            Elem1A = 0;
             Elem1AX = 0;
             Elem1AY = 0;
 
@@ -146,7 +128,7 @@ namespace DS.CollisionsElliminator
                                    DisplayUnitType.DUT_METERS,
                                    DisplayUnitType.DUT_DECIMAL_FEET);
 
-            ElementSize elementSize = new ElementSize(Element1.MEPCurve, Element2.MEPCurve);
+            ElementSize elementSize = new ElementSize(Elem1Curve, Elem2Curve);
             elementSize.GetSizes();
 
             //int side = 1;
@@ -189,7 +171,7 @@ namespace DS.CollisionsElliminator
 
             fullOffsetZ = (Elem2Height + Elem1Height) / 2 + dz * (centerPointElement2.Z - centerPointElement1.Z) + offsetNormF;
 
-           
+
             XYZ XYZoffset = new XYZ(dxy * (fullOffsetX), dxy * (fullOffsetY), dz * (fullOffsetZ));
 
             return XYZoffset;
@@ -198,7 +180,8 @@ namespace DS.CollisionsElliminator
 
         public XYZ GetStartOffset(double offset)
         {
-            elementUtils.GetPoints(Elem1, out XYZ startPointA, out XYZ endPointA, out XYZ centerPointElementA);
+            ElementUtils elementUtils = new ElementUtils();
+            elementUtils.GetPoints(Elem1Curve, out XYZ startPointA, out XYZ endPointA, out XYZ centerPointElementA);
 
             double offsetF = UnitUtils.Convert(offset / 1000,
                                    DisplayUnitType.DUT_METERS,
@@ -212,13 +195,13 @@ namespace DS.CollisionsElliminator
         bool CheckProjection()
         {
             ElementUtils elementUtils = new ElementUtils();
-            elementUtils.GetPoints(Data.Elem1, out XYZ Elem1StartPoint, out XYZ Elem1EndPoint, out XYZ Elem1CenterPoint);
-            elementUtils.GetPoints(Data.Elem2, out XYZ Elem2StartPoint, out XYZ Elem2EndPoint, out XYZ Elem2CenterPoint);
+            elementUtils.GetPoints(Elem1Curve, out XYZ Elem1StartPoint, out XYZ Elem1EndPoint, out XYZ Elem1CenterPoint);
+            elementUtils.GetPoints(Elem2Curve, out XYZ Elem2StartPoint, out XYZ Elem2EndPoint, out XYZ Elem2CenterPoint);
 
             XYZ Elem2Vector = Elem2EndPoint - Elem2StartPoint;
             XYZ deltaVector = Elem1CenterPoint - Elem2CenterPoint;
-         
-            double angleRad = 90.0/(180 / Math.PI)- Elem2Vector.AngleTo(deltaVector);
+
+            double angleRad = 90.0 / (180 / Math.PI) - Elem2Vector.AngleTo(deltaVector);
             double angle = angleRad * (180 / Math.PI);
 
             double gyp = Elem2CenterPoint.DistanceTo(Elem1CenterPoint);
@@ -237,19 +220,19 @@ namespace DS.CollisionsElliminator
 
         void CheckLength()
         {
-            string type1 = Element1.MEPCurve.GetType().ToString();
-            string type2 = Element2.MEPCurve.GetType().ToString();
+            string type1 = Elem1Curve.GetType().ToString();
+            string type2 = Elem2Curve.GetType().ToString();
 
             if (!type1.Contains("FamilyInstance") && !type2.Contains("FamilyInstance"))
             {
-                LocationCurve lc1 = Element1.MEPCurve.Location as LocationCurve;
-                LocationCurve lc2 = Element2.MEPCurve.Location as LocationCurve;
+                LocationCurve lc1 = Elem1Curve.Location as LocationCurve;
+                LocationCurve lc2 = Elem2Curve.Location as LocationCurve;
                 double l1 = lc1.Curve.ApproximateLength;
                 double l2 = lc2.Curve.ApproximateLength;
                 if (l2 < l1)
                 {
-                    Elem1 = Element2.MEPCurve;
-                    Elem2 = Element1.MEPCurve;
+                    Elem1Curve = Elem2Curve;
+                    Elem2Curve = Elem1Curve;
                 }
 
             }
@@ -257,27 +240,16 @@ namespace DS.CollisionsElliminator
 
         void GetLinkedElements()
         {
-            //Get all linked models
-            AllLinks = MEPAutoCoordination.MEPAutoCoordinationCommand.Container.
-                GetInstance<AllElementsGeometryService>().AlllLinks.ToList();
-
-            //Get all linked elements
-            var LinksElems = MEPAutoCoordination.MEPAutoCoordinationCommand.
-           Container.GetInstance<AllElementsGeometryService>().LinksElems;
-
-            AllLinkedElements = LinksElems.SelectMany(x => x.Value).Select(x => x.Element).ToList();
-            AllLinkedElementsIds = LinksElems.SelectMany(x => x.Value).Select(x => x.Element.Id).ToList();
-
-            if (AllLinkedElementsIds.Count !=0)
+            if (AllLinkedElementsIds.Count != 0)
             {
                 FilteredElementCollector collector = new FilteredElementCollector(Doc, AllLinkedElementsIds);
                 ElementCategoryFilter elementCategoryFilter = new ElementCategoryFilter(BuiltInCategory.OST_TelephoneDevices, true);
 
                 AllLinkedElements = collector.WherePasses(elementCategoryFilter).ToElements().ToList();
-                AllLinkedElementsIds = LinksElems.SelectMany(x => x.Value).Select(x => x.Element.Id).ToList();
+                AllLinkedElementsIds = AllLinkedElements.Select(x => x.Id).ToList();
             }
 
-           
+
         }
 
         public List<Connector> GetConnectors(MEPCurve mepCurve)
@@ -308,11 +280,11 @@ namespace DS.CollisionsElliminator
                 foreach (Connector con in connectorSet)
                 {
                     ElementId elementId = con.Owner.Id;
-                    if (elementId != Elem1.Id)
+                    if (elementId != Elem1Curve.Id)
                         connectedElements.Add(elementId);
                 }
 
-                   
+
             }
 
 

@@ -2,8 +2,9 @@
 using Autodesk.Revit.UI;
 using System;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
+
     interface ITransaction
     {
         void CreateTransaction();

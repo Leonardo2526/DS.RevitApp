@@ -6,8 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
+
     class ElementMover
     {
         /// <summary>
@@ -17,7 +18,7 @@ namespace DS.CollisionsElliminator
         {
             TransactionUtils transactionUtils = new TransactionUtils();
 
-            ITransaction moveElementTransaction = new MoveElementTransaction(Data.Elem1.Document, elemetnID, MoveVector);
+            ITransaction moveElementTransaction = new MoveElementTransaction(Data.Doc, elemetnID, MoveVector);
 
             FailureEvent failureProcess = new FailureEvent(App);
             failureProcess.RegisterEvent();

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
+
     class ConnectorUtils
     {
         public static List<Connector> GetConnectors(Element element)

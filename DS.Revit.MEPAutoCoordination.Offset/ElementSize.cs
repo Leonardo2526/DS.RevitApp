@@ -1,8 +1,9 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Plumbing;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
+
 
     /// <summary>
     /// Get sizes of Elem1 and Elem2 and set class properties

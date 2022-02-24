@@ -1,8 +1,9 @@
 ﻿using Autodesk.Revit.DB;
 using System.Collections.Generic;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
+
     class LineCollision
     {
         readonly Document Doc;

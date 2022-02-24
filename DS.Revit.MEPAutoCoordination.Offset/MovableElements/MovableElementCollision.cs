@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
+
 
     interface IMovableElemCollision
     {
@@ -33,7 +34,7 @@ namespace DS.CollisionsElliminator
 
         public bool IsModelsElementsCountValid { get; set; } = true;
 
-        Document Doc = Data.Elem1.Document;
+        Document Doc = Data.Doc;
 
 
         public List<int> GetCollisions()

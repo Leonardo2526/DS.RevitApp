@@ -2,6 +2,9 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5CBE3588-08FD-4DD1-A7EF-4C8769D2B4EC}</ProjectGuid>
@@ -33,6 +36,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DS.Revit.ExternalUtils">
+      <HintPath>..\..\DS.Revit.Utils\DS.Revit.ExternalUtils\bin\Release\DS.Revit.ExternalUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="iUtils">
+      <HintPath>..\..\DS.Revit.Utils\iUtils\bin\Release\iUtils.dll</HintPath>
+    </Reference>
     <Reference Include="RevitAPI">
       <HintPath>C:\Program Files\Autodesk\Revit 2020\RevitAPI.dll</HintPath>
       <Private>False</Private>
@@ -66,6 +75,7 @@
     <Compile Include="Events\DocEvent.cs" />
     <Compile Include="Events\FailureEvent.cs" />
     <Compile Include="ExternalCommand.cs" />
+    <Compile Include="Main.cs" />
     <Compile Include="MovableElements\MovableElement.cs" />
     <Compile Include="MovableElements\MovableElementChecker.cs" />
     <Compile Include="MovableElements\MovableElementCollision.cs" />

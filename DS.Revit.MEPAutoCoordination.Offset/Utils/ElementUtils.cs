@@ -2,8 +2,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
+
     class ElementUtils
     {
         /// <summary>

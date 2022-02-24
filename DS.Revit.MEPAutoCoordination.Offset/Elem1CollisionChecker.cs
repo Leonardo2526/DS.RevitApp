@@ -3,8 +3,9 @@ using Autodesk.Revit.DB;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
+
     class Elem1CollisionChecker
     {
         /// <summary>
@@ -12,7 +13,7 @@ namespace DS.CollisionsElliminator
         /// </summary>
         public static bool CheckCollisions(XYZ moveVector)
         {
-            LineCollision lineCollision = new LineCollision(Data.Elem1.Document);
+            LineCollision lineCollision = new LineCollision(Data.Doc);
 
             List<Line> lines = CreateLinesByVector(moveVector);
 
@@ -32,7 +33,7 @@ namespace DS.CollisionsElliminator
         public static List<Line> CreateLinesByVector(XYZ moveVector)
         {
             LinesUtils linesUtils = new LinesUtils(moveVector);
-            return linesUtils.CreateAllElementLines(Data.Elem1, moveVector, false);
+            return linesUtils.CreateAllElementLines(Data.Elem1Curve, moveVector, false);
         }
     }
 }

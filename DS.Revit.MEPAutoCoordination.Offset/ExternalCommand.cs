@@ -6,7 +6,7 @@ using System;
 namespace DS.Revit.MEPAutoCoordination.Offset
 {
     [Transaction(TransactionMode.Manual)]
-    public class ExternalCommand : IExternalCommand
+    internal class ExternalCommand : IExternalCommand
     {
         public Autodesk.Revit.UI.Result Execute(ExternalCommandData revit,
            ref string message, ElementSet elements)

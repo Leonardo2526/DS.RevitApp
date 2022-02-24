@@ -4,18 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
+
     class MovableElement
     {
-        readonly Document Doc;
-        readonly Data data;
         readonly XYZ MoveVector;
 
-        public MovableElement(Document doc, Data dat, XYZ moveVector)
+        public MovableElement(XYZ moveVector)
         {
-            Doc = doc;
-            data = dat;
             MoveVector = moveVector;
         }
 
@@ -35,7 +32,7 @@ namespace DS.CollisionsElliminator
         public bool GetMovableElements(XYZ moveVector)
         {
             List<Element> elements = new List<Element>();
-            elements.Add(Data.Elem1);
+            elements.Add(Data.Elem1Curve);
             List<Element> preElements = new List<Element>();
 
             SearchConnected(elements, preElements);
@@ -61,7 +58,7 @@ namespace DS.CollisionsElliminator
                 foreach (ElementId elId in connectedElemIdsEnum)
                 {
                     if (!preElementsIds.Contains(elId))
-                        connectedToCurrent.Add(Doc.GetElement(elId));
+                        connectedToCurrent.Add(Data.Doc.GetElement(elId));
                 }
             }
 
@@ -202,7 +199,7 @@ namespace DS.CollisionsElliminator
         {
             Dictionary<Element, XYZ> staticCenterPoints = new Dictionary<Element, XYZ>();
 
-            elementUtils.GetPoints(Data.Elem1, out XYZ startPoint, out XYZ endPoint, out XYZ centerPoint);
+            elementUtils.GetPoints(Data.Elem1Curve, out XYZ startPoint, out XYZ endPoint, out XYZ centerPoint);
 
             foreach (Element element in PotentialObstacledElements)
             {
@@ -228,7 +225,7 @@ namespace DS.CollisionsElliminator
         {
             int totalCount = 0;
 
-            LineCollision lineCollision = new LineCollision(Doc);
+            LineCollision lineCollision = new LineCollision(Data.Doc);
 
             LinesUtils linesUtils = new LinesUtils(moveVector);
 

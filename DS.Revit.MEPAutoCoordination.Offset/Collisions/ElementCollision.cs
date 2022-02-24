@@ -3,8 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
+
     class ElementCollision
     {
         readonly Document Doc;

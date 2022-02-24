@@ -8,8 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
+
     class SolidCreator
     {
         List<Solid> solids = new List<Solid>();

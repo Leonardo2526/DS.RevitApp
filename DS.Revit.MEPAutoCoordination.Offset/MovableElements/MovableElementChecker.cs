@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace DS.CollisionsElliminator
+namespace DS.Revit.MEPAutoCoordination.Offset
 {
+
     class MovableElementChecker
     {
         readonly XYZ MoveVector;
@@ -112,7 +113,7 @@ namespace DS.CollisionsElliminator
         /// </summary>
         public bool CheckPosition()
         {
-            elementUtils.GetPoints(Data.Elem1, out XYZ Elem1StartPoint, out XYZ Elem1EndPoint, out XYZ Elem1CenterPoint);
+            elementUtils.GetPoints(Data.Elem1Curve, out XYZ Elem1StartPoint, out XYZ Elem1EndPoint, out XYZ Elem1CenterPoint);
 
             XYZ elementVector = CenterPoint - Elem1CenterPoint;
 
