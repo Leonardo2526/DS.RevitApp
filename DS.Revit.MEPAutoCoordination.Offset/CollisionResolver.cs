@@ -6,15 +6,16 @@ using System.Linq;
 namespace DS.Revit.MEPAutoCoordination.Offset
 {
 
-    class CollisionCorrector
+    class CollisionResolver
     {       
         List<int> startMovableElementCollisions = new List<int>();
         public static int StartColllisionsCount;
+        public bool IsResolved;
 
         /// <summary>
-        /// Intiate searching for available Elem1 position through set of directions
+        /// Resolve collision by intiating search for available Elem1 position through set of directions
         /// </summary>
-        public bool IsCorrected()
+        public void Resolve()
         {
             List<int> dxy = new List<int>
             {
@@ -53,11 +54,12 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 Dictionary<Element, XYZ> staticCenterPoints = movableElement.GetStaticCenterPoints();
 
                 if (Position.IfAvailableExist(moveVector, movableElement, staticCenterPoints))
-                    return true;
+                {
+                    IsResolved = true;
+                    break;
+                }
 
             }
-
-            return false;
         }
 
        

@@ -28,8 +28,9 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
         public void Run()
         {
-            CollisionCorrector collisionDestroyer = new CollisionCorrector();
-            if (collisionDestroyer.IsCorrected())
+            CollisionResolver collisionDestroyer = new CollisionResolver();
+            collisionDestroyer.Resolve();
+            if (collisionDestroyer.IsResolved)
             {
                 IsCollisionResolved = true;
             }

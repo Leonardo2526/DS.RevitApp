@@ -36,7 +36,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 if (Elem1CollisionChecker.CheckCollisions(moveVector))
                 {
                     if (movableElement.CheckCurrentCollisions(movableElement, moveVector,
-                    CollisionCorrector.StartColllisionsCount, staticCenterPoints))
+                    CollisionResolver.StartColllisionsCount, staticCenterPoints))
                     {
                         if (VectorForFamInst != null && !ElementMover.Move(movableElement.FamInstToMove.Id, Data.Doc.Application, VectorForFamInst))
                             break;

@@ -62,7 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CollisionCorrector.cs" />
+    <Compile Include="CollisionResolver.cs" />
     <Compile Include="Collisions\BoundingBoxFilter.cs" />
     <Compile Include="Collisions\CollisionChecker.cs" />
     <Compile Include="Collisions\CollisionType2.cs" />
