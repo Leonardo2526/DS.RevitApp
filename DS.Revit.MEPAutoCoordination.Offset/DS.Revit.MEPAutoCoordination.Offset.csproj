@@ -36,8 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DS.Revit.ExternalUtils">
-      <HintPath>..\..\DS.Revit.Utils\DS.Revit.ExternalUtils\bin\Release\DS.Revit.ExternalUtils.dll</HintPath>
+    <Reference Include="DS.Revit.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DS.Revit.Utils\DS.Revit.Utils\bin\Debug\DS.Revit.Utils.dll</HintPath>
     </Reference>
     <Reference Include="iUtils">
       <HintPath>..\..\DS.Revit.Utils\iUtils\bin\Release\iUtils.dll</HintPath>
@@ -93,6 +94,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y  "$(TargetDir)$(TargetName).dll" "C:\Users\Сараев Даниил\AppData\Roaming\Autodesk\Revit\Addins\2020\Olimproekt\MEPAutoCoordination"</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y  "$(TargetDir)$(TargetName).dll" "C:\Users\Сараев Даниил\AppData\Roaming\Autodesk\Revit\Addins\2020\Olimproekt\MEPAutoCoordination"
+xcopy /Y  "$(TargetDir)$(TargetName).pdb" "C:\Users\Сараев Даниил\AppData\Roaming\Autodesk\Revit\Addins\2020\Olimproekt\MEPAutoCoordination"</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -10,7 +10,6 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 {
     public class Main
     {
-        Data data = new Data();
 
         public Main(Document doc, List<Element> allModelElements, List<RevitLinkInstance> allLinks, List<Element> allLinkedElements, MEPCurve elem1Curve, MEPCurve elem2Curve)
         {
@@ -21,7 +20,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             Data.Elem1Curve = elem1Curve;
             Data.Elem2Curve = elem2Curve;
 
-            data.GetAllData();
+            Data.GetAllData();
         }
 
         public bool IsCollisionResolved { get; set; } = false;

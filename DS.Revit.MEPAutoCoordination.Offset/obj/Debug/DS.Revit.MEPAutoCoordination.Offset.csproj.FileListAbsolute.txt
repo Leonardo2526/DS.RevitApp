@@ -1,9 +1,7 @@
 E:\Repository\DS.RevitApp\DS.Revit.MEPAutoCoordination.Offset\obj\Debug\DS.Revit.MEPAutoCoordination.Offset.csproj.AssemblyReference.cache
 E:\Repository\DS.RevitApp\DS.Revit.MEPAutoCoordination.Offset\obj\Debug\DS.Revit.MEPAutoCoordination.Offset.csproj.CoreCompileInputs.cache
-E:\Repository\DS.RevitApp\DS.Revit.MEPAutoCoordination.Offset\bin\Debug\DS.Revit.ExternalUtils.dll
 E:\Repository\DS.RevitApp\DS.Revit.MEPAutoCoordination.Offset\bin\Debug\iUtils.dll
 E:\Repository\DS.RevitApp\DS.Revit.MEPAutoCoordination.Offset\bin\Debug\Newtonsoft.Json.dll
-E:\Repository\DS.RevitApp\DS.Revit.MEPAutoCoordination.Offset\bin\Debug\DS.Revit.ExternalUtils.pdb
 E:\Repository\DS.RevitApp\DS.Revit.MEPAutoCoordination.Offset\bin\Debug\iUtils.pdb
 E:\Repository\DS.RevitApp\DS.Revit.MEPAutoCoordination.Offset\bin\Debug\Newtonsoft.Json.xml
 E:\Repository\DS.RevitApp\DS.Revit.MEPAutoCoordination.Offset\obj\Debug\DS.Revit.MEPAutoCoordination.Offset.csproj.CopyComplete
@@ -11,3 +9,5 @@ E:\Repository\DS.RevitApp\DS.Revit.MEPAutoCoordination.Offset\bin\Debug\DS.Revit
 E:\Repository\DS.RevitApp\DS.Revit.MEPAutoCoordination.Offset\bin\Debug\DS.Revit.MEPAutoCoordination.Offset.pdb
 E:\Repository\DS.RevitApp\DS.Revit.MEPAutoCoordination.Offset\obj\Debug\DS.Revit.MEPAutoCoordination.Offset.dll
 E:\Repository\DS.RevitApp\DS.Revit.MEPAutoCoordination.Offset\obj\Debug\DS.Revit.MEPAutoCoordination.Offset.pdb
+E:\Repository\DS.RevitApp\DS.Revit.MEPAutoCoordination.Offset\bin\Debug\DS.Revit.Utils.pdb
+E:\Repository\DS.RevitApp\DS.Revit.MEPAutoCoordination.Offset\bin\Debug\DS.Revit.Utils.dll
