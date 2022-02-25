@@ -74,7 +74,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         {
             get 
             {
-                return ConnectedElement.GetConnected(Elem1Curve);
+                return ConnectorUtils.GetConnectedElements(Elem1Curve);
             }
         }
 

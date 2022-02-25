@@ -83,11 +83,9 @@
     <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transactions\Transactions.cs" />
-    <Compile Include="Utils\ConnectorUtils.cs" />
     <Compile Include="Utils\ElementUtils.cs" />
     <Compile Include="Utils\LineUtils.cs" />
     <Compile Include="Utils\PointUtils.cs" />
-    <Compile Include="Utils\SolidUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DS.Revit.MEPAutoCoordination.Offset.addin" />
