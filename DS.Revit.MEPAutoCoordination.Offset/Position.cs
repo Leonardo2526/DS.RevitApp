@@ -7,62 +7,138 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
     class Position
     {
-        /// <summary>
-        /// Iterate through available positions of current direction. 
-        /// Return true if position without collisions found and move Elem1 to it.
-        /// </summary>
-        public static bool IfAvailableExist(XYZ moveVector, MovableElement movableElement, Dictionary<Element, XYZ> staticCenterPoints)
-        {
-            Application App = Data.Doc.Application;
-            PointUtils pointUtils = new PointUtils();
+        public bool PositonFound { get; private set; }
 
+        private bool StopProcess;
+        private bool PositionAvailable;
+        private XYZ VectorForFamInst;
+
+        private readonly Application App = Data.Doc.Application;
+
+        private XYZ _moveVector;
+        private readonly MovableElement _movableElement;
+        private readonly Dictionary<Element, XYZ> _staticCenterPoints;
+
+        public Position(XYZ moveVector, MovableElement movableElement, Dictionary<Element, XYZ> staticCenterPoints)
+        {
+            _moveVector = moveVector;
+            _movableElement = movableElement;
+            _staticCenterPoints = staticCenterPoints;
+        }
+
+
+        /// <summary>
+        /// Find through available positions of current direction.
+        /// </summary>
+        public void Find()
+        {
             int i;
             for (i = 0; i < 20; i++)
             {
+                PositionAvailable = true;
 
-                double moveElem1ToZ = Data.Elem1StartCenterLine.Origin.Z + moveVector.Z;
-                if (moveVector.Z != 0)
-                {
-                    if (moveElem1ToZ < Data.MinZCoordinate || moveElem1ToZ > Data.MaxZCoordinate)
-                        break;
-                }
+                Data.MoveVector = _moveVector;
 
-                Data.MoveVector = moveVector;
+                CheckMovement();
 
-                if (!movableElement.IsElementsObstacle(movableElement.PotentialObstacledElements, moveVector, out XYZ VectorForFamInst))
+                if (StopProcess)
                     break;
 
-
-                if (Elem1CollisionChecker.CheckCollisions(moveVector))
+                if (PositionAvailable)
                 {
-                    if (movableElement.CheckCurrentCollisions(movableElement, moveVector,
-                    CollisionResolver.StartColllisionsCount, staticCenterPoints))
-                    {
-                        if (VectorForFamInst != null && !ElementMover.Move(movableElement.FamInstToMove.Id, Data.Doc.Application, VectorForFamInst))
-                            break;
-
-                        if (!ElementMover.Move(Data.Elem1Curve.Id, App, moveVector))
-                            break;
-                        else
-                            return true;
-                    }
-                    else
-                    {
-
-                        moveVector = moveVector + pointUtils.GetOffsetByMoveVector(Data.MoveVector, 100);
-                        continue;
-                    }
+                    TryToMoveElements();
+                    break;
                 }
-                else
-                {
-
-                    moveVector = moveVector + pointUtils.GetOffsetByMoveVector(Data.MoveVector, 100);
-                    continue;
-                }
-
 
             }
-            return false;
+        }
+
+        private void CheckMovement()
+        {
+            if (PositionAvailable)
+            {
+                CheckZ();
+            }
+
+            if (PositionAvailable)
+            {
+                CheckElem1();
+            }
+
+            if (PositionAvailable)
+            {
+                CheckObstacles();
+            }
+
+            if (!StopProcess && PositionAvailable)
+            {
+                CheckMovable();
+            }
+        }
+
+        private void CheckZ()
+        {
+            double moveElem1ToZ = Data.Elem1StartCenterLine.Origin.Z + _moveVector.Z;
+            if (_moveVector.Z != 0)
+            {
+                if (moveElem1ToZ < Data.MinZCoordinate || moveElem1ToZ > Data.MaxZCoordinate)
+                    PositionAvailable = false;
+            }
+        }
+
+        private void CheckElem1()
+        {
+            if (!Elem1CollisionChecker.CheckCollisions(_moveVector))
+            {
+                UpdateMoveVector();
+                PositionAvailable = false;
+            }
+        }
+
+        private void CheckObstacles()
+        {
+            if (!_movableElement.IsElementsObstacle(_movableElement.PotentialObstacledElements, _moveVector, out VectorForFamInst))
+            {
+                StopProcess = true;
+            }
+        }
+
+
+        private void CheckMovable()
+        {
+            if (!_movableElement.CheckCurrentCollisions(_movableElement, _moveVector,
+              CollisionResolver.StartColllisionsCount, _staticCenterPoints))
+            {
+                UpdateMoveVector();
+                PositionAvailable = false;
+            }
+        }
+
+        private void UpdateMoveVector()
+        {
+            PointUtils pointUtils = new PointUtils();
+            _moveVector += pointUtils.GetOffsetByMoveVector(Data.MoveVector, 100);
+        }
+
+        private void TryToMoveElements()
+        {
+            bool elem1MovingAvailable = true;
+
+            if (VectorForFamInst != null)
+            {
+                if (!ElementMover.Move(_movableElement.FamInstToMove.Id, App, VectorForFamInst))
+                {
+                    elem1MovingAvailable = false;
+                }
+            }
+
+            if (elem1MovingAvailable)
+            {
+                if (ElementMover.Move(Data.Elem1Curve.Id, App, _moveVector))
+                {
+                    PositonFound = true;
+                }
+            }
         }
 
     }
