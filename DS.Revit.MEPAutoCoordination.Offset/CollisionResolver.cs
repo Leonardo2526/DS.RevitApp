@@ -53,7 +53,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
                 Dictionary<Element, XYZ> staticCenterPoints = movableElement.GetStaticCenterPoints();
 
-                if (Position.IfAvailableExist(moveVector, movableElement, staticCenterPoints))
+                if (Position.Get(moveVector, movableElement, staticCenterPoints))
                 {
                     IsResolved = true;
                     break;
