@@ -14,7 +14,25 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         public static Element ElementToMove { get; set; }
 
 
-        public static Element GetElementToMove(List<Element> MovableElements, Element ruducibleElement)
+        public static Element GetElementToMove(List<Element> movableElements, Element ruducibleElement)
+        {
+            List<Element> famInstToMove = ConnectorUtils.GetConnectedFamilyInstances(ruducibleElement);
+
+            var NoIntersections = new List<Element>();
+
+            foreach (var one in famInstToMove)
+            {
+                if (!movableElements.Any(two => two.Id == one.Id))
+                {
+                    ElementToMove = one;
+                    return one;
+                }
+            }
+
+            return null;
+        }
+
+        public static Element OldGetElementToMove(List<Element> MovableElements, Element ruducibleElement)
         {
             List<Element> famInstToMove = ConnectorUtils.GetConnectedFamilyInstances(ruducibleElement);
 

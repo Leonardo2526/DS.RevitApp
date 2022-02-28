@@ -25,7 +25,6 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
         public bool IsMovableElementsCountValid { get; set; } = true;
 
-        public Element FamInstToMove { get; set; }
 
         /// <summary>
         /// Check if current move vector is available for correct system connection.
@@ -150,7 +149,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 boundingBoxFilter.GetBoundingBoxFilter(elementsBoundingBoxFilter);
 
             IMovableElemCollision movableElemCollision =
-                   new MovableElementCollision(MovableElements, boundingBoxIntersectsFilter, movableElementsSolids, FamInstToMove);
+                   new MovableElementCollision(MovableElements, boundingBoxIntersectsFilter, movableElementsSolids, ObstacleElement.ElementToMove);
 
             List<int> collisions = movableElemCollision.GetCollisions();
 
@@ -175,7 +174,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 boundingBoxFilter.GetBoundingBoxFilter(elementsBoundingBoxFilter);
 
             IMovableElemCollision movableElemCollision =
-                   new MovableElementCollision(MovableElements, boundingBoxIntersectsFilter, movableElementsSolids, FamInstToMove);
+                   new MovableElementCollision(MovableElements, boundingBoxIntersectsFilter, movableElementsSolids, ObstacleElement.ElementToMove);
 
             return movableElemCollision.GetCollisions();
         }
@@ -220,8 +219,13 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 int count = 0;
 
                 List<Line> obstacledElementLines = linesUtils.CreateAllObstacledElementLines(keyValue.Key, keyValue.Value, moveVector, false);
-
-                lineCollision.GetAllModelSolidsForObstacled(obstacledElementLines, movableElement);
+                List<Element> excludedElements = new List<Element>()
+                {
+                    ObstacleElement.ElementToMove
+                };
+                excludedElements.AddRange(movableElement.MovableElements);
+                lineCollision.SetModelSolids(obstacledElementLines, excludedElements);
+                //lineCollision.GetAllModelSolidsForObstacled(obstacledElementLines, movableElement);
 
                 foreach (Line gLine in obstacledElementLines)
                 {

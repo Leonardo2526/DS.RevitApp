@@ -126,7 +126,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
             if (VectorForFamInst != null)
             {
-                if (!ElementMover.Move(_movableElement.FamInstToMove.Id, App, VectorForFamInst))
+                if (!ElementMover.Move(ObstacleElement.ElementToMove.Id, App, VectorForFamInst))
                 {
                     elem1MovingAvailable = false;
                 }

@@ -16,16 +16,20 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             LineCollision lineCollision = new LineCollision(Data.Doc);
 
             List<Line> lines = CreateLinesByVector(moveVector);
+            lineCollision.SetModelSolids(lines, new List<Element> { ObstacleElement.ElementToMove });
+            //lineCollision.GetSolidsByLines(lines);
 
-            lineCollision.GetAllModelSolids(lines);
-
-            foreach (Line gLine in lines)
+            if (lineCollision.ModelSolidsForCollisionCheck.Count > 0 || lineCollision.LinksSolidsForCollisionCheck.Count >0)
             {
-                IList<Element> CheckCollisions = lineCollision.GetAllLinesCollisions(gLine);
+                foreach (Line gLine in lines)
+                {
+                    IList<Element> CheckCollisions = lineCollision.GetAllLinesCollisions(gLine);
 
-                if (CheckCollisions.Count != 0)
-                    return false;
+                    if (CheckCollisions.Count != 0)
+                        return false;
+                }
             }
+            
 
             return true;
         }
