@@ -62,12 +62,12 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
             if (PositionAvailable)
             {
-                CheckElem1();
+                CheckObstacles();
             }
 
-            if (PositionAvailable)
+            if (!StopProcess && PositionAvailable)
             {
-                CheckObstacles();
+                CheckElem1();
             }
 
             if (!StopProcess && PositionAvailable)
@@ -86,15 +86,6 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             }
         }
 
-        private void CheckElem1()
-        {
-            if (!Elem1CollisionChecker.CheckCollisions(_moveVector))
-            {
-                UpdateMoveVector();
-                PositionAvailable = false;
-            }
-        }
-
         private void CheckObstacles()
         {
             if (!_movableElement.IsElementsObstacle(_movableElement.PotentialObstacledElements, _moveVector, out VectorForFamInst))
@@ -102,6 +93,15 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 StopProcess = true;
             }
         }
+
+        private void CheckElem1()
+        {
+            if (!Elem1CollisionChecker.CheckCollisions(_moveVector))
+            {
+                UpdateMoveVector();
+                PositionAvailable = false;
+            }
+        }     
 
 
         private void CheckMovable()

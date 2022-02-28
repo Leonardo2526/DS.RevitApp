@@ -116,24 +116,8 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 {
                     if (!movableElementChecker.CheckLength(movableElementChecker.AngleRad, out XYZ moveVectorForFamInst))
                     {
-                        //Check if family instance is available to move
                         VectorForFamInst = moveVectorForFamInst;
-                        List<Element> famInstToMove = ConnectorUtils.GetConnectedFamilyInstances(element);
-
-                        for (int i = 0; i < famInstToMove.Count; i++)
-                        {
-                            for (int j = 0; j < MovableElements.Count; j++)
-                            {
-                                if (famInstToMove[i].Id == MovableElements[j].Id)
-                                    continue;
-                                else
-                                {
-                                    FamInstToMove = famInstToMove[i];
-                                    break;
-                                }
-
-                            }
-                        }
+                        ObstacleElement.GetElementToMove(MovableElements, element);
                     }
                 }
                 

@@ -94,12 +94,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
             if (curvelength -moveVectorLength < MinCurveLength)
                 {
-                double deltaF =curvelength - MinCurveLength;
-                double delta = UnitUtils.Convert(deltaF,
-                                           DisplayUnitType.DUT_DECIMAL_FEET,
-                                           DisplayUnitType.DUT_MILLIMETERS);
-                XYZ newoffset = pointUtils.GetOffsetByMoveVector(Data.MoveVector, delta);
-                moveVectorForFamInst = new XYZ(MoveVector.X - newoffset.X, MoveVector.Y - newoffset.Y, MoveVector.Z - newoffset.Z);
+                moveVectorForFamInst = ObstacleElement.GetMoveVector(curvelength, MinCurveLength);
                 return false;
             }
 
