@@ -32,28 +32,6 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             return null;
         }
 
-        public static Element OldGetElementToMove(List<Element> MovableElements, Element ruducibleElement)
-        {
-            List<Element> famInstToMove = ConnectorUtils.GetConnectedFamilyInstances(ruducibleElement);
-
-            for (int i = 0; i < famInstToMove.Count; i++)
-            {
-                for (int j = 0; j < MovableElements.Count; j++)
-                {
-                    if (famInstToMove[i].Id == MovableElements[j].Id)
-                        continue;
-                    else
-                    {
-                        ElementToMove = famInstToMove[i];
-                        return ElementToMove;
-                    }
-
-                }
-            }
-
-            return null;
-        }
-
         public static XYZ GetMoveVector(double curvelength, double MinCurveLength)
         {
             double deltaF = curvelength - MinCurveLength;

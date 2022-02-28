@@ -209,7 +209,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         {
             int totalCount = 0;
 
-            LineCollision lineCollision = new LineCollision(Data.Doc);
+            LineCollision lineCollision = new LineCollision();
 
             LinesUtils linesUtils = new LinesUtils(moveVector);
 
@@ -225,7 +225,6 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 };
                 excludedElements.AddRange(movableElement.MovableElements);
                 lineCollision.SetModelSolids(obstacledElementLines, excludedElements);
-                //lineCollision.GetAllModelSolidsForObstacled(obstacledElementLines, movableElement);
 
                 foreach (Line gLine in obstacledElementLines)
                 {

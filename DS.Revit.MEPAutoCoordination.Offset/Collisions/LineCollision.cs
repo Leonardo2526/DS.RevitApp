@@ -7,15 +7,6 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
     class LineCollision
     {
-        readonly Document Doc;
-
-        public LineCollision(Document doc)
-        {
-            Doc = doc;
-        }
-
-        ElementUtils ElemUtils = new ElementUtils();
-
         public Dictionary<Element, List<Solid>> ModelSolidsForCollisionCheck { get; set; } = new Dictionary<Element, List<Solid>>();
         public Dictionary<Element, List<Solid>> LinksSolidsForCollisionCheck { get; set; } = new Dictionary<Element, List<Solid>>();
 
@@ -40,34 +31,10 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             return intersectedElements;
         }
 
-        /// <summary>
-        /// Get solids of elements by boundig box from all linked models.
-        /// </summary>   
-        //public Dictionary<Element, List<Solid>> GetLinkSolids(BoundingBoxIntersectsFilter boundingBoxFilter)
-        //{
-        //    foreach (RevitLinkInstance m_currentInstance in Data.AllLinks)
-        //    {
-        //        if (m_currentInstance != null)
-        //        {
-        //            // Get the handle to the element in the link
-        //            Document linkedDoc = m_currentInstance.GetLinkDocument();
-        //            FilteredElementCollector collector = new FilteredElementCollector(linkedDoc, Data.AllLinkedElementsIds);
-        //            Dictionary<Element, List<Solid>> currentLinkSolids = GetModelSolids(collector, boundingBoxFilter);
-
-        //            foreach (KeyValuePair<Element, List<Solid>> keyValue in currentLinkSolids)
-        //                linksSolids.Add(keyValue.Key, keyValue.Value);
-
-        //        }
-        //    }
-
-        //    return linksSolids;
-
-        //}
-     
-       public void SetModelSolids(List<Line> allCurrentPositionLines, List<Element> excludedElements)
+        public void SetModelSolids(List<Line> allCurrentPositionLines, List<Element> excludedElements)
         {
-            ModelSolidsForCollisionCheck = SolidByLines.GetSolidsForMovable(allCurrentPositionLines, excludedElements);
-            //linksSolids = GetLinkSolids(boundingBoxIntersectsFilter);
+            ModelSolidsForCollisionCheck = SolidByLines.GetSolidsByExclusions(allCurrentPositionLines, excludedElements);
+            LinksSolidsForCollisionCheck = SolidByLines.GetSolidsByExclusionsInLinks(allCurrentPositionLines, excludedElements);
         }
 
         /// <summary>
