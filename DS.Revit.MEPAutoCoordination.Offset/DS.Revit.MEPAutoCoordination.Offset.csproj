@@ -69,6 +69,7 @@
     <Compile Include="Collisions\CollisionType2.cs" />
     <Compile Include="Collisions\ElementCollision.cs" />
     <Compile Include="Collisions\LineCollision.cs" />
+    <Compile Include="MovableElements\ReducibleCurve.cs" />
     <Compile Include="SolidByLines.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="Elem1CollisionChecker.cs" />

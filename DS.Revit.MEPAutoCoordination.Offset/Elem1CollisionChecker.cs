@@ -13,11 +13,10 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         /// </summary>
         public static bool CheckCollisions(XYZ moveVector)
         {
-            LineCollision lineCollision = new LineCollision(Data.Doc);
+            LineCollision lineCollision = new LineCollision();
 
             List<Line> lines = CreateLinesByVector(moveVector);
-            lineCollision.SetModelSolids(lines, new List<Element> { ObstacleElement.ElementToMove });
-            //lineCollision.GetSolidsByLines(lines);
+            lineCollision.SetModelSolids(lines, ObstacleElement.ElementsToMove);
 
             if (lineCollision.ModelSolidsForCollisionCheck.Count > 0 || lineCollision.LinksSolidsForCollisionCheck.Count >0)
             {

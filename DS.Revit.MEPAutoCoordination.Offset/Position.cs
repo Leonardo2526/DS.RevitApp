@@ -1,6 +1,7 @@
 ﻿using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.DB;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DS.Revit.MEPAutoCoordination.Offset
 {
@@ -17,9 +18,9 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
         private XYZ _moveVector;
         private readonly MovableElement _movableElement;
-        private readonly Dictionary<Element, XYZ> _staticCenterPoints;
+        private readonly Dictionary<MEPCurve, XYZ> _staticCenterPoints;
 
-        public Position(XYZ moveVector, MovableElement movableElement, Dictionary<Element, XYZ> staticCenterPoints)
+        public Position(XYZ moveVector, MovableElement movableElement, Dictionary<MEPCurve, XYZ> staticCenterPoints)
         {
             _moveVector = moveVector;
             _movableElement = movableElement;
@@ -88,7 +89,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
         private void CheckObstacles()
         {
-            if (!_movableElement.IsElementsObstacle(_movableElement.PotentialObstacledElements, _moveVector, out VectorForFamInst))
+            if (!_movableElement.IsElementsObstacle(_movableElement.PotentialReducibleElements, _moveVector, out VectorForFamInst))
             {
                 StopProcess = true;
             }
@@ -126,7 +127,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
             if (VectorForFamInst != null)
             {
-                if (!ElementMover.Move(ObstacleElement.ElementToMove.Id, App, VectorForFamInst))
+                if (!ElementMover.Move(ObstacleElement.ElementsToMove.FirstOrDefault().Id, App, VectorForFamInst))
                 {
                     elem1MovingAvailable = false;
                 }

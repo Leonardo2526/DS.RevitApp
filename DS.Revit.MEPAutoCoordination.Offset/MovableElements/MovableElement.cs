@@ -21,7 +21,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         ElementUtils elementUtils = new ElementUtils();
 
         public List<Element> MovableElements = new List<Element>();
-        public List<Element> PotentialObstacledElements = new List<Element>();
+        public List<MEPCurve> PotentialReducibleElements = new List<MEPCurve>();
 
         public bool IsMovableElementsCountValid { get; set; } = true;
 
@@ -92,7 +92,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 {
                     movableElementChecker.GetData();
                     if (!movableElementChecker.CheckAngle())
-                        PotentialObstacledElements.Add(element);
+                        PotentialReducibleElements.Add(element as MEPCurve);
                     else if (movableElementChecker.CheckAngle())
                         elementsForNewSearch.Add(element);
                 }
@@ -103,12 +103,12 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
        
 
-        public bool IsElementsObstacle(List<Element> elements, XYZ moveVector, out XYZ VectorForFamInst)
+        public bool IsElementsObstacle(List<MEPCurve> mepCurves, XYZ moveVector, out XYZ VectorForFamInst)
         {
             VectorForFamInst = null;
-            foreach (Element element in elements)
+            foreach (var mepCurve in mepCurves)
             {
-                MovableElementChecker movableElementChecker = new MovableElementChecker(moveVector, element);
+                MovableElementChecker movableElementChecker = new MovableElementChecker(moveVector, mepCurve);
                 movableElementChecker.GetData();
 
                 if (!movableElementChecker.CheckPosition())
@@ -116,7 +116,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                     if (!movableElementChecker.CheckLength(movableElementChecker.AngleRad, out XYZ moveVectorForFamInst))
                     {
                         VectorForFamInst = moveVectorForFamInst;
-                        ObstacleElement.GetElementToMove(MovableElements, element);
+                        ObstacleElement.GetElementToMove(MovableElements, mepCurve);
                     }
                 }
                 
@@ -149,7 +149,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 boundingBoxFilter.GetBoundingBoxFilter(elementsBoundingBoxFilter);
 
             IMovableElemCollision movableElemCollision =
-                   new MovableElementCollision(MovableElements, boundingBoxIntersectsFilter, movableElementsSolids, ObstacleElement.ElementToMove);
+                   new MovableElementCollision(MovableElements, boundingBoxIntersectsFilter, movableElementsSolids, ObstacleElement.ElementsToMove);
 
             List<int> collisions = movableElemCollision.GetCollisions();
 
@@ -174,82 +174,82 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 boundingBoxFilter.GetBoundingBoxFilter(elementsBoundingBoxFilter);
 
             IMovableElemCollision movableElemCollision =
-                   new MovableElementCollision(MovableElements, boundingBoxIntersectsFilter, movableElementsSolids, ObstacleElement.ElementToMove);
+                   new MovableElementCollision(MovableElements, boundingBoxIntersectsFilter, movableElementsSolids, ObstacleElement.ElementsToMove);
 
             return movableElemCollision.GetCollisions();
         }
 
-        public Dictionary<Element, XYZ> GetStaticCenterPoints()
+        public Dictionary<MEPCurve, XYZ> GetStaticCenterPoints()
         {
-            Dictionary<Element, XYZ> staticCenterPoints = new Dictionary<Element, XYZ>();
+            var staticCenterPoints = new Dictionary<MEPCurve, XYZ>();
 
             elementUtils.GetPoints(Data.Elem1Curve, out XYZ startPoint, out XYZ endPoint, out XYZ centerPoint);
 
-            foreach (Element element in PotentialObstacledElements)
+            foreach (var mEPCurve in PotentialReducibleElements)
             {
-                elementUtils.GetPoints(element, out XYZ p1, out XYZ p2, out XYZ cp);
+                elementUtils.GetPoints(mEPCurve, out XYZ p1, out XYZ p2, out XYZ cp);
                 if (p1.DistanceTo(centerPoint) < p2.DistanceTo(centerPoint))
-                    staticCenterPoints.Add(element, p2);
+                    staticCenterPoints.Add(mEPCurve, p2);
                 else
-                    staticCenterPoints.Add(element, p1);
+                    staticCenterPoints.Add(mEPCurve, p1);
 
             }
 
             return staticCenterPoints;
         }
 
-        /// <summary>
-        /// Get collisions of MEPCurves which increase it's length due to moving elem1
-        /// </summary>
-        /// <param name="staticCenterPoints"></param>
-        /// <param name="movableElement"></param>
-        /// <param name="moveVector"></param>
-        /// <returns></returns>
-        int GetCollisionsByObstacled(Dictionary<Element, XYZ> staticCenterPoints, MovableElement movableElement, XYZ moveVector)
-        {
-            int totalCount = 0;
+        ///// <summary>
+        ///// Get collisions of MEPCurves which increase it's length due to moving elem1
+        ///// </summary>
+        ///// <param name="staticCenterPoints"></param>
+        ///// <param name="movableElement"></param>
+        ///// <param name="moveVector"></param>
+        ///// <returns></returns>
+        //int GetCollisionsByObstacled(Dictionary<Element, XYZ> staticCenterPoints, MovableElement movableElement, XYZ moveVector)
+        //{
+        //    int totalCount = 0;
 
-            LineCollision lineCollision = new LineCollision();
+        //    LineCollision lineCollision = new LineCollision();
 
-            LinesUtils linesUtils = new LinesUtils(moveVector);
-
-
-            foreach (KeyValuePair<Element, XYZ> keyValue in staticCenterPoints)
-            {
-                int count = 0;
-
-                List<Line> obstacledElementLines = linesUtils.CreateAllObstacledElementLines(keyValue.Key, keyValue.Value, moveVector, false);
-                List<Element> excludedElements = new List<Element>()
-                {
-                    ObstacleElement.ElementToMove
-                };
-                excludedElements.AddRange(movableElement.MovableElements);
-                lineCollision.SetModelSolids(obstacledElementLines, excludedElements);
-
-                foreach (Line gLine in obstacledElementLines)
-                {
-                    IList<Element> CheckCollisions = lineCollision.GetAllLinesCollisions(gLine);
-                    if (count < CheckCollisions.Count)
-                        count = CheckCollisions.Count;
-                }
-
-                totalCount = totalCount + count;
-            }
+        //    LinesUtils linesUtils = new LinesUtils(moveVector);
 
 
+        //    foreach (KeyValuePair<Element, XYZ> keyValue in staticCenterPoints)
+        //    {
+        //        int count = 0;
 
-            return totalCount;
-        }
+        //        List<Line> obstacledElementLines = linesUtils.CreateAllObstacledElementLines(keyValue.Key, keyValue.Value, moveVector, false);
+        //        List<Element> excludedElements = new List<Element>()
+        //        {
+        //            ObstacleElement.ElementToMove
+        //        };
+        //        excludedElements.AddRange(movableElement.MovableElements);
+        //        lineCollision.SetModelSolids(obstacledElementLines, excludedElements);
+
+        //        foreach (Line gLine in obstacledElementLines)
+        //        {
+        //            IList<Element> CheckCollisions = lineCollision.GetAllLinesCollisions(gLine);
+        //            if (count < CheckCollisions.Count)
+        //                count = CheckCollisions.Count;
+        //        }
+
+        //        totalCount = totalCount + count;
+        //    }
+
+
+
+        //    return totalCount;
+        //}
 
         public bool CheckCurrentCollisions(
-           MovableElement movableElement, XYZ moveVector, int startColllisionsCount, Dictionary<Element, XYZ> staticCenterPoints)
+           MovableElement movableElement, XYZ moveVector, int startColllisionsCount, Dictionary<MEPCurve, XYZ> staticCenterPoints)
         {
             if (staticCenterPoints.Count == 0)
                 return true;
 
             List<Element> checkedElements = new List<Element>();
             List<ElementId> potentialObstacledElementsIds =
-                movableElement.PotentialObstacledElements.Select(el => el.Id).ToList();
+                movableElement.PotentialReducibleElements.Select(el => el.Id).ToList();
 
             foreach (Element element in movableElement.MovableElements)
             {
@@ -266,8 +266,8 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
             if (staticCenterPoints.Count > 0)
             {
-                int obstacledElementsCollision = GetCollisionsByObstacled(staticCenterPoints, movableElement, moveVector);
-                currentCollisionsCount = currentCollisionsCount + obstacledElementsCollision;
+                int reducibleElementsCollision = ReducibleCurve.GetCollisions(staticCenterPoints, movableElement, moveVector);
+                currentCollisionsCount += reducibleElementsCollision;
             }
 
 

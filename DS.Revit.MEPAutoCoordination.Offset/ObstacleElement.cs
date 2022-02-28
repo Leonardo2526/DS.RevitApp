@@ -11,12 +11,12 @@ namespace DS.Revit.MEPAutoCoordination.Offset
     class ObstacleElement
     {
         public static XYZ VectorForFamInst { get; set; }
-        public static Element ElementToMove { get; set; }
+        public static List<Element> ElementsToMove { get; set; } = new List<Element>();
 
 
-        public static Element GetElementToMove(List<Element> movableElements, Element ruducibleElement)
+        public static List<Element> GetElementToMove(List<Element> movableElements, Element reducibleElement)
         {
-            List<Element> famInstToMove = ConnectorUtils.GetConnectedFamilyInstances(ruducibleElement);
+            List<Element> famInstToMove = ConnectorUtils.GetConnectedFamilyInstances(reducibleElement);
 
             var NoIntersections = new List<Element>();
 
@@ -24,12 +24,11 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             {
                 if (!movableElements.Any(two => two.Id == one.Id))
                 {
-                    ElementToMove = one;
-                    return one;
+                    ElementsToMove.Add(one);
                 }
             }
 
-            return null;
+            return ElementsToMove;
         }
 
         public static XYZ GetMoveVector(double curvelength, double MinCurveLength)

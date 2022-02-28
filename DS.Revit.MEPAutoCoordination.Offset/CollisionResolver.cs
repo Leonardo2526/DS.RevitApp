@@ -51,7 +51,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 }
               
 
-                Dictionary<Element, XYZ> staticCenterPoints = movableElement.GetStaticCenterPoints();
+                var staticCenterPoints = movableElement.GetStaticCenterPoints();
 
                 var positionRefact = new Position(moveVector, movableElement, staticCenterPoints);
                 positionRefact.Find();

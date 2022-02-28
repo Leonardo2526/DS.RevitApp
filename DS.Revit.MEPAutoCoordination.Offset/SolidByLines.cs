@@ -19,7 +19,11 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             BoundingBoxIntersectsFilter boundingBoxIntersectsFilter =
                 boundingBoxFilter.GetBoundingBoxFilter(new LinesBoundingBox(allCurrentPositionLines));
 
-            ExclusionFilter exclusionFilter = DS.Revit.Utils.ElementFilterUtils.GetExclustionFilter(excludedElements);
+            ExclusionFilter exclusionFilter = null;
+            if (excludedElements !=null)
+            {
+                exclusionFilter = DS.Revit.Utils.ElementFilterUtils.GetExclustionFilter(excludedElements);
+            }
 
             FilteredElementCollector collector = new FilteredElementCollector(Data.Doc, Data.NotConnectedToElem1ElementIds);
 
