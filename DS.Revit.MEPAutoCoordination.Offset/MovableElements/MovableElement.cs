@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DS.Revit.Utils.MEP;
+using DS.Revit.Utils;
 
 namespace DS.Revit.MEPAutoCoordination.Offset
 {
@@ -119,7 +120,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                         ObstacleElement.GetElementToMove(MovableElements, mepCurve);
                     }
                 }
-                
+                 
             }
 
             return true;
@@ -139,8 +140,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 return new List<int>();
             }
 
-            ElementUtils elementUtils = new ElementUtils();
-            List<Solid> movableElementsSolids = elementUtils.GetSolidsOfElements(MovableElements);
+            List<Solid> movableElementsSolids = ElementUtils.GetSolidsOfElements(MovableElements);
 
             IBoundingBoxFilter elementsBoundingBoxFilter = new SolidsBoundingBox(movableElementsSolids);
 
@@ -164,8 +164,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
         public List<int> GetCollisionsByTransform(List<Element> movableElements, XYZ moveVector)
         {
-            ElementUtils elementUtils = new ElementUtils();
-            List<Solid> movableElementsSolids = elementUtils.GetTransformSolidsOfElements(movableElements, moveVector);
+            List<Solid> movableElementsSolids = ElementUtils.GetTransformSolidsOfElements(movableElements, moveVector);
 
             IBoundingBoxFilter elementsBoundingBoxFilter = new SolidsBoundingBox(movableElementsSolids);
 
@@ -183,11 +182,11 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         {
             var staticCenterPoints = new Dictionary<MEPCurve, XYZ>();
 
-            elementUtils.GetPoints(Data.Elem1Curve, out XYZ startPoint, out XYZ endPoint, out XYZ centerPoint);
+            ElementUtils.GetPoints(Data.Elem1Curve, out XYZ startPoint, out XYZ endPoint, out XYZ centerPoint);
 
             foreach (var mEPCurve in PotentialReducibleElements)
             {
-                elementUtils.GetPoints(mEPCurve, out XYZ p1, out XYZ p2, out XYZ cp);
+                ElementUtils.GetPoints(mEPCurve, out XYZ p1, out XYZ p2, out XYZ cp);
                 if (p1.DistanceTo(centerPoint) < p2.DistanceTo(centerPoint))
                     staticCenterPoints.Add(mEPCurve, p2);
                 else

@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.DB;
+using DS.Revit.Utils;
 using System.Collections.Generic;
 
 namespace DS.Revit.MEPAutoCoordination.Offset
@@ -22,10 +23,9 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
         public Line CreateCenterLine(XYZ offset, bool show)
         {
-            ElementUtils ElemUtils = new ElementUtils();
             TransactionUtils transactionUtils = new TransactionUtils();
 
-            ElemUtils.GetPoints(Elem, out XYZ startPoint, out XYZ endPoint, out XYZ centerPointElement);
+            ElementUtils.GetPoints(Elem, out XYZ startPoint, out XYZ endPoint, out XYZ centerPointElement);
 
             if (offset == null)
                 offset = new XYZ();
@@ -38,10 +38,9 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
         public Line CreateCenterLineByStaticPoint(XYZ offset, XYZ staticPoint, bool show)
         {
-            ElementUtils ElemUtils = new ElementUtils();
             TransactionUtils transactionUtils = new TransactionUtils();
 
-            ElemUtils.GetPoints(Elem, out XYZ startPoint, out XYZ endPoint, out XYZ centerPointElement);
+            ElementUtils.GetPoints(Elem, out XYZ startPoint, out XYZ endPoint, out XYZ centerPointElement);
 
             List<XYZ> glStartPoints = new List<XYZ>();
             glStartPoints.Add(startPoint);
@@ -179,9 +178,8 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         public List<Line> CreateLinesByStaticPoint(Element Elem, List<XYZ> glStartPoints, List<XYZ> glEndPoints, XYZ offset, XYZ staticPoint, bool show)
         {
             PointUtils pointUtils = new PointUtils();
-            ElementUtils ElemUtils = new ElementUtils();
 
-            ElemUtils.GetPoints(Elem, out XYZ startPoint, out XYZ endPoint, out XYZ centerPointElement);
+            ElementUtils.GetPoints(Elem, out XYZ startPoint, out XYZ endPoint, out XYZ centerPointElement);
 
             pointUtils.GetStaticListsPoins(glStartPoints, glEndPoints, startPoint, endPoint,
                 staticPoint,

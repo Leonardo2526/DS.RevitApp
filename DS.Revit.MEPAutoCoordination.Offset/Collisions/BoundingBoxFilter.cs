@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autodesk.Revit.DB;
+using DS.Revit.Utils;
 
 namespace DS.Revit.MEPAutoCoordination.Offset
 {
@@ -62,7 +63,6 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         {
 
             PointUtils pointUtils = new PointUtils();
-            ElementUtils elementUtils = new ElementUtils();
 
             List<XYZ> points = new List<XYZ>();
 
@@ -89,9 +89,8 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         public BoundingBoxIntersectsFilter GetElementBoundingBox(Element element)
         {
             PointUtils pointUtils = new PointUtils();
-            ElementUtils elementUtils = new ElementUtils();
 
-            elementUtils.GetPoints(element, out XYZ startPoint, out XYZ endPoint, out XYZ centerPoint);
+            ElementUtils.GetPoints(element, out XYZ startPoint, out XYZ endPoint, out XYZ centerPoint);
 
             List<XYZ> points = new List<XYZ>()
             {

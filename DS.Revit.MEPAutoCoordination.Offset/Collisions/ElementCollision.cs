@@ -15,7 +15,6 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             Doc = doc;
         }
 
-        ElementUtils ElemUtils = new ElementUtils();
 
         /// <summary>
         /// Check collisions between source elementID and all others. Return true if no collisions have been found.

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DS.Revit.Utils.MEP;
+using DS.Revit.Utils;
 
 namespace DS.Revit.MEPAutoCoordination.Offset
 {
@@ -100,9 +101,8 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
         public static XYZ GetNormOffset(double offsetNorm, int dxy, int dz)
         {
-            ElementUtils elementUtils = new ElementUtils();
-            elementUtils.GetPoints(Elem1Curve, out XYZ startPoint1, out XYZ endPoint1, out XYZ centerPointElement1);
-            elementUtils.GetPoints(Elem2Curve, out XYZ startPoint2, out XYZ endPoint2, out XYZ centerPointElement2);
+            ElementUtils.GetPoints(Elem1Curve, out XYZ startPoint1, out XYZ endPoint1, out XYZ centerPointElement1);
+            ElementUtils.GetPoints(Elem2Curve, out XYZ startPoint2, out XYZ endPoint2, out XYZ centerPointElement2);
 
             double alfa;
             double beta;

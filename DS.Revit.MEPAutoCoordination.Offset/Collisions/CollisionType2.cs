@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.DB;
+using DS.Revit.Utils;
 using System;
 
 namespace DS.Revit.MEPAutoCoordination.Offset
@@ -25,10 +26,9 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         {
             bool elementForMove = false;
 
-            ElementUtils elementUtils = new ElementUtils();
 
-            elementUtils.GetPoints(Elem1, out XYZ startPointA, out XYZ endPointA, out XYZ centerPointA);
-            elementUtils.GetPoints(Elem2, out XYZ startPointB, out XYZ endPointB, out XYZ centerPointB);
+            ElementUtils.GetPoints(Elem1, out XYZ startPointA, out XYZ endPointA, out XYZ centerPointA);
+            ElementUtils.GetPoints(Elem2, out XYZ startPointB, out XYZ endPointB, out XYZ centerPointB);
 
             if (Math.Abs(endPointB.X - startPointB.X) < 0.01 && Math.Abs(endPointB.Y - startPointB.Y) < 0.01)
                 return false;

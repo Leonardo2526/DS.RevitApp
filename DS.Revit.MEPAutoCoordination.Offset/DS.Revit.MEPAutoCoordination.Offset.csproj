@@ -86,7 +86,6 @@
     <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transactions\Transactions.cs" />
-    <Compile Include="Utils\ElementUtils.cs" />
     <Compile Include="Utils\LineUtils.cs" />
     <Compile Include="Utils\PointUtils.cs" />
   </ItemGroup>
@@ -96,6 +95,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /Y  "$(TargetDir)$(TargetName).dll" "C:\Users\Сараев Даниил\AppData\Roaming\Autodesk\Revit\Addins\2020\Olimproekt\MEPAutoCoordination"
-xcopy /Y  "$(TargetDir)$(TargetName).pdb" "C:\Users\Сараев Даниил\AppData\Roaming\Autodesk\Revit\Addins\2020\Olimproekt\MEPAutoCoordination"</PostBuildEvent>
+xcopy /Y  "$(TargetDir)$(TargetName).pdb" "C:\Users\Сараев Даниил\AppData\Roaming\Autodesk\Revit\Addins\2020\Olimproekt\MEPAutoCoordination"
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

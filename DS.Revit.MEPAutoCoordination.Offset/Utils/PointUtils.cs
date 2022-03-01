@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.DB;
+using DS.Revit.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -202,9 +203,8 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
             public void GetGeneralPoints(out List<XYZ> startPoints, out List<XYZ> endPoints)
             {
-                ElementUtils elementUtils = new ElementUtils();
                 //Get element's solid
-                List<Solid> solids = elementUtils.GetSolids(element);
+                List<Solid> solids = ElementUtils.GetSolids(element);
 
                 Solid elementSolid = null;
                 foreach (Solid solid in solids)
@@ -289,8 +289,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
             public void GetClearancePoints(Element element, out List<XYZ> startCLRPoints, out List<XYZ> endCLRPoints)
             {
-                ElementUtils ElemUtils = new ElementUtils();
-                ElemUtils.GetPoints(element, out XYZ startPoint, out XYZ endPoint, out XYZ centerPointElement);
+                ElementUtils.GetPoints(element, out XYZ startPoint, out XYZ endPoint, out XYZ centerPointElement);
 
                 IGeneralPointExtractor pointExtractor = new GeneralPointExtractor(element);
                 pointUtils.GetGeneralPoints(new GeneralPointExtractor(element), out List<XYZ> glStartPoints, out List<XYZ> glEndPoints);

@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.DB;
+using DS.Revit.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,6 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             element = elem;
         }
 
-        ElementUtils elementUtils = new ElementUtils();
         PointUtils pointUtils = new PointUtils();
         
         XYZ StartPoint = new XYZ();
@@ -41,7 +41,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
         public void GetData()
         {
-            elementUtils.GetPoints(element, out XYZ startPoint, out XYZ endPoint, out XYZ centerPoint);
+            ElementUtils.GetPoints(element, out XYZ startPoint, out XYZ endPoint, out XYZ centerPoint);
             StartPoint = startPoint;
             EndPoint = endPoint;
             CenterPoint = centerPoint;
@@ -108,7 +108,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         /// </summary>
         public bool CheckPosition()
         {
-            elementUtils.GetPoints(Data.Elem1Curve, out XYZ Elem1StartPoint, out XYZ Elem1EndPoint, out XYZ Elem1CenterPoint);
+            ElementUtils.GetPoints(Data.Elem1Curve, out XYZ Elem1StartPoint, out XYZ Elem1EndPoint, out XYZ Elem1CenterPoint);
 
             XYZ elementVector = CenterPoint - Elem1CenterPoint;
 
