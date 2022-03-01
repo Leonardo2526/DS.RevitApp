@@ -108,7 +108,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         private void CheckMovable()
         {
             if (!_movableElement.CheckCurrentCollisions(_movableElement, _moveVector,
-              CollisionResolver.StartColllisionsCount, _staticCenterPoints))
+              CollisionResolver.StartCollisionsCount, _staticCenterPoints))
             {
                 UpdateMoveVector();
                 PositionAvailable = false;

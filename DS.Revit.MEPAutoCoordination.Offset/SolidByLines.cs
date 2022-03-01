@@ -20,7 +20,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 boundingBoxFilter.GetBoundingBoxFilter(new LinesBoundingBox(allCurrentPositionLines));
 
             ExclusionFilter exclusionFilter = null;
-            if (excludedElements !=null)
+            if (excludedElements.Count > 0)
             {
                 exclusionFilter = DS.Revit.Utils.ElementFilterUtils.GetExclustionFilter(excludedElements);
             }

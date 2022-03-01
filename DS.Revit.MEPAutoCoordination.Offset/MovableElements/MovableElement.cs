@@ -270,9 +270,11 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 currentCollisionsCount += reducibleElementsCollision;
             }
 
-
-            if (currentCollisionsCount > startColllisionsCount)
+            if (currentCollisionsCount != 0)
                 return false;
+
+            //if (currentCollisionsCount > startColllisionsCount)
+            //    return false;
 
             return true;
         }
