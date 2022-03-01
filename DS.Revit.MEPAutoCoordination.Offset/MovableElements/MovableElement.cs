@@ -106,6 +106,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
         public bool IsElementsObstacle(List<MEPCurve> mepCurves, XYZ moveVector, out XYZ VectorForFamInst)
         {
+            ObstacleElement.ElementsToMove = new List<Element>();
             VectorForFamInst = null;
             foreach (var mepCurve in mepCurves)
             {
