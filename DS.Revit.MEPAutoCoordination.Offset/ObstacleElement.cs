@@ -11,11 +11,12 @@ namespace DS.Revit.MEPAutoCoordination.Offset
     class ObstacleElement
     {
         public static XYZ VectorForFamInst { get; set; }
-        public static List<Element> ElementsToMove { get; set; } = new List<Element>();
+        public static List<Element> ElementsToMove { get; set; }
 
 
         public static List<Element> GetElementToMove(List<Element> movableElements, Element reducibleElement)
         {
+            ElementsToMove = new List<Element>();
             List<Element> famInstToMove = ConnectorUtils.GetConnectedFamilyInstances(reducibleElement);
 
             var NoIntersections = new List<Element>();

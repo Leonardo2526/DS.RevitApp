@@ -11,7 +11,9 @@ namespace DS.Revit.MEPAutoCoordination.Offset
     public class Main
     {
 
-        public Main(Document doc, List<Element> allModelElements, List<RevitLinkInstance> allLinks, List<Element> allLinkedElements, MEPCurve elem1Curve, MEPCurve elem2Curve)
+        public Main(Document doc, List<Element> allModelElements, 
+            List<RevitLinkInstance> allLinks, List<Element> allLinkedElements, 
+            MEPCurve elem1Curve, MEPCurve elem2Curve, double MaxZCoordinate, double MinZCoordinate)
         {
             Data.Doc = doc;
             Data.AllModelElements = allModelElements;
@@ -19,6 +21,8 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             Data.AllLinkedElements = allLinkedElements;
             Data.Elem1Curve = elem1Curve;
             Data.Elem2Curve = elem2Curve;
+            Data.MinZCoordinate = MinZCoordinate;
+            Data.MaxZCoordinate = MaxZCoordinate;
 
             Data.GetAllData();
         }
