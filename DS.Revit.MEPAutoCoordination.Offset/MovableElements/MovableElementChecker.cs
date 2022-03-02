@@ -94,7 +94,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
             if (curvelength -moveVectorLength < MinCurveLength)
                 {
-                moveVectorForFamInst = ObstacleElement.GetMoveVector(curvelength, MinCurveLength);
+                moveVectorForFamInst = Obstacle.GetMoveVector(curvelength, MinCurveLength);
                 return false;
             }
 

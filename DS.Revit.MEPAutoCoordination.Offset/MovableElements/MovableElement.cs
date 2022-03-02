@@ -106,7 +106,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
         public bool IsElementsObstacle(List<MEPCurve> mepCurves, XYZ moveVector, out XYZ VectorForFamInst)
         {
-            ObstacleElement.ElementsToMove = new List<Element>();
+            Obstacle.ElementsToMove = new List<Element>();
             VectorForFamInst = null;
             foreach (var mepCurve in mepCurves)
             {
@@ -118,7 +118,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                     if (!movableElementChecker.CheckLength(movableElementChecker.AngleRad, out XYZ moveVectorForFamInst))
                     {
                         VectorForFamInst = moveVectorForFamInst;
-                        ObstacleElement.GetElementToMove(MovableElements, mepCurve);
+                        Obstacle.GetElementToMove(MovableElements, mepCurve);
                     }
                 }
                  
@@ -150,7 +150,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 boundingBoxFilter.GetBoundingBoxFilter(elementsBoundingBoxFilter);
 
             IMovableElemCollision movableElemCollision =
-                   new MovableElementCollision(MovableElements, boundingBoxIntersectsFilter, movableElementsSolids, ObstacleElement.ElementsToMove);
+                   new MovableElementCollision(MovableElements, boundingBoxIntersectsFilter, movableElementsSolids, Obstacle.ElementsToMove);
 
             List<int> collisions = movableElemCollision.GetCollisions();
 
@@ -174,7 +174,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 boundingBoxFilter.GetBoundingBoxFilter(elementsBoundingBoxFilter);
 
             IMovableElemCollision movableElemCollision =
-                   new MovableElementCollision(MovableElements, boundingBoxIntersectsFilter, movableElementsSolids, ObstacleElement.ElementsToMove);
+                   new MovableElementCollision(MovableElements, boundingBoxIntersectsFilter, movableElementsSolids, Obstacle.ElementsToMove);
 
             return movableElemCollision.GetCollisions();
         }
@@ -197,49 +197,6 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
             return staticCenterPoints;
         }
-
-        ///// <summary>
-        ///// Get collisions of MEPCurves which increase it's length due to moving elem1
-        ///// </summary>
-        ///// <param name="staticCenterPoints"></param>
-        ///// <param name="movableElement"></param>
-        ///// <param name="moveVector"></param>
-        ///// <returns></returns>
-        //int GetCollisionsByObstacled(Dictionary<Element, XYZ> staticCenterPoints, MovableElement movableElement, XYZ moveVector)
-        //{
-        //    int totalCount = 0;
-
-        //    LineCollision lineCollision = new LineCollision();
-
-        //    LinesUtils linesUtils = new LinesUtils(moveVector);
-
-
-        //    foreach (KeyValuePair<Element, XYZ> keyValue in staticCenterPoints)
-        //    {
-        //        int count = 0;
-
-        //        List<Line> obstacledElementLines = linesUtils.CreateAllObstacledElementLines(keyValue.Key, keyValue.Value, moveVector, false);
-        //        List<Element> excludedElements = new List<Element>()
-        //        {
-        //            ObstacleElement.ElementToMove
-        //        };
-        //        excludedElements.AddRange(movableElement.MovableElements);
-        //        lineCollision.SetModelSolids(obstacledElementLines, excludedElements);
-
-        //        foreach (Line gLine in obstacledElementLines)
-        //        {
-        //            IList<Element> CheckCollisions = lineCollision.GetAllLinesCollisions(gLine);
-        //            if (count < CheckCollisions.Count)
-        //                count = CheckCollisions.Count;
-        //        }
-
-        //        totalCount = totalCount + count;
-        //    }
-
-
-
-        //    return totalCount;
-        //}
 
         public bool CheckCurrentCollisions(
            MovableElement movableElement, XYZ moveVector, int startColllisionsCount, Dictionary<MEPCurve, XYZ> staticCenterPoints)

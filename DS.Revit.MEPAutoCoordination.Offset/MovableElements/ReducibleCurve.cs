@@ -30,9 +30,9 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 List<Element> excludedElements = new List<Element>();
                 excludedElements.AddRange(movableElement.MovableElements);
 
-                if (ObstacleElement.ElementsToMove != null)
+                if (Obstacle.ElementsToMove != null)
                 {
-                    excludedElements.AddRange(ObstacleElement.ElementsToMove);
+                    excludedElements.AddRange(Obstacle.ElementsToMove);
                 }
 
                 lineCollision.SetModelSolids(reducibleElementLines, excludedElements);

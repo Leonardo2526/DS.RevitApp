@@ -167,7 +167,6 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
             return XYZoffset;
         }
-
     }
 
 }

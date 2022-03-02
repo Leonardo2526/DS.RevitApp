@@ -8,11 +8,40 @@ using System.Threading.Tasks;
 
 namespace DS.Revit.MEPAutoCoordination.Offset
 {
-    class ObstacleElement
+    class Obstacle
     {
         public static XYZ VectorForFamInst { get; set; }
         public static List<Element> ElementsToMove { get; set; }
 
+        /// <summary>
+        /// Get MEPCurves obstructive for current move vector
+        /// </summary>
+        /// <param name="potentialObstructiveMEPCurves"></param>
+        /// <param name="moveVector"></param>
+        /// <returns></returns>
+        public List<MEPCurve> GetObstructiveMEPCurves(List<MEPCurve> potentialObstructiveMEPCurves, XYZ moveVector)
+        {
+            List<MEPCurve> obstactedMEPCurves = new List<MEPCurve>();
+
+            foreach (var mepCurve in potentialObstructiveMEPCurves)
+            {
+                MovableElementChecker movableElementChecker = new MovableElementChecker(moveVector, mepCurve);
+                movableElementChecker.GetData();
+
+                if (!movableElementChecker.CheckPosition())
+                {
+                    if (!movableElementChecker.CheckLength(movableElementChecker.AngleRad, out XYZ moveVectorForFamInst))
+                    {
+                        obstactedMEPCurves.Add(mepCurve);
+                    }
+                }
+
+            }
+
+            return obstactedMEPCurves;
+        }
+
+      
 
         public static List<Element> GetElementToMove(List<Element> movableElements, Element reducibleElement)
         {

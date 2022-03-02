@@ -16,7 +16,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             LineCollision lineCollision = new LineCollision();
 
             List<Line> lines = CreateLinesByVector(moveVector);
-            lineCollision.SetModelSolids(lines, ObstacleElement.ElementsToMove);
+            lineCollision.SetModelSolids(lines, Obstacle.ElementsToMove);
 
             if (lineCollision.ModelSolidsForCollisionCheck.Count > 0 || lineCollision.LinksSolidsForCollisionCheck.Count >0)
             {
