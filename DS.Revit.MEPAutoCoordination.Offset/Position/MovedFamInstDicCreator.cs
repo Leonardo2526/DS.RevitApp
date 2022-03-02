@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.DB;
+using DS.Revit.Utils.MEP;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,17 +20,46 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
         public Dictionary<Element, XYZ> FamInstToMove { get; set; } = new Dictionary<Element, XYZ>();
 
-        private void GetElementToMove(MEPCurve mEPCurve)
+
+        private Element GetFamInstToMove(List<Element> passedElements, MEPCurve obstacleMEPCurve)
         {
+            List<Element> famInstToMove = ConnectorUtils.GetConnectedFamilyInstances(obstacleMEPCurve);
+
+            var NoIntersections = new List<Element>();
+
+            foreach (var one in famInstToMove)
+            {
+                if (!passedElements.Any(two => two.Id == one.Id))
+                {
+                    return one;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Get family instances to move for current obstacleMEPCurve and all next
+        /// </summary>
+        /// <param name="obstacleMEPCurves"></param>
+        /// <returns></returns>
+        private void GetFamInstToMoveNext(MEPCurve obstacleMEPCurve)
+        {
+            Element famInstToMove = GetFamInstToMove(passedElements, obstacleMEPCurve);
 
 
         }
 
-        public Dictionary<Element, XYZ> GetAllElementsToMove(List<MEPCurve> ObstacledMEPCurves)
+        /// <summary>
+        /// Get family instances to move for all obstacleMEPCurves
+        /// </summary>
+        /// <param name="obstacleMEPCurves"></param>
+        /// <returns></returns>
+        public Dictionary<Element, XYZ> GetAllFamInstToMove(List<MEPCurve> obstacleMEPCurves)
         {
-            foreach (var mEPCurve in ObstacledMEPCurves)
+            foreach (var mEPCurve in obstacleMEPCurves)
             {
-                GetElementToMove(mEPCurve);
+                GetFamInstToMoveNext(mEPCurve);
             }
 
             return FamInstToMove;

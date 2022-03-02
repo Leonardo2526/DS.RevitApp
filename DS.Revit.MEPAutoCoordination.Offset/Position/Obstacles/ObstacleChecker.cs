@@ -26,24 +26,24 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         public bool Check()
         {
             Obstacle obstacle = new Obstacle();
-            List<MEPCurve> obstactedMEPCurves = obstacle.GetObstructiveMEPCurves(_mEPCurves, _moveVector);
+            List<MEPCurve> obstacteMEPCurves = obstacle.GetObstructiveMEPCurves(_mEPCurves, _moveVector);
 
-            if (obstactedMEPCurves.Count > 0)
+            if (obstacteMEPCurves.Count > 0)
             {
                 return false;
             }
             else
             {
-                FillFamInstToMove();
+                FillFamInstToMove(obstacteMEPCurves);
             }
 
             return true;
         }
 
-        private Dictionary<Element, XYZ> FillFamInstToMove()
+        private Dictionary<Element, XYZ> FillFamInstToMove(List<MEPCurve> obstacteMEPCurves)
         {
             MovedFamInstDicCreator movedFamInstDicCreator = new MovedFamInstDicCreator(_moveVector);
-            FamInstToMove = movedFamInstDicCreator.GetAllElementsToMove(_mEPCurves);
+            FamInstToMove = movedFamInstDicCreator.GetAllFamInstToMove(obstacteMEPCurves);
             return FamInstToMove;
         }
     }

@@ -66,7 +66,7 @@
     <Compile Include="Position\MovedFamInstDicCreator.cs" />
     <Compile Include="Position\MoverToPosition.cs" />
     <Compile Include="Position\Obstacles\ObstacleChecker.cs" />
-    <Compile Include="CollisionResolver.cs" />
+    <Compile Include="Collisions\CollisionResolver.cs" />
     <Compile Include="Collisions\BoundingBoxFilter.cs" />
     <Compile Include="Collisions\CollisionChecker.cs" />
     <Compile Include="Collisions\CollisionType2.cs" />
