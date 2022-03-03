@@ -21,6 +21,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
 
         private List<Element> PassedElements;
+        private double LengthPrevious;
         public Dictionary<Element, XYZ> FamInstToMove { get; set; } = new Dictionary<Element, XYZ>();
 
         /// <summary>
@@ -48,6 +49,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
             if (obstacteMEPCurves.Count > 0)
             {
+                PassedElements.Add(obstacteMEPCurves.FirstOrDefault());
                 GetFamInstToMove(obstacteMEPCurves.FirstOrDefault());
             }
         }
@@ -59,10 +61,12 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         /// <returns></returns>
         public Dictionary<Element, XYZ> GetAllFamInstToMove(List<MEPCurve> obstacleMEPCurves)
         {
-            foreach (var mEPCurve in obstacleMEPCurves)
+            foreach (var mEPCurve in obstacleMEPCurves) 
             {
                 PassedElements = new List<Element>();
                 PassedElements.AddRange(_movableElement.MovableElements);
+                LengthPrevious = 0;
+
                 GetFamInstToMove(mEPCurve);
             }
 
@@ -75,9 +79,11 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             double delta = UnitUtils.Convert(deltaF,
                                        DisplayUnitType.DUT_DECIMAL_FEET,
                                        DisplayUnitType.DUT_MILLIMETERS);
+            double totalLength = delta + LengthPrevious;
+            LengthPrevious = totalLength;
 
             PointUtils pointUtils = new PointUtils();
-            XYZ newoffset = pointUtils.GetOffsetByMoveVector(Data.MoveVector, delta);
+            XYZ newoffset = pointUtils.GetOffsetByMoveVector(Data.MoveVector, totalLength);
 
             
             return new XYZ(Data.MoveVector.X - newoffset.X, Data.MoveVector.Y - newoffset.Y, Data.MoveVector.Z - newoffset.Z);
