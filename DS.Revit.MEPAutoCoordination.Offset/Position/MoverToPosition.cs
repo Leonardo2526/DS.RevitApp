@@ -9,10 +9,12 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 {
     static class MoverToPosition
     {
-        private static bool movingAvailable = true;
+        private static bool movingAvailable;
 
         public static bool TryToMoveElements(ObstacleChecker obstacleChecker, XYZ _moveVector)
         {
+            movingAvailable = true;
+
             MoveFamInst(obstacleChecker);
             MoveElem1(_moveVector);
 
@@ -23,13 +25,18 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         {
             if (obstacleChecker.FamInstToMoveDic != null && obstacleChecker.FamInstToMoveDic.Count > 0)
             {
-                foreach (var item in obstacleChecker.FamInstToMoveDic)
+                for (int i = obstacleChecker.FamInstToMoveDic.Count; i-- > 0;)
                 {
-                    if (!ElementMover.Move(item.Key.Id, Data.Doc.Application, item.Value))
+                    if (!ElementMover.Move(obstacleChecker.FamInstToMoveDic.ElementAt(i).Key.Id, 
+                        Data.Doc.Application, 
+                        obstacleChecker.FamInstToMoveDic.ElementAt(i).Value))
                     {
                         movingAvailable = false;
                     }
                 }
+                 
+                   
+                
             }
         }
 

@@ -84,7 +84,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             get
             {
                 return UnitUtils.Convert(
-                    50, DisplayUnitType.DUT_MILLIMETERS, DisplayUnitType.DUT_DECIMAL_FEET);
+                    10, DisplayUnitType.DUT_MILLIMETERS, DisplayUnitType.DUT_DECIMAL_FEET);
             }
         }
 

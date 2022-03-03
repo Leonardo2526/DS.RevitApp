@@ -19,6 +19,8 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             _movableElement = movableElement;
         }
 
+
+        private List<Element> PassedElements;
         public Dictionary<Element, XYZ> FamInstToMove { get; set; } = new Dictionary<Element, XYZ>();
 
         /// <summary>
@@ -27,17 +29,20 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         /// <param name="obstacleMEPCurves"></param>
         /// <returns></returns>
         private void GetFamInstToMove(MEPCurve obstacleMEPCurve)
-        {
-            List<Element> passedElements = _movableElement.MovableElements;
-            Element famInstToMove = ConnectedElement.GetConnectedWithExclusions(passedElements, obstacleMEPCurve).FirstOrDefault();
-            passedElements.Add(famInstToMove);
+        {            
+            Element famInstToMove = ConnectedElement.GetConnectedWithExclusions(PassedElements, obstacleMEPCurve).FirstOrDefault();
+
+            if (famInstToMove == null)
+                return;
+
+            PassedElements.Add(famInstToMove);
 
             double curvelength = MEPCurveUtils.GetLength(obstacleMEPCurve);
             XYZ moveVector = GetMoveVector(curvelength, Data.MinCurveLength);
 
             FamInstToMove.Add(famInstToMove, moveVector);
 
-            var nextMEPCurves = GetNextMEPCurves(passedElements, famInstToMove);
+            var nextMEPCurves = GetNextMEPCurves(PassedElements, famInstToMove);
 
             List<MEPCurve> obstacteMEPCurves = Obstacle.GetObstructiveMEPCurves(nextMEPCurves, _moveVector);
 
@@ -56,6 +61,8 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         {
             foreach (var mEPCurve in obstacleMEPCurves)
             {
+                PassedElements = new List<Element>();
+                PassedElements.AddRange(_movableElement.MovableElements);
                 GetFamInstToMove(mEPCurve);
             }
 

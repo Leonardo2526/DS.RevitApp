@@ -221,7 +221,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                     Mesh mesh = face.Triangulate();
                     for (i = 0; i < mesh.Vertices.Count - 1; i++)
                     {
-                        if ((mesh.Vertices[i].DistanceTo(mesh.Vertices[i + 1]) > 0.1))
+                        if ((mesh.Vertices[i].DistanceTo(mesh.Vertices[i + 1]) > 0.01))
                         {
                             startPoints.Add(mesh.Vertices[i]);
                             endPoints.Add(mesh.Vertices[i + 1]);

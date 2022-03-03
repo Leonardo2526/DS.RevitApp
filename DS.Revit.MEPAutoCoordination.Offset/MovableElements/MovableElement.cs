@@ -97,7 +97,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                     else if (movableElementChecker.CheckAngle())
                         elementsForNewSearch.Add(element);
                 }
-            }
+            } 
 
             return elementsForNewSearch;
         }       
