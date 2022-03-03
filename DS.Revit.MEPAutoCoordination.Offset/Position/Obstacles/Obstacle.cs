@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DS.Revit.MEPAutoCoordination.Offset
 {
-    class Obstacle
+    static class Obstacle
     {
         /// <summary>
         /// Get MEPCurves obstructive for current move vector
@@ -16,7 +16,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         /// <param name="potentialObstructiveMEPCurves"></param>
         /// <param name="moveVector"></param>
         /// <returns></returns>
-        public List<MEPCurve> GetObstructiveMEPCurves(List<MEPCurve> potentialObstructiveMEPCurves, XYZ moveVector)
+        public static List<MEPCurve> GetObstructiveMEPCurves(List<MEPCurve> potentialObstructiveMEPCurves, XYZ moveVector)
         {
             List<MEPCurve> obstactedMEPCurves = new List<MEPCurve>();
 

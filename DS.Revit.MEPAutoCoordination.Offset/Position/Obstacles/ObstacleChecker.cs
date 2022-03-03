@@ -41,19 +41,18 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         /// <returns></returns>
         public bool Check()
         {
-            Obstacle obstacle = new Obstacle();
-            List<MEPCurve> obstacteMEPCurves = obstacle.GetObstructiveMEPCurves(_mEPCurves, _moveVector);
+            List<MEPCurve> obstacteMEPCurves = Obstacle.GetObstructiveMEPCurves(_mEPCurves, _moveVector);
 
             if (obstacteMEPCurves.Count > 0)
             {
+                FillFamInstToMove(obstacteMEPCurves);
                 return false;
             }
             else
             {
-                FillFamInstToMove(obstacteMEPCurves);
+                return true;
             }
 
-            return true;
         }
 
         private Dictionary<Element, XYZ> FillFamInstToMove(List<MEPCurve> obstacteMEPCurves)

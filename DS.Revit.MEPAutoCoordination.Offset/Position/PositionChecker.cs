@@ -48,7 +48,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             {
                 CheckMovable();
             }
-        }
+        } 
 
         private void CheckZ()
         {

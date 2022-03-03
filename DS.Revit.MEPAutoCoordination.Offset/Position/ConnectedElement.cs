@@ -12,11 +12,11 @@ namespace DS.Revit.MEPAutoCoordination.Offset
     {
         public static List<Element> GetConnectedWithExclusions(List<Element> excludedElements, Element sourceElement)
         {
-            List<Element> famInstToMove = ConnectorUtils.GetConnectedFamilyInstances(sourceElement);
+            List<Element> elements = ConnectorUtils.GetConnectedElements(sourceElement);
 
             var NoIntersections = new List<Element>();
 
-            foreach (var one in famInstToMove)
+            foreach (var one in elements)
             {
                 if (!excludedElements.Any(two => two.Id == one.Id))
                 {

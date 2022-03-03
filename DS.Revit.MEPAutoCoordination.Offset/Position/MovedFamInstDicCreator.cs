@@ -26,7 +26,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         /// </summary>
         /// <param name="obstacleMEPCurves"></param>
         /// <returns></returns>
-        private void GetFamInstToMoveNext(MEPCurve obstacleMEPCurve)
+        private void GetFamInstToMove(MEPCurve obstacleMEPCurve)
         {
             List<Element> passedElements = _movableElement.MovableElements;
             Element famInstToMove = ConnectedElement.GetConnectedWithExclusions(passedElements, obstacleMEPCurve).FirstOrDefault();
@@ -39,12 +39,11 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
             var nextMEPCurves = GetNextMEPCurves(passedElements, famInstToMove);
 
-            Obstacle obstacle = new Obstacle();
-            List<MEPCurve> obstacteMEPCurves = obstacle.GetObstructiveMEPCurves(nextMEPCurves, _moveVector);
+            List<MEPCurve> obstacteMEPCurves = Obstacle.GetObstructiveMEPCurves(nextMEPCurves, _moveVector);
 
             if (obstacteMEPCurves.Count > 0)
             {
-                GetFamInstToMoveNext(obstacteMEPCurves.FirstOrDefault());
+                GetFamInstToMove(obstacteMEPCurves.FirstOrDefault());
             }
         }
 
@@ -57,7 +56,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         {
             foreach (var mEPCurve in obstacleMEPCurves)
             {
-                GetFamInstToMoveNext(mEPCurve);
+                GetFamInstToMove(mEPCurve);
             }
 
             return FamInstToMove;
@@ -82,13 +81,13 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             var nextMEPCurves = new List<MEPCurve>();
 
             List<Element> nextElements = ConnectedElement.GetConnectedWithExclusions(passedElements, famInstToMove);
-            foreach (var item in nextMEPCurves)
+            foreach (var item in nextElements)
             {
                 Type type = item.GetType();
 
                 if (type.Name != "FamilyInstance")
                 {
-                    nextMEPCurves.Add(item);
+                    nextMEPCurves.Add(item as MEPCurve);
                 }
             }
 
