@@ -63,13 +63,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CollisionResolver.cs" />
+    <Compile Include="Position\ConnectedElement.cs" />
+    <Compile Include="Position\MovedFamInstDicCreator.cs" />
+    <Compile Include="Position\MoverToPosition.cs" />
+    <Compile Include="Position\Obstacles\ObstacleChecker.cs" />
+    <Compile Include="Collisions\CollisionResolver.cs" />
     <Compile Include="Collisions\BoundingBoxFilter.cs" />
     <Compile Include="Collisions\CollisionChecker.cs" />
     <Compile Include="Collisions\CollisionType2.cs" />
     <Compile Include="Collisions\ElementCollision.cs" />
     <Compile Include="Collisions\LineCollision.cs" />
     <Compile Include="MovableElements\ReducibleCurve.cs" />
+    <Compile Include="Position\PositionChecker.cs" />
     <Compile Include="SolidByLines.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="Elem1CollisionChecker.cs" />
@@ -82,8 +87,8 @@
     <Compile Include="MovableElements\MovableElement.cs" />
     <Compile Include="MovableElements\MovableElementChecker.cs" />
     <Compile Include="MovableElements\MovableElementCollision.cs" />
-    <Compile Include="ObstacleElement.cs" />
-    <Compile Include="Position.cs" />
+    <Compile Include="Position\Obstacles\Obstacle.cs" />
+    <Compile Include="Position\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transactions\Transactions.cs" />
     <Compile Include="Utils\LineUtils.cs" />

@@ -1,8 +1,6 @@
 ﻿using Autodesk.Revit.DB;
 using DS.Revit.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 
 namespace DS.Revit.MEPAutoCoordination.Offset
@@ -20,7 +18,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         }
 
         PointUtils pointUtils = new PointUtils();
-        
+
         XYZ StartPoint = new XYZ();
         XYZ EndPoint = new XYZ();
         XYZ CenterPoint = new XYZ();
@@ -28,16 +26,6 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
         public double AngleRad;
         public double Angle;
-
-        public static double MinCurveLength 
-        {
-            get
-            {
-                return UnitUtils.Convert(
-                    50, DisplayUnitType.DUT_MILLIMETERS, DisplayUnitType.DUT_DECIMAL_FEET);
-            }
-        }
-       
 
         public void GetData()
         {
@@ -72,7 +60,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         /// </summary>
         public bool CheckAngle()
         {
-            if (Angle == 90|| Angle == 270)
+            if (Angle == 90 || Angle == 270)
                 return true;
 
             return false;
@@ -82,19 +70,16 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         /// Check length of element.
         /// Return true if element's length will not obstacle for moving.
         /// </summary>
-        public bool CheckLength(double angleRad, out XYZ moveVectorForFamInst)
+        public bool CheckLength(double angleRad)
         {
-            moveVectorForFamInst = null;
-
             MEPCurve mEPCurve = element as MEPCurve;
             LocationCurve lc = mEPCurve.Location as LocationCurve;
             double curvelength = lc.Curve.ApproximateLength;
 
             double moveVectorLength = Math.Abs(MoveVector.GetLength() / Math.Cos(angleRad));
 
-            if (curvelength -moveVectorLength < MinCurveLength)
-                {
-                moveVectorForFamInst = ObstacleElement.GetMoveVector(curvelength, MinCurveLength);
+            if (curvelength - moveVectorLength < Data.MinCurveLength)
+            {
                 return false;
             }
 

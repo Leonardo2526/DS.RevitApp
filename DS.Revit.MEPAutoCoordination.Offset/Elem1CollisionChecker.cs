@@ -11,12 +11,12 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         /// <summary>
         /// Check collisions of all element lines in current position. Return false if collisions exist.
         /// </summary>
-        public static bool CheckCollisions(XYZ moveVector)
+        public static bool CheckCollisions(XYZ moveVector, List<Element> excludedElements)
         {
             LineCollision lineCollision = new LineCollision();
 
             List<Line> lines = CreateLinesByVector(moveVector);
-            lineCollision.SetModelSolids(lines, ObstacleElement.ElementsToMove);
+            lineCollision.SetModelSolids(lines, excludedElements);
 
             if (lineCollision.ModelSolidsForCollisionCheck.Count > 0 || lineCollision.LinksSolidsForCollisionCheck.Count >0)
             {
