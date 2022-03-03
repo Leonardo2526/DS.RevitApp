@@ -10,33 +10,16 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 {
     class MovedFamInstDicCreator
     {
-
+        MovableElement _movableElement;
         XYZ _moveVector;
 
-        public MovedFamInstDicCreator(XYZ moveVector)
+        public MovedFamInstDicCreator(XYZ moveVector, MovableElement movableElement)
         {
             _moveVector = moveVector;
+            _movableElement = movableElement;
         }
 
         public Dictionary<Element, XYZ> FamInstToMove { get; set; } = new Dictionary<Element, XYZ>();
-
-
-        private Element GetFamInstToMove(List<Element> passedElements, MEPCurve obstacleMEPCurve)
-        {
-            List<Element> famInstToMove = ConnectorUtils.GetConnectedFamilyInstances(obstacleMEPCurve);
-
-            var NoIntersections = new List<Element>();
-
-            foreach (var one in famInstToMove)
-            {
-                if (!passedElements.Any(two => two.Id == one.Id))
-                {
-                    return one;
-                }
-            }
-
-            return null;
-        }
 
         /// <summary>
         /// Get family instances to move for current obstacleMEPCurve and all next
@@ -45,9 +28,24 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         /// <returns></returns>
         private void GetFamInstToMoveNext(MEPCurve obstacleMEPCurve)
         {
-            Element famInstToMove = GetFamInstToMove(passedElements, obstacleMEPCurve);
+            List<Element> passedElements = _movableElement.MovableElements;
+            Element famInstToMove = ConnectedElement.GetConnectedWithExclusions(passedElements, obstacleMEPCurve).FirstOrDefault();
+            passedElements.Add(famInstToMove);
 
+            double curvelength = MEPCurveUtils.GetLength(obstacleMEPCurve);
+            XYZ moveVector = GetMoveVector(curvelength, Data.MinCurveLength);
 
+            FamInstToMove.Add(famInstToMove, moveVector);
+
+            var nextMEPCurves = GetNextMEPCurves(passedElements, famInstToMove);
+
+            Obstacle obstacle = new Obstacle();
+            List<MEPCurve> obstacteMEPCurves = obstacle.GetObstructiveMEPCurves(nextMEPCurves, _moveVector);
+
+            if (obstacteMEPCurves.Count > 0)
+            {
+                GetFamInstToMoveNext(obstacteMEPCurves.FirstOrDefault());
+            }
         }
 
         /// <summary>
@@ -63,6 +61,38 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             }
 
             return FamInstToMove;
+        }
+
+        public XYZ GetMoveVector(double curvelength, double MinCurveLength)
+        {
+            double deltaF = curvelength - MinCurveLength;
+            double delta = UnitUtils.Convert(deltaF,
+                                       DisplayUnitType.DUT_DECIMAL_FEET,
+                                       DisplayUnitType.DUT_MILLIMETERS);
+
+            PointUtils pointUtils = new PointUtils();
+            XYZ newoffset = pointUtils.GetOffsetByMoveVector(Data.MoveVector, delta);
+
+            
+            return new XYZ(Data.MoveVector.X - newoffset.X, Data.MoveVector.Y - newoffset.Y, Data.MoveVector.Z - newoffset.Z);
+        }
+
+        private List<MEPCurve> GetNextMEPCurves(List<Element> passedElements, Element famInstToMove)
+        {
+            var nextMEPCurves = new List<MEPCurve>();
+
+            List<Element> nextElements = ConnectedElement.GetConnectedWithExclusions(passedElements, famInstToMove);
+            foreach (var item in nextMEPCurves)
+            {
+                Type type = item.GetType();
+
+                if (type.Name != "FamilyInstance")
+                {
+                    nextMEPCurves.Add(item);
+                }
+            }
+
+            return nextMEPCurves;
         }
     }
 }

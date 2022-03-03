@@ -120,7 +120,6 @@ namespace DS.Revit.MEPAutoCoordination.Offset
          
             ICollection<ElementId> elementsIds = _MovableElements.Select(el => el.Id).ToList();
 
-            //Element el = MovableElement.FamInstToMove;
             if (FamInstToMove !=null)
             {
                 foreach (var item in FamInstToMove)

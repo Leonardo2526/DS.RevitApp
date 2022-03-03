@@ -21,9 +21,9 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
         private static void MoveFamInst(ObstacleChecker obstacleChecker)
         {
-            if (obstacleChecker.FamInstToMove != null && obstacleChecker.FamInstToMove.Count > 0)
+            if (obstacleChecker.FamInstToMoveDic != null && obstacleChecker.FamInstToMoveDic.Count > 0)
             {
-                foreach (var item in obstacleChecker.FamInstToMove)
+                foreach (var item in obstacleChecker.FamInstToMoveDic)
                 {
                     if (!ElementMover.Move(item.Key.Id, Data.Doc.Application, item.Value))
                     {

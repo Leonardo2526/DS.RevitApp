@@ -32,7 +32,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             {
                 Data.MoveVector = _moveVector;
 
-                ObstacleChecker obstacleChecker = new ObstacleChecker(_movableElement.PotentialReducibleElements, _moveVector);
+                ObstacleChecker obstacleChecker = new ObstacleChecker(_movableElement.PotentialReducibleElements, _moveVector, _movableElement);
                 PositionChecker positionChecker = new PositionChecker(_moveVector, _movableElement, _staticCenterPoints, obstacleChecker);
 
                 positionChecker.CheckMovement();

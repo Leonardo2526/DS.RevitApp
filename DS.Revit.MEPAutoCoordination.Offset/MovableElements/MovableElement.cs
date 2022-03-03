@@ -100,32 +100,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             }
 
             return elementsForNewSearch;
-        }
-
-       
-
-        public bool IsElementsObstacle(List<MEPCurve> mepCurves, XYZ moveVector, out XYZ VectorForFamInst)
-        {
-            Obstacle.ElementsToMove = new List<Element>();
-            VectorForFamInst = null;
-            foreach (var mepCurve in mepCurves)
-            {
-                MovableElementChecker movableElementChecker = new MovableElementChecker(moveVector, mepCurve);
-                movableElementChecker.GetData();
-
-                if (!movableElementChecker.CheckPosition())
-                {
-                    if (!movableElementChecker.CheckLength(movableElementChecker.AngleRad, out XYZ moveVectorForFamInst))
-                    {
-                        VectorForFamInst = moveVectorForFamInst;
-                        Obstacle.GetElementToMove(MovableElements, mepCurve);
-                    }
-                }
-                 
-            }
-
-            return true;
-        }
+        }       
 
         public List<int> GetCollisions()
         {
@@ -150,7 +125,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 boundingBoxFilter.GetBoundingBoxFilter(elementsBoundingBoxFilter);
 
             IMovableElemCollision movableElemCollision =
-                   new MovableElementCollision(MovableElements, boundingBoxIntersectsFilter, movableElementsSolids, Obstacle.ElementsToMove);
+                   new MovableElementCollision(MovableElements, boundingBoxIntersectsFilter, movableElementsSolids, null);
 
             List<int> collisions = movableElemCollision.GetCollisions();
 
@@ -163,7 +138,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             return collisions;
         }
 
-        public List<int> GetCollisionsByTransform(List<Element> movableElements, XYZ moveVector)
+        public List<int> GetCollisionsByTransform(List<Element> movableElements, XYZ moveVector, List<Element> excludedElements)
         {
             List<Solid> movableElementsSolids = ElementUtils.GetTransformSolidsOfElements(movableElements, moveVector);
 
@@ -174,7 +149,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 boundingBoxFilter.GetBoundingBoxFilter(elementsBoundingBoxFilter);
 
             IMovableElemCollision movableElemCollision =
-                   new MovableElementCollision(MovableElements, boundingBoxIntersectsFilter, movableElementsSolids, Obstacle.ElementsToMove);
+                   new MovableElementCollision(MovableElements, boundingBoxIntersectsFilter, movableElementsSolids, excludedElements);
 
             return movableElemCollision.GetCollisions();
         }
@@ -199,7 +174,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         }
 
         public bool CheckCurrentCollisions(
-           MovableElement movableElement, XYZ moveVector, int startColllisionsCount, Dictionary<MEPCurve, XYZ> staticCenterPoints)
+           MovableElement movableElement, XYZ moveVector, int startColllisionsCount, Dictionary<MEPCurve, XYZ> staticCenterPoints, List<Element> excludedElements)
         {
             if (staticCenterPoints.Count == 0)
                 return true;
@@ -215,7 +190,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             }
 
             List<int> currentMovableElementCollisions =
-                        movableElement.GetCollisionsByTransform(checkedElements, moveVector);
+                        movableElement.GetCollisionsByTransform(checkedElements, moveVector, excludedElements);
 
             int currentCollisionsCount = 0;
             foreach (int c in currentMovableElementCollisions)
@@ -223,7 +198,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
 
             if (staticCenterPoints.Count > 0)
             {
-                int reducibleElementsCollision = ReducibleCurve.GetCollisions(staticCenterPoints, movableElement, moveVector);
+                int reducibleElementsCollision = ReducibleCurve.GetCollisions(staticCenterPoints, movableElement, moveVector, excludedElements);
                 currentCollisionsCount += reducibleElementsCollision;
             }
 

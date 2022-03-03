@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Position\ConnectedElement.cs" />
     <Compile Include="Position\MovedFamInstDicCreator.cs" />
     <Compile Include="Position\MoverToPosition.cs" />
     <Compile Include="Position\Obstacles\ObstacleChecker.cs" />

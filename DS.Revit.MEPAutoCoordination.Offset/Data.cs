@@ -79,6 +79,14 @@ namespace DS.Revit.MEPAutoCoordination.Offset
             }
         }
 
+        public static double MinCurveLength
+        {
+            get
+            {
+                return UnitUtils.Convert(
+                    50, DisplayUnitType.DUT_MILLIMETERS, DisplayUnitType.DUT_DECIMAL_FEET);
+            }
+        }
 
         public static void GetAllData()
         {

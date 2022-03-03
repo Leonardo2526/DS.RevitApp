@@ -12,7 +12,7 @@ namespace DS.Revit.MEPAutoCoordination.Offset
         /// <param name="movableElement"></param>
         /// <param name="moveVector"></param>
         /// <returns></returns>
-        public static int GetCollisions(Dictionary<MEPCurve, XYZ> staticCenterPoints, MovableElement movableElement, XYZ moveVector)
+        public static int GetCollisions(Dictionary<MEPCurve, XYZ> staticCenterPoints, MovableElement movableElement, XYZ moveVector, List<Element> excludedFamInst)
         {
             int totalCount = 0;
 
@@ -30,9 +30,9 @@ namespace DS.Revit.MEPAutoCoordination.Offset
                 List<Element> excludedElements = new List<Element>();
                 excludedElements.AddRange(movableElement.MovableElements);
 
-                if (Obstacle.ElementsToMove != null)
+                if (excludedFamInst != null)
                 {
-                    excludedElements.AddRange(Obstacle.ElementsToMove);
+                    excludedElements.AddRange(excludedFamInst);
                 }
 
                 lineCollision.SetModelSolids(reducibleElementLines, excludedElements);
