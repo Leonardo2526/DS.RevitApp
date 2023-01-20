@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+	<AddIn Type="Application">
+		<Name>DS.RevitLib.MessageHandler</Name>
+		<Assembly>DS.RevitLib.MessageHandler\DS.RevitLib.MessageHandler.dll</Assembly>
+		<ClientId>d736b083-211e-4d50-9a89-e64a0c57a20e</ClientId>
+		<FullClassName>DS.RevitLib.MessageHandler.ExternalApplication</FullClassName>
+		<VendorId>DS</VendorId>
+	</AddIn>
+</RevitAddIns>

@@ -1,0 +1,12 @@
+E:\Repository\DS.RevitApp.Tests\DS.RevitLib.MessagedHandler\bin\Debug\DS.RevitLib.MessageHandler.dll
+E:\Repository\DS.RevitApp.Tests\DS.RevitLib.MessagedHandler\bin\Debug\DS.RevitLib.MessageHandler.pdb
+E:\Repository\DS.RevitApp.Tests\DS.RevitLib.MessagedHandler\obj\Debug\DS.RevitLib.MessageHandler.csproj.AssemblyReference.cache
+E:\Repository\DS.RevitApp.Tests\DS.RevitLib.MessagedHandler\obj\Debug\DS.RevitLib.MessageHandler.csproj.CoreCompileInputs.cache
+E:\Repository\DS.RevitApp.Tests\DS.RevitLib.MessagedHandler\obj\Debug\DS.RevitLib.MessageHandler.dll
+E:\Repository\DS.RevitApp.Tests\DS.RevitLib.MessagedHandler\obj\Debug\DS.RevitLib.MessageHandler.pdb
+E:\Repository\DS.RevitApp.Plugins\DS.RevitLib.MessagedHandler\bin\Debug\DS.RevitLib.MessageHandler.dll
+E:\Repository\DS.RevitApp.Plugins\DS.RevitLib.MessagedHandler\bin\Debug\DS.RevitLib.MessageHandler.pdb
+E:\Repository\DS.RevitApp.Plugins\DS.RevitLib.MessagedHandler\obj\Debug\DS.RevitLib.MessageHandler.csproj.AssemblyReference.cache
+E:\Repository\DS.RevitApp.Plugins\DS.RevitLib.MessagedHandler\obj\Debug\DS.RevitLib.MessageHandler.csproj.CoreCompileInputs.cache
+E:\Repository\DS.RevitApp.Plugins\DS.RevitLib.MessagedHandler\obj\Debug\DS.RevitLib.MessageHandler.dll
+E:\Repository\DS.RevitApp.Plugins\DS.RevitLib.MessagedHandler\obj\Debug\DS.RevitLib.MessageHandler.pdb
