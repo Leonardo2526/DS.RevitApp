@@ -1,6 +1,0 @@
-E:\Repository\DS.Revit.Utils\DS.RevitUtils.Ribbon\bin\Debug\DS.RevitUtils.Ribbon.dll
-E:\Repository\DS.Revit.Utils\DS.RevitUtils.Ribbon\bin\Debug\DS.RevitUtils.Ribbon.pdb
-E:\Repository\DS.Revit.Utils\DS.RevitUtils.Ribbon\obj\Debug\DS.RevitUtils.Ribbon.csproj.AssemblyReference.cache
-E:\Repository\DS.Revit.Utils\DS.RevitUtils.Ribbon\obj\Debug\DS.RevitUtils.Ribbon.csproj.CoreCompileInputs.cache
-E:\Repository\DS.Revit.Utils\DS.RevitUtils.Ribbon\obj\Debug\DS.RevitUtils.Ribbon.dll
-E:\Repository\DS.Revit.Utils\DS.RevitUtils.Ribbon\obj\Debug\DS.RevitUtils.Ribbon.pdb
