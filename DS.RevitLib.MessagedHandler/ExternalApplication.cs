@@ -21,8 +21,7 @@ namespace DS.RevitLib.MessageHandler
             try
             {
                 // Register event. 
-                application.ControlledApplication.FailuresProcessing += ControlledApplication_FailuresProcessing;
-                application.DialogBoxShowing += new EventHandler<DialogBoxShowingEventArgs>(a_DialogBoxShowing);
+                SubscribeOnEvents(application);
                 //TaskDialog.Show("DS message", "Message handler1 acivated!");
 
             }
@@ -32,6 +31,12 @@ namespace DS.RevitLib.MessageHandler
             }
 
             return Result.Succeeded;
+        }
+
+        public void SubscribeOnEvents(UIControlledApplication application)
+        {
+            application.ControlledApplication.FailuresProcessing += ControlledApplication_FailuresProcessing;
+            application.DialogBoxShowing += new EventHandler<DialogBoxShowingEventArgs>(a_DialogBoxShowing);
         }
 
         private void a_DialogBoxShowing(object sender, DialogBoxShowingEventArgs e)
