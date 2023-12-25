@@ -9,7 +9,10 @@ using DS.RevitLib.Utils.Elements.MEPElements;
 using DS.RevitLib.Utils.Extensions;
 using DS.RevitLib.Utils.MEP;
 using DS.RevitLib.Utils.MEP.Models;
+using DS.RevitLib.Utils.Openings;
 using DS.RevitLib.Utils.Various;
+using Serilog;
+using System;
 using System.Threading.Tasks;
 
 namespace DS.MEPTools
@@ -25,18 +28,33 @@ namespace DS.MEPTools
             UIDocument uiDoc = uiapp.ActiveUIDocument;
             Document doc = uiDoc.Document;
 
+            var mEPCurve = new ElementSelector(uiDoc).Pick() as MEPCurve ?? throw new ArgumentNullException();
+            var wall = new ElementSelector(uiDoc).Pick() as Wall ?? throw new ArgumentNullException();
+
+            var logger = new LoggerConfiguration()
+                    .MinimumLevel.Information()
+                    .WriteTo.Debug()
+                    .CreateLogger();
             var trf = new ContextTransactionFactory(doc, RevitLib.Utils.RevitContextOption.Inside);
             var profileCreator = new RectangleProfileCreator(doc)
             {
-                Offset = 100.MMToFeet(), 
+                Offset = 100.MMToFeet(),
                 TransactionFactory = trf
             };
-            
-            var factory = new OpeningProfileFactory(uiDoc, profileCreator, trf);
+            var wBuilder = new WallOpeningRuleBuilder(doc, mEPCurve, profileCreator)
+            {
+                InsertsOffset = 500.MMToFeet(),
+                WallOffset = 1000.MMToFeet(),
+                Logger = logger,
+                TransactionFactory = trf
+            };
 
-            var profile = factory.CreateProfile();
-            if(profile == null) { return Result.Cancelled; }
-            factory.ShowAsync(profile);
+            //var result1 = wBuilder.GetRule(wall);
+            //logger?.Information("Result: " + result1);
+            //return Autodesk.Revit.UI.Result.Succeeded;
+            (Solid, Element) arg = (null, wall);
+            var result2 = wBuilder.GetRuleFunc().Invoke(arg);
+            logger?.Information("Result: " + result2);
 
             return Autodesk.Revit.UI.Result.Succeeded;
         }
