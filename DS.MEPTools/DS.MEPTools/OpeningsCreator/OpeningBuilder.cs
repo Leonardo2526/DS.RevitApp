@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DS.MEPTools.OpeningsCreator
 {
-    internal class OpeningBuilder : IOpeningBuilder<Solid>
+    internal class OpeningBuilder : IOpeningBuilder<Solid, MEPCurve>
     {
         public OpeningBuilder()
         {

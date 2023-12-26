@@ -65,6 +65,7 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.7.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
@@ -89,9 +90,10 @@
   <ItemGroup>
     <Compile Include="ExternalCommand.cs" />
     <Compile Include="OpeningsCreator\OpeningBuilder.cs" />
-    <Compile Include="OpeningsCreator\OpeningProfileFactory.cs" />
-    <Compile Include="OpeningsCreator\RectangleProfileCreator.cs" />
+    <Compile Include="OpeningsCreator\RectangleSolidProfileCreator.cs" />
+    <Compile Include="OpeningsCreator\RectangleMEPCurveProfileCreator.cs" />
     <Compile Include="OpeningsCreator\OpeningFactory.cs" />
+    <Compile Include="OpeningsCreator\RectangleProfileCreatorBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
