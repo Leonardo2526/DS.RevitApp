@@ -4,15 +4,10 @@ using DS.RevitLib.Utils.Extensions;
 namespace DS.MEPTools.OpeningsCreator
 {
     /// <inheritdoc/>
-    public class RectangleMEPCurveProfileCreator : RectangleProfileCreatorBase<MEPCurve>
+    public class RectangleMEPCurveProfileCreator(Document doc) : RectangleProfileCreatorBase<MEPCurve>(doc)
     {
         /// <inheritdoc/>
-        public RectangleMEPCurveProfileCreator(Document doc) : base(doc)
-        {
-        }
-
-        /// <inheritdoc/>
-        protected override Solid GetIntersectionSolid(Wall wall, MEPCurve mEPCurve)
-            => (wall, mEPCurve).GetIntersectionSolidWithInsulation(0, _activeDoc);
+        protected override Solid GetIntersectionSolid(Wall wall, MEPCurve mepCurve) =>
+            (wall, mepCurve).GetIntersectionSolidWithInsulation(0, ActiveDoc);
     }
 }

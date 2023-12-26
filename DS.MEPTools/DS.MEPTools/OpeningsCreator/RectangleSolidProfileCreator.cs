@@ -15,7 +15,7 @@ namespace DS.MEPTools.OpeningsCreator
 
         /// <inheritdoc/>
         protected override Solid GetIntersectionSolid(Wall wall, Solid solid)
-        => CollisionUtils.GetIntersectionSolid(_activeDoc, _activeDoc, solid, wall.Document, wall.Solid());
+        => CollisionUtils.GetIntersectionSolid(ActiveDoc, ActiveDoc, solid, wall.Document, wall.Solid());
 
     }
 }

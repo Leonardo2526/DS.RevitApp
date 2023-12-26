@@ -1,6 +1,5 @@
 ﻿using Autodesk.Revit.DB;
 using DS.ClassLib.VarUtils;
-using DS.RevitLib.Utils;
 using DS.RevitLib.Utils.Creation.Transactions;
 using DS.RevitLib.Utils.Extensions;
 using DS.RevitLib.Utils.Geometry;
@@ -21,63 +20,54 @@ namespace DS.MEPTools.OpeningsCreator
     public abstract class RectangleProfileCreatorBase<TIntersectionItem> : IOpeningProfileCreator<TIntersectionItem>
     {
         /// <summary>
-        /// Curent active <see cref="Document"/>.
+        /// Current active <see cref="Document"/>.
         /// </summary>
-        protected Document _activeDoc;
+        protected readonly Document ActiveDoc;
 
         /// <summary>
-        /// The core Serilog, used for writing log events.
-        /// </summary>
-        protected ILogger _logger;
-
-        private double _offset;
-
-        /// <summary>
-        /// Instansiate a base object is used to create rectangle 
+        /// Instantiate a base object is used to create rectangle 
         /// opening profile of <typeparamref name="TIntersectionItem"/> on the <see cref="Wall"/>.
         /// </summary>
         /// <param name="doc"></param>
-        public RectangleProfileCreatorBase(Document doc)
+        protected RectangleProfileCreatorBase(Document doc)
         {
-            _activeDoc = doc;
+            ActiveDoc = doc;
         }
 
         /// <summary>
         /// The core Serilog, used for writing log events.
         /// </summary>
-        public ILogger Logger
-        { get => _logger; set => _logger = value; }
+        public ILogger Logger { get; set; }
 
         /// <summary>
         /// Opening clearance.
         /// </summary>
-        public double Offset { get => _offset; set => _offset = value; }
+        public double Offset { get; set; }
 
         /// <summary>
         /// A factory to commit transactions.
         /// </summary>
-        public ITransactionFactory TransactionFactory { get; set; } = null;
+        public ITransactionFactory TransactionFactory { get; set; }
 
         /// <inheritdoc/>
-        public CurveLoop CreateProfile(Wall wall, TIntersectionItem intersectionItem)
+        public CurveLoop CreateProfile(Wall wall, TIntersectionItem mepCurve)
         {
-            Solid intersectionSolid = GetIntersectionSolid(wall, intersectionItem);
+            var intersectionSolid = GetIntersectionSolid(wall, mepCurve);
             if (intersectionSolid == null)
             {
-                _logger?.Warning($"Wall {wall.Id} and MEPCurve {intersectionItem} have no intersections.");
+                Logger?.Warning($"Wall {wall.Id} and MEPCurve {mepCurve} have no intersections.");
                 return null;
             }
 
             //var wSolid = wall.Solid;
-            var wPlane = wall.GetMainPlanarFace(_activeDoc).GetPlane().ToRhinoPlane();
+            var wPlane = wall.GetMainPlanarFace(ActiveDoc).GetPlane().ToRhinoPlane();
 
-            List<Point3d> points = GetBoxPoints(wall, intersectionSolid);
-            if (points is null || points.Count == 0) { return null; }
+            var points = GetBoxPoints(wall, intersectionSolid);
             if (TransactionFactory != null)
             {
                 var label = 50.MMToFeet();
                 TransactionFactory.CreateAsync(() =>
-                points.ForEach(p => p.ToXYZ().ShowPoint(_activeDoc, label)), "ShowBoundPoints");
+                points.ForEach(p => p.ToXYZ().ShowPoint(ActiveDoc, label)), "ShowBoundPoints");
             }
 
             var box = new Box(wPlane, points);
@@ -86,25 +76,25 @@ namespace DS.MEPTools.OpeningsCreator
             var c2 = box.FurthestPoint(c1);
             var rect = new Rectangle3d(wPlane, c1, c2);
 
-            if (!rect.TryExtend(_offset, out var exRectangle))
+            if (!rect.TryExtend(Offset, out var exRectangle))
             { throw new Exception(""); }
 
             var lines = exRectangle.ToLines();
 
-            var cloop = new CurveLoop();
-            lines.ForEach(l => cloop.Append(l.ToXYZ()));
+            var cLoop = new CurveLoop();
+            lines.ForEach(l => cLoop.Append(l.ToXYZ()));
 
-            return cloop;
+            return cLoop;
         }
 
-        private List<Point3d> GetBoxPoints(Wall wall, Solid intersectionSolid)
+        private static List<Point3d> GetBoxPoints(Element wall, Solid intersectionSolid)
         {
             var centroid = intersectionSolid.ComputeCentroid();
             var wLine = wall.GetCenterLine();
             var xLine = Autodesk.Revit.DB.Line.CreateUnbound(centroid, wLine.Direction);
-            (XYZ px1, XYZ px2) = intersectionSolid.GetEdgeProjectPoints(xLine);
+            var (px1, px2) = intersectionSolid.GetEdgeProjectPoints(xLine);
             var zLine = Autodesk.Revit.DB.Line.CreateUnbound(centroid, XYZ.BasisZ);
-            (XYZ pz1, XYZ pz2) = intersectionSolid.GetEdgeProjectPoints(zLine);
+            var (pz1, pz2) = intersectionSolid.GetEdgeProjectPoints(zLine);
 
             var points = new List<Point3d>()
             { px1.ToPoint3d(), px2.ToPoint3d(), pz1.ToPoint3d(), pz2.ToPoint3d()};
