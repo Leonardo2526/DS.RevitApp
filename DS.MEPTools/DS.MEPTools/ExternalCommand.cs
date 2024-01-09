@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
+using Autodesk.Revit.DB.Structure;
 using Autodesk.Revit.UI;
 using DS.MEPTools.OpeningsCreator;
 using DS.RevitLib.Utils.Creation.Transactions;
@@ -28,6 +29,13 @@ public class ExternalCommand : IExternalCommand
 
         var mepCurve = new ElementSelector(uiDoc).Pick() as MEPCurve ?? throw new ArgumentNullException();
         var wall = new ElementSelector(uiDoc).Pick() as Wall ?? throw new ArgumentNullException();
+        //var floor = new ElementSelector(uiDoc).Pick() as Floor ?? throw new ArgumentNullException();
+        //wall.Solid();
+        //var con = wall.GetBestConnected();
+
+        //var joined1 = JoinGeometryUtils.GetJoinedElements(doc, wall);
+        //var joined2 = JoinGeometryUtils.GetJoinedElements(doc, floor);
+        //return Result.Succeeded;
 
         var logger = new LoggerConfiguration()
             .MinimumLevel.Information()
@@ -87,7 +95,7 @@ public class ExternalCommand : IExternalCommand
         {
             InsertsOffset = 500.MMToFeet(),
             WallOffset = 1000.MMToFeet(),
-            JointsOffset = 500.MMToFeet(),
+            JointsOffset = 0,
             Logger = logger,
             TransactionFactory = trf
         };
