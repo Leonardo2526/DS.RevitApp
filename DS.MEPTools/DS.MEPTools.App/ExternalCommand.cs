@@ -12,7 +12,7 @@ using DS.RevitLib.Utils.Openings;
 using DS.RevitLib.Utils.Various;
 using Serilog;
 
-namespace DS.MEPTools;
+namespace DS.MEPTools.App;
 
 /// <inheritdoc />
 [Transaction(TransactionMode.Manual)]

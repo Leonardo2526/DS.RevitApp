@@ -9,8 +9,8 @@
     <ProjectGuid>{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DS.MEPTools</RootNamespace>
-    <AssemblyName>DS.MEPTools</AssemblyName>
+    <RootNamespace>DS.MEPTools.App</RootNamespace>
+    <AssemblyName>DS.MEPTools.App</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -26,7 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x64</PlatformTarget>
-    <DocumentationFile>bin\Debug\DS.MEPTools.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\DS.MEPTools.App.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,11 +37,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DS.ClassLib.VarUtils">
-      <HintPath>..\..\..\DS.CommonLib.Utils\DS.ClassLib.VarUtils\bin\Debug\DS.ClassLib.VarUtils.dll</HintPath>
-    </Reference>
-    <Reference Include="DS.RevitLib.Utils">
-      <HintPath>..\..\..\DS.RevitLib.Utils\DS.RevitLib.Utils\bin\Debug\DS.RevitLib.Utils.dll</HintPath>
+    <Reference Include="MoreLinq, Version=4.1.0.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.4.1.0\lib\netstandard2.0\MoreLinq.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="RevitAPI">
@@ -89,17 +86,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExternalCommand.cs" />
-    <Compile Include="OpeningsCreator\OpeningBuilder.cs" />
-    <Compile Include="OpeningsCreator\RectangleSolidProfileCreator.cs" />
-    <Compile Include="OpeningsCreator\RectangleMEPCurveProfileCreator.cs" />
-    <Compile Include="OpeningsCreator\OpeningFactory.cs" />
-    <Compile Include="OpeningsCreator\RectangleProfileCreatorBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="DS.MEPTools.addin" />
+    <None Include="DS.MEPTools.App.addin" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\DS.CommonLib.Utils\DS.ClassLib.VarUtils\DS.ClassLib.VarUtils.csproj">
+      <Project>{97d2548b-ba7f-4c31-8f52-6bf929e0c37b}</Project>
+      <Name>DS.ClassLib.VarUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\DS.RevitLib.Utils\DS.RevitLib.Utils\DS.RevitLib.Utils.csproj">
+      <Project>{9873f185-f630-4bb2-94a4-d9665f32b802}</Project>
+      <Name>DS.RevitLib.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DS.MEPTools.Core\DS.MEPTools.Core.csproj">
+      <Project>{3ED209AC-C1AB-489D-8BF6-CCCDC69C1BBC}</Project>
+      <Name>DS.MEPTools.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

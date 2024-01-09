@@ -2,7 +2,7 @@
 using DS.RevitLib.Utils.Openings;
 using System;
 
-namespace DS.MEPTools.OpeningsCreator
+namespace DS.MEPTools.Core.OpeningsCreator
 {
     internal class OpeningBuilder : IOpeningBuilder<Solid, MEPCurve>
     {
