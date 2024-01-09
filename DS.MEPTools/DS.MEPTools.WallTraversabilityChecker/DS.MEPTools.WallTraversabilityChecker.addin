@@ -2,11 +2,11 @@
 <RevitAddIns>
 	<AddIn Type="Command">
 		<Name>DS.MEPTools</Name>
-		<FullClassName>DS.MEPTools.App.ExternalCommand</FullClassName>
-		<Text>DS.MEPToolst.App</Text>
+		<FullClassName>DS.MEPTools.WallTraversabilityChecker.ExternalCommand</FullClassName>
+		<Text>DS.MEPToolst.WallTraversabilityChecker</Text>
 		<Description>Revit tools for MEPSystems</Description>
 		<VisibilityMode>AlwaysVisible</VisibilityMode>
-		<Assembly>.\DS.MEPTools.App\DS.MEPTools.App.dll</Assembly>
+		<Assembly>.\DS.MEPTools.WallTraversabilityChecker\DS.MEPTools.WallTraversabilityChecker.dll</Assembly>
 		<AddInId>df46c94f-8155-463a-8204-700e724e4130</AddInId>
 		<VendorId>DS</VendorId>
 	</AddIn> 

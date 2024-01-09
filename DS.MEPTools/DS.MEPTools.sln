@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.ClassLib.VarUtils", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPTools.Core", "DS.MEPTools.Core\DS.MEPTools.Core.csproj", "{3ED209AC-C1AB-489D-8BF6-CCCDC69C1BBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPTools.App", "DS.MEPTools.App\DS.MEPTools.App.csproj", "{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPTools.WallTraversabilityChecker", "DS.MEPTools.WallTraversabilityChecker\DS.MEPTools.WallTraversabilityChecker.csproj", "{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
