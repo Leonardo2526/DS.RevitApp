@@ -7,7 +7,7 @@
 		<Description>Revit tools for MEPSystems</Description>
 		<VisibilityMode>AlwaysVisible</VisibilityMode>
 		<Assembly>.\DS.MEPTools.WallTraversabilityChecker\DS.MEPTools.WallTraversabilityChecker.dll</Assembly>
-		<AddInId>df46c94f-8155-463a-8204-700e724e4130</AddInId>
+		<AddInId>a9350178-983d-400b-a42c-5e8adc18ee8b</AddInId>
 		<VendorId>DS</VendorId>
 	</AddIn> 
 </RevitAddIns>

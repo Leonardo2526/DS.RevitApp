@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+	<AddIn Type="Command">
+		<Name>DS.MEPTools.RoomTraversabilityChecker</Name>
+		<FullClassName>DS.MEPTools.RoomTraversabilityChecker.ExternalCommand</FullClassName>
+		<Text>DS.MEPTools.RoomTraversabilityCheckere</Text>
+		<Description>Check MEPCurve traversability through rooms.</Description>
+		<VisibilityMode>AlwaysVisible</VisibilityMode>
+		<Assembly>.\DS.MEPTools.RoomTraversabilityChecker\DS.MEPTools.RoomTraversabilityChecker.dll</Assembly>
+		<AddInId>f1077b7c-80de-4205-8a83-90e2e1e673bf</AddInId>
+		<VendorId>DS</VendorId>
+	</AddIn> 
+</RevitAddIns>
