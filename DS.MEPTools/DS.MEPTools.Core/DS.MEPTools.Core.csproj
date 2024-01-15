@@ -82,17 +82,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ElementMutliFilter.cs" />
-    <Compile Include="GetGeomeryElements.cs" />
     <Compile Include="OpeningsCreator\OpeningBuilder.cs" />
     <Compile Include="OpeningsCreator\OpeningFactory.cs" />
     <Compile Include="OpeningsCreator\RectangleMEPCurveProfileCreator.cs" />
     <Compile Include="OpeningsCreator\RectangleProfileCreatorBase.cs" />
     <Compile Include="OpeningsCreator\RectangleSolidProfileCreator.cs" />
+    <Compile Include="Rooms\Traversability\PointRoomTraversable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MEPCurveRoomTraversabilityService.cs" />
+    <Compile Include="Rooms\Traversability\MEPCurveRoomTraversable.cs" />
     <Compile Include="Rooms\SolidElementIntersectionFactory.cs" />
     <Compile Include="Rooms\SolidElementIntersectionFactoryBase.cs" />
     <Compile Include="Rooms\SolidRoomIntersectionFactory.cs" />
+    <Compile Include="Rooms\Traversability\SolidRoomTraversable.cs" />
     <Compile Include="SolidElementRulesFilterSet.cs" />
     <Compile Include="WallOpeningProfileValidator.cs" />
   </ItemGroup>

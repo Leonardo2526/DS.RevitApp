@@ -3,6 +3,7 @@ using DS.RevitLib.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DS.RevitLib.Utils.Extensions;
 
 namespace DS.MEPTools.Core
 {
@@ -74,7 +75,7 @@ namespace DS.MEPTools.Core
             _elementMultiFilter.SlowFilters.Add(intersectsElementFilter);
 
             var elementIdsDocs = _elementMultiFilter.ApplyToAllDocs();
-            return elementIdsDocs.SelectMany(kv => ToElements(kv.Key, kv.Value));
+            return elementIdsDocs.SelectMany(kv => kv.Value.ToElements(kv.Key));
         }
 
         private (ElementSlowFilter, Func<Transform, ElementSlowFilter>)

@@ -79,20 +79,5 @@ namespace DS.MEPTools.Core
                 return new BoundingBoxIntersectsFilter(outlineTransformed);
             }
         }
-
-        /// <summary>
-        /// Convert <paramref name="elementIds"/> of <paramref name="elementDoc"/> to it's <see cref="Autodesk.Revit.DB.Element"/>s
-        /// </summary>
-        /// <param name="elementDoc"></param>
-        /// <param name="elementIds"></param>
-        /// <returns>
-        /// List of <paramref name="elementDoc"/>'s <see cref="Autodesk.Revit.DB.Element"/>s.
-        /// </returns>
-        protected IEnumerable<Element> ToElements(Document elementDoc, IEnumerable<ElementId> elementIds)
-        {
-            var elements = new List<Element>();
-            elementIds.ToList().ForEach(id => elements.Add(elementDoc.GetElement(id)));
-            return elements;
-        }
     }
 }

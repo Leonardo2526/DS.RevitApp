@@ -20,7 +20,7 @@ namespace DS.MEPTools.Core.Rooms
             _elementMultiFilter.Reset();
 
             if (ElementIdsSet?.Count > 0)
-            { _elementMultiFilter.ElementIdsSet.AddRange(ElementIdsSet); }
+            { _elementMultiFilter.ElementIdsSet = [.. ElementIdsSet];}
 
             var boundingBoxFilter = GetBoundingBoxIntersectsFilter(solid);
             _elementMultiFilter.QuickFilters.Add(boundingBoxFilter);
@@ -29,7 +29,7 @@ namespace DS.MEPTools.Core.Rooms
             _elementMultiFilter.SlowFilters.Add((new RoomFilter(), null));
 
             var roomBoxDocs = _elementMultiFilter.ApplyToAllDocs();
-            var rooms = roomBoxDocs.SelectMany(kv => ToElements(kv.Key, kv.Value)).OfType<Room>();
+            var rooms = roomBoxDocs.SelectMany(kv => kv.Value.ToElements(kv.Key)).OfType<Room>();
             rooms = rooms.Where(r => r.Contains(solid, _doc));
 
             if (Logger != null)
