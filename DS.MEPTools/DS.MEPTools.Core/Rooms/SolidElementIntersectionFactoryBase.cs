@@ -12,7 +12,7 @@ using System.Linq;
 namespace DS.MEPTools.Core
 {
     /// <summary>
-    /// A base class to get intersections of <see cref="Solid"/> with <typeparamref name="T"/> objects.
+    /// The class to get intersections of <see cref="Solid"/> with <typeparamref name="T"/> objects.
     /// </summary>
     /// <param name="doc"></param>
     /// <param name="elementMultiFilter"></param>

@@ -110,21 +110,21 @@ namespace DS.MEPTools
 
             if (!TryGetOpeningRectangle(wall, intersectionItem, out Rectangle3d openingRectangle))
             { return true; }
-            _transactionFactory.CreateAsync(() => { openingRectangle.Show(_activeDoc); }, "ShowOpeningEdges");
+            _transactionFactory?.CreateAsync(() => { openingRectangle.Show(_activeDoc); }, "ShowOpeningEdges");
 
             if (!Rectangle3dFactoty.TryCreate(wallFace, out var wallRectangle))
             { throw new Exception(""); }
-            _transactionFactory.CreateAsync(() => { wallRectangle.Show(_activeDoc); }, "ShowWallEdges");
+            _transactionFactory?.CreateAsync(() => { wallRectangle.Show(_activeDoc); }, "ShowWallEdges");
 
             (List<Face> wallFaces, Dictionary<ElementId, List<Face>> insertsFacesCollection) = wall.GetFaces(_activeDoc, _geomOptions, true);
             var externalJointRectangels = GetExternalJointRectangels(wall, _activeDoc, wallFace, mainPlane, _wallOffset);
-            _transactionFactory.CreateAsync(() => { externalJointRectangels.ForEach(r => r.Show(_activeDoc)); }, "ShowExternalJointEdges");
+            _transactionFactory?.CreateAsync(() => { externalJointRectangels.ForEach(r => r.Show(_activeDoc)); }, "ShowExternalJointEdges");
 
             var insertsRectangles = GetInsertsRectangles(insertsFacesCollection, wall, wallFace, _insertsOffset);
-            _transactionFactory.CreateAsync(() => { insertsRectangles.ForEach(r => r.Show(_activeDoc)); }, "ShowInsertsEdges");
+            _transactionFactory?.CreateAsync(() => { insertsRectangles.ForEach(r => r.Show(_activeDoc)); }, "ShowInsertsEdges");
 
             var jointRectangles = GetJointRectangels(wall, wall1YFaces[0], wall1YFaces[1], _activeDoc, _jointsOffset, _geomOptions);
-            _transactionFactory.CreateAsync(() => { jointRectangles.ForEach(r => r.Show(_activeDoc)); }, "ShowJointsEdges");
+            _transactionFactory?.CreateAsync(() => { jointRectangles.ForEach(r => r.Show(_activeDoc)); }, "ShowJointsEdges");
 
             return IsValidOpening(wallRectangle, externalJointRectangels, insertsRectangles, jointRectangles, openingRectangle);
         }

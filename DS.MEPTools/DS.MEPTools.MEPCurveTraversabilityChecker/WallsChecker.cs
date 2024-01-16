@@ -17,17 +17,22 @@ using DS.RevitLib.Utils;
 using DS.RevitLib.Utils.MEP;
 using DS.MEPTools.Core;
 using System.Security.Cryptography;
+using DS.ClassLib.VarUtils;
+using DS.ClassLib.VarUtils.Collisons;
+using MoreLinq;
 
 namespace DS.MEPTools.WallTraversabilityChecker
 {
     internal class WallsChecker
     {
         private readonly UIDocument _uiDoc;
+        private readonly ITIntersectionFactory<Element, Solid> _intersectionFactory;
         private readonly Document _doc;
 
-        public WallsChecker(UIDocument uiDoc)
+        public WallsChecker(UIDocument uiDoc, ITIntersectionFactory<Element, Solid> intersectionFactory)
         {
             _uiDoc = uiDoc;
+            _intersectionFactory = intersectionFactory;
             _doc = uiDoc.Document;
         }
 
@@ -41,35 +46,33 @@ namespace DS.MEPTools.WallTraversabilityChecker
         /// </summary>
         public ITransactionFactory TransactionFactory { get; set; }
 
-        public void Initiate()
+        /// <summary>
+        /// Window messenger to show important information to user.
+        /// </summary>
+        public IWindowMessenger WindowMessenger { get; set; }
+
+        public bool Initiate(MEPCurve mEPCurve)
         {
-            if (new ElementSelector(_uiDoc).Pick() is not MEPCurve mEPCurve) { return; }
-            if (new ElementSelector(_uiDoc).Pick() is not Wall wall) { return; }
+            var mEPCurveSolid = mEPCurve.GetSolidInLink(_doc);
+            var interesectionWalls = _intersectionFactory.GetIntersections(mEPCurveSolid).
+                 OfType<Wall>();
 
             var collisions = new List<(Solid, Element)>();
-            var collision = (mEPCurve.Solid(), wall);
-            collisions.Add(collision);
+            interesectionWalls.ForEach(e => collisions.Add((mEPCurveSolid, e)));
 
-            //if (_checkTraverseDirection)
-            //{
-            //    var dir = mEPCurve.Direction().ToVector3d();
-            //    var rools = new List<Func<(Solid, Element), bool>>
-            //    {SolidElementRulesFilterSet.WallTraversableDirectionRule(dir)};
-            //    Func<(Solid, Element), bool> ruleCollisionFilter = new RulesFilterFactory<Solid, Element>(rools).GetFilter();
-            //    collisions = collisions.Where(ruleCollisionFilter).ToList();
-            //}
-
-            var filter = GetFilter(_doc, mEPCurve, wall, Logger, TransactionFactory);
-            collisions = collisions.SkipWhile(filter).ToList();
-
-            if (collisions.Count == 0)
+            foreach (var wall in interesectionWalls)
             {
-                Logger?.Information($"The wall is traversable.");
+                var filter = GetFilter(_doc, mEPCurve, wall, Logger, TransactionFactory);
+                var isWallCollisions = collisions.SkipWhile(filter).Any(c => c.Item2.Id == wall.Id);
+                if (isWallCollisions)
+                {
+                    Logger?.Information($"The wall {wall.Id} is not traversable.");
+                    WindowMessenger?.Show($"Некорректный проход через стену '{wall.Name}' (id: {wall.Id}).");
+                    return false;
+                }             
             }
-            else
-            {
-                Logger?.Information($"The wall is not traversable.");
-            }
+
+            return true;
         }
 
         private Func<(Solid, Element), bool> GetFilter(

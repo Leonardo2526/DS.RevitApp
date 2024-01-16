@@ -1,1 +1,0 @@
-﻿A project for creating a Revit command C# class library that targets on .Net Framework.

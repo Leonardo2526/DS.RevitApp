@@ -9,8 +9,8 @@
     <ProjectGuid>{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DS.MEPTools.WallTraversabilityChecker</RootNamespace>
-    <AssemblyName>DS.MEPTools.WallTraversabilityChecker</AssemblyName>
+    <RootNamespace>DS.MEPTools.MEPCurveTraversabilityChecker</RootNamespace>
+    <AssemblyName>DS.MEPTools.MEPCurveTraversabilityChecker</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -26,7 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x64</PlatformTarget>
-    <DocumentationFile>bin\Debug\DS.MEPTools.WallTraversabilityChecker.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\DS.MEPTools.MEPCurveTraversabilityChecker.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -85,13 +85,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RoomChecker.cs" />
     <Compile Include="WallsChecker.cs" />
     <Compile Include="ExternalCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="DS.MEPTools.WallTraversabilityChecker.addin" />
+    <None Include="DS.MEPTools.MEPCurveTraversabilityChecker.addin" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
