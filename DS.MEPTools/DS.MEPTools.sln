@@ -9,9 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.ClassLib.VarUtils", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPTools.Core", "DS.MEPTools.Core\DS.MEPTools.Core.csproj", "{3ED209AC-C1AB-489D-8BF6-CCCDC69C1BBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPTools.WallTraversabilityChecker", "DS.MEPTools.WallTraversabilityChecker\DS.MEPTools.WallTraversabilityChecker.csproj", "{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPTools.RoomTraversabilityChecker", "DS.MEPTools.RoomTraversabilityChecker\DS.MEPTools.RoomTraversabilityChecker.csproj", "{0C780209-7AFD-4CFC-97CD-9647BB161035}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPTools.MEPCurveTraversabilityChecker", "DS.MEPTools.MEPCurveTraversabilityChecker\DS.MEPTools.MEPCurveTraversabilityChecker.csproj", "{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0C780209-7AFD-4CFC-97CD-9647BB161035}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0C780209-7AFD-4CFC-97CD-9647BB161035}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0C780209-7AFD-4CFC-97CD-9647BB161035}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0C780209-7AFD-4CFC-97CD-9647BB161035}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

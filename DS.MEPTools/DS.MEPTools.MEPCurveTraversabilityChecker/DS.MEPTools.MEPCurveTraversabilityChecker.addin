@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+	<AddIn Type="Command">
+		<Name>DS.MEPTools</Name>
+		<FullClassName>DS.MEPTools.MEPCurveTraversabilityChecker.ExternalCommand</FullClassName>
+		<Text>DS.MEPToolst.MEPCurveTraversabilityChecker</Text>
+		<Description>Проверка проходимости линейных элементов</Description>
+		<VisibilityMode>AlwaysVisible</VisibilityMode>
+		<Assembly>.\DS.MEPTools.MEPCurveTraversabilityChecker\DS.MEPTools.MEPCurveTraversabilityChecker.dll</Assembly>
+		<AddInId>a9350178-983d-400b-a42c-5e8adc18ee8b</AddInId>
+		<VendorId>DS</VendorId>
+	</AddIn> 
+</RevitAddIns>

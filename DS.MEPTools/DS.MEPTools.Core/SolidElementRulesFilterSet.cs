@@ -32,11 +32,10 @@ namespace DS.MEPTools.Core
 
         public static Func<(Solid, Element), bool> WallOpeningTraversableRule(Document doc,
             Solid solid,
-            Element wall,
             ILogger logger,
             ITransactionFactory trf)
         {
-            return f => IsOpeningTraversable(doc, solid, wall, logger, trf);
+            return f => IsOpeningTraversable(doc, solid, f.Item2 as Wall, logger, trf);
         }
 
 
