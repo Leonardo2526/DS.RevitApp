@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPTools.Core", "DS.MEPT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPTools.MEPCurveTraversabilityChecker", "DS.MEPTools.MEPCurveTraversabilityChecker\DS.MEPTools.MEPCurveTraversabilityChecker.csproj", "{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.GraphUtils.Entities", "..\..\DS.GraphUtils\DS.GraphUtils.Entities\DS.GraphUtils.Entities\DS.GraphUtils.Entities.csproj", "{3F3C36E6-646A-47B2-AD46-81268EAD25B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.PathFinder", "..\..\DS.CommonLib.Utils\PathFinders\DS.PathFinder\DS.PathFinder.csproj", "{0A99EB4B-783B-495B-B743-82077C2BB30A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F3C36E6-646A-47B2-AD46-81268EAD25B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F3C36E6-646A-47B2-AD46-81268EAD25B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F3C36E6-646A-47B2-AD46-81268EAD25B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F3C36E6-646A-47B2-AD46-81268EAD25B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A99EB4B-783B-495B-B743-82077C2BB30A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A99EB4B-783B-495B-B743-82077C2BB30A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A99EB4B-783B-495B-B743-82077C2BB30A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A99EB4B-783B-495B-B743-82077C2BB30A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
