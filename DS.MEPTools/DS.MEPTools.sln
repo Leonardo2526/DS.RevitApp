@@ -3,17 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.RevitLib.Utils", "..\..\DS.RevitLib.Utils\DS.RevitLib.Utils\DS.RevitLib.Utils.csproj", "{9873F185-F630-4BB2-94A4-D9665F32B802}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.ClassLib.VarUtils", "..\..\DS.CommonLib.Utils\DS.ClassLib.VarUtils\DS.ClassLib.VarUtils.csproj", "{97D2548B-BA7F-4C31-8F52-6BF929E0C37B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPTools.Core", "DS.MEPTools.Core\DS.MEPTools.Core.csproj", "{3ED209AC-C1AB-489D-8BF6-CCCDC69C1BBC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPTools.MEPCurveTraversabilityChecker", "DS.MEPTools.MEPCurveTraversabilityChecker\DS.MEPTools.MEPCurveTraversabilityChecker.csproj", "{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.GraphUtils.Entities", "..\..\DS.GraphUtils\DS.GraphUtils.Entities\DS.GraphUtils.Entities\DS.GraphUtils.Entities.csproj", "{3F3C36E6-646A-47B2-AD46-81268EAD25B0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.PathFinder", "..\..\DS.CommonLib.Utils\PathFinders\DS.PathFinder\DS.PathFinder.csproj", "{0A99EB4B-783B-495B-B743-82077C2BB30A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OLMP.RevitAPI.Tools", "..\..\OLMP.RevitAPI\OLMP.RevitAPI.Tools\OLMP.RevitAPI.Tools.csproj", "{698A89CB-1B8A-46F5-9E67-8820C37C1ED5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,30 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9873F185-F630-4BB2-94A4-D9665F32B802}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9873F185-F630-4BB2-94A4-D9665F32B802}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9873F185-F630-4BB2-94A4-D9665F32B802}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9873F185-F630-4BB2-94A4-D9665F32B802}.Release|Any CPU.Build.0 = Release|Any CPU
 		{97D2548B-BA7F-4C31-8F52-6BF929E0C37B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{97D2548B-BA7F-4C31-8F52-6BF929E0C37B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97D2548B-BA7F-4C31-8F52-6BF929E0C37B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97D2548B-BA7F-4C31-8F52-6BF929E0C37B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3ED209AC-C1AB-489D-8BF6-CCCDC69C1BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3ED209AC-C1AB-489D-8BF6-CCCDC69C1BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3ED209AC-C1AB-489D-8BF6-CCCDC69C1BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3ED209AC-C1AB-489D-8BF6-CCCDC69C1BBC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3F3C36E6-646A-47B2-AD46-81268EAD25B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3F3C36E6-646A-47B2-AD46-81268EAD25B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3F3C36E6-646A-47B2-AD46-81268EAD25B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3F3C36E6-646A-47B2-AD46-81268EAD25B0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A99EB4B-783B-495B-B743-82077C2BB30A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A99EB4B-783B-495B-B743-82077C2BB30A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A99EB4B-783B-495B-B743-82077C2BB30A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A99EB4B-783B-495B-B743-82077C2BB30A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{698A89CB-1B8A-46F5-9E67-8820C37C1ED5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{698A89CB-1B8A-46F5-9E67-8820C37C1ED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{698A89CB-1B8A-46F5-9E67-8820C37C1ED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{698A89CB-1B8A-46F5-9E67-8820C37C1ED5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

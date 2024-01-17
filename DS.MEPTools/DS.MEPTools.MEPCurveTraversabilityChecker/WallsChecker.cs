@@ -1,10 +1,10 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using DS.ClassLib.VarUtils.Filters;
-using DS.MEPTools.OpeningsCreator;
-using DS.RevitLib.Utils.Collisions;
-using DS.RevitLib.Utils.Creation.Transactions;
-using DS.RevitLib.Utils.Various;
+using OLMP.RevitAPI.Tools.OpeningsCreator;
+using OLMP.RevitAPI.Tools.Collisions;
+using OLMP.RevitAPI.Tools.Creation.Transactions;
+using OLMP.RevitAPI.Tools.Various;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -12,10 +12,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DS.RevitLib.Utils.Extensions;
-using DS.RevitLib.Utils;
-using DS.RevitLib.Utils.MEP;
-using DS.MEPTools.Core;
+using OLMP.RevitAPI.Tools.Extensions;
+using OLMP.RevitAPI.Tools;
+using OLMP.RevitAPI.Tools.MEP;
+using OLMP.RevitAPI.Tools;
 using System.Security.Cryptography;
 using DS.ClassLib.VarUtils;
 using DS.ClassLib.VarUtils.Collisons;
@@ -26,12 +26,14 @@ namespace DS.MEPTools.WallTraversabilityChecker
     internal class WallsChecker
     {
         private readonly UIDocument _uiDoc;
+        private readonly IEnumerable<RevitLinkInstance> _links;
         private readonly ITIntersectionFactory<Element, Solid> _intersectionFactory;
         private readonly Document _doc;
 
-        public WallsChecker(UIDocument uiDoc, ITIntersectionFactory<Element, Solid> intersectionFactory)
+        public WallsChecker(UIDocument uiDoc, IEnumerable<RevitLinkInstance> links, ITIntersectionFactory<Element, Solid> intersectionFactory)
         {
             _uiDoc = uiDoc;
+            _links = links;
             _intersectionFactory = intersectionFactory;
             _doc = uiDoc.Document;
         }
@@ -53,7 +55,7 @@ namespace DS.MEPTools.WallTraversabilityChecker
 
         public bool Initiate(MEPCurve mEPCurve)
         {
-            var mEPCurveSolid = mEPCurve.GetSolidInLink(_doc);
+            var mEPCurveSolid = mEPCurve.Solid(_links);
 
             //get collisions
             var collisions = new List<(Solid, Element)>();
@@ -61,7 +63,7 @@ namespace DS.MEPTools.WallTraversabilityChecker
             var interesectionWalls = interesections.OfType<Wall>();
             interesectionWalls.ForEach(e => collisions.Add((mEPCurveSolid, e)));
 
-            var filter = GetFilter(_doc, mEPCurve, Logger, TransactionFactory);
+            var filter = GetFilter(_doc, _links, mEPCurve, Logger, TransactionFactory);
             var isWallCollisions = collisions.SkipWhile(filter).Any(c => c.Item2 is Wall);
             if (isWallCollisions)
             {
@@ -74,7 +76,8 @@ namespace DS.MEPTools.WallTraversabilityChecker
         }
 
         private Func<(Solid, Element), bool> GetFilter(
-            Document doc,
+            Document doc, 
+            IEnumerable<RevitLinkInstance> links,
             MEPCurve mEPCurve,
             ILogger logger,
             ITransactionFactory trf)
@@ -84,8 +87,8 @@ namespace DS.MEPTools.WallTraversabilityChecker
 
             var rools = new List<Func<(Solid, Element), bool>>
             {
-                SolidElementRulesFilterSet.WallTraversableDirectionRule(doc, dir),
-                SolidElementRulesFilterSet.WallOpeningTraversableRule(doc, mEPCurveSolid, logger, trf),
+                SolidElementRulesFilterSet.WallTraversableDirectionRule(doc, links, dir),
+                SolidElementRulesFilterSet.WallOpeningTraversableRule(doc, links, mEPCurveSolid, logger, trf),
                 //SolidElementRulesFilterSet.WallConstructionRule(doc)
             };
             return new RulesFilterFactory<Solid, Element>(rools).GetFilter();

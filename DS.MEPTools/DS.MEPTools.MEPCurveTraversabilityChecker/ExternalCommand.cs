@@ -1,13 +1,15 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using DS.MEPTools.Core;
-using DS.MEPTools.Core.Rooms;
+using OLMP.RevitAPI.Tools;
+using OLMP.RevitAPI.Tools.Rooms;
 using DS.MEPTools.WallTraversabilityChecker;
-using DS.RevitLib.Utils;
-using DS.RevitLib.Utils.Creation.Transactions;
-using DS.RevitLib.Utils.Various;
+using OLMP.RevitAPI.Tools;
+using OLMP.RevitAPI.Tools.Creation.Transactions;
+using OLMP.RevitAPI.Tools.Various;
 using Serilog;
+using OLMP.RevitAPI.Tools.Extensions;
+using OLMP.RevitAPI.UI;
 
 namespace DS.MEPTools.MEPCurveTraversabilityChecker;
 
@@ -26,6 +28,8 @@ public class ExternalCommand : IExternalCommand
         var uiDoc = uiApp.ActiveUIDocument;
         var doc = uiDoc.Document;
 
+        var links = doc.GetLoadedLinks();
+
         var logger = new LoggerConfiguration()
             .MinimumLevel.Information()
             .WriteTo.Debug()
@@ -40,14 +44,14 @@ public class ExternalCommand : IExternalCommand
 
         if (checkRooms)
         {
-            var roomIntersectFactory = new SolidRoomIntersectionFactory(doc, elementFilter)
+            var solidRoomIntersectFactory = new SolidRoomIntersectionFactory(doc, links, elementFilter)
             { Logger = logger, TransactionFactory = null };
             var roomCheker = new RoomChecker(
-                uiDoc,
+                uiDoc, links,
                 elementFilter,
                 elementIntersectFactory,
-                roomIntersectFactory)
-            {
+                solidRoomIntersectFactory)
+            {              
                 Logger = logger,
                 //TransactionFactory = trf,
                 WindowMessenger = messenger
@@ -56,8 +60,8 @@ public class ExternalCommand : IExternalCommand
             if (!roomCheker) { return Result.Failed; }
         }
 
-        new WallsChecker(uiDoc, elementIntersectFactory)
-        {
+        new WallsChecker(uiDoc, links, elementIntersectFactory)
+        { 
             Logger = logger,
             //TransactionFactory = trf,
             WindowMessenger = messenger

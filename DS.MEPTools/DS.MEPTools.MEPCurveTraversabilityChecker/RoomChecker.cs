@@ -1,10 +1,10 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using DS.ClassLib.VarUtils.Filters;
-using DS.MEPTools.OpeningsCreator;
-using DS.RevitLib.Utils.Collisions;
-using DS.RevitLib.Utils.Creation.Transactions;
-using DS.RevitLib.Utils.Various;
+using OLMP.RevitAPI.Tools.OpeningsCreator;
+using OLMP.RevitAPI.Tools.Collisions;
+using OLMP.RevitAPI.Tools.Creation.Transactions;
+using OLMP.RevitAPI.Tools.Various;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -12,42 +12,46 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DS.RevitLib.Utils.Extensions;
-using DS.RevitLib.Utils;
-using DS.RevitLib.Utils.MEP;
-using DS.MEPTools.Core;
+using OLMP.RevitAPI.Tools.Extensions;
+using OLMP.RevitAPI.Tools;
+using OLMP.RevitAPI.Tools.MEP;
+using OLMP.RevitAPI.Tools;
 using System.Security.Cryptography;
 using Autodesk.Revit.DB.Architecture;
-using DS.MEPTools.Core.Rooms.Traversability;
-using DS.MEPTools.Core.Rooms;
+using OLMP.RevitAPI.Tools.Rooms.Traversability;
+using OLMP.RevitAPI.Tools.Rooms;
 using Rhino.UI;
 using Serilog.Core;
 using DS.ClassLib.VarUtils;
 using DS.ClassLib.VarUtils.Collisons;
+using OLMP.RevitAPI.Tools.Intersections;
+using Rhino.Geometry;
 
 namespace DS.MEPTools.WallTraversabilityChecker
 {
     internal class RoomChecker
     {
         private readonly UIDocument _uiDoc;
+        private readonly IEnumerable<RevitLinkInstance> _links;
         private readonly IElementMultiFilter _elementMultiFilter;
         private readonly ITIntersectionFactory<Element, Solid> _elementIntersectFactory;
-        private readonly SolidElementIntersectionFactoryBase<Room> _roomIntersectFactory;
+        private readonly SolidElementIntersectionFactoryBase<Room> _solidElementIntersectFactory;
         private readonly Document _doc;
 
         public RoomChecker(
-            UIDocument uiDoc, 
+            UIDocument uiDoc, IEnumerable<RevitLinkInstance> links,
             IElementMultiFilter elementMultiFilter, 
             ITIntersectionFactory<Element, Solid> elementIntersectFactory,
-            SolidElementIntersectionFactoryBase<Room> roomIntersectFactory
+            SolidElementIntersectionFactoryBase<Room> solidElementIntersectFactory
             )
         {
             _uiDoc = uiDoc;
+            _links = links;
             _elementMultiFilter = elementMultiFilter;
             _elementIntersectFactory = elementIntersectFactory;
-            _roomIntersectFactory = roomIntersectFactory;
+            _solidElementIntersectFactory = solidElementIntersectFactory;
             _doc = uiDoc.Document;
-        }
+        }      
 
         /// <summary>
         /// The core Serilog, used for writing log events.
@@ -66,6 +70,9 @@ namespace DS.MEPTools.WallTraversabilityChecker
 
         public bool Initiate(MEPCurve mEPCurve)
         {
+            var minIntersectionVolume = 3.CubicCMToFeet();
+
+
             var elementMultiFilter = new ElementMutliFilter(_doc);
             var excludeFields = new List<string>()
             {
@@ -76,23 +83,30 @@ namespace DS.MEPTools.WallTraversabilityChecker
             //get rooms
             _elementMultiFilter.SlowFilters.Add((new RoomFilter(), null));
             var rooms = _elementMultiFilter.ApplyToAllDocs().SelectMany(kv => kv.Value.ToElements(kv.Key)).OfType<Room>();
+            var pointIntersectionFactory = new ElementPointIntersectionFactory(_doc, _links, elementMultiFilter)
+            {
+                Logger = Logger
+            }.SetExcludedElementIds(new List<ElementId>(){ mEPCurve.Id });
 
-         
+            var openingIntersectionFactory = new SolidOpeningIntersectionFactoty(_doc, _links, elementMultiFilter)
+            { MinVolume = minIntersectionVolume };
 
             IRoomTraverable<Solid> roomSolidFactory(IEnumerable<Room> rooms)
-                => new SolidRoomTraversable(_doc, rooms, _roomIntersectFactory, _elementIntersectFactory)
+                => new SolidRoomTraversable(_doc, _links, rooms, _solidElementIntersectFactory, _elementIntersectFactory, openingIntersectionFactory)
                 {
                     Logger = Logger,
                     ExcludeFields = excludeFields,
-                    WindowMessenger = WindowMessenger
+                    WindowMessenger = WindowMessenger, 
+                    MinVolume = minIntersectionVolume
                 };
 
             IRoomTraverable<XYZ> roomPointFactory(IEnumerable<Room> rooms)
-                => new PointRoomTraversable(_doc, rooms)
+                => new PointRoomTraversable(_doc, _links, rooms)
                 {
                     Logger = Logger,
                     ExcludeFields = excludeFields,
-                    WindowMessenger = WindowMessenger
+                    WindowMessenger = WindowMessenger,
+                    PointIntersectionFactory = pointIntersectionFactory, 
                 };
 
 

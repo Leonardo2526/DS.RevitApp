@@ -40,6 +40,9 @@
     <Reference Include="MoreLinq, Version=4.1.0.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
       <HintPath>..\packages\morelinq.4.1.0\lib\netstandard2.0\MoreLinq.dll</HintPath>
     </Reference>
+    <Reference Include="OLMP.RevitAPI.UI">
+      <HintPath>..\..\..\OLMP.RevitAPI\OLMP.RevitAPI.UI\bin\Debug\OLMP.RevitAPI.UI.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="RevitAPI">
       <HintPath>C:\Program Files\Autodesk\Revit 2020\RevitAPI.dll</HintPath>
@@ -100,13 +103,9 @@
       <Project>{97d2548b-ba7f-4c31-8f52-6bf929e0c37b}</Project>
       <Name>DS.ClassLib.VarUtils</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\DS.RevitLib.Utils\DS.RevitLib.Utils\DS.RevitLib.Utils.csproj">
-      <Project>{9873f185-f630-4bb2-94a4-d9665f32b802}</Project>
-      <Name>DS.RevitLib.Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DS.MEPTools.Core\DS.MEPTools.Core.csproj">
-      <Project>{3ED209AC-C1AB-489D-8BF6-CCCDC69C1BBC}</Project>
-      <Name>DS.MEPTools.Core</Name>
+    <ProjectReference Include="..\..\..\OLMP.RevitAPI\OLMP.RevitAPI.Tools\OLMP.RevitAPI.Tools.csproj">
+      <Project>{698a89cb-1b8a-46f5-9e67-8820c37c1ed5}</Project>
+      <Name>OLMP.RevitAPI.Tools</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
