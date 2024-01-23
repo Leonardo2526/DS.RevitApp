@@ -1,10 +1,10 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using DS.MEPCurveTraversability.Interactors;
 using OLMP.RevitAPI.Tools;
 using OLMP.RevitAPI.Tools.Creation.Transactions;
 using OLMP.RevitAPI.Tools.Extensions;
-using OLMP.RevitAPI.Tools.Rooms;
 using OLMP.RevitAPI.Tools.Various;
 using OLMP.RevitAPI.UI;
 using Serilog;
@@ -19,7 +19,6 @@ public class ExternalCommand : IExternalCommand
     public Result Execute(ExternalCommandData commandData,
         ref string message, ElementSet elements)
     {
-        bool checkRooms = true;
 
         var uiApp = commandData.Application;
         var application = uiApp.Application;
@@ -40,31 +39,13 @@ public class ExternalCommand : IExternalCommand
 
         if (new ElementSelector(uiDoc).Pick() is not MEPCurve mEPCurve) { return Result.Failed; }
 
-        if (checkRooms)
-        {
-            var solidRoomIntersectFactory = new SolidRoomIntersectionFactory(doc, links, elementFilter)
-            { Logger = logger, TransactionFactory = null };
-            var roomCheker = new RoomChecker(
-                uiDoc, links,
-                elementFilter,
-                elementIntersectFactory,
-                solidRoomIntersectFactory)
-            {
-                Logger = logger,
-                //TransactionFactory = trf,
-                WindowMessenger = messenger
-            }.Initiate(mEPCurve);
-
-            if (!roomCheker) { return Result.Failed; }
-        }
-
-        new WallsChecker(uiDoc, links, elementIntersectFactory)
+        new TraversabilityService(uiDoc, links, elementFilter, elementIntersectFactory)
         {
             Logger = logger,
-            //TransactionFactory = trf,
+            TransactionFactory = trf,
             WindowMessenger = messenger
-
-        }.Initiate(mEPCurve);
+        }.
+        Initiate(mEPCurve);
 
         return Result.Succeeded;
     }
