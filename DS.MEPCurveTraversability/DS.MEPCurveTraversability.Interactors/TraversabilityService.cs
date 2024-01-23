@@ -23,6 +23,7 @@ namespace DS.MEPCurveTraversability.Interactors
         private readonly IEnumerable<RevitLinkInstance> _links;
         private readonly IElementMultiFilter _elementMultiFilter;
         private readonly ITIntersectionFactory<Element, Solid> _intersectionFactory;
+        private readonly WallIntersectionSettings _intersectionSettings;
         bool checkRooms = true;
 
 
@@ -30,13 +31,15 @@ namespace DS.MEPCurveTraversability.Interactors
             UIDocument uiDoc,
             IEnumerable<RevitLinkInstance> links,
             IElementMultiFilter elementMultiFilter,
-            ITIntersectionFactory<Element, Solid> intersectionFactory)
+            ITIntersectionFactory<Element, Solid> intersectionFactory,
+            WallIntersectionSettings intersectionSettings)
         {
             _uiDoc = uiDoc;
             _doc = uiDoc.Document;
             _links = links;
             _elementMultiFilter = elementMultiFilter;
             _intersectionFactory = intersectionFactory;
+            _intersectionSettings = intersectionSettings;
         }
 
         /// <summary>
@@ -55,7 +58,7 @@ namespace DS.MEPCurveTraversability.Interactors
         public IWindowMessenger WindowMessenger { get; set; }
 
 
-        public void Initiate(MEPCurve mEPCurve)
+        public bool Initiate(MEPCurve mEPCurve)
         {
             if (checkRooms)
             {
@@ -72,16 +75,17 @@ namespace DS.MEPCurveTraversability.Interactors
                     WindowMessenger = WindowMessenger
                 }.Initiate(mEPCurve);
 
-                if (!roomCheker) { return; }
+                if (!roomCheker) { return false; }
             }
 
-            new WallsChecker(_uiDoc, _links, _intersectionFactory)
+           var wallChecker = new WallsChecker(_uiDoc, _links, _intersectionFactory, _intersectionSettings)
             {
                 Logger = Logger,
                 //TransactionFactory = trf,
                 WindowMessenger = WindowMessenger
 
-            }.Initiate(mEPCurve);
+            };
+            return wallChecker.Initiate(mEPCurve);
         }
     }
 }

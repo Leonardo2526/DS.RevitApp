@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPCurveTraversability.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPCurveTraversability.Interactors", "DS.MEPCurveTraversability.Interactors\DS.MEPCurveTraversability.Interactors.csproj", "{00786D46-F05F-4F40-9FDF-25D3A9437649}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPCurveTraversability.UI", "DS.MEPCurveTraversability.UI\DS.MEPCurveTraversability.UI.csproj", "{12DA88A7-C723-438C-A2BE-5BF3B6F07EE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{00786D46-F05F-4F40-9FDF-25D3A9437649}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00786D46-F05F-4F40-9FDF-25D3A9437649}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00786D46-F05F-4F40-9FDF-25D3A9437649}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12DA88A7-C723-438C-A2BE-5BF3B6F07EE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12DA88A7-C723-438C-A2BE-5BF3B6F07EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12DA88A7-C723-438C-A2BE-5BF3B6F07EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12DA88A7-C723-438C-A2BE-5BF3B6F07EE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

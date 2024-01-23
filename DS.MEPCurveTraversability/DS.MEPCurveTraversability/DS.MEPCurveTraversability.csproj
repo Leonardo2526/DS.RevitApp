@@ -40,7 +40,8 @@
     <Reference Include="MoreLinq, Version=4.1.0.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
       <HintPath>..\packages\morelinq.4.1.0\lib\netstandard2.0\MoreLinq.dll</HintPath>
     </Reference>
-    <Reference Include="OLMP.RevitAPI.UI">
+    <Reference Include="OLMP.RevitAPI.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\OLMP.RevitAPI\OLMP.RevitAPI.UI\bin\Debug\OLMP.RevitAPI.UI.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
@@ -88,6 +89,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.cs" />
     <Compile Include="ExternalCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -108,6 +110,14 @@
     <ProjectReference Include="..\DS.MEPCurveTraversability.Interactors\DS.MEPCurveTraversability.Interactors.csproj">
       <Project>{00786d46-f05f-4f40-9fdf-25d3a9437649}</Project>
       <Name>DS.MEPCurveTraversability.Interactors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DS.MEPCurveTraversability.Presenters\DS.MEPCurveTraversability.Presenters.csproj">
+      <Project>{adbccd01-0c09-4853-9d9b-12733d809962}</Project>
+      <Name>DS.MEPCurveTraversability.Presenters</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DS.MEPCurveTraversability.UI\DS.MEPCurveTraversability.UI.csproj">
+      <Project>{12da88a7-c723-438c-a2be-5bf3b6f07ee1}</Project>
+      <Name>DS.MEPCurveTraversability.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
