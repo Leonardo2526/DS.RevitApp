@@ -3,7 +3,7 @@
 	<AddIn Type="Command">
 		<Name>DS.MEPTools</Name>
 		<FullClassName>DS.MEPTools.MEPCurveTraversabilityChecker.ExternalCommand</FullClassName>
-		<Text>DS.MEPToolst.MEPCurveTraversabilityChecker</Text>
+		<Text>MEPCurveTraversabilityChecker</Text>
 		<Description>Проверка проходимости линейных элементов</Description>
 		<VisibilityMode>AlwaysVisible</VisibilityMode>
 		<Assembly>.\DS.MEPTools.MEPCurveTraversabilityChecker\DS.MEPTools.MEPCurveTraversabilityChecker.dll</Assembly>
