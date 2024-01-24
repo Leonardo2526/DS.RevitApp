@@ -12,8 +12,12 @@ using OLMP.RevitAPI.Tools.Various;
 using Rhino;
 using Serilog;
 using Serilog.Core;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnitSystem = Rhino.UnitSystem;
+using System.Windows;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DS.MEPCurveTraversability;
 
@@ -23,39 +27,58 @@ public class ExternalCommand : IExternalCommand
 {
     private static readonly double _mmToFeet =
             RhinoMath.UnitScale(UnitSystem.Millimeters, UnitSystem.Feet);
+    private IEnumerable<Document> _allDocs;
 
     /// <inheritdoc />
     public Result Execute(ExternalCommandData commandData,
         ref string message, ElementSet elements)
     {
-
         var uiApp = commandData.Application;
         var application = uiApp.Application;
         var uiDoc = uiApp.ActiveUIDocument;
-        var doc = uiDoc.Document;
 
+        var doc = uiDoc.Document;
         var links = doc.GetLoadedLinks();
 
-        var docAR = doc;
-        var docKR = doc;
-        var linksAR = links;
-        var linksKR = links;
+        (Document, IEnumerable<RevitLinkInstance>) docLinks = (doc, links);
+        App.DocLinks = docLinks;
+
+        var allDocs = new List<Document>() { doc};
+        var linkDocs = docLinks.Item2.Select(l => l.GetLinkDocument()).ToList();
+        allDocs.AddRange(linkDocs);
+        _allDocs = allDocs;
+
+        var docLinksNames = GetNames(docLinks);
+        //App.DocLinksAR = GetDocLinks(docLinks, "AR");
+        var docLinksNamesAR = GetNames(App.DocLinksAR);
+        //App.DocLinksKR = GetDocLinks(docLinks, "KR");
+        var docLinksNamesKR = GetNames(App.DocLinksKR);
+
+        var sourceDocLinksKRNames = docLinksNames.Except(docLinksNamesKR);
+        //var exchangeARItemsViewModel = new ExchangeItemsViewModel(docLinksNames, docLinksNamesAR);
+        //var checkDocsViewAR = new CheckDocsConfigView(exchangeARItemsViewModel);
+         var exchangeKRItemsViewModel = new ExchangeItemsViewModel(sourceDocLinksKRNames, docLinksNamesKR);
+        var checkDocsViewKR = new CheckDocsConfigView(exchangeKRItemsViewModel);
+        checkDocsViewKR.Closing += CheckDocsViewKR_Closing;
+      
+
+        var viewModel = new WallCheckerViewModel(App.WallIntersectionSettingsKR)
+        { Title = "КР" };      
+        var view = new WallIntersectionSettingsView(viewModel, checkDocsViewKR);
+
+        return Result.Succeeded;
 
         var logger = App.Logger;
         var messenger = App.Messenger;
         var trf = new ContextTransactionFactory(doc, RevitContextOption.Inside);
         var elementFilter = new ElementMutliFilter(doc, links);
-        (Document, IEnumerable<RevitLinkInstance>) _checkerDocsLinks = (null, null);
-        //var view = new TraceSettingsView();
-        //var viewModel = new WallCheckerViewModel(App.WallIntersectionSettingsKR);
-        //var view = new WallIntersectionSettingsView(viewModel);
-        var viewModel = new CheckDocsConfigViewModel((doc, links), _checkerDocsLinks);
-        var view = new CheckDocsConfigView(viewModel);
-
-        return Result.Succeeded;
-
 
         if (new ElementSelector(uiDoc).Pick() is not MEPCurve mEPCurve) { return Result.Failed; }
+
+        var docAR = doc;
+        var docKR = doc;
+        var linksAR = links;
+        var linksKR = links;
 
         var checkServiceAR = GetCheckService(
             uiDoc,
@@ -86,6 +109,53 @@ public class ExternalCommand : IExternalCommand
 
         return Result.Succeeded;
     }
+
+    private void CheckDocsViewKR_Closing(object sender, EventArgs e)
+    {
+        var view = sender as CheckDocsConfigView;
+        if(view is null) { return; }
+
+        var targedNames = view.ConfigViewModel.ObservableTarget;
+
+        var allDocs = _allDocs.Where(d => targedNames.Any(n => d.Title == n));
+        App.DocLinksKR = ToDocLinks(allDocs, App.DocLinks.Item2);
+
+        return;
+    }
+
+    private static (Document, IEnumerable<RevitLinkInstance>) ToDocLinks(
+          IEnumerable<Document> docs,
+          IEnumerable<RevitLinkInstance> sourceLinks)
+    {
+        Document doc = docs.FirstOrDefault(d => !d.IsLinked);
+        var links = sourceLinks.Where(l => docs.Any(d => d.Title == l.GetLinkDocument().Title));
+
+        return (doc, links);
+    }
+
+    private (Document, IEnumerable<RevitLinkInstance>) GetDocLinks(
+        (Document, IEnumerable<RevitLinkInstance>) availableDocLinks, string suffix = null)
+    {
+        (Document, IEnumerable<RevitLinkInstance>) docLinks = new();
+
+        return docLinks;
+    }
+
+    private IEnumerable<string> GetNames((Document, IEnumerable<RevitLinkInstance>) docLinks)
+    {
+        var names = new List<string>();
+
+        if (docLinks.Item1 == null && docLinks.Item2 == null)
+        { return names; }
+
+        if (docLinks.Item1 != null)
+        { names.Add(docLinks.Item1.Title); }
+        if (docLinks.Item2 != null)
+        { names.AddRange(docLinks.Item2.Select(r => r.GetLinkDocument().Title)); }
+
+        return names;
+    }
+
 
     private static TraversabilityService GetCheckService(
         UIDocument uiDoc,

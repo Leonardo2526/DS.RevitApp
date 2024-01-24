@@ -1,13 +1,6 @@
-﻿using Autodesk.Revit.DB;
-using DS.ClassLib.VarUtils;
+﻿using DS.ClassLib.VarUtils;
 using DS.MEPCurveTraversability.Interactors;
 using Rhino;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using UnitSystem = Rhino.UnitSystem;
 
@@ -23,13 +16,12 @@ namespace DS.MEPCurveTraversability.Presenters
 
         private readonly WallIntersectionSettings _settings;
 
-        public WallCheckerViewModel(
-            WallIntersectionSettings wallIntersectionSettings, 
-            CheckDocsConfigViewModel checkDocsConfig)
+        public WallCheckerViewModel(WallIntersectionSettings wallIntersectionSettings)
         {
             _settings = wallIntersectionSettings;
         }
 
+        public string Title { get; set; }
 
         public bool CheckOpenings
         {
@@ -70,11 +62,11 @@ namespace DS.MEPCurveTraversability.Presenters
 
         #region Commands
 
-        public ICommand ConfigDocs => new RelayCommand(p =>
+        public ICommand TestCommand => new RelayCommand(p =>
         {
-            
+
         }, _ => true);
-      
+
 
         #endregion
     }

@@ -6,20 +6,25 @@
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:local="clr-namespace:DS.MEPCurveTraversability.UI"            
              xmlns:uc="clr-namespace:DS.MEPCurveTraversability.UI.View.UserControls" 
-             mc:Ignorable="d" SizeToContent="WidthAndHeight" Title="Настройки трассировки"
+             mc:Ignorable="d" SizeToContent="WidthAndHeight" 
+             Title= "{Binding StringFormat= Настройки пересечения стен {0},
+                        Path=Title, 
+                        FallbackValue=Настройки пересечения стен}"
              WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" >
-    
+
     <mah:MetroWindow.Resources>
         <ResourceDictionary >
+            <FontFamily x:Key="Awesome">/DS.MEPCurveTraversability.UI;component/Fonts/#Font Awesome 5 Free Solid</FontFamily>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="/DS.MEPCurveTraversability.UI;component/Views/Styles/Button.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </mah:MetroWindow.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -34,6 +39,10 @@
         <!--Row0-->
         <Border Grid.Column="0" BorderThickness="1" BorderBrush="Gray">
             <StackPanel Orientation="Vertical" Margin="5">
+                <Label FontWeight="Bold">
+                    I. Проверка угла пересечения.
+                </Label>
+                <Separator Height="1"/>
                 <uc:InputParameterUserControl 
                     Description="Максимальный угол отклонения (A), град." 
                     ToolTip="Максимальный угол отклонения пересечения от нормали к стене"
@@ -47,11 +56,12 @@
 
         <!--Row1-->
         <Border Grid.Column="0" Grid.Row="1" BorderThickness="1" BorderBrush="Gray">
-            <StackPanel Orientation="Vertical" Margin="5">
-                <CheckBox IsChecked="{Binding Path=CheckOpenings}" Margin="5">
-                    Проверять расстояния до отверстия.
-                </CheckBox>
-                <uc:InputParameterUserControl 
+            <StackPanel Orientation="Vertical" Margin="5" x:Name="WallIntersectionSettingsPanel">
+                <Label FontWeight="Bold">
+                    II. Проверка расстояний от проходного отверстия.
+                </Label>
+                <Separator Height="1"/>
+                <uc:InputParameterUserControl x:Name="Item1" 
              Description="Отступ от края отверстия (B), мм." 
              Value="{Binding OpeningOffset, Mode=TwoWay}"/>
                 <uc:InputParameterUserControl 
@@ -59,7 +69,13 @@
              Value="{Binding WallOffset, Mode=TwoWay}"/>
                 <uc:InputParameterUserControl 
              Description="Минимальное расстояние до отверстий (D), мм." 
-             Value="{Binding InsertsOffset, Mode=TwoWay}"/> 
+             Value="{Binding InsertsOffset, Mode=TwoWay}"/>
+                <CheckBox HorizontalAlignment="Right"
+                    Checked="CheckBox_Checked" 
+                    Unchecked="CheckBox_Unchecked" 
+                    IsChecked="{Binding Path=CheckOpenings}" Margin="5" 
+                          ToolTip="Вкл/выкл опцию">
+                </CheckBox>
             </StackPanel>
         </Border>
 
@@ -77,8 +93,16 @@
 
         <!--Row2-->
         <Border Grid.Column="0" Grid.Row="2" BorderThickness="1" BorderBrush="Gray">
-            <StackPanel Orientation="Vertical" Margin="5">               
-        
+            <StackPanel Orientation="Vertical" Margin="5" HorizontalAlignment="Left">
+                <Button Content="Настройка моделей" Width="Auto" FontSize="12"
+                 Margin="2 0"
+                 Padding="3"
+                 FontFamily="{StaticResource Awesome}"
+                 Style="{StaticResource BaseMetroWindowButtonStyle }" 
+                 ToolTip="Настройка моделей для применения данных настроек"
+                 Height="25"
+                 Click="ConfigDocs_Click"
+                 />
             </StackPanel>
         </Border>
     </Grid>

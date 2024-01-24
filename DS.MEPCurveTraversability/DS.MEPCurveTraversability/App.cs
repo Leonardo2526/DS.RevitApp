@@ -30,18 +30,20 @@ namespace DS.MEPCurveTraversability
 
         public static IWindowMessenger Messenger { get; } = new TaskDialogMessenger();
 
+        public static (Document, IEnumerable<RevitLinkInstance>) DocLinks { get; set; }           
+
         public static WallIntersectionSettings WallIntersectionSettingsAR { get; } = new()
         {
             WallOffset = 200 * _mmToFeet,
             InsertsOffset = 200 * _mmToFeet,
         };
 
-        public static Tuple<Document, IEnumerable<RevitLinkInstance>> ARDocs { get; set; }
+        public static (Document, IEnumerable<RevitLinkInstance>) DocLinksAR { get; set; }
 
 
         public static WallIntersectionSettings WallIntersectionSettingsKR { get; } = new();
 
-        public static Tuple<Document, IEnumerable<RevitLinkInstance>> KRDocs { get; set; }
+        public static (Document, IEnumerable<RevitLinkInstance>) DocLinksKR { get; set; }
 
 
     }

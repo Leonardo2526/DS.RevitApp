@@ -56,9 +56,18 @@ namespace DS.MEPCurveTraversability.Presenters
 
         public ICommand AddItem => new RelayCommand(p =>
         {
-            CheckerDocNames.Add(DocNameToAdd);
-            AvailableDocNames.Remove(DocNameToAdd);
-        }, _ => DocNameToAdd != null);
+            string nameToAdd = DocNameToAdd is null ?
+           AvailableDocNames.First() : DocNameToAdd;
+
+            CheckerDocNames.Add(nameToAdd);
+            AvailableDocNames.Remove(nameToAdd);
+        }, _ => AvailableDocNames.Count > 0);
+
+        public ICommand AddAllItems => new RelayCommand(p =>
+        {
+            AvailableDocNames.ToList().ForEach(d => CheckerDocNames.Add(d));
+            AvailableDocNames.Clear();
+        }, _ => AvailableDocNames.Count > 0);
 
         public ICommand RemoveItem => new RelayCommand(p =>
         {
@@ -68,6 +77,12 @@ namespace DS.MEPCurveTraversability.Presenters
             CheckerDocNames.Remove(nameToRemove);
             AvailableDocNames.Add(nameToRemove);
 
+        }, _ => CheckerDocNames.Count > 0);
+
+        public ICommand RemoveAllItems => new RelayCommand(p =>
+        {
+            CheckerDocNames.ToList().ForEach(d => AvailableDocNames.Add(d));
+            CheckerDocNames.Clear();
         }, _ => CheckerDocNames.Count > 0);
 
         public ICommand CloseWindow => new RelayCommand(p =>
