@@ -28,10 +28,6 @@ public class ExternalCommand : IExternalCommand
     public Result Execute(ExternalCommandData commandData,
         ref string message, ElementSet elements)
     {
-        //var view = new TraceSettingsView();
-        var viewModel = new WallCheckerViewModel(App.WallIntersectionSettingsKR);
-        var view = new WallIntersectionSettingsView(viewModel);
-        return Result.Succeeded;
 
         var uiApp = commandData.Application;
         var application = uiApp.Application;
@@ -49,6 +45,15 @@ public class ExternalCommand : IExternalCommand
         var messenger = App.Messenger;
         var trf = new ContextTransactionFactory(doc, RevitContextOption.Inside);
         var elementFilter = new ElementMutliFilter(doc, links);
+        (Document, IEnumerable<RevitLinkInstance>) _checkerDocsLinks = (null, null);
+        //var view = new TraceSettingsView();
+        //var viewModel = new WallCheckerViewModel(App.WallIntersectionSettingsKR);
+        //var view = new WallIntersectionSettingsView(viewModel);
+        var viewModel = new CheckDocsConfigViewModel((doc, links), _checkerDocsLinks);
+        var view = new CheckDocsConfigView(viewModel);
+
+        return Result.Succeeded;
+
 
         if (new ElementSelector(uiDoc).Pick() is not MEPCurve mEPCurve) { return Result.Failed; }
 

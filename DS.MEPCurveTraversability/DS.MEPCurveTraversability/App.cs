@@ -12,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DS.ClassLib.VarUtils;
+using Autodesk.Revit.DB;
+using UnitSystem = Rhino.UnitSystem;
 
 namespace DS.MEPCurveTraversability
 {
@@ -34,7 +36,12 @@ namespace DS.MEPCurveTraversability
             InsertsOffset = 200 * _mmToFeet,
         };
 
+        public static Tuple<Document, IEnumerable<RevitLinkInstance>> ARDocs { get; set; }
+
+
         public static WallIntersectionSettings WallIntersectionSettingsKR { get; } = new();
+
+        public static Tuple<Document, IEnumerable<RevitLinkInstance>> KRDocs { get; set; }
 
 
     }

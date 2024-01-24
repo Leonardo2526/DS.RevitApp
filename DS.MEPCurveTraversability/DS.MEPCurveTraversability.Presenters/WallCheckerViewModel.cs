@@ -1,10 +1,15 @@
-﻿using DS.MEPCurveTraversability.Interactors;
+﻿using Autodesk.Revit.DB;
+using DS.ClassLib.VarUtils;
+using DS.MEPCurveTraversability.Interactors;
 using Rhino;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using UnitSystem = Rhino.UnitSystem;
 
 namespace DS.MEPCurveTraversability.Presenters
 {
@@ -18,15 +23,18 @@ namespace DS.MEPCurveTraversability.Presenters
 
         private readonly WallIntersectionSettings _settings;
 
-        public WallCheckerViewModel(WallIntersectionSettings wallIntersectionSettings)
+        public WallCheckerViewModel(
+            WallIntersectionSettings wallIntersectionSettings, 
+            CheckDocsConfigViewModel checkDocsConfig)
         {
             _settings = wallIntersectionSettings;
         }
 
-        public bool CheckOpenings 
-        { 
-            get => _settings.CheckOpenings; 
-            set => _settings.CheckOpenings = value; 
+
+        public bool CheckOpenings
+        {
+            get => _settings.CheckOpenings;
+            set => _settings.CheckOpenings = value;
         }
 
         public double InsertsOffset
@@ -40,6 +48,7 @@ namespace DS.MEPCurveTraversability.Presenters
             get => _settings.JointsOffset * _feetToMM;
             set => _settings.JointsOffset = value * _mmToFeet;
         }
+
         public double NormalAngleLimit
         {
             get => RhinoMath.ToDegrees(_settings.NormalAngleLimit);
@@ -57,5 +66,16 @@ namespace DS.MEPCurveTraversability.Presenters
             get => _settings.WallOffset * _feetToMM;
             set => _settings.WallOffset = value * _mmToFeet;
         }
+
+
+        #region Commands
+
+        public ICommand ConfigDocs => new RelayCommand(p =>
+        {
+            
+        }, _ => true);
+      
+
+        #endregion
     }
 }

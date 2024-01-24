@@ -61,12 +61,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CheckDocsConfigViewModel.cs" />
     <Compile Include="WallCheckerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ProjectDescription.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\DS.CommonLib.Utils\DS.ClassLib.VarUtils\DS.ClassLib.VarUtils.csproj">
+      <Project>{97D2548B-BA7F-4C31-8F52-6BF929E0C37B}</Project>
+      <Name>DS.ClassLib.VarUtils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DS.MEPCurveTraversability.Interactors\DS.MEPCurveTraversability.Interactors.csproj">
       <Project>{00786D46-F05F-4F40-9FDF-25D3A9437649}</Project>
       <Name>DS.MEPCurveTraversability.Interactors</Name>

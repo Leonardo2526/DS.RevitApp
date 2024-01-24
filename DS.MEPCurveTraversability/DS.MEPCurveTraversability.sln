@@ -17,6 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPCurveTraversability.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPCurveTraversability.UI", "DS.MEPCurveTraversability.UI\DS.MEPCurveTraversability.UI.csproj", "{12DA88A7-C723-438C-A2BE-5BF3B6F07EE1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B83B82E5-FB3E-472F-A063-2E33517651D3}"
+	ProjectSection(SolutionItems) = preProject
+		CodeMap1.dgml = CodeMap1.dgml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
