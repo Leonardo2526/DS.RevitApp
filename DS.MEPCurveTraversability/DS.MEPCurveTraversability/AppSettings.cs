@@ -17,8 +17,13 @@ using UnitSystem = Rhino.UnitSystem;
 
 namespace DS.MEPCurveTraversability
 {
-    internal static class App
+    internal class AppSettings
     {
+        private static Lazy<AppSettings> _instance = new Lazy<AppSettings>(() =>
+        {
+            return new AppSettings();
+        });
+
         private static readonly double _mmToFeet =
            RhinoMath.UnitScale(UnitSystem.Millimeters, UnitSystem.Feet);
 
@@ -30,7 +35,9 @@ namespace DS.MEPCurveTraversability
 
         public static IWindowMessenger Messenger { get; } = new TaskDialogMessenger();
 
-        public static (Document, IEnumerable<RevitLinkInstance>) DocLinks { get; set; }           
+
+        public static (Document, IEnumerable<RevitLinkInstance>) DocLinks { get; set; }  
+        
 
         public static WallIntersectionSettings WallIntersectionSettingsAR { get; } = new()
         {
@@ -40,11 +47,13 @@ namespace DS.MEPCurveTraversability
 
         public static (Document, IEnumerable<RevitLinkInstance>) DocLinksAR { get; set; }
 
-
         public static WallIntersectionSettings WallIntersectionSettingsKR { get; } = new();
 
         public static (Document, IEnumerable<RevitLinkInstance>) DocLinksKR { get; set; }
 
-
+        public static AppSettings GetInstance()
+        {
+            return _instance.Value;
+        }
     }
 }

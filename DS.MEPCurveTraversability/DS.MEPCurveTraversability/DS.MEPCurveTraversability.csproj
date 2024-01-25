@@ -41,6 +41,9 @@
     <Reference Include="MoreLinq, Version=4.1.0.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
       <HintPath>..\packages\morelinq.4.1.0\lib\netstandard2.0\MoreLinq.dll</HintPath>
     </Reference>
+    <Reference Include="OLMP.RevitAPI.Core">
+      <HintPath>..\..\..\OLMP.RevitAPI\OLMP.RevitAPI.Core\bin\Debug\OLMP.RevitAPI.Core.dll</HintPath>
+    </Reference>
     <Reference Include="OLMP.RevitAPI.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\OLMP.RevitAPI\OLMP.RevitAPI.UI\bin\Debug\OLMP.RevitAPI.UI.dll</HintPath>
@@ -92,7 +95,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.cs" />
+    <Compile Include="AppSettings.cs" />
+    <Compile Include="ShowKRSettingsExternalCommand.cs" />
     <Compile Include="ExternalCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

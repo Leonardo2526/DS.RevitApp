@@ -18,6 +18,7 @@ using System.Linq;
 using UnitSystem = Rhino.UnitSystem;
 using System.Windows;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.IO;
 
 namespace DS.MEPCurveTraversability;
 
@@ -39,9 +40,10 @@ public class ExternalCommand : IExternalCommand
 
         var doc = uiDoc.Document;
         var links = doc.GetLoadedLinks();
+        
 
         (Document, IEnumerable<RevitLinkInstance>) docLinks = (doc, links);
-        App.DocLinks = docLinks;
+        AppSettings.DocLinks = docLinks;
 
         var allDocs = new List<Document>() { doc};
         var linkDocs = docLinks.Item2.Select(l => l.GetLinkDocument()).ToList();
@@ -50,9 +52,9 @@ public class ExternalCommand : IExternalCommand
 
         var docLinksNames = GetNames(docLinks);
         //App.DocLinksAR = GetDocLinks(docLinks, "AR");
-        var docLinksNamesAR = GetNames(App.DocLinksAR);
+        var docLinksNamesAR = GetNames(AppSettings.DocLinksAR);
         //App.DocLinksKR = GetDocLinks(docLinks, "KR");
-        var docLinksNamesKR = GetNames(App.DocLinksKR);
+        var docLinksNamesKR = GetNames(AppSettings.DocLinksKR);
 
         var sourceDocLinksKRNames = docLinksNames.Except(docLinksNamesKR);
         //var exchangeARItemsViewModel = new ExchangeItemsViewModel(docLinksNames, docLinksNamesAR);
@@ -62,14 +64,14 @@ public class ExternalCommand : IExternalCommand
         checkDocsViewKR.Closing += CheckDocsViewKR_Closing;
       
 
-        var viewModel = new WallCheckerViewModel(App.WallIntersectionSettingsKR)
+        var viewModel = new WallCheckerViewModel(AppSettings.WallIntersectionSettingsKR)
         { Title = "КР" };      
         var view = new WallIntersectionSettingsView(viewModel, checkDocsViewKR);
 
         return Result.Succeeded;
 
-        var logger = App.Logger;
-        var messenger = App.Messenger;
+        var logger = AppSettings.Logger;
+        var messenger = AppSettings.Messenger;
         var trf = new ContextTransactionFactory(doc, RevitContextOption.Inside);
         var elementFilter = new ElementMutliFilter(doc, links);
 
@@ -90,7 +92,7 @@ public class ExternalCommand : IExternalCommand
             trf,
             messenger,
             elementFilter,
-            App.WallIntersectionSettingsAR);
+            AppSettings.WallIntersectionSettingsAR);
         if (!checkServiceAR.Initiate(mEPCurve)) { return Result.Failed; }
 
         var checkServiceKR = GetCheckService(
@@ -103,7 +105,7 @@ public class ExternalCommand : IExternalCommand
             trf,
             messenger,
             elementFilter,
-            App.WallIntersectionSettingsKR);
+            AppSettings.WallIntersectionSettingsKR);
         checkServiceKR.Initiate(mEPCurve);
         if (!checkServiceKR.Initiate(mEPCurve)) { return Result.Failed; }
 
@@ -118,7 +120,7 @@ public class ExternalCommand : IExternalCommand
         var targedNames = view.ConfigViewModel.ObservableTarget;
 
         var allDocs = _allDocs.Where(d => targedNames.Any(n => d.Title == n));
-        App.DocLinksKR = ToDocLinks(allDocs, App.DocLinks.Item2);
+        AppSettings.DocLinksKR = ToDocLinks(allDocs, AppSettings.DocLinks.Item2);
 
         return;
     }
