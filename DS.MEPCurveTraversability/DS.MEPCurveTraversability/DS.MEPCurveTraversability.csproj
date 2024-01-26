@@ -96,6 +96,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
+    <Compile Include="RoomSettingsExternalCommand.cs" />
+    <Compile Include="ShowARSettingsExternalCommand.cs" />
     <Compile Include="ShowKRSettingsExternalCommand.cs" />
     <Compile Include="ExternalCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

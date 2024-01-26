@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExchangeItemsViewModel.cs" />
+    <Compile Include="RoomTraversionViewModel.cs" />
     <Compile Include="WallCheckerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

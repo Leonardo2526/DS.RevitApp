@@ -74,17 +74,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DocsFilter.cs" />
-    <Compile Include="IWallIntersectionSettings.cs" />
+    <Compile Include="Settings\RoomTraversion\IRoomTraversionSettings.cs" />
+    <Compile Include="Settings\WallIntersection\IWallIntersectionSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoomChecker.cs" />
     <Compile Include="Settings\DocSettingsAR.cs" />
     <Compile Include="Settings\DocSettingsBase.cs" />
-    <Compile Include="Settings\IRoomTraversion.cs" />
     <Compile Include="Settings\DocSettingsKR.cs" />
-    <Compile Include="Settings\RoomTraversionSettings.cs" />
+    <Compile Include="Settings\RoomTraversion\RoomTraversionSettings.cs" />
     <Compile Include="WallRuleBuilder.cs" />
     <Compile Include="TraversabilityService.cs" />
-    <Compile Include="WallIntersectionSettings.cs" />
+    <Compile Include="Settings\WallIntersection\WallIntersectionSettings.cs" />
     <Compile Include="WallsChecker.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
 <RevitAddIns>
 	<AddIn Type="Command">
 		<Name>DS.MEPCurveTraversability</Name>
-		<FullClassName>DS.MEPCurveTraversability.ShowKRSettingsExternalCommand</FullClassName>
+		<FullClassName>DS.MEPCurveTraversability.RoomSettingsExternalCommand</FullClassName>
 		<Text>MEPCurveTraversability</Text>
 		<Description>Проверка проходимости линейных элементов</Description>
 		<VisibilityMode>AlwaysVisible</VisibilityMode>
