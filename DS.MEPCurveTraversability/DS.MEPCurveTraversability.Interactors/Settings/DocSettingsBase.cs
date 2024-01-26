@@ -1,6 +1,7 @@
 ﻿using Autodesk.Revit.DB;
 using MoreLinq;
 using OLMP.RevitAPI.Core.Extensions;
+using Rhino.UI;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,15 +32,16 @@ namespace DS.MEPCurveTraversability.Interactors.Settings
             return (doc, fLinks);
         }
 
-        public IEnumerable<Document> Docs { get; set; }
-
+        public List<Document> Docs { get; set; }
 
         public DocSettingsBase TryUpdateDocs((Document, IEnumerable<RevitLinkInstance>) allDocLinks)
         {
-            if (CanDetectAutoDocs && (Docs == null || Docs.Count() == 0))
+            Docs = Docs?.Where(d => d.IsValidObject).ToList();
+            if (Docs == null || Docs.Count() == 0)
             {
-                Docs = DocsFilter.FilterByLastFolderName(allDocLinks, AutoDocsDetectionFields);
-            }
+                if (CanDetectAutoDocs)
+                { Docs = DocsFilter.FilterByLastFolderName(allDocLinks, AutoDocsDetectionFields).ToList(); }
+            }          
             return this;
         }
     }

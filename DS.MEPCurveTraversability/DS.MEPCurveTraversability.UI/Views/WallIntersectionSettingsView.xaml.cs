@@ -17,6 +17,11 @@ namespace DS.MEPCurveTraversability.UI
             InitializeComponent();
             this.DataContext = wallCheckerViewModel;
             _checkDocsConfigView = checkDocsConfigView;
+          
+            SwitchChildren<UserControl>(
+                WallIntersectionCheckBox.GetParentObject(), 
+                WallIntersectionCheckBox.IsChecked == true);
+
             ShowDialog();
         }
 
@@ -25,18 +30,22 @@ namespace DS.MEPCurveTraversability.UI
             _checkDocsConfigView.ShowDialog();
         }
 
-        private void CheckBox_Checked(object sender, System.Windows.RoutedEventArgs e)
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            var ucs = this.WallIntersectionSettingsPanel.FindChildren<UserControl>();
-            ucs.ToList().ForEach(uc => uc.IsEnabled = true);
-            Item1.IsEnabled = true;
+            var checkBox = (CheckBox)sender;
+            SwitchChildren<UserControl>(checkBox.GetParentObject(), checkBox.IsChecked == true);
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            var ucs = this.WallIntersectionSettingsPanel.FindChildren<UserControl>();
-            ucs.ToList().ForEach(uc => uc.IsEnabled = false);
-            Item1.IsEnabled = false;
+            var checkBox = (CheckBox)sender;
+            SwitchChildren<UserControl>(checkBox.GetParentObject(), checkBox.IsChecked == true);
+        }
+
+        private void SwitchChildren<T>(DependencyObject parent, bool swichOption) where T : UIElement
+        {
+            var ucs = parent.FindChildren<T>();
+            ucs.ToList().ForEach(uc => uc.IsEnabled = swichOption);
         }
     }
 }

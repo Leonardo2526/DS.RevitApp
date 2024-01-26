@@ -46,12 +46,20 @@
                 <uc:InputParameterUserControl 
                     Description="Максимальный угол отклонения (A), град." 
                     ToolTip="Максимальный угол отклонения пересечения от нормали к стене"
-                    Value="{Binding NormalAngleLimit, Mode=TwoWay}"/>              
+                    Value="{Binding NormalAngleLimit, Mode=TwoWay}"/>
             </StackPanel>
         </Border>
 
-        <Border Grid.Column="1" BorderThickness="1" BorderBrush="Gray">
-           
+        <!--Row1, Column1-->
+        <Border Grid.Column="1" Grid.Row="0" BorderThickness="1" BorderBrush="Gray">
+            <StackPanel Orientation="Vertical" Margin="0 5">
+                <Image x:Name="BypassImage" Width="Auto" Height="120">
+                    <Image.Source>
+                        <BitmapImage DecodePixelWidth="{Binding ElementName=BypassImage, Path=Width}"
+                               UriSource="pack://application:,,,/DS.MEPCurveTraversability.UI;component/Resources/WallPIpeIntersectionPlan.png"/>
+                    </Image.Source>
+                </Image>
+            </StackPanel>
         </Border>
 
         <!--Row1-->
@@ -70,7 +78,7 @@
                 <uc:InputParameterUserControl 
              Description="Минимальное расстояние до отверстий (D), мм." 
              Value="{Binding InsertsOffset, Mode=TwoWay}"/>
-                <CheckBox HorizontalAlignment="Right"
+                <CheckBox x:Name="WallIntersectionCheckBox" HorizontalAlignment="Right"
                     Checked="CheckBox_Checked" 
                     Unchecked="CheckBox_Unchecked" 
                     IsChecked="{Binding Path=CheckOpenings}" Margin="5" 
@@ -81,13 +89,10 @@
 
         <!--Row1, Column1-->
         <Border Grid.Column="1" Grid.Row="1" BorderThickness="1" BorderBrush="Gray">
-            <StackPanel Orientation="Vertical" Margin="0 5">
-                <Image x:Name="BypassImage" Width="350">
-                    <Image.Source>
-                        <BitmapImage DecodePixelWidth="{Binding ElementName=BypassImage, Path=Width}"
-                                     UriSource="pack://application:,,,/DS.MEPCurveTraversability.UI;component/Resources/BypassPipes.png"/>
-                    </Image.Source>
-                </Image>
+            <StackPanel Orientation="Vertical" Margin="10">
+                <Image x:Name="WallPIpeIntersectionSection" 
+                       Width="300" Height="Auto" 
+                       Source="pack://application:,,,/DS.MEPCurveTraversability.UI;component/Resources/WallPIpeIntersectionSection.png"/>
             </StackPanel>
         </Border>
 

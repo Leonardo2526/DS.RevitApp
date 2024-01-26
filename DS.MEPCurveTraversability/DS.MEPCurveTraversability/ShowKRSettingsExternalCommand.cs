@@ -63,7 +63,9 @@ public class ShowKRSettingsExternalCommand : IExternalCommand
         if (sender is not CheckDocsConfigView view) { return; }
 
         var targedNames = view.ConfigViewModel.ObservableTarget;
-        _settings.Docs = _allDocs.Where(d => targedNames.Any(n => d.Title == n));
+        var docs = _allDocs.Where(d => targedNames.Any(n => d.Title == n));
+        _settings.Docs.Clear();
+        _settings.Docs.AddRange(docs);
 
         return;
     }
