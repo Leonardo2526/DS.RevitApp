@@ -2,6 +2,7 @@
 using Autodesk.Revit.UI;
 using DS.ClassLib.VarUtils;
 using DS.ClassLib.VarUtils.Collisons;
+using DS.MEPCurveTraversability.Interactors.Settings;
 using OLMP.RevitAPI.Tools;
 using OLMP.RevitAPI.Tools.Creation.Transactions;
 using OLMP.RevitAPI.Tools.Rooms;
@@ -24,6 +25,7 @@ namespace DS.MEPCurveTraversability.Interactors
         private readonly IElementMultiFilter _elementMultiFilter;
         private readonly ITIntersectionFactory<Element, Solid> _intersectionFactory;
         private readonly WallIntersectionSettings _intersectionSettings;
+        private readonly IRoomTraversionSettings _roomTraversionSettings;
         bool checkRooms = true;
 
 
@@ -32,7 +34,8 @@ namespace DS.MEPCurveTraversability.Interactors
             IEnumerable<RevitLinkInstance> links,
             IElementMultiFilter elementMultiFilter,
             ITIntersectionFactory<Element, Solid> intersectionFactory,
-            WallIntersectionSettings intersectionSettings)
+            WallIntersectionSettings intersectionSettings, 
+            IRoomTraversionSettings roomTraversionSettings = null)
         {
             _uiDoc = uiDoc;
             _doc = uiDoc.Document;
@@ -40,6 +43,7 @@ namespace DS.MEPCurveTraversability.Interactors
             _elementMultiFilter = elementMultiFilter;
             _intersectionFactory = intersectionFactory;
             _intersectionSettings = intersectionSettings;
+            _roomTraversionSettings = roomTraversionSettings;
         }
 
         /// <summary>

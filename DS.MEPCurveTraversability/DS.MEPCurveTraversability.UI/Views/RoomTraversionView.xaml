@@ -37,7 +37,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="350"/>
         </Grid.ColumnDefinitions>
 
         <!--Row0-->
@@ -47,9 +47,13 @@
                     Быстрая проверка
                 </CheckBox>
                 <StackPanel Orientation="Vertical">
-                    <CheckBox IsChecked="{Binding Path=CheckSolid}" Margin="5"
-                              Checked="CheckBox_Checked" 
-                              Unchecked="CheckBox_Unchecked" 
+                    <CheckBox x:Name="SolidCheckBox" 
+                              IsChecked="{Binding Path=CheckSolid ,  
+                        Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}" 
+                              Margin="5"
+                              Checked="SolidCheckBox_Checked" 
+                              Unchecked="SolidCheckBox_Unchecked" 
                               ToolTip="Проверка всего солида линейного элемента">
                         Полная проверка
                     </CheckBox>
@@ -59,9 +63,17 @@
                                                   Value="{Binding MinResidualVolume, Mode=TwoWay}"/>
                 </StackPanel>
                 <StackPanel>
-                    <Label>
-                        Исключения имён помещений.
-                    </Label>                  
+                <CheckBox x:Name="FieldsCheckBox" 
+                          IsChecked="{Binding Path=CheckNames, 
+                    Mode=TwoWay, 
+                    UpdateSourceTrigger=PropertyChanged}" 
+                          Margin="5"
+                      Checked="FieldsCheckBox_Checked" 
+                      Unchecked="FieldsCheckBox_Unchecked" 
+                      ToolTip="Проверка помещений по содержанию в них полей.">   
+                    Проверка имён помещений.
+                </CheckBox>
+                               
                     <StackPanel Margin="30 0 0 0" 
                                 Orientation="Horizontal" 
                                 Width="Auto">
@@ -119,7 +131,12 @@
                         Строгое соответствие
                     </CheckBox>
                 </StackPanel>
-            </StackPanel>
+            <CheckBox x:Name="AllCheckBox" Margin="5" HorizontalAlignment="Right"
+               Checked="AllCheckBox_Checked" 
+               Unchecked="AllCheckBox_Unchecked" 
+               ToolTip="Вкл/откл все проверки"> 
+            </CheckBox>
+        </StackPanel>
 
         <!--Row1-->
             <StackPanel Grid.Row="1"  Orientation="Vertical" Margin="5" HorizontalAlignment="Left">

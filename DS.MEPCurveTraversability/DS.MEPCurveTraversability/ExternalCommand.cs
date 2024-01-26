@@ -19,6 +19,8 @@ using UnitSystem = Rhino.UnitSystem;
 using System.Windows;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.IO;
+using DS.MEPCurveTraversability.Interactors.Settings;
+using System.Runtime;
 
 namespace DS.MEPCurveTraversability;
 
@@ -39,36 +41,7 @@ public class ExternalCommand : IExternalCommand
         var uiDoc = uiApp.ActiveUIDocument;
 
         var doc = uiDoc.Document;
-        var links = doc.GetLoadedLinks();
-        
-
-        (Document, IEnumerable<RevitLinkInstance>) docLinks = (doc, links);
-        AppSettings.DocLinks = docLinks;
-
-        var allDocs = new List<Document>() { doc};
-        var linkDocs = docLinks.Item2.Select(l => l.GetLinkDocument()).ToList();
-        allDocs.AddRange(linkDocs);
-        _allDocs = allDocs;
-
-        var docLinksNames = GetNames(docLinks);
-        //App.DocLinksAR = GetDocLinks(docLinks, "AR");
-        var docLinksNamesAR = GetNames(AppSettings.DocLinksAR);
-        //App.DocLinksKR = GetDocLinks(docLinks, "KR");
-        var docLinksNamesKR = GetNames(AppSettings.DocLinksKR);
-
-        var sourceDocLinksKRNames = docLinksNames.Except(docLinksNamesKR);
-        //var exchangeARItemsViewModel = new ExchangeItemsViewModel(docLinksNames, docLinksNamesAR);
-        //var checkDocsViewAR = new CheckDocsConfigView(exchangeARItemsViewModel);
-         var exchangeKRItemsViewModel = new ExchangeItemsViewModel(sourceDocLinksKRNames, docLinksNamesKR);
-        var checkDocsViewKR = new CheckDocsConfigView(exchangeKRItemsViewModel);
-        checkDocsViewKR.Closing += CheckDocsViewKR_Closing;
-      
-
-        var viewModel = new WallCheckerViewModel(AppSettings.WallIntersectionSettingsKR)
-        { Title = "КР" };      
-        var view = new WallIntersectionSettingsView(viewModel, checkDocsViewKR);
-
-        return Result.Succeeded;
+        var links = doc.GetLoadedLinks();    
 
         var logger = AppSettings.Logger;
         var messenger = AppSettings.Messenger;
@@ -82,6 +55,9 @@ public class ExternalCommand : IExternalCommand
         var linksAR = links;
         var linksKR = links;
 
+        var settingsAR = DocSettingsAR.GetInstance();
+        var settingsKR = DocSettingsKR.GetInstance();
+
         var checkServiceAR = GetCheckService(
             uiDoc,
             doc,
@@ -92,7 +68,7 @@ public class ExternalCommand : IExternalCommand
             trf,
             messenger,
             elementFilter,
-            AppSettings.WallIntersectionSettingsAR);
+            settingsAR.WallIntersectionSettings);
         if (!checkServiceAR.Initiate(mEPCurve)) { return Result.Failed; }
 
         var checkServiceKR = GetCheckService(
@@ -105,24 +81,11 @@ public class ExternalCommand : IExternalCommand
             trf,
             messenger,
             elementFilter,
-            AppSettings.WallIntersectionSettingsKR);
+            settingsKR.WallIntersectionSettings);
         checkServiceKR.Initiate(mEPCurve);
         if (!checkServiceKR.Initiate(mEPCurve)) { return Result.Failed; }
 
         return Result.Succeeded;
-    }
-
-    private void CheckDocsViewKR_Closing(object sender, EventArgs e)
-    {
-        var view = sender as CheckDocsConfigView;
-        if(view is null) { return; }
-
-        var targedNames = view.ConfigViewModel.ObservableTarget;
-
-        var allDocs = _allDocs.Where(d => targedNames.Any(n => d.Title == n));
-        AppSettings.DocLinksKR = ToDocLinks(allDocs, AppSettings.DocLinks.Item2);
-
-        return;
     }
 
     private static (Document, IEnumerable<RevitLinkInstance>) ToDocLinks(

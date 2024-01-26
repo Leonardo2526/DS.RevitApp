@@ -48,19 +48,27 @@ namespace DS.MEPCurveTraversability.Presenters
         public bool CheckEndPoints
         {
             get => _settings.CheckEndPoints;
-            set => _settings.CheckEndPoints = value;
+            set 
+            { 
+                _settings.CheckEndPoints = value; 
+                OnPropertyChanged(nameof(CheckEndPoints)); 
+            }
         }
 
         public bool CheckSolid
         {
             get => _settings.CheckSolid;
-            set => _settings.CheckSolid = value;
+            set { _settings.CheckSolid = value; 
+                OnPropertyChanged(nameof(CheckSolid)); }
         }
 
         public bool CheckNames
         {
             get => _settings.CheckNames;
-            set => _settings.CheckNames = value;
+            set {
+                _settings.CheckNames = value;
+                OnPropertyChanged(nameof(CheckNames));
+            }
         }
 
         public IEnumerable<string> ExcludeFields
@@ -91,7 +99,7 @@ namespace DS.MEPCurveTraversability.Presenters
             set
             {
                 _itemToAdd = value;
-                OnPropertyChanged(ItemToAdd);
+                OnPropertyChanged(nameof(ItemToAdd));
             }
 
         }
