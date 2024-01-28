@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
+    <Compile Include="MEPCurveValidatorSet.cs" />
     <Compile Include="RoomSettingsExternalCommand.cs" />
     <Compile Include="ShowARSettingsExternalCommand.cs" />
     <Compile Include="ShowKRSettingsExternalCommand.cs" />

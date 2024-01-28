@@ -13,23 +13,25 @@ using Rhino;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace DS.MEPCurveTraversability.Interactors
 {
-    internal class WallsChecker
+    internal class WallsChecker : IValidator<MEPCurve>
     {
         private readonly UIDocument _uiDoc;
         private readonly IEnumerable<RevitLinkInstance> _links;
         private readonly ITIntersectionFactory<Element, Solid> _intersectionFactory;
-        private readonly WallIntersectionSettings _intersectionSettings;
+        private readonly IWallIntersectionSettings _intersectionSettings;
         private readonly Document _doc;
 
         public WallsChecker(
             UIDocument uiDoc,
             IEnumerable<RevitLinkInstance> links,
             ITIntersectionFactory<Element, Solid> intersectionFactory, 
-            WallIntersectionSettings wallIntersectionSettings)
+            IWallIntersectionSettings wallIntersectionSettings)
         {
             _uiDoc = uiDoc;
             _links = links;
@@ -53,9 +55,12 @@ namespace DS.MEPCurveTraversability.Interactors
         /// </summary>
         public IWindowMessenger WindowMessenger { get; set; }
 
-        public bool Initiate(MEPCurve mEPCurve)
+        public IEnumerable<ValidationResult> ValidationResults => throw new NotImplementedException();
+     
+
+        public bool IsValid(MEPCurve item)
         {
-            var mEPCurveSolid = mEPCurve.Solid(_links);
+            var mEPCurveSolid = item.Solid(_links);
 
             //get collisions
             var collisions = new List<(Solid, Element)>();
@@ -63,7 +68,7 @@ namespace DS.MEPCurveTraversability.Interactors
             var interesectionWalls = interesections.OfType<Wall>();
             interesectionWalls.ForEach(e => collisions.Add((mEPCurveSolid, e)));
 
-            var filter = GetFilter(_doc, _links, mEPCurve, _intersectionSettings);
+            var filter = GetFilter(_doc, _links, item, _intersectionSettings);
             var isWallCollisions = collisions.SkipWhile(filter).Any(c => c.Item2 is Wall);
             if (isWallCollisions)
             {
@@ -79,7 +84,7 @@ namespace DS.MEPCurveTraversability.Interactors
             Document doc,
             IEnumerable<RevitLinkInstance> links,
             MEPCurve mEPCurve,
-             WallIntersectionSettings intersectionSettings)
+             IWallIntersectionSettings intersectionSettings)
         {
             var dir = mEPCurve.Direction().ToVector3d();
             var mEPCurveSolid = mEPCurve.GetSolidWithInsulation();

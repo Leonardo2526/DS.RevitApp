@@ -36,7 +36,7 @@ namespace DS.MEPCurveTraversability.Interactors.Settings
         public RoomTraversionSettings RoomTraversionSettings { get; } = new();
 
         public override IEnumerable<string> AutoDocsDetectionFields { get; set; } =
-            new List<string>() { "АР", "AR" };
+            new List<string>() { "АР", "AR", "Test" };
 
         #endregion
     }

@@ -23,12 +23,12 @@ namespace DS.MEPCurveTraversability.Interactors
     {
         private readonly Document _doc;
         private readonly IEnumerable<RevitLinkInstance> _links;
-        private readonly WallIntersectionSettings _wallIntersectionSettings;
+        private readonly IWallIntersectionSettings _wallIntersectionSettings;
 
         public WallRuleBuilder(
             Document doc,
             IEnumerable<RevitLinkInstance> links,
-            WallIntersectionSettings wallIntersectionSettings)
+            IWallIntersectionSettings wallIntersectionSettings)
         {
             _doc = doc;
             _links = links;

@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OLMP.RevitAPI.Core.Extensions;
 
 namespace DS.MEPCurveTraversability.Interactors
 {
@@ -21,29 +22,23 @@ namespace DS.MEPCurveTraversability.Interactors
     {
         private readonly UIDocument _uiDoc;
         private readonly Document _doc;
-        private readonly IEnumerable<RevitLinkInstance> _links;
+        private readonly IEnumerable<RevitLinkInstance> _allDoclinks;
         private readonly IElementMultiFilter _elementMultiFilter;
-        private readonly ITIntersectionFactory<Element, Solid> _intersectionFactory;
-        private readonly WallIntersectionSettings _intersectionSettings;
-        private readonly IRoomTraversionSettings _roomTraversionSettings;
+        private readonly DocSettingsAR _settingsAR;
         bool checkRooms = true;
 
 
         public TraversabilityService(
             UIDocument uiDoc,
-            IEnumerable<RevitLinkInstance> links,
+            IEnumerable<RevitLinkInstance> allDocLinks,
             IElementMultiFilter elementMultiFilter,
-            ITIntersectionFactory<Element, Solid> intersectionFactory,
-            WallIntersectionSettings intersectionSettings, 
-            IRoomTraversionSettings roomTraversionSettings = null)
+            DocSettingsAR settingsAR)
         {
             _uiDoc = uiDoc;
             _doc = uiDoc.Document;
-            _links = links;
+            _allDoclinks = allDocLinks;
             _elementMultiFilter = elementMultiFilter;
-            _intersectionFactory = intersectionFactory;
-            _intersectionSettings = intersectionSettings;
-            _roomTraversionSettings = roomTraversionSettings;
+            _settingsAR = settingsAR;
         }
 
         /// <summary>
@@ -64,14 +59,22 @@ namespace DS.MEPCurveTraversability.Interactors
 
         public bool Initiate(MEPCurve mEPCurve)
         {
+
+            var solidIntersectionFactory = GetSolidIntersectionFactory(
+                _doc,
+                _allDoclinks,
+                _settingsAR,
+                _elementMultiFilter,
+                Logger);
+
             if (checkRooms)
             {
-                var solidRoomIntersectFactory = new SolidRoomIntersectionFactory(_doc, _links, _elementMultiFilter)
+                var solidRoomIntersectFactory = new SolidRoomIntersectionFactory(_doc, _allDoclinks, _elementMultiFilter)
                 { Logger = Logger, TransactionFactory = null };
                 var roomCheker = new RoomChecker(
-                    _uiDoc, _links,
+                    _uiDoc, _allDoclinks,
                     _elementMultiFilter,
-                    _intersectionFactory,
+                    solidIntersectionFactory,
                     solidRoomIntersectFactory)
                 {
                     Logger = Logger,
@@ -82,14 +85,34 @@ namespace DS.MEPCurveTraversability.Interactors
                 if (!roomCheker) { return false; }
             }
 
-           var wallChecker = new WallsChecker(_uiDoc, _links, _intersectionFactory, _intersectionSettings)
+           var wallChecker = new WallsChecker(
+               _uiDoc,
+               _allDoclinks,
+               solidIntersectionFactory,
+               _settingsAR.WallIntersectionSettings)
             {
                 Logger = Logger,
                 //TransactionFactory = trf,
                 WindowMessenger = WindowMessenger
 
             };
-            return wallChecker.Initiate(mEPCurve);
+            return wallChecker.IsValid(mEPCurve);
+        }
+
+        private ITIntersectionFactory<Element, Solid> GetSolidIntersectionFactory(
+            Document activeDoc,
+            IEnumerable<RevitLinkInstance> allDocLinks, 
+            DocSettingsBase baseSettings, 
+            IElementMultiFilter serviceElementFilter, 
+            ILogger logger= null, 
+            ITransactionFactory transactionFactory = null)
+        {
+            var settingsDoc = baseSettings.Docs.FirstOrDefault(d => !d.IsLinked);
+            var settingsLinks = baseSettings.Docs.Select(d => d.TryGetLink(allDocLinks)).Where(l => l != null);
+            var elementFilterAR = new ElementMutliFilter(settingsDoc, settingsLinks);
+
+            return new SolidElementIntersectionFactory(activeDoc, serviceElementFilter)
+            { Logger = logger, TransactionFactory = transactionFactory };
         }
     }
 }

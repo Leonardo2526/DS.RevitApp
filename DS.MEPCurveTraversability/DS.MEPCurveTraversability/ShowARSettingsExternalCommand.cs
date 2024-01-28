@@ -41,7 +41,7 @@ public class ShowARSettingsExternalCommand : IExternalCommand
 
         _settings = DocSettingsAR.GetInstance();
         _settings.AutoDocsDetectionFields = new List<string>() {"Тест" };
-        _settings.TryUpdateDocs((doc, links));
+        _settings.TryUpdateDocs(doc, links);
 
         var targetDocNames = _settings.Docs.Select(d => d.Title);
 

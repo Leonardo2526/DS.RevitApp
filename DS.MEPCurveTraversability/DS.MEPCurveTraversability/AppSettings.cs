@@ -35,8 +35,6 @@ namespace DS.MEPCurveTraversability
 
         public static IWindowMessenger Messenger { get; } = new TaskDialogMessenger();
 
-        public static (Document, IEnumerable<RevitLinkInstance>) DocLinks { get; set; }          
-
         public static AppSettings GetInstance()
         {
             return _instance.Value;

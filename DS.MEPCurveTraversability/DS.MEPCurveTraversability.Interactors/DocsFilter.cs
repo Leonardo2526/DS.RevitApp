@@ -12,11 +12,10 @@ namespace DS.MEPCurveTraversability.Interactors
     public static class DocsFilter
     {
         public static IEnumerable<Document> FilterByLastFolderName(
-           (Document, IEnumerable<RevitLinkInstance>) allDocLinks,
+           Document activeDoc, IEnumerable<RevitLinkInstance> allDocLinks,
            IEnumerable<string> detectionFields)
         {
-            var allLinks = allDocLinks.Item2;
-            var allDocs = allDocLinks.Item1.GetDocuments(allLinks);
+            var allDocs = activeDoc.GetDocuments(allDocLinks);
 
             if (detectionFields == null || detectionFields.Count() == 0) { return allDocs; }
 

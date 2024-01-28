@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<DirectedGraph DataVirtualized="True" GraphDirection="TopToBottom" Layout="Sugiyama" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+<DirectedGraph ButterflyMode="True" DataVirtualized="True" GraphDirection="LeftToRight" Layout="Sugiyama" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
   <Nodes>
     <Node Id="@10" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="System.Diagnostics.DiagnosticSource, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" DelayedChildNodesState="NotFetched" FilePath="D:\Repository\Olimproekt\MEPAutoCoordination\packages\System.Diagnostics.DiagnosticSource.7.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll" Group="Collapsed" Label="System.Diagnostics.DiagnosticSource.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
@@ -7,7 +7,7 @@
     <Node Id="@100" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" DelayedChildNodesState="NotFetched" FilePath="D:\Repository\Olimproekt\MEPAutoCoordination\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll" Group="Collapsed" Label="System.Memory.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="@102" Category="CodeSchema_Assembly" Bounds="290.080935122386,-95.6250187500001,215.416666666667,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="NotFetched" ErrorMessage="Unreferenced node detected:DS.MEPCurveTraversability.dll ((Assembly=file:///D:/Repository/DS.RevitApp.Plugins/DS.MEPCurveTraversability/DS.MEPCurveTraversability/bin/Debug/DS.MEPCurveTraversability.dll))" FilePath="$(4d8af1cb-3a75-4567-81ac-10d94c2b74b2.OutputPath)" Group="Collapsed" IsUnreferenced="True" Label="DS.MEPCurveTraversability.dll">
+    <Node Id="@102" Category="CodeSchema_Assembly" Bounds="0,112,215.416666666667,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="NotFetched" ErrorMessage="Unreferenced node detected:DS.MEPCurveTraversability.dll ((Assembly=file:///D:/Repository/DS.RevitApp.Plugins/DS.MEPCurveTraversability/DS.MEPCurveTraversability/bin/Debug/DS.MEPCurveTraversability.dll))" FilePath="$(4d8af1cb-3a75-4567-81ac-10d94c2b74b2.OutputPath)" Group="Collapsed" IsUnreferenced="True" Label="DS.MEPCurveTraversability.dll" NeighborhoodCenter="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
     <Node Id="@104" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DelayedChildNodesState="NotFetched" FilePath="$(VsSolution)\DS.MEPCurveTraversability.UI\bin\Debug\System.Windows.Interactivity.dll" Group="Collapsed" Label="System.Windows.Interactivity.dll" UseManualLocation="True">
@@ -16,9 +16,9 @@
     <Node Id="@106" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="QuickGraph.Graphviz, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3" DelayedChildNodesState="NotFetched" FilePath="D:\Repository\DS.RevitLib.Utils\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Graphviz.dll" Group="Collapsed" Label="QuickGraph.Graphviz.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="@107" Category="CodeSchema_Namespace" Bounds="271.001789968823,219.37498125,256.05,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="DS‎.MEPCurveTraversability‎.Interactors" />
-    <Node Id="@108" Category="CodeSchema_Namespace" Bounds="298.215123302157,164.37498125,180.223333333333,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Microsoft‎.CodeAnalysis" />
-    <Node Id="@109" Category="CodeSchema_Namespace" Bounds="271.001789968823,109.37498125,234.65,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" ErrorMessage="Unreferenced node detected:System‎.Runtime‎.CompilerServices ((Assembly=file:///D:/Repository/DS.RevitApp.Plugins/DS.MEPCurveTraversability/DS.MEPCurveTraversability.Interactors/bin/Debug/DS.MEPCurveTraversability.Interactors.dll Namespace=System.Runtime.CompilerServices))" Group="Collapsed" IsUnreferenced="True" Label="System‎.Runtime‎.CompilerServices" />
+    <Node Id="@107" Category="CodeSchema_Namespace" Bounds="1140.05228670962,112.05651954687,256.05,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="DS‎.MEPCurveTraversability‎.Interactors" UseManualLocation="True" />
+    <Node Id="@108" Category="CodeSchema_Namespace" Bounds="298.215123302157,164.37498125,180.223333333333,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" ErrorMessage="Unreferenced node detected:Microsoft‎.CodeAnalysis ((Assembly=file:///D:/Repository/DS.RevitApp.Plugins/DS.MEPCurveTraversability/DS.MEPCurveTraversability.Interactors/bin/Debug/DS.MEPCurveTraversability.Interactors.dll Namespace=Microsoft.CodeAnalysis))" Group="Collapsed" IsUnreferenced="True" Label="Microsoft‎.CodeAnalysis" UseManualLocation="True" Visibility="Hidden" />
+    <Node Id="@109" Category="CodeSchema_Namespace" Bounds="271.001789968823,109.37498125,234.65,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" ErrorMessage="Unreferenced node detected:System‎.Runtime‎.CompilerServices ((Assembly=file:///D:/Repository/DS.RevitApp.Plugins/DS.MEPCurveTraversability/DS.MEPCurveTraversability.Interactors/bin/Debug/DS.MEPCurveTraversability.Interactors.dll Namespace=System.Runtime.CompilerServices))" Group="Collapsed" IsUnreferenced="True" Label="System‎.Runtime‎.CompilerServices" UseManualLocation="True" Visibility="Hidden" />
     <Node Id="@12" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" DelayedChildNodesState="NotFetched" FilePath="D:\Repository\Olimproekt\MEPAutoCoordination\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll" Group="Collapsed" Label="System.Runtime.CompilerServices.Unsafe.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
@@ -28,7 +28,7 @@
     <Node Id="@16" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" DelayedChildNodesState="NotFetched" FilePath="$(ProgramFiles) (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Core.dll" Group="Collapsed" Label="System.Core.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="@18" Category="CodeSchema_Assembly" Bounds="303.310040637909,294.37498125,242.926666666667,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="NotFetched" FilePath="$(d3858153-a4ee-40bc-a40b-7aa657996d72.OutputPath)" Group="Collapsed" Label="DS.MEPCurveTraversability.Core.dll">
+    <Node Id="@18" Category="CodeSchema_Assembly" Bounds="549.946666666667,56,242.926666666667,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="NotFetched" FilePath="$(d3858153-a4ee-40bc-a40b-7aa657996d72.OutputPath)" Group="Collapsed" Label="DS.MEPCurveTraversability.Core.dll">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
     <Node Id="@2" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="QuickGraph.Data, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="NotFetched" FilePath="D:\Repository\DS.RevitLib.Utils\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Data.dll" Group="Collapsed" Label="QuickGraph.Data.dll" UseManualLocation="True">
@@ -61,7 +61,7 @@
     <Node Id="@36" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="OLMP.RevitAPI.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="NotFetched" FilePath="D:\Repository\OLMP.RevitAPI\OLMP.RevitAPI.UI\bin\Debug\OLMP.RevitAPI.UI.dll" Group="Collapsed" Label="OLMP.RevitAPI.UI.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="@38" Category="CodeSchema_Assembly" Bounds="282.725404843867,-40.6250187500002,229.453333333333,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="NotFetched" FilePath="$(12da88a7-c723-438c-a2be-5bf3b6f07ee1.OutputPath)" Group="Collapsed" Label="DS.MEPCurveTraversability.UI.dll">
+    <Node Id="@38" Category="CodeSchema_Assembly" Bounds="267.955,279,229.453333333333,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="NotFetched" FilePath="$(12da88a7-c723-438c-a2be-5bf3b6f07ee1.OutputPath)" Group="Collapsed" Label="DS.MEPCurveTraversability.UI.dll">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
     <Node Id="@4" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" DelayedChildNodesState="NotFetched" FilePath="$(ProgramFiles) (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Data.dll" Group="Collapsed" Label="System.Data.dll" UseManualLocation="True">
@@ -127,13 +127,13 @@
     <Node Id="@76" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="iUtils, Version=2.4.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="NotFetched" FilePath="D:\Repository\VAR.RevitLib.Utils\iUtils\bin\Debug\iUtils.dll" Group="Collapsed" Label="iUtils.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="@78" Category="CodeSchema_Assembly" Bounds="308.265474564264,404.37498125,177.776666666667,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="NotFetched" FilePath="$(97d2548b-ba7f-4c31-8f52-6bf929e0c37b.OutputPath)" Group="Collapsed" Label="DS.ClassLib.VarUtils.dll">
+    <Node Id="@78" Category="CodeSchema_Assembly" Bounds="293.793333333333,224,177.776666666667,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="NotFetched" FilePath="$(97d2548b-ba7f-4c31-8f52-6bf929e0c37b.OutputPath)" Group="Collapsed" Label="DS.ClassLib.VarUtils.dll">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
     <Node Id="@8" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="Revit.Async, Version=2.0.1.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="NotFetched" FilePath="D:\Repository\OLMP.RevitAPI\packages\Revit.Async.2.0.1\lib\net45\Revit.Async.dll" Group="Collapsed" Label="Revit.Async.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="@80" Category="CodeSchema_Assembly" Bounds="302.174735248452,349.37498125,183.526666666667,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="NotFetched" FilePath="$(698a89cb-1b8a-46f5-9e67-8820c37c1ed5.OutputPath)" Group="Collapsed" Label="OLMP.RevitAPI.Tools.dll">
+    <Node Id="@80" Category="CodeSchema_Assembly" Bounds="290.918333333333,168,183.526666666667,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="NotFetched" FilePath="$(698a89cb-1b8a-46f5-9e67-8820c37c1ed5.OutputPath)" Group="Collapsed" Label="OLMP.RevitAPI.Tools.dll">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
     <Node Id="@82" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" DelayedChildNodesState="NotFetched" FilePath="$(ProgramFiles) (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Windows.Forms.dll" Group="Collapsed" Label="System.Windows.Forms.dll" UseManualLocation="True">
@@ -148,13 +148,13 @@
     <Node Id="@88" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" DelayedChildNodesState="NotFetched" FilePath="D:\Repository\Olimproekt\MEPAutoCoordination\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll" Group="Collapsed" Label="System.Buffers.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="@90" Category="CodeSchema_Assembly" Bounds="264.633690537524,14.3749812499998,272.956666666667,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="NotFetched" FilePath="$(adbccd01-0c09-4853-9d9b-12733d809962.OutputPath)" Group="Collapsed" Label="DS.MEPCurveTraversability.Presenters.dll">
+    <Node Id="@90" Category="CodeSchema_Assembly" Bounds="246.203333333333,112,272.956666666667,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="NotFetched" FilePath="$(adbccd01-0c09-4853-9d9b-12733d809962.OutputPath)" Group="Collapsed" Label="DS.MEPCurveTraversability.Presenters.dll">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
     <Node Id="@92" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" DelayedChildNodesState="NotFetched" FilePath="$(VsSolution)\DS.MEPCurveTraversability.UI\bin\Debug\Microsoft.Xaml.Behaviors.dll" Group="Collapsed" Label="Microsoft.Xaml.Behaviors.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="@94" Category="CodeSchema_Assembly" Bounds="251.001789968823,69.3749812499998,296.05,195" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="NotFetched" FetchedChildrenCount="3" FilePath="$(00786d46-f05f-4f40-9fdf-25d3a9437649.OutputPath)" Group="Expanded" Label="DS.MEPCurveTraversability.Interactors.dll" UseManualLocation="True">
+    <Node Id="@94" Category="CodeSchema_Assembly" Bounds="245.416666666667,56,274.53,25" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="NotFetched" FetchedChildrenCount="3" FilePath="$(00786d46-f05f-4f40-9fdf-25d3a9437649.OutputPath)" Group="Collapsed" Label="DS.MEPCurveTraversability.Interactors.dll">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
     <Node Id="@96" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" DelayedChildNodesState="NotFetched" FilePath="D:\Repository\Olimproekt\MEPAutoCoordination\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll" Group="Collapsed" Label="System.Numerics.Vectors.dll" UseManualLocation="True">
@@ -163,12 +163,12 @@
     <Node Id="@98" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="ControlzEx, Version=3.0.2.4, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="NotFetched" FilePath="$(VsSolution)\DS.MEPCurveTraversability.UI\bin\Debug\ControlzEx.dll" Group="Collapsed" Label="ControlzEx.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="_standardGraphExternalsGroup" Category="Externals" Bounds="356.072929076772,459.37498125,86.9900000000002,25" Group="Collapsed" Label="Externals" LayoutSettings="List" />
+    <Node Id="_standardGraphExternalsGroup" Category="Externals" Bounds="339.186666666667,0,86.9900000000002,25" Group="Collapsed" Label="Externals" LayoutSettings="List" />
   </Nodes>
   <Links>
     <Link Source="@102" Target="@10" Category="CodeMap_ExternalReference" />
     <Link Source="@102" Target="@100" Category="CodeMap_ExternalReference" />
-    <Link Source="@102" Target="@107" Category="References" Bounds="397.838376372589,-70.6255298610976,1.1039482520714,281.000580564013" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="16">
+    <Link Source="@102" Target="@107" Category="References" Bounds="768.302091951673,-105.533092644292,464.448863058877,213.825855914279" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="16">
       <Category Ref="CodeSchema_Calls" />
       <Category Ref="CodeSchema_ReturnTypeLink" />
     </Link>
@@ -179,7 +179,7 @@
     <Link Source="@102" Target="@30" Category="CodeMap_ExternalReference" />
     <Link Source="@102" Target="@34" Category="CodeMap_ExternalReference" />
     <Link Source="@102" Target="@36" Category="CodeMap_ExternalReference" />
-    <Link Source="@102" Target="@38" Category="CodeMap_ProjectReference" Bounds="397.583883824871,-70.6250187500001,0.1287489614881,21.0001691383754" />
+    <Link Source="@102" Target="@38" Category="CodeMap_ProjectReference" Bounds="124.401039123535,137,212.891502380371,139.109985351563" />
     <Link Source="@102" Target="@4" Category="CodeMap_ExternalReference" />
     <Link Source="@102" Target="@40" Category="CodeMap_ExternalReference" />
     <Link Source="@102" Target="@46" Category="CodeMap_ExternalReference" />
@@ -191,47 +191,47 @@
     <Link Source="@102" Target="@64" Category="CodeMap_ExternalReference" />
     <Link Source="@102" Target="@66" Category="CodeMap_ExternalReference" />
     <Link Source="@102" Target="@72" Category="CodeMap_ExternalReference" />
-    <Link Source="@102" Target="@78" Category="CodeMap_ProjectReference" Bounds="432.241638183594,-70.6250152587891,120.766662597656,471.210189819336" />
-    <Link Source="@102" Target="@80" Category="CodeMap_ProjectReference" Bounds="240.867614746094,-70.6250152587891,108.568939208984,417.241928100586" />
+    <Link Source="@102" Target="@78" Category="CodeMap_ProjectReference" Bounds="138.397323608398,137,205.260238647461,83.6050109863281" />
+    <Link Source="@102" Target="@80" Category="CodeMap_ProjectReference" Bounds="169.086303710938,137,143.398406982422,29.2039642333984" />
     <Link Source="@102" Target="@84" Category="CodeMap_ExternalReference" />
     <Link Source="@102" Target="@86" Category="CodeMap_ExternalReference" />
     <Link Source="@102" Target="@88" Category="CodeMap_ExternalReference" />
-    <Link Source="@102" Target="@90" Category="CodeMap_ProjectReference" Bounds="445.881530761719,-70.6250152587891,76.431396484375,82.6762247085571" />
+    <Link Source="@102" Target="@90" Category="CodeMap_ProjectReference" Bounds="215.41667175293,124.5,21.7866668701172,0" />
     <Link Source="@102" Target="@94" Category="CodeMap_ProjectReference" Bounds="136.647583007813,-79.4270095825195,93.3971405029297,134.210971832275" />
     <Link Source="@102" Target="@96" Category="CodeMap_ExternalReference" />
-    <Link Source="@107" Target="@16" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="6" />
+    <Link Source="@107" Target="@16" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Visibility="Hidden" Weight="6" />
     <Link Source="@107" Target="@18" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="8" />
-    <Link Source="@107" Target="@28" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="18">
+    <Link Source="@107" Target="@28" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Visibility="Hidden" Weight="18">
       <Category Ref="CodeSchema_Calls" />
       <Category Ref="CodeSchema_ReturnTypeLink" />
     </Link>
-    <Link Source="@107" Target="@34" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="138">
+    <Link Source="@107" Target="@34" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Visibility="Hidden" Weight="138">
       <Category Ref="CodeSchema_Calls" />
     </Link>
-    <Link Source="@107" Target="@40" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="9">
+    <Link Source="@107" Target="@40" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Visibility="Hidden" Weight="9">
       <Category Ref="CodeSchema_Calls" />
     </Link>
-    <Link Source="@107" Target="@50" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="5">
+    <Link Source="@107" Target="@50" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Visibility="Hidden" Weight="5">
       <Category Ref="CodeSchema_Calls" />
     </Link>
-    <Link Source="@107" Target="@6" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="286">
+    <Link Source="@107" Target="@6" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Visibility="Hidden" Weight="286">
       <Category Ref="CodeSchema_AttributeUse" />
       <Category Ref="CodeSchema_Calls" />
       <Category Ref="CodeSchema_FieldRead" />
       <Category Ref="CodeSchema_FunctionPointer" />
       <Category Ref="CodeSchema_ReturnTypeLink" />
     </Link>
-    <Link Source="@107" Target="@66" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
-    <Link Source="@107" Target="@78" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="28">
+    <Link Source="@107" Target="@66" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Visibility="Hidden" Weight="1" />
+    <Link Source="@107" Target="@78" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Visibility="Hidden" Weight="28">
       <Category Ref="CodeSchema_Calls" />
       <Category Ref="CodeSchema_ReturnTypeLink" />
     </Link>
-    <Link Source="@107" Target="@80" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="78">
+    <Link Source="@107" Target="@80" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Visibility="Hidden" Weight="78">
       <Category Ref="CodeSchema_Calls" />
       <Category Ref="CodeSchema_FunctionPointer" />
       <Category Ref="CodeSchema_ReturnTypeLink" />
     </Link>
-    <Link Source="@107" Target="@86" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="6">
+    <Link Source="@107" Target="@86" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Visibility="Hidden" Weight="6">
       <Category Ref="CodeSchema_FunctionPointer" />
     </Link>
     <Link Source="@108" Target="@6" Category="InheritsFrom" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="3">
@@ -244,158 +244,158 @@
       <Category Ref="CodeSchema_Calls" />
       <Category Ref="InheritsFrom" />
     </Link>
-    <Link Source="@18" Target="@16" Category="CodeMap_ExternalReference" />
-    <Link Source="@18" Target="@28" Category="CodeMap_ExternalReference" />
-    <Link Source="@18" Target="@30" Category="CodeMap_ExternalReference" />
-    <Link Source="@18" Target="@34" Category="CodeMap_ExternalReference" />
-    <Link Source="@18" Target="@4" Category="CodeMap_ExternalReference" />
-    <Link Source="@18" Target="@40" Category="CodeMap_ExternalReference" />
-    <Link Source="@18" Target="@46" Category="CodeMap_ExternalReference" />
-    <Link Source="@18" Target="@50" Category="CodeMap_ExternalReference" />
-    <Link Source="@18" Target="@52" Category="CodeMap_ExternalReference" />
-    <Link Source="@18" Target="@6" Category="CodeMap_ExternalReference" />
-    <Link Source="@18" Target="@60" Category="CodeMap_ExternalReference" />
-    <Link Source="@18" Target="@62" Category="CodeMap_ExternalReference" />
-    <Link Source="@18" Target="@64" Category="CodeMap_ExternalReference" />
-    <Link Source="@18" Target="@66" Category="CodeMap_ExternalReference" />
-    <Link Source="@18" Target="@78" Category="CodeMap_ProjectReference" Bounds="443.814971923828,319.374969482422,52.0205993652344,82.1875610351563" />
-    <Link Source="@18" Target="@80" Category="CodeMap_ProjectReference" Bounds="405.347358582503,319.37498125,12.4179914365905,22.1495950951735" />
-    <Link Source="@18" Target="@84" Category="CodeMap_ExternalReference" />
-    <Link Source="@18" Target="@86" Category="CodeMap_ExternalReference" />
+    <Link Source="@18" Target="@16" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@18" Target="@28" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@18" Target="@30" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@18" Target="@34" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@18" Target="@4" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@18" Target="@40" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@18" Target="@46" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@18" Target="@50" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@18" Target="@52" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@18" Target="@6" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@18" Target="@60" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@18" Target="@62" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@18" Target="@64" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@18" Target="@66" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@18" Target="@78" Category="CodeMap_ProjectReference" Bounds="443.814910888672,319.375183105469,52.0207214355469,82.187744140625" Visibility="Hidden" />
+    <Link Source="@18" Target="@80" Category="CodeMap_ProjectReference" Bounds="405.347339752119,319.375170138902,12.4180230088129,22.149691681683" Visibility="Hidden" />
+    <Link Source="@18" Target="@84" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@18" Target="@86" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@38" Target="@104" Category="CodeMap_ExternalReference" />
     <Link Source="@38" Target="@106" Category="CodeMap_ExternalReference" />
-    <Link Source="@38" Target="@16" Category="CodeMap_ExternalReference" />
+    <Link Source="@38" Target="@16" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@38" Target="@2" Category="CodeMap_ExternalReference" />
-    <Link Source="@38" Target="@20" Category="CodeMap_ExternalReference" />
+    <Link Source="@38" Target="@20" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@38" Target="@22" Category="CodeMap_ExternalReference" />
     <Link Source="@38" Target="@26" Category="CodeMap_ExternalReference" />
-    <Link Source="@38" Target="@28" Category="CodeMap_ExternalReference" />
+    <Link Source="@38" Target="@28" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@38" Target="@32" Category="CodeMap_ExternalReference" />
-    <Link Source="@38" Target="@34" Category="CodeMap_ExternalReference" />
-    <Link Source="@38" Target="@4" Category="CodeMap_ExternalReference" />
-    <Link Source="@38" Target="@40" Category="CodeMap_ExternalReference" />
+    <Link Source="@38" Target="@34" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@38" Target="@4" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@38" Target="@40" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@38" Target="@42" Category="CodeMap_ExternalReference" />
     <Link Source="@38" Target="@44" Category="CodeMap_ExternalReference" />
-    <Link Source="@38" Target="@46" Category="CodeMap_ExternalReference" />
+    <Link Source="@38" Target="@46" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@38" Target="@48" Category="CodeMap_ExternalReference" />
-    <Link Source="@38" Target="@52" Category="CodeMap_ExternalReference" />
+    <Link Source="@38" Target="@52" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@38" Target="@54" Category="CodeMap_ExternalReference" />
     <Link Source="@38" Target="@56" Category="CodeMap_ExternalReference" />
     <Link Source="@38" Target="@58" Category="CodeMap_ExternalReference" />
-    <Link Source="@38" Target="@6" Category="CodeMap_ExternalReference" />
-    <Link Source="@38" Target="@60" Category="CodeMap_ExternalReference" />
-    <Link Source="@38" Target="@62" Category="CodeMap_ExternalReference" />
-    <Link Source="@38" Target="@64" Category="CodeMap_ExternalReference" />
+    <Link Source="@38" Target="@6" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@38" Target="@60" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@38" Target="@62" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@38" Target="@64" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@38" Target="@74" Category="CodeMap_ExternalReference" />
-    <Link Source="@38" Target="@78" Category="CodeMap_ExternalReference" Bounds="240.867614746094,-15.6250190734863,101.374755859375,417.99019241333" />
+    <Link Source="@38" Target="@78" Category="CodeMap_ExternalReference" Bounds="240.867538452148,-15.6254301071167,101.374923706055,417.990969657898" Visibility="Hidden" />
     <Link Source="@38" Target="@8" Category="CodeMap_ExternalReference" />
-    <Link Source="@38" Target="@80" Category="CodeMap_ProjectReference" Bounds="240.867614746094,-15.6250190734863,105.588104248047,362.241931915283" />
+    <Link Source="@38" Target="@80" Category="CodeMap_ProjectReference" Bounds="240.867538452148,-15.6254301071167,105.588272094727,362.242617607117" Visibility="Hidden" />
     <Link Source="@38" Target="@82" Category="CodeMap_ExternalReference" />
-    <Link Source="@38" Target="@84" Category="CodeMap_ExternalReference" />
-    <Link Source="@38" Target="@90" Category="CodeMap_ProjectReference" Bounds="398.283878865152,-15.6250187500002,1.39875799008803,21.0198608836632" />
+    <Link Source="@38" Target="@84" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@38" Target="@90" Category="CodeMap_ProjectReference" Bounds="398.283877352778,-15.6254298610976,1.39876209655296,21.0199608116809" Visibility="Hidden" />
     <Link Source="@38" Target="@92" Category="CodeMap_ExternalReference" />
     <Link Source="@38" Target="@98" Category="CodeMap_ExternalReference" />
-    <Link Source="@78" Target="@10" Category="CodeMap_ExternalReference" />
-    <Link Source="@78" Target="@100" Category="CodeMap_ExternalReference" />
+    <Link Source="@78" Target="@10" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@78" Target="@100" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@78" Target="@106" Category="CodeMap_ExternalReference" />
-    <Link Source="@78" Target="@12" Category="CodeMap_ExternalReference" />
+    <Link Source="@78" Target="@12" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@78" Target="@14" Category="CodeMap_ExternalReference" />
-    <Link Source="@78" Target="@16" Category="CodeMap_ExternalReference" />
+    <Link Source="@78" Target="@16" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@78" Target="@2" Category="CodeMap_ExternalReference" />
-    <Link Source="@78" Target="@20" Category="CodeMap_ExternalReference" />
-    <Link Source="@78" Target="@28" Category="CodeMap_ExternalReference" />
+    <Link Source="@78" Target="@20" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@78" Target="@28" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@78" Target="@32" Category="CodeMap_ExternalReference" />
-    <Link Source="@78" Target="@4" Category="CodeMap_ExternalReference" />
+    <Link Source="@78" Target="@4" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@78" Target="@42" Category="CodeMap_ExternalReference" />
-    <Link Source="@78" Target="@46" Category="CodeMap_ExternalReference" />
+    <Link Source="@78" Target="@46" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@78" Target="@48" Category="CodeMap_ExternalReference" />
-    <Link Source="@78" Target="@52" Category="CodeMap_ExternalReference" />
+    <Link Source="@78" Target="@52" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@78" Target="@56" Category="CodeMap_ExternalReference" />
-    <Link Source="@78" Target="@6" Category="CodeMap_ExternalReference" />
-    <Link Source="@78" Target="@60" Category="CodeMap_ExternalReference" />
-    <Link Source="@78" Target="@62" Category="CodeMap_ExternalReference" />
-    <Link Source="@78" Target="@64" Category="CodeMap_ExternalReference" />
+    <Link Source="@78" Target="@6" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@78" Target="@60" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@78" Target="@62" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@78" Target="@64" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@78" Target="@70" Category="CodeMap_ExternalReference" />
-    <Link Source="@78" Target="@72" Category="CodeMap_ExternalReference" />
+    <Link Source="@78" Target="@72" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@78" Target="@74" Category="CodeMap_ExternalReference" />
-    <Link Source="@78" Target="@84" Category="CodeMap_ExternalReference" />
-    <Link Source="@78" Target="@86" Category="CodeMap_ExternalReference" />
-    <Link Source="@78" Target="@88" Category="CodeMap_ExternalReference" />
-    <Link Source="@78" Target="@96" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@10" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@100" Category="CodeMap_ExternalReference" />
+    <Link Source="@78" Target="@84" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@78" Target="@86" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@78" Target="@88" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@78" Target="@96" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@80" Target="@10" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@80" Target="@100" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@80" Target="@106" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@12" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@16" Category="CodeMap_ExternalReference" />
+    <Link Source="@80" Target="@12" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@80" Target="@16" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@80" Target="@2" Category="CodeMap_ExternalReference" />
     <Link Source="@80" Target="@22" Category="CodeMap_ExternalReference" />
     <Link Source="@80" Target="@24" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@28" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@30" Category="CodeMap_ExternalReference" />
+    <Link Source="@80" Target="@28" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@80" Target="@30" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@80" Target="@32" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@34" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@4" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@40" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@46" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@50" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@52" Category="CodeMap_ExternalReference" />
+    <Link Source="@80" Target="@34" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@80" Target="@4" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@80" Target="@40" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@80" Target="@46" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@80" Target="@50" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@80" Target="@52" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@80" Target="@56" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@6" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@60" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@62" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@64" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@66" Category="CodeMap_ExternalReference" />
+    <Link Source="@80" Target="@6" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@80" Target="@60" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@80" Target="@62" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@80" Target="@64" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@80" Target="@66" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@80" Target="@68" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@72" Category="CodeMap_ExternalReference" />
+    <Link Source="@80" Target="@72" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@80" Target="@74" Category="CodeMap_ExternalReference" />
     <Link Source="@80" Target="@76" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@78" Category="CodeMap_ExternalReference" Bounds="394.668918426289,374.37498125,1.22872486842141,21.0153439462255" />
+    <Link Source="@80" Target="@78" Category="CodeMap_ExternalReference" Bounds="394.668917097473,374.375270138902,1.22872847791467,21.0154438905723" Visibility="Hidden" />
     <Link Source="@80" Target="@8" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@84" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@86" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@88" Category="CodeMap_ExternalReference" />
-    <Link Source="@80" Target="@96" Category="CodeMap_ExternalReference" />
-    <Link Source="@90" Target="@107" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="15">
+    <Link Source="@80" Target="@84" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@80" Target="@86" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@80" Target="@88" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@80" Target="@96" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@90" Target="@107" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Visibility="Hidden" Weight="15">
       <Category Ref="CodeSchema_Calls" />
       <Category Ref="Implements" />
     </Link>
-    <Link Source="@90" Target="@16" Category="CodeMap_ExternalReference" />
-    <Link Source="@90" Target="@34" Category="CodeMap_ExternalReference" />
-    <Link Source="@90" Target="@4" Category="CodeMap_ExternalReference" />
-    <Link Source="@90" Target="@40" Category="CodeMap_ExternalReference" />
-    <Link Source="@90" Target="@46" Category="CodeMap_ExternalReference" />
-    <Link Source="@90" Target="@50" Category="CodeMap_ExternalReference" />
-    <Link Source="@90" Target="@52" Category="CodeMap_ExternalReference" />
-    <Link Source="@90" Target="@6" Category="CodeMap_ExternalReference" />
-    <Link Source="@90" Target="@60" Category="CodeMap_ExternalReference" />
-    <Link Source="@90" Target="@62" Category="CodeMap_ExternalReference" />
-    <Link Source="@90" Target="@64" Category="CodeMap_ExternalReference" />
-    <Link Source="@90" Target="@84" Category="CodeMap_ExternalReference" />
-    <Link Source="@90" Target="@94" Category="CodeMap_ProjectReference" Bounds="281.34694243884,30.5729871817285,0.328238367112988,21.001099075669" />
+    <Link Source="@90" Target="@16" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@90" Target="@34" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@90" Target="@4" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@90" Target="@40" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@90" Target="@46" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@90" Target="@50" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@90" Target="@52" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@90" Target="@6" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@90" Target="@60" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@90" Target="@62" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@90" Target="@64" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@90" Target="@84" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@90" Target="@94" Category="CodeMap_ProjectReference" Bounds="281.34694243884,30.5729871817285,0.328238367112988,21.001099075669" Visibility="Hidden" />
     <Link Source="@94" Target="@107" Category="Contains" FetchingParent="@94" />
     <Link Source="@94" Target="@108" Category="Contains" FetchingParent="@94" />
     <Link Source="@94" Target="@109" Category="Contains" FetchingParent="@94" IsTargetVirtualized="True" Weight="1">
       <Category Ref="CodeSchema_AttributeUse" />
     </Link>
-    <Link Source="@94" Target="@16" Category="CodeMap_ExternalReference" />
+    <Link Source="@94" Target="@16" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="@94" Target="@18" Category="CodeMap_ProjectReference" Bounds="297.699437799394,255.572987181728,3.90827903754831,21.1498364560352" />
-    <Link Source="@94" Target="@28" Category="CodeMap_ExternalReference" />
-    <Link Source="@94" Target="@30" Category="CodeMap_ExternalReference" />
-    <Link Source="@94" Target="@34" Category="CodeMap_ExternalReference" />
-    <Link Source="@94" Target="@4" Category="CodeMap_ExternalReference" />
-    <Link Source="@94" Target="@40" Category="CodeMap_ExternalReference" />
-    <Link Source="@94" Target="@46" Category="CodeMap_ExternalReference" />
-    <Link Source="@94" Target="@50" Category="CodeMap_ExternalReference" />
-    <Link Source="@94" Target="@52" Category="CodeMap_ExternalReference" />
-    <Link Source="@94" Target="@6" Category="CodeMap_ExternalReference" />
-    <Link Source="@94" Target="@60" Category="CodeMap_ExternalReference" />
-    <Link Source="@94" Target="@62" Category="CodeMap_ExternalReference" />
-    <Link Source="@94" Target="@64" Category="CodeMap_ExternalReference" />
-    <Link Source="@94" Target="@66" Category="CodeMap_ExternalReference" />
-    <Link Source="@94" Target="@78" Category="CodeMap_ProjectReference" Bounds="174.341217041016,255.572982788086,39.9704132080078,137.99006652832" />
-    <Link Source="@94" Target="@80" Category="CodeMap_ProjectReference" Bounds="173.955505371094,255.572982788086,63.4989166259766,81.4105682373047" />
-    <Link Source="@94" Target="@84" Category="CodeMap_ExternalReference" />
-    <Link Source="@94" Target="@86" Category="CodeMap_ExternalReference" />
+    <Link Source="@94" Target="@28" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@94" Target="@30" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@94" Target="@34" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@94" Target="@4" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@94" Target="@40" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@94" Target="@46" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@94" Target="@50" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@94" Target="@52" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@94" Target="@6" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@94" Target="@60" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@94" Target="@62" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@94" Target="@64" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@94" Target="@66" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@94" Target="@78" Category="CodeMap_ProjectReference" Bounds="174.341217041016,255.572982788086,39.9704132080078,137.99006652832" Visibility="Hidden" />
+    <Link Source="@94" Target="@80" Category="CodeMap_ProjectReference" Bounds="173.955505371094,255.572982788086,63.4989166259766,81.4105682373047" Visibility="Hidden" />
+    <Link Source="@94" Target="@84" Category="CodeMap_ExternalReference" Visibility="Hidden" />
+    <Link Source="@94" Target="@86" Category="CodeMap_ExternalReference" Visibility="Hidden" />
     <Link Source="_standardGraphExternalsGroup" Target="@10" Category="Contains" />
     <Link Source="_standardGraphExternalsGroup" Target="@100" Category="Contains" />
     <Link Source="_standardGraphExternalsGroup" Target="@104" Category="Contains" />
@@ -464,6 +464,7 @@
   </Categories>
   <Properties>
     <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="ButterflyMode" DataType="System.Boolean" />
     <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
     <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
     <Property Id="CodeSchemaProperty_IsExternal" Label="Is External" Description="Flag indicating whether this node is considered external" DataType="System.Boolean" />
@@ -492,6 +493,7 @@
     <Property Id="Layout" DataType="System.String" />
     <Property Id="LayoutSettings" DataType="Microsoft.VisualStudio.Diagrams.View.GroupLayoutStyle" />
     <Property Id="NavigationActionLabel" Label="NavigationActionLabel" Description="NavigationActionLabel" DataType="System.String" />
+    <Property Id="NeighborhoodCenter" DataType="System.Boolean" />
     <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
     <Property Id="TargetType" DataType="System.Type" />
     <Property Id="ToolTip" DataType="System.String" />
@@ -846,6 +848,11 @@
       <Setter Property="Stroke" Value="#9A9A9A" />
       <Setter Property="StrokeDashArray" Value="2 2" />
       <Setter Property="DrawArrow" Value="true" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Center" ValueLabel="True">
+      <Condition Expression="HasValue('NeighborhoodCenter')" />
+      <Setter Property="Stroke" Value="#C0A0B862" />
+      <Setter Property="StrokeThickness" Value="4" />
     </Style>
   </Styles>
   <Paths>

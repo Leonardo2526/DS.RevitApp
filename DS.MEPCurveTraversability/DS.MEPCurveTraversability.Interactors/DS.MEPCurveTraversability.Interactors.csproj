@@ -82,6 +82,9 @@
     <Compile Include="Settings\DocSettingsBase.cs" />
     <Compile Include="Settings\DocSettingsKR.cs" />
     <Compile Include="Settings\RoomTraversion\RoomTraversionSettings.cs" />
+    <Compile Include="ValidatorFactories\PointRoomValidatorFactory.cs" />
+    <Compile Include="ValidatorFactories\SolidRoomValidatorFactory.cs" />
+    <Compile Include="ValidatorFactories\WallIntersectionValidatorFactory.cs" />
     <Compile Include="WallRuleBuilder.cs" />
     <Compile Include="TraversabilityService.cs" />
     <Compile Include="Settings\WallIntersection\WallIntersectionSettings.cs" />
