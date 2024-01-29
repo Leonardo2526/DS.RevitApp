@@ -77,7 +77,6 @@
     <Compile Include="Settings\RoomTraversion\IRoomTraversionSettings.cs" />
     <Compile Include="Settings\WallIntersection\IWallIntersectionSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoomChecker.cs" />
     <Compile Include="Settings\DocSettingsAR.cs" />
     <Compile Include="Settings\DocSettingsBase.cs" />
     <Compile Include="Settings\DocSettingsKR.cs" />
@@ -85,10 +84,7 @@
     <Compile Include="ValidatorFactories\PointRoomValidatorFactory.cs" />
     <Compile Include="ValidatorFactories\SolidRoomValidatorFactory.cs" />
     <Compile Include="ValidatorFactories\WallIntersectionValidatorFactory.cs" />
-    <Compile Include="WallRuleBuilder.cs" />
-    <Compile Include="TraversabilityService.cs" />
     <Compile Include="Settings\WallIntersection\WallIntersectionSettings.cs" />
-    <Compile Include="WallsChecker.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ProjectDescription.txt" />
@@ -101,10 +97,6 @@
     <ProjectReference Include="..\..\..\OLMP.RevitAPI\OLMP.RevitAPI.Tools\OLMP.RevitAPI.Tools.csproj">
       <Project>{698a89cb-1b8a-46f5-9e67-8820c37c1ed5}</Project>
       <Name>OLMP.RevitAPI.Tools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DS.MEPCurveTraversability.Core\DS.MEPCurveTraversability.Core.csproj">
-      <Project>{d3858153-a4ee-40bc-a40b-7aa657996d72}</Project>
-      <Name>DS.MEPCurveTraversability.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
