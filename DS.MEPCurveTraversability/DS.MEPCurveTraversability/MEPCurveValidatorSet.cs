@@ -83,6 +83,7 @@ namespace DS.MEPCurveTraversability
                 {
                     ExcludedIds = new List<ElementId>() { _mEPCurve.Id },
                     ExcludeFields = _docSettingsAR.RoomTraversionSettings.ExcludeFields,
+                    StrictFieldCompliance = _docSettingsAR.RoomTraversionSettings.StrictFieldCompliance,
                     WindowMessenger = WindowMessenger,
                     Logger = Logger,
                     TransactionFactory = null,
@@ -99,7 +100,8 @@ namespace DS.MEPCurveTraversability
                     _docSettingsAR)
                 {
                     ExcludeFields = _docSettingsAR.RoomTraversionSettings.ExcludeFields,
-                    MinVolume = _docSettingsAR.RoomTraversionSettings.MinResidualVolume,
+                    MinVolume = _docSettingsAR.RoomTraversionSettings.MinResidualVolume, 
+                    StrictFieldCompliance = _docSettingsAR.RoomTraversionSettings.StrictFieldCompliance,
                     WindowMessenger = WindowMessenger,
                     Logger = Logger,
                     TransactionFactory = null,

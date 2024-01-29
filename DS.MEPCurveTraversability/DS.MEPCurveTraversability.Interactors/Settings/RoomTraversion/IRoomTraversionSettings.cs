@@ -13,7 +13,14 @@ namespace DS.MEPCurveTraversability.Interactors.Settings
         /// Fields to exclude.
         /// </summary>
         IEnumerable<string> ExcludeFields { get; set; }
+
+
         double MinResidualVolume { get; set; }
+
+
+        /// <summary>
+        /// Specifies if room names should conatain content fields fully or not.
+        /// </summary>
         bool StrictFieldCompliance { get; set; }
     }
 }

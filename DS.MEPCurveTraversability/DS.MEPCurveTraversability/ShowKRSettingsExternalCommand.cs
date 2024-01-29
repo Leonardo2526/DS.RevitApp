@@ -40,7 +40,8 @@ public class ShowKRSettingsExternalCommand : IExternalCommand
         var allDocNames = _allDocs.Select(d => d.Title);
 
         _settings = DocSettingsKR.GetInstance();
-        _settings.AutoDocsDetectionFields = new List<string>() {"Тест" };
+        //_settings.AutoDocsDetectionFields = new List<string>();
+        //_settings.AutoDocsDetectionFields = new List<string>() {"Тест" };
         _settings.TryUpdateDocs(doc, links);
 
         var targetDocNames = _settings.Docs.Select(d => d.Title);

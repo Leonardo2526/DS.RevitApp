@@ -35,7 +35,9 @@ namespace DS.MEPCurveTraversability.Interactors.Settings
         /// <inheritdoc/>
         public IEnumerable<string> ExcludeFields { get; set; } = DefaultExcludeFields.DeepCopy();
 
+        /// <inheritdoc/>
         public bool StrictFieldCompliance { get; set; } = true;
+
         public bool CheckNames { get; set; } = true;
     }
 }

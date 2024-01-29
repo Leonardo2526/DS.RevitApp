@@ -1,18 +1,12 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using DS.ClassLib.VarUtils;
 using DS.ClassLib.VarUtils.Iterators;
 using DS.MEPCurveTraversability.Interactors.Settings;
 using OLMP.RevitAPI.Tools;
 using OLMP.RevitAPI.Tools.Creation.Transactions;
 using OLMP.RevitAPI.Tools.Extensions;
 using OLMP.RevitAPI.Tools.Various;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 
 namespace DS.MEPCurveTraversability;
 
@@ -42,8 +36,8 @@ public class ExternalCommand : IExternalCommand
         var settingsKR = DocSettingsKR.GetInstance();
         settingsKR.TryUpdateDocs(doc, allLoadedLinks);
         var settingsAR = DocSettingsAR.GetInstance();
-        settingsAR.Docs?.Clear();
-        settingsAR.AutoDocsDetectionFields = new List<string>() { "АР", "Тест" };
+        //settingsAR.Docs?.Clear();
+        //settingsAR.AutoDocsDetectionFields = new List<string>() { "АР", "Тест" };
         settingsAR.TryUpdateDocs(doc, allLoadedLinks);
         //return Result.Succeeded;
 

@@ -56,6 +56,12 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
         /// </summary>
         public IEnumerable<string> ExcludeFields { get; set; }
 
+
+        /// <summary>
+        /// Specifies if room names should conatain content fields fully or not.
+        /// </summary>
+        public bool StrictFieldCompliance { get; set; }
+
         public IValidator<MEPCurve> GetValidator()
         {
             //get rooms
@@ -75,7 +81,8 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
                 Logger = Logger,
                 ExcludeFields = ExcludeFields,
                 WindowMessenger = WindowMessenger,
-                PointIntersectionFactory = pointIntersectionFactory,
+                PointIntersectionFactory = pointIntersectionFactory, 
+                StrictFieldCompliance = StrictFieldCompliance
             };
         }
     }
