@@ -22,20 +22,23 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
     {
         private readonly UIDocument _uiDoc;
         private readonly IEnumerable<RevitLinkInstance> _links;
-        private readonly IElementMultiFilter _elementMultiFilter;
+        private readonly IElementMultiFilter _globalFilter;
+        private readonly IElementMultiFilter _localFilter;
         private readonly DocSettingsAR _docSettingsAR;
         private readonly Document _doc;
 
         public SolidRoomValidatorFactory(
             UIDocument uiDoc,
             IEnumerable<RevitLinkInstance> links,
-            IElementMultiFilter elementMultiFilter,
+            IElementMultiFilter globalFilter,
+            IElementMultiFilter localFilter,
             DocSettingsAR docSettingsAR
             )
         {
             _uiDoc = uiDoc;
             _links = links;
-            _elementMultiFilter = elementMultiFilter;
+            _globalFilter = globalFilter;
+            _localFilter = localFilter;
             _docSettingsAR = docSettingsAR;
             _doc = uiDoc.Document;
         }
@@ -67,25 +70,20 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
 
         public IValidator<MEPCurve> GetValidator()
         {
-            //build solid element factory
-            var settingsDoc = _docSettingsAR.Docs.FirstOrDefault(d => !d.IsLinked);
-            var settingsLinks = _docSettingsAR.Docs.Select(d => d.TryGetLink(_links)).Where(l => l != null);
-            var elementFilter = new ElementMutliFilter(_doc, _links);
-            //var elementFilter = new ElementMutliFilter(settingsDoc, settingsLinks);
-            var solidIntersectionFactory = new SolidElementIntersectionFactory(_doc, elementFilter)
-            { Logger = Logger, TransactionFactory = TransactionFactory };
-
-            var elementRoomFilter = new ElementMutliFilter(settingsDoc, settingsLinks);
+            //get rooms
+            _localFilter.Reset();           
+            _localFilter.SlowFilters.Add((new RoomFilter(), null));
+            var rooms = _localFilter.ApplyToAllDocs().SelectMany(kv => kv.Value.ToElements(kv.Key)).OfType<Room>();
 
             //build solid room factory
-            var solidRoomIntersectFactory = new SolidRoomIntersectionFactory(_doc, _links, elementRoomFilter)
+            var solidRoomIntersectFactory = new SolidRoomIntersectionFactory(_doc, _links, _localFilter)
             { Logger = Logger, TransactionFactory = null };
 
-            //get rooms
-            elementRoomFilter.SlowFilters.Add((new RoomFilter(), null));
-            var rooms = elementRoomFilter.ApplyToAllDocs().SelectMany(kv => kv.Value.ToElements(kv.Key)).OfType<Room>();
+            //build solid element factory
+            var elementItersectionFactory = new SolidElementIntersectionFactory(_doc, _globalFilter)
+            { Logger = Logger, TransactionFactory = TransactionFactory };
 
-            var openingIntersectionFactory = new SolidOpeningIntersectionFactoty(_doc, _links, _elementMultiFilter)
+            var openingIntersectionFactory = new SolidOpeningIntersectionFactoty(_doc, _links, _globalFilter)
             { MinVolume = MinVolume };
 
             return new SolidRoomTraversable(
@@ -93,7 +91,7 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
                 _links,
                 rooms,
                 solidRoomIntersectFactory,
-                solidIntersectionFactory,
+                elementItersectionFactory,
                 openingIntersectionFactory)
             {
                 Logger = Logger,

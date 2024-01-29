@@ -7,6 +7,7 @@ using OLMP.RevitAPI.Core.Extensions;
 using OLMP.RevitAPI.Tools;
 using OLMP.RevitAPI.Tools.Creation.Transactions;
 using Serilog;
+using Serilog.Core;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,22 +18,19 @@ namespace DS.MEPCurveTraversability.Interactors
         private readonly UIDocument _uiDoc;
         private readonly Document _doc;
         private readonly IEnumerable<RevitLinkInstance> _allLoadedLinks;
-        private readonly IElementMultiFilter _elementMultiFilter;
-        private readonly IEnumerable<Document> _validatableDocs;
+        private readonly IElementMultiFilter _localFilter;
         private readonly IWallIntersectionSettings _wallIntersectionSettings;
 
         public WallIntersectionValidatorFactory(
             UIDocument uiDoc,
             IEnumerable<RevitLinkInstance> allLoadedLinks,
-            IElementMultiFilter elementMultiFilter,
-            IEnumerable<Document> validatableDocs, 
+            IElementMultiFilter localFilter,
             IWallIntersectionSettings wallIntersectionSettings)
         {
             _uiDoc = uiDoc;
             _doc = uiDoc.Document;
             _allLoadedLinks = allLoadedLinks;
-            _elementMultiFilter = elementMultiFilter;
-            _validatableDocs = validatableDocs;
+            _localFilter = localFilter;
             _wallIntersectionSettings = wallIntersectionSettings;
         }
 
@@ -53,12 +51,8 @@ namespace DS.MEPCurveTraversability.Interactors
 
         public IValidator<MEPCurve> GetValidator()
         {
-            var solidIntersectionFactory = GetSolidIntersectionFactory(
-              _doc,
-              _allLoadedLinks,
-              _validatableDocs,
-              _elementMultiFilter,
-              Logger);
+            var solidIntersectionFactory = new SolidElementIntersectionFactory(_doc, _localFilter)
+            { Logger = Logger, TransactionFactory = TransactionFactory };
 
             return new WallsChecker(
               _uiDoc,
@@ -70,23 +64,6 @@ namespace DS.MEPCurveTraversability.Interactors
                 TransactionFactory = TransactionFactory,
                 WindowMessenger = WindowMessenger
             };
-        }
-
-
-        private ITIntersectionFactory<Element, Solid> GetSolidIntersectionFactory(
-            Document activeDoc,
-            IEnumerable<RevitLinkInstance> allDocLinks,
-            IEnumerable<Document> validatableDocs,
-            IElementMultiFilter serviceElementFilter,
-            ILogger logger = null,
-            ITransactionFactory transactionFactory = null)
-        {
-            var settingsDoc = validatableDocs.FirstOrDefault(d => !d.IsLinked);
-            var settingsLinks = validatableDocs.Select(d => d.TryGetLink(allDocLinks)).Where(l => l != null);
-            var elementFilterAR = new ElementMutliFilter(settingsDoc, settingsLinks);
-
-            return new SolidElementIntersectionFactory(activeDoc, serviceElementFilter)
-            { Logger = logger, TransactionFactory = transactionFactory };
         }
     }
 }

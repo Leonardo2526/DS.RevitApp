@@ -1,11 +1,18 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using DS.ClassLib.VarUtils;
+using DS.ClassLib.VarUtils.Iterators;
 using DS.MEPCurveTraversability.Interactors.Settings;
 using OLMP.RevitAPI.Tools;
 using OLMP.RevitAPI.Tools.Creation.Transactions;
 using OLMP.RevitAPI.Tools.Extensions;
 using OLMP.RevitAPI.Tools.Various;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace DS.MEPCurveTraversability;
 
@@ -32,10 +39,13 @@ public class ExternalCommand : IExternalCommand
         if (new ElementSelector(uiDoc).Pick() is not MEPCurve mEPCurve)
         { return Result.Failed; }
 
-        var settingsKR = DocSettingsKR.GetInstance().
-            TryUpdateDocs(doc, allLoadedLinks) as DocSettingsKR;
-        var settingsAR = DocSettingsAR.GetInstance().
-            TryUpdateDocs(doc, allLoadedLinks) as DocSettingsAR;
+        var settingsKR = DocSettingsKR.GetInstance();
+        settingsKR.TryUpdateDocs(doc, allLoadedLinks);
+        var settingsAR = DocSettingsAR.GetInstance();
+        settingsAR.Docs?.Clear();
+        settingsAR.AutoDocsDetectionFields = new List<string>() { "АР", "Тест" };
+        settingsAR.TryUpdateDocs(doc, allLoadedLinks);
+        //return Result.Succeeded;
 
         var validatorsSet = new MEPCurveValidatorSet(
             uiDoc,
@@ -44,15 +54,29 @@ public class ExternalCommand : IExternalCommand
             elementFilter,
             settingsAR,
             settingsKR)
-            { 
-                WindowMessenger = messenger, 
-                Logger = logger,
-                TransactionFactory = trf
-            }
+        {
+            WindowMessenger = null,
+            Logger = logger,
+            TransactionFactory = trf
+        }
             .Create();
 
+        var iterator = validatorsSet.GetEnumerator();
+        var validatorIterator = new ValidatorIterator<MEPCurve>(iterator)
+        { Logger = logger, StopOnFirst = false };
 
-        validatorsSet.TrueForAll(v => v.IsValid(mEPCurve));
+        //Validation
+        var isValid = validatorIterator.IsValid(mEPCurve);
+
+        if (isValid)
+        { logger?.Information("MEPCurve is traversable"); }
+        else
+        { logger?.Warning("MEPCurve isn't traversable"); }
+
+        var resultMessage = ValidationResultsConverter.
+            ToString(validatorIterator.ValidationResults);
+
+        if (!string.IsNullOrEmpty(resultMessage)) { messenger?.Show(resultMessage); }
 
         return Result.Succeeded;
     }

@@ -26,6 +26,7 @@ namespace DS.MEPCurveTraversability.Interactors
         private readonly ITIntersectionFactory<Element, Solid> _intersectionFactory;
         private readonly IWallIntersectionSettings _intersectionSettings;
         private readonly Document _doc;
+        private readonly List<ValidationResult> _validationResults = new();
 
         public WallsChecker(
             UIDocument uiDoc,
@@ -55,11 +56,12 @@ namespace DS.MEPCurveTraversability.Interactors
         /// </summary>
         public IWindowMessenger WindowMessenger { get; set; }
 
-        public IEnumerable<ValidationResult> ValidationResults => throw new NotImplementedException();
+        public IEnumerable<ValidationResult> ValidationResults => _validationResults;
      
 
         public bool IsValid(MEPCurve item)
         {
+            _validationResults.Clear();
             var mEPCurveSolid = item.Solid(_links);
 
             //get collisions
@@ -72,8 +74,10 @@ namespace DS.MEPCurveTraversability.Interactors
             var isWallCollisions = collisions.SkipWhile(filter).Any(c => c.Item2 is Wall);
             if (isWallCollisions)
             {
+                var message = $"Некорректный проход через стены.";
+                _validationResults.Add(new ValidationResult(message));
                 Logger?.Information($"The walls are not traversable.");
-                WindowMessenger?.Show($"Некорректный проход через стены.");
+                WindowMessenger?.Show(message);
                 return false;
             }
 

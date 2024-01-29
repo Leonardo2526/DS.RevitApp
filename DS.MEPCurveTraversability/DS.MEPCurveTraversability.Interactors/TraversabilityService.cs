@@ -23,7 +23,7 @@ namespace DS.MEPCurveTraversability.Interactors
         private readonly UIDocument _uiDoc;
         private readonly Document _doc;
         private readonly IEnumerable<RevitLinkInstance> _allDoclinks;
-        private readonly IElementMultiFilter _elementMultiFilter;
+        private readonly IElementMultiFilter _globalFilter;
         private readonly DocSettingsAR _settingsAR;
         bool checkRooms = true;
 
@@ -37,7 +37,7 @@ namespace DS.MEPCurveTraversability.Interactors
             _uiDoc = uiDoc;
             _doc = uiDoc.Document;
             _allDoclinks = allDocLinks;
-            _elementMultiFilter = elementMultiFilter;
+            _globalFilter = elementMultiFilter;
             _settingsAR = settingsAR;
         }
 
@@ -64,16 +64,16 @@ namespace DS.MEPCurveTraversability.Interactors
                 _doc,
                 _allDoclinks,
                 _settingsAR,
-                _elementMultiFilter,
+                _globalFilter,
                 Logger);
 
             if (checkRooms)
             {
-                var solidRoomIntersectFactory = new SolidRoomIntersectionFactory(_doc, _allDoclinks, _elementMultiFilter)
+                var solidRoomIntersectFactory = new SolidRoomIntersectionFactory(_doc, _allDoclinks, _globalFilter)
                 { Logger = Logger, TransactionFactory = null };
                 var roomCheker = new RoomChecker(
                     _uiDoc, _allDoclinks,
-                    _elementMultiFilter,
+                    _globalFilter,
                     solidIntersectionFactory,
                     solidRoomIntersectFactory)
                 {

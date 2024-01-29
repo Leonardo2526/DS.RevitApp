@@ -18,7 +18,7 @@ namespace DS.MEPCurveTraversability.Interactors
     {
         private readonly UIDocument _uiDoc;
         private readonly IEnumerable<RevitLinkInstance> _links;
-        private readonly IElementMultiFilter _elementMultiFilter;
+        private readonly IElementMultiFilter _globalFilter;
         private readonly ITIntersectionFactory<Element, Solid> _elementIntersectFactory;
         private readonly SolidElementIntersectionFactoryBase<Room> _solidElementIntersectFactory;
         private readonly Document _doc;
@@ -32,7 +32,7 @@ namespace DS.MEPCurveTraversability.Interactors
         {
             _uiDoc = uiDoc;
             _links = links;
-            _elementMultiFilter = elementMultiFilter;
+            _globalFilter = elementMultiFilter;
             _elementIntersectFactory = elementIntersectFactory;
             _solidElementIntersectFactory = solidElementIntersectFactory;
             _doc = uiDoc.Document;
@@ -66,8 +66,8 @@ namespace DS.MEPCurveTraversability.Interactors
             };
 
             //get rooms
-            _elementMultiFilter.SlowFilters.Add((new RoomFilter(), null));
-            var rooms = _elementMultiFilter.ApplyToAllDocs().SelectMany(kv => kv.Value.ToElements(kv.Key)).OfType<Room>();
+            _globalFilter.SlowFilters.Add((new RoomFilter(), null));
+            var rooms = _globalFilter.ApplyToAllDocs().SelectMany(kv => kv.Value.ToElements(kv.Key)).OfType<Room>();
             var pointIntersectionFactory = new ElementPointIntersectionFactory(_doc, _links, elementMultiFilter)
             {
                 Logger = Logger

@@ -17,18 +17,21 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
     public class PointRoomValidatorFactory : IValidatorFactory<MEPCurve>
     {
         private readonly IEnumerable<RevitLinkInstance> _links;
-        private readonly IElementMultiFilter _elementMultiFilter;
+        private readonly IElementMultiFilter _globalFilter;
+        private readonly IElementMultiFilter _localFilter;
         private readonly Document _doc;
 
         public PointRoomValidatorFactory(
             UIDocument uiDoc, 
             IEnumerable<RevitLinkInstance> allLoadedlinks,
-            IElementMultiFilter elementMultiFilter
+            IElementMultiFilter globalFilter,
+            IElementMultiFilter localFilter
             )
         {
             _doc = uiDoc.Document;
             _links = allLoadedlinks;
-            _elementMultiFilter = elementMultiFilter;
+            _globalFilter = globalFilter;
+            _localFilter = localFilter;
         }
 
         /// <summary>
@@ -56,13 +59,13 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
         public IValidator<MEPCurve> GetValidator()
         {
             //get rooms
-            _elementMultiFilter.SlowFilters.Add((new RoomFilter(), null));
-            var rooms = _elementMultiFilter.ApplyToAllDocs().
+            _localFilter.Reset();
+            _localFilter.SlowFilters.Add((new RoomFilter(), null));
+            var rooms = _localFilter.ApplyToAllDocs().
                 SelectMany(kv => kv.Value.ToElements(kv.Key)).OfType<Room>();
 
-            var elementMultiFilter = new ElementMutliFilter(_doc);
             var pointIntersectionFactory =
-                new ElementPointIntersectionFactory(_doc, _links, elementMultiFilter)
+                new ElementPointIntersectionFactory(_doc, _links, _globalFilter)
                 {
                     Logger = Logger
                 }.SetExcludedElementIds(ExcludedIds.ToList());
