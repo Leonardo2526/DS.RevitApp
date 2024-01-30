@@ -1,19 +1,13 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using DS.MEPCurveTraversability.Interactors;
 using DS.MEPCurveTraversability.Interactors.Settings;
 using DS.MEPCurveTraversability.Presenters;
 using DS.MEPCurveTraversability.UI;
 using OLMP.RevitAPI.Core.Extensions;
-using OLMP.RevitAPI.Tools.Extensions;
-using Rhino;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime;
-using System.Windows.Controls;
-using UnitSystem = Rhino.UnitSystem;
 
 namespace DS.MEPCurveTraversability;
 
@@ -21,8 +15,6 @@ namespace DS.MEPCurveTraversability;
 [Transaction(TransactionMode.Manual)]
 public class RoomSettingsExternalCommand : IExternalCommand
 {
-    private static readonly double _mmToFeet =
-            RhinoMath.UnitScale(UnitSystem.Millimeters, UnitSystem.Feet);
     private IEnumerable<Document> _allDocs;
     private DocSettingsAR _settings;
 
@@ -39,9 +31,8 @@ public class RoomSettingsExternalCommand : IExternalCommand
         _allDocs = doc.GetDocuments();
         var allDocNames = _allDocs.Select(d => d.Title);
 
-        _settings = DocSettingsAR.GetInstance();
-        _settings.AutoDocsDetectionFields = new List<string>() {"Тест" };
-        _settings.TryUpdateDocs(doc, links);
+        _settings = DocSettingsAR.GetInstance(doc, links);
+        _settings.RefreshDocs();
 
         var targetDocNames = _settings.Docs.Select(d => d.Title);
 

@@ -54,6 +54,7 @@ namespace DS.MEPCurveTraversability.Interactors
         /// </summary>
         public IWindowMessenger WindowMessenger { get; set; }
 
+        /// <inheritdoc/>
         public IValidator<MEPCurve> GetValidator()
         {
             var solidIntersectionFactory = new SolidElementIntersectionFactory(_doc, _localFilter)
@@ -71,7 +72,7 @@ namespace DS.MEPCurveTraversability.Interactors
             }
 
             Func<Solid, Wall, bool> openingFilter = null;
-            if (_wallIntersectionSettings.CheckOpenings)
+            if (_wallIntersectionSettings.IsEnabled)
             {
                 openingFilter = (wall, solid) =>
                 IsOpeningTraversable(

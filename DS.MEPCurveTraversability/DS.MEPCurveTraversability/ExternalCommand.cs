@@ -2,6 +2,7 @@
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using DS.ClassLib.VarUtils.Iterators;
+using DS.MEPCurveTraversability.Interactors;
 using DS.MEPCurveTraversability.Interactors.Settings;
 using OLMP.RevitAPI.Tools;
 using OLMP.RevitAPI.Tools.Creation.Transactions;
@@ -19,7 +20,7 @@ public class ExternalCommand : IExternalCommand
         ref string message, ElementSet elements)
     {
         var uiApp = commandData.Application;
-        var application = uiApp.Application;
+        //var application = uiApp.Application;
         var uiDoc = uiApp.ActiveUIDocument;
 
         var doc = uiDoc.Document;
@@ -33,13 +34,9 @@ public class ExternalCommand : IExternalCommand
         if (new ElementSelector(uiDoc).Pick() is not MEPCurve mEPCurve)
         { return Result.Failed; }
 
-        var settingsKR = DocSettingsKR.GetInstance();
-        settingsKR.TryUpdateDocs(doc, allLoadedLinks);
-        var settingsAR = DocSettingsAR.GetInstance();
-        //settingsAR.Docs?.Clear();
-        //settingsAR.AutoDocsDetectionFields = new List<string>() { "АР", "Тест" };
-        settingsAR.TryUpdateDocs(doc, allLoadedLinks);
-        //return Result.Succeeded;
+        var settingsKR = DocSettingsKR.GetInstance(doc, allLoadedLinks);
+        var settingsAR = DocSettingsAR.GetInstance(doc, allLoadedLinks);
+        settingsAR.RefreshDocs();
 
         var validatorsSet = new MEPCurveValidatorSet(
             uiDoc,

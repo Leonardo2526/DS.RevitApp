@@ -1,12 +1,11 @@
-﻿using DS.ClassLib.VarUtils;
-using DS.MEPCurveTraversability.Interactors;
+﻿using DS.MEPCurveTraversability.Interactors;
 using Rhino;
-using System.Windows.Input;
 using UnitSystem = Rhino.UnitSystem;
 
 namespace DS.MEPCurveTraversability.Presenters
 {
-    public class WallCheckerViewModel : IWallIntersectionSettings
+    public class WallCheckerViewModel(IWallIntersectionSettings wallIntersectionSettings) :
+        IWallIntersectionSettings
     {
         private static readonly double _mmToFeet =
           RhinoMath.UnitScale(UnitSystem.Millimeters, UnitSystem.Feet);
@@ -14,60 +13,50 @@ namespace DS.MEPCurveTraversability.Presenters
         private static readonly double _feetToMM =
           RhinoMath.UnitScale(UnitSystem.Feet, UnitSystem.Millimeters);
 
-        private readonly WallIntersectionSettings _settings;
-
-        public WallCheckerViewModel(WallIntersectionSettings wallIntersectionSettings)
-        {
-            _settings = wallIntersectionSettings;
-        }
+        private readonly IWallIntersectionSettings _settings = wallIntersectionSettings;
 
         public string Title { get; set; }
 
-        public bool CheckOpenings
+        /// <inheritdoc/>
+        public bool IsEnabled
         {
-            get => _settings.CheckOpenings;
-            set => _settings.CheckOpenings = value;
+            get => _settings.IsEnabled;
+            set => _settings.IsEnabled = value;
         }
 
+        /// <inheritdoc/>
         public double InsertsOffset
         {
             get => _settings.InsertsOffset * _feetToMM;
             set => _settings.InsertsOffset = value * _mmToFeet;
         }
 
+        /// <inheritdoc/>
         public double JointsOffset
         {
             get => _settings.JointsOffset * _feetToMM;
             set => _settings.JointsOffset = value * _mmToFeet;
         }
 
+        /// <inheritdoc/>
         public double NormalAngleLimit
         {
             get => RhinoMath.ToDegrees(_settings.NormalAngleLimit);
             set => _settings.NormalAngleLimit = RhinoMath.ToRadians(value);
         }
 
+        /// <inheritdoc/>
         public double OpeningOffset
         {
             get => _settings.OpeningOffset * _feetToMM;
             set => _settings.OpeningOffset = value * _mmToFeet;
         }
 
+        /// <inheritdoc/>
         public double WallOffset
         {
             get => _settings.WallOffset * _feetToMM;
             set => _settings.WallOffset = value * _mmToFeet;
         }
-
-
-        #region Commands
-
-        public ICommand TestCommand => new RelayCommand(p =>
-        {
-
-        }, _ => true);
-
-
-        #endregion
     }
 }

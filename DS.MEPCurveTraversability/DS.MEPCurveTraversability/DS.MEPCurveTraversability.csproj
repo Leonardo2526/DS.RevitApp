@@ -96,7 +96,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
-    <Compile Include="MEPCurveValidatorSet.cs" />
     <Compile Include="RoomSettingsExternalCommand.cs" />
     <Compile Include="ShowARSettingsExternalCommand.cs" />
     <Compile Include="ShowKRSettingsExternalCommand.cs" />
@@ -104,6 +103,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="app.config" />
     <None Include="DS.MEPCurveTraversability.addin" />
     <None Include="packages.config" />
@@ -129,10 +131,6 @@
       <Project>{12da88a7-c723-438c-a2be-5bf3b6f07ee1}</Project>
       <Name>DS.MEPCurveTraversability.UI</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
-    <Analyzer Include="..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

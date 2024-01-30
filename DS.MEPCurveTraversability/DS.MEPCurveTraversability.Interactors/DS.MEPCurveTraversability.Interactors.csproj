@@ -73,7 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DocsFilter.cs" />
+    <Compile Include="MEPCurveValidatorSet.cs" />
     <Compile Include="Settings\RoomTraversion\IRoomTraversionSettings.cs" />
     <Compile Include="Settings\WallIntersection\IWallIntersectionSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,6 +81,7 @@
     <Compile Include="Settings\DocSettingsBase.cs" />
     <Compile Include="Settings\DocSettingsKR.cs" />
     <Compile Include="Settings\RoomTraversion\RoomTraversionSettings.cs" />
+    <Compile Include="Settings\WallIntersection\IWallOpeningSettings.cs" />
     <Compile Include="ValidatorFactories\PointRoomValidatorFactory.cs" />
     <Compile Include="ValidatorFactories\SolidRoomValidatorFactory.cs" />
     <Compile Include="ValidatorFactories\WallIntersectionValidatorFactory.cs" />
@@ -102,10 +103,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
-    <Analyzer Include="..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -18,30 +18,18 @@ using OLMP.RevitAPI.Core.Extensions;
 
 namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
 {
-    public class SolidRoomValidatorFactory : IValidatorFactory<MEPCurve>
-    {
-        private readonly UIDocument _uiDoc;
-        private readonly IEnumerable<RevitLinkInstance> _links;
-        private readonly IElementMultiFilter _globalFilter;
-        private readonly IElementMultiFilter _localFilter;
-        private readonly DocSettingsAR _docSettingsAR;
-        private readonly Document _doc;
 
-        public SolidRoomValidatorFactory(
-            UIDocument uiDoc,
-            IEnumerable<RevitLinkInstance> links,
-            IElementMultiFilter globalFilter,
-            IElementMultiFilter localFilter,
-            DocSettingsAR docSettingsAR
-            )
-        {
-            _uiDoc = uiDoc;
-            _links = links;
-            _globalFilter = globalFilter;
-            _localFilter = localFilter;
-            _docSettingsAR = docSettingsAR;
-            _doc = uiDoc.Document;
-        }
+    public class SolidRoomValidatorFactory(
+        Document activeDoc,
+        IEnumerable<RevitLinkInstance> links,
+        IElementMultiFilter globalFilter,
+        IElementMultiFilter localFilter
+            ) : IValidatorFactory<MEPCurve>
+    {
+        private readonly Document _doc = activeDoc;
+        private readonly IEnumerable<RevitLinkInstance> _links = links;
+        private readonly IElementMultiFilter _globalFilter = globalFilter;
+        private readonly IElementMultiFilter _localFilter = localFilter;
 
         /// <summary>
         /// The core Serilog, used for writing log events.
@@ -73,6 +61,7 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
         /// </summary>
         public bool StrictFieldCompliance { get; set; }
 
+        /// <inheritdoc/>
         public IValidator<MEPCurve> GetValidator()
         {
             //get rooms

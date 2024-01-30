@@ -17,23 +17,16 @@ namespace DS.MEPCurveTraversability.Presenters
 {
     public class RoomTraversionViewModel : IRoomTraversionSettings, INotifyPropertyChanged
     {
-        private static readonly double _mmToFeet =
-          RhinoMath.UnitScale(UnitSystem.Millimeters, UnitSystem.Feet);
-
         private static readonly double _cmToFeet =
          RhinoMath.UnitScale(UnitSystem.Centimeters, UnitSystem.Feet);
-
-        private static readonly double _feetToMM =
-          RhinoMath.UnitScale(UnitSystem.Feet, UnitSystem.Millimeters);
 
         private static readonly double _feetToCM =
             RhinoMath.UnitScale(UnitSystem.Feet, UnitSystem.Centimeters);
 
-        private readonly RoomTraversionSettings _settings;
-        private List<string> _excludeFields;
+        private readonly IRoomTraversionSettings _settings;
         private string _itemToAdd;
 
-        public RoomTraversionViewModel(RoomTraversionSettings settings)
+        public RoomTraversionViewModel(IRoomTraversionSettings settings)
         {
             var t1 = _cmToFeet;
             var t2 = _feetToCM;
@@ -115,7 +108,8 @@ namespace DS.MEPCurveTraversability.Presenters
         public ICommand SetDefault => new RelayCommand(p =>
         {
             StringCollection.Clear();
-            RoomTraversionSettings.DefaultExcludeFields.ForEach(f => StringCollection.Add(f));
+            _settings.SetDefault();
+            _settings.ExcludeFields.ForEach(f => StringCollection.Add(f));
         }, _ => true);
 
         public ICommand RemoveItem => new RelayCommand(p =>
@@ -141,8 +135,12 @@ namespace DS.MEPCurveTraversability.Presenters
         /// <param name="prop"></param>
         private void OnPropertyChanged([CallerMemberName] string prop = "")
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
+        void IRoomTraversionSettings.SetDefault()
+        {
+            throw new NotImplementedException();
         }
 
 
