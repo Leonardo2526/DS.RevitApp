@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.ClassLib.VarUtils", "..\..\DS.CommonLib.Utils\DS.ClassLib.VarUtils\DS.ClassLib.VarUtils.csproj", "{97D2548B-BA7F-4C31-8F52-6BF929E0C37B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPTools.MEPCurveTraversabilityChecker", "DS.MEPTools.MEPCurveTraversabilityChecker\DS.MEPTools.MEPCurveTraversabilityChecker.csproj", "{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPCurveTraversability", "DS.MEPTools.MEPCurveTraversabilityChecker\DS.MEPCurveTraversability.csproj", "{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OLMP.RevitAPI.Tools", "..\..\OLMP.RevitAPI\OLMP.RevitAPI.Tools\OLMP.RevitAPI.Tools.csproj", "{698A89CB-1B8A-46F5-9E67-8820C37C1ED5}"
 EndProject

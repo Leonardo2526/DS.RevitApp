@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+	<AddIn Type="Application">
+		<Name>DS.MEPTools.App</Name>
+		<Assembly>DS.MEPTools.App\DS.MEPTools.App.dll</Assembly>
+		<ClientId>ee88cd68-b486-4bdd-8086-4321b52cb0b9</ClientId>
+		<FullClassName>DS.MEPTools.App.ExternalApplication</FullClassName>
+		<VendorId>DS</VendorId>
+	</AddIn>
+</RevitAddIns>

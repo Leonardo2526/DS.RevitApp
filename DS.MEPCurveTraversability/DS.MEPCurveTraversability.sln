@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.ClassLib.VarUtils", "..\..\DS.CommonLib.Utils\DS.ClassLib.VarUtils\DS.ClassLib.VarUtils.csproj", "{97D2548B-BA7F-4C31-8F52-6BF929E0C37B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OLMP.RevitAPI.Tools", "..\..\OLMP.RevitAPI\OLMP.RevitAPI.Tools\OLMP.RevitAPI.Tools.csproj", "{698A89CB-1B8A-46F5-9E67-8820C37C1ED5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPCurveTraversability", "DS.MEPCurveTraversability\DS.MEPCurveTraversability.csproj", "{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPCurveTraversability.Presenters", "DS.MEPCurveTraversability.Presenters\DS.MEPCurveTraversability.Presenters.csproj", "{ADBCCD01-0C09-4853-9D9B-12733D809962}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPCurveTraversability.Interactors", "DS.MEPCurveTraversability.Interactors\DS.MEPCurveTraversability.Interactors.csproj", "{00786D46-F05F-4F40-9FDF-25D3A9437649}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPCurveTraversability.UI", "DS.MEPCurveTraversability.UI\DS.MEPCurveTraversability.UI.csproj", "{12DA88A7-C723-438C-A2BE-5BF3B6F07EE1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B83B82E5-FB3E-472F-A063-2E33517651D3}"
+	ProjectSection(SolutionItems) = preProject
+		CodeMap1.dgml = CodeMap1.dgml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPTools.App", "..\DS.MEPTools\DS.MEPTools.App\DS.MEPTools.App.csproj", "{B23201A8-CB98-463E-B603-B3E3EA9A2F80}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97D2548B-BA7F-4C31-8F52-6BF929E0C37B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97D2548B-BA7F-4C31-8F52-6BF929E0C37B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97D2548B-BA7F-4C31-8F52-6BF929E0C37B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97D2548B-BA7F-4C31-8F52-6BF929E0C37B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{698A89CB-1B8A-46F5-9E67-8820C37C1ED5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{698A89CB-1B8A-46F5-9E67-8820C37C1ED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{698A89CB-1B8A-46F5-9E67-8820C37C1ED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{698A89CB-1B8A-46F5-9E67-8820C37C1ED5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D8AF1CB-3A75-4567-81AC-10D94C2B74B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADBCCD01-0C09-4853-9D9B-12733D809962}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADBCCD01-0C09-4853-9D9B-12733D809962}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADBCCD01-0C09-4853-9D9B-12733D809962}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADBCCD01-0C09-4853-9D9B-12733D809962}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00786D46-F05F-4F40-9FDF-25D3A9437649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00786D46-F05F-4F40-9FDF-25D3A9437649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00786D46-F05F-4F40-9FDF-25D3A9437649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00786D46-F05F-4F40-9FDF-25D3A9437649}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12DA88A7-C723-438C-A2BE-5BF3B6F07EE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12DA88A7-C723-438C-A2BE-5BF3B6F07EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12DA88A7-C723-438C-A2BE-5BF3B6F07EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12DA88A7-C723-438C-A2BE-5BF3B6F07EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B23201A8-CB98-463E-B603-B3E3EA9A2F80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B23201A8-CB98-463E-B603-B3E3EA9A2F80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B23201A8-CB98-463E-B603-B3E3EA9A2F80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B23201A8-CB98-463E-B603-B3E3EA9A2F80}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B5B8420E-9157-4FB8-9899-F3801A39BA86}
+	EndGlobalSection
+EndGlobal
