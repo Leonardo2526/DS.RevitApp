@@ -24,12 +24,29 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
         IEnumerable<RevitLinkInstance> links,
         IElementMultiFilter globalFilter,
         IElementMultiFilter localFilter
-            ) : IValidatorFactory<MEPCurve>
+            ) : IValidatorFactory
     {
         private readonly Document _doc = activeDoc;
         private readonly IEnumerable<RevitLinkInstance> _links = links;
         private readonly IElementMultiFilter _globalFilter = globalFilter;
         private readonly IElementMultiFilter _localFilter = localFilter;
+
+        #region Properties
+
+        /// <summary>
+        /// Ids to exclude from intersections.
+        /// </summary>
+        public List<ElementId> ExcludedElementIds { get; set; }
+
+        /// <summary>
+        /// Types to exclude from intersections.
+        /// </summary>
+        public List<Type> ExculdedTypes { get; set; }
+
+        /// <summary>
+        /// Ids to exclude from intersections.
+        /// </summary>
+        public List<BuiltInCategory> ExcludedCategories { get; set; }
 
         /// <summary>
         /// The core Serilog, used for writing log events.
@@ -61,8 +78,12 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
         /// </summary>
         public bool StrictFieldCompliance { get; set; }
 
+        #endregion
+
+
+
         /// <inheritdoc/>
-        public IValidator<MEPCurve> GetValidator()
+        public IValidator GetValidator()
         {
             //get rooms
             _localFilter.Reset();           
@@ -74,13 +95,31 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
             { Logger = Logger, TransactionFactory = null };
 
             //build solid element factory
-            var elementItersectionFactory = new SolidElementIntersectionFactory(_doc, _globalFilter)
-            { Logger = Logger, TransactionFactory = TransactionFactory };
+            var elementItersectionFactory = new SolidElementIntersectionFactory(_doc, _localFilter)
+            {
+                Logger = Logger,
+                TransactionFactory = TransactionFactory
+            };
+            if (ExcludedElementIds != null)
+            {
+                elementItersectionFactory.ExcludedElementIds.Clear();
+                elementItersectionFactory.ExcludedElementIds.AddRange(ExcludedElementIds);
+            }
+            if (ExcludedCategories is not null)
+            {
+                elementItersectionFactory.ExcludedCategories.Clear();
+                elementItersectionFactory.ExcludedCategories.AddRange(ExcludedCategories);
+            }
+            if (ExculdedTypes is not null)
+            {
+                elementItersectionFactory.ExculdedTypes.Clear();
+                elementItersectionFactory.ExculdedTypes.AddRange(ExculdedTypes);
+            }
 
             var openingIntersectionFactory = new SolidOpeningIntersectionFactoty(_doc, _links, _globalFilter)
             { MinVolume = MinVolume };
 
-            return new SolidRoomTraversable(
+            return new SolidRoomValidator(
                 _doc,
                 _links,
                 rooms,

@@ -1,6 +1,7 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using DS.ClassLib.VarUtils;
 using DS.ClassLib.VarUtils.Iterators;
 using DS.MEPCurveTraversability.Interactors;
 using DS.MEPCurveTraversability.Interactors.Settings;
@@ -8,6 +9,8 @@ using OLMP.RevitAPI.Tools;
 using OLMP.RevitAPI.Tools.Creation.Transactions;
 using OLMP.RevitAPI.Tools.Extensions;
 using OLMP.RevitAPI.Tools.Various;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DS.MEPCurveTraversability;
 
@@ -38,22 +41,23 @@ public class ExternalCommand : IExternalCommand
         var settingsAR = DocSettingsAR.GetInstance(doc, allLoadedLinks);
         settingsAR.RefreshDocs();
 
-        var validatorsSet = new MEPCurveValidatorSet(
+        var validators = new ValidatorFactory(
             uiDoc,
             allLoadedLinks,
-            mEPCurve,
             elementFilter,
             settingsAR,
             settingsKR)
         {
+            ExcludedElementIds = new List<ElementId>() { mEPCurve.Id },
             WindowMessenger = null,
             Logger = logger,
             TransactionFactory = trf
         }
             .Create();
 
-        var iterator = validatorsSet.GetEnumerator();
-        var validatorIterator = new ValidatorIterator<MEPCurve>(iterator)
+        //var iterator = validatorsSet.GetEnumerator();
+        var mEPCurveValidators = validators.OfType<IValidator<MEPCurve>>().GetEnumerator();    
+        var validatorIterator = new ValidatorIterator<MEPCurve>(mEPCurveValidators)
         { Logger = logger, StopOnFirst = false };
 
         //Validation

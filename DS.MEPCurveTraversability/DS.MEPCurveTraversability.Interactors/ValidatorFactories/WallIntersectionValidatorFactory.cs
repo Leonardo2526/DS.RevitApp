@@ -18,7 +18,7 @@ using System.Text;
 
 namespace DS.MEPCurveTraversability.Interactors
 {
-    public class WallIntersectionValidatorFactory : IValidatorFactory<MEPCurve>
+    public class WallIntersectionValidatorFactory : IValidatorFactory
     {
         private readonly UIDocument _uiDoc;
         private readonly Document _doc;
@@ -39,6 +39,23 @@ namespace DS.MEPCurveTraversability.Interactors
             _wallIntersectionSettings = wallIntersectionSettings;
         }
 
+        #region Properties
+
+        /// <summary>
+        /// Ids to exclude from intersections.
+        /// </summary>
+        public List<ElementId> ExcludedElementIds { get; set; } 
+
+        /// <summary>
+        /// Types to exclude from intersections.
+        /// </summary>
+        public List<Type> ExculdedTypes { get; set; } 
+
+        /// <summary>
+        /// Ids to exclude from intersections.
+        /// </summary>
+        public List<BuiltInCategory> ExcludedCategories { get; set; }
+
         /// <summary>
         /// The core Serilog, used for writing log events.
         /// </summary>
@@ -54,11 +71,32 @@ namespace DS.MEPCurveTraversability.Interactors
         /// </summary>
         public IWindowMessenger WindowMessenger { get; set; }
 
+        #endregion
+
         /// <inheritdoc/>
-        public IValidator<MEPCurve> GetValidator()
+        public IValidator GetValidator()
         {
-            var solidIntersectionFactory = new SolidElementIntersectionFactory(_doc, _localFilter)
-            { Logger = Logger, TransactionFactory = TransactionFactory };
+            //build solid element factory
+            var elementItersectionFactory = new SolidElementIntersectionFactory(_doc, _localFilter)
+            {
+                Logger = Logger, 
+                TransactionFactory = TransactionFactory 
+            };
+            if(ExcludedElementIds != null)
+            {
+                elementItersectionFactory.ExcludedElementIds.Clear();
+                elementItersectionFactory.ExcludedElementIds.AddRange(ExcludedElementIds);
+            }
+            if(ExcludedCategories is not null)
+            {
+                elementItersectionFactory.ExcludedCategories.Clear();
+                elementItersectionFactory.ExcludedCategories.AddRange(ExcludedCategories);
+            }
+            if (ExculdedTypes is not null)
+            {
+                elementItersectionFactory.ExculdedTypes.Clear();
+                elementItersectionFactory.ExculdedTypes.AddRange(ExculdedTypes);
+            }
 
             //build filters
             Func<Wall, Vector3d, bool> directionFilter = null;
@@ -88,7 +126,7 @@ namespace DS.MEPCurveTraversability.Interactors
             return new WallIntersectionValidator(
               _uiDoc,
               _allLoadedLinks,
-              solidIntersectionFactory)
+              elementItersectionFactory)
             {
                 DirectionFilter = directionFilter,
                 OpeningFilter = openingFilter,

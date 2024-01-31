@@ -7,27 +7,26 @@ using OLMP.RevitAPI.Core.Extensions;
 using OLMP.RevitAPI.Tools;
 using OLMP.RevitAPI.Tools.Creation.Transactions;
 using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace DS.MEPCurveTraversability.Interactors
 {
-    public class MEPCurveValidatorSet : List<IValidator<MEPCurve>>
+    public class ValidatorFactory : List<IValidator>
     {
         private readonly UIDocument _uiDoc;
         private readonly Document _doc;
         private readonly IEnumerable<RevitLinkInstance> _allLoadedLinks;
-        private readonly MEPCurve _mEPCurve;
         private readonly IElementMultiFilter _globalFilter;
         private readonly DocSettingsAR _docSettingsAR;
         private readonly DocSettingsKR _docSettingsKR;
         private readonly IElementMultiFilter _localARFilter;
         private readonly IElementMultiFilter _localKRFilter;
 
-        public MEPCurveValidatorSet(
+        public ValidatorFactory(
             UIDocument uiDoc,
             IEnumerable<RevitLinkInstance> allLoadedLinks,
-            MEPCurve mEPCurve,
             IElementMultiFilter globalFilter,
             DocSettingsAR docSettingsAR,
             DocSettingsKR docSettingsKR)
@@ -35,13 +34,31 @@ namespace DS.MEPCurveTraversability.Interactors
             _uiDoc = uiDoc;
             _doc = uiDoc.Document;
             _allLoadedLinks = allLoadedLinks;
-            _mEPCurve = mEPCurve;
             _globalFilter = globalFilter;
             _docSettingsAR = docSettingsAR;
             _docSettingsKR = docSettingsKR;
             _localARFilter = GetLocalFilter(allLoadedLinks, _docSettingsAR.Docs);
             _localKRFilter = GetLocalFilter(allLoadedLinks, _docSettingsKR.Docs);
         }
+
+
+
+        #region Properties
+
+        /// <summary>
+        /// Ids to exclude from intersections.
+        /// </summary>
+        public List<ElementId> ExcludedElementIds { get; set; }
+
+        /// <summary>
+        /// Types to exclude from intersections.
+        /// </summary>
+        public List<Type> ExculdedTypes { get; set; }
+
+        /// <summary>
+        /// Ids to exclude from intersections.
+        /// </summary>
+        public List<BuiltInCategory> ExcludedCategories { get; set; }
 
         /// <summary>
         /// The core Serilog, used for writing log events.
@@ -58,17 +75,23 @@ namespace DS.MEPCurveTraversability.Interactors
         /// </summary>
         public IWindowMessenger WindowMessenger { get; set; }
 
+        #endregion
 
-        public MEPCurveValidatorSet Create()
+
+
+        public ValidatorFactory Create()
         {
-            var arValidators = new List<IValidator<MEPCurve>>
+            var arValidators = new List<IValidator>
             {
                 new WallIntersectionValidatorFactory(
                     _uiDoc,
                     _allLoadedLinks,
                     _localARFilter,
                     _docSettingsAR.WallIntersectionSettings)
-                {
+                { 
+                    ExcludedElementIds = ExcludedElementIds, 
+                    ExculdedTypes = ExculdedTypes, 
+                    ExcludedCategories = ExcludedCategories,
                     WindowMessenger = WindowMessenger,
                     Logger = Logger,
                     TransactionFactory = null
@@ -80,7 +103,9 @@ namespace DS.MEPCurveTraversability.Interactors
                 arValidators.Add(new PointRoomValidatorFactory(
                     _uiDoc, _allLoadedLinks, _globalFilter, _localARFilter)
                 {
-                    ExcludedIds = new List<ElementId>() { _mEPCurve.Id },
+                    ExcludedElementIds = ExcludedElementIds,
+                    ExculdedTypes = ExculdedTypes,
+                    ExcludedCategories = ExcludedCategories,
                     ExcludeFields = _docSettingsAR.RoomTraversionSettings.ExcludeFields,
                     StrictFieldCompliance = _docSettingsAR.RoomTraversionSettings.StrictFieldCompliance,
                     WindowMessenger = WindowMessenger,
@@ -97,6 +122,9 @@ namespace DS.MEPCurveTraversability.Interactors
                     _globalFilter,
                     _localARFilter)
                 {
+                    ExcludedElementIds = ExcludedElementIds,
+                    ExculdedTypes = ExculdedTypes,
+                    ExcludedCategories = ExcludedCategories,
                     ExcludeFields = _docSettingsAR.RoomTraversionSettings.ExcludeFields,
                     MinVolume = _docSettingsAR.RoomTraversionSettings.MinResidualVolume,
                     StrictFieldCompliance = _docSettingsAR.RoomTraversionSettings.StrictFieldCompliance,
@@ -114,6 +142,9 @@ namespace DS.MEPCurveTraversability.Interactors
               _localKRFilter,
               _docSettingsKR.WallIntersectionSettings)
             {
+                ExcludedElementIds = ExcludedElementIds,
+                ExculdedTypes = ExculdedTypes,
+                ExcludedCategories = ExcludedCategories,
                 WindowMessenger = WindowMessenger,
                 Logger = Logger,
                 TransactionFactory = null
