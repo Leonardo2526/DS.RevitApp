@@ -81,7 +81,7 @@
                 <CheckBox x:Name="WallIntersectionCheckBox" HorizontalAlignment="Right"
                     Checked="CheckBox_Checked" 
                     Unchecked="CheckBox_Unchecked" 
-                    IsChecked="{Binding Path=CheckOpenings}" Margin="5" 
+                    IsChecked="{Binding Path=IsEnabled}" Margin="5" 
                           ToolTip="Вкл/выкл опцию">
                 </CheckBox>
             </StackPanel>

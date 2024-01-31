@@ -24,7 +24,7 @@ namespace DS.MEPCurveTraversability.UI
 
             int maxValue = 10000;
             int minValue = 0;
-            int devisibleNum = 5;
+            int devisibleNum = 1;
 
             int.TryParse(stringValue, out int intValue);
             if (!intValue.IsDevisible(devisibleNum))

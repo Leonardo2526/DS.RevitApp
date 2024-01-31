@@ -62,6 +62,7 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
         /// </summary>
         public bool StrictFieldCompliance { get; set; }
 
+        /// <inheritdoc/>
         public IValidator<MEPCurve> GetValidator()
         {
             //get rooms

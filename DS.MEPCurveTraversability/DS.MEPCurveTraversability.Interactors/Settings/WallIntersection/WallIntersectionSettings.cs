@@ -1,36 +1,28 @@
 ﻿using Rhino;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DS.MEPCurveTraversability.Interactors
 {
-    public class WallIntersectionSettings : IWallIntersectionSettings
+    internal class WallIntersectionSettings : IWallIntersectionSettings
     {
         private static readonly double _mmToFeet =
             RhinoMath.UnitScale(UnitSystem.Millimeters, UnitSystem.Feet);
 
+        /// <inheritdoc/>
         public double NormalAngleLimit { get; set; } = RhinoMath.DefaultAngleTolerance;
 
+        /// <inheritdoc/>
         public double OpeningOffset { get; set; } = 100 * _mmToFeet;
 
-        public bool CheckOpenings { get; set; } = true;
+        /// <inheritdoc/>
+        public bool IsEnabled { get; set; } = true;
 
-        /// <summary>
-        /// Wall clerance.
-        /// </summary>
+        /// <inheritdoc/>
         public double WallOffset { get; set; } = 1000 * _mmToFeet;
 
-        /// <summary>
-        /// Clerance for walls inserts.
-        /// </summary>
+        /// <inheritdoc/>
         public double InsertsOffset { get; set; } = 500 * _mmToFeet;
 
-        /// <summary>
-        /// Clerance for walls joints.
-        /// </summary>
+        /// <inheritdoc/>
         public double JointsOffset { get; set; }
     }
 }

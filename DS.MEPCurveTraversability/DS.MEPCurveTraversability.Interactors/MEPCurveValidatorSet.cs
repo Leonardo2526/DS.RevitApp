@@ -1,7 +1,6 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using DS.ClassLib.VarUtils;
-using DS.MEPCurveTraversability.Interactors;
 using DS.MEPCurveTraversability.Interactors.Settings;
 using DS.MEPCurveTraversability.Interactors.ValidatorFactories;
 using OLMP.RevitAPI.Core.Extensions;
@@ -11,7 +10,7 @@ using Serilog;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DS.MEPCurveTraversability
+namespace DS.MEPCurveTraversability.Interactors
 {
     public class MEPCurveValidatorSet : List<IValidator<MEPCurve>>
     {
@@ -93,14 +92,13 @@ namespace DS.MEPCurveTraversability
             if (_docSettingsAR.RoomTraversionSettings.CheckSolid)
             {
                 arValidators.Add(new SolidRoomValidatorFactory(
-                    _uiDoc,
+                     _doc,
                     _allLoadedLinks,
-                    _globalFilter, 
-                    _localARFilter,
-                    _docSettingsAR)
+                    _globalFilter,
+                    _localARFilter)
                 {
                     ExcludeFields = _docSettingsAR.RoomTraversionSettings.ExcludeFields,
-                    MinVolume = _docSettingsAR.RoomTraversionSettings.MinResidualVolume, 
+                    MinVolume = _docSettingsAR.RoomTraversionSettings.MinResidualVolume,
                     StrictFieldCompliance = _docSettingsAR.RoomTraversionSettings.StrictFieldCompliance,
                     WindowMessenger = WindowMessenger,
                     Logger = Logger,

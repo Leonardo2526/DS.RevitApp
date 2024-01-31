@@ -6,38 +6,41 @@ using DS.ClassLib.VarUtils;
 
 namespace DS.MEPCurveTraversability.Interactors.Settings
 {
-    public class RoomTraversionSettings : IRoomTraversionSettings
+    /// <inheritdoc/>
+    internal class RoomTraversionSettings : IRoomTraversionSettings
     {
-        private static readonly double _mmToFeet =
-          RhinoMath.UnitScale(UnitSystem.Millimeters, UnitSystem.Feet);
-
-
-
+        /// <summary>
+        /// Default fields to exclude from rooms names.
+        /// </summary>
         public static IEnumerable<string> DefaultExcludeFields = new List<string>
         {
             "электр"
         };
 
-        public RoomTraversionSettings()
-        {
-            //var excludeFields = new List<string>();
-            //excludeFields.AddRange(DefaultExcludeFields);
-            //ExcludeFields = excludeFields;
-        }
+        private static readonly double _mmToFeet =
+          RhinoMath.UnitScale(UnitSystem.Millimeters, UnitSystem.Feet);
 
-
+        /// <inheritdoc/>
         public bool CheckEndPoints { get; set; } = true;
 
+        /// <inheritdoc/>
         public bool CheckSolid { get; set; } = true;
 
+        /// <inheritdoc/>
         public double MinResidualVolume { get; set; } = 3.CubicCMToFeet();
 
         /// <inheritdoc/>
-        public IEnumerable<string> ExcludeFields { get; set; } = DefaultExcludeFields.DeepCopy();
+        public IEnumerable<string> ExcludeFields { get; set; } = DefaultExcludeFields;
 
         /// <inheritdoc/>
         public bool StrictFieldCompliance { get; set; } = true;
 
+        /// <inheritdoc/>
         public bool CheckNames { get; set; } = true;
+
+        public void SetDefault()
+        {
+            ExcludeFields = DefaultExcludeFields;
+        }
     }
 }

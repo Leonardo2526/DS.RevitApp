@@ -1,12 +1,13 @@
 ﻿namespace DS.MEPCurveTraversability.Interactors
 {
-    public interface IWallIntersectionSettings
+    /// <summary>
+    /// Settings to check objects intersections with walls.
+    /// </summary>
+    public interface IWallIntersectionSettings : IWallOpeningSettings
     {
-        bool CheckOpenings { get; set; }
-        double InsertsOffset { get; set; }
-        double JointsOffset { get; set; }
+        /// <summary>
+        /// Max angle between wall's Y face normal and intersection direction. 
+        /// </summary>
         double NormalAngleLimit { get; set; }
-        double OpeningOffset { get; set; }
-        double WallOffset { get; set; }
     }
 }
