@@ -1,6 +1,7 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using DS.ClassLib.VarUtils;
+using DS.ClassLib.VarUtils.Collisons;
 using DS.MEPCurveTraversability.Interactors.Settings;
 using DS.MEPCurveTraversability.Interactors.ValidatorFactories;
 using OLMP.RevitAPI.Core.Extensions;
@@ -18,18 +19,20 @@ namespace DS.MEPCurveTraversability.Interactors
         private readonly UIDocument _uiDoc;
         private readonly Document _doc;
         private readonly IEnumerable<RevitLinkInstance> _allLoadedLinks;
-        private readonly IElementMultiFilter _globalFilter;
+        private readonly IDocumentFilter _globalFilter;
         private readonly DocSettingsAR _docSettingsAR;
         private readonly DocSettingsKR _docSettingsKR;
-        private readonly IElementMultiFilter _localARFilter;
-        private readonly IElementMultiFilter _localKRFilter;
+        private readonly ITIntersectionFactory<Element, XYZ> _pointIntersectionFactory;
+        private readonly IDocumentFilter _localARFilter;
+        private readonly IDocumentFilter _localKRFilter;
 
         public ValidatorFactory(
             UIDocument uiDoc,
             IEnumerable<RevitLinkInstance> allLoadedLinks,
-            IElementMultiFilter globalFilter,
+            IDocumentFilter globalFilter,
             DocSettingsAR docSettingsAR,
-            DocSettingsKR docSettingsKR)
+            DocSettingsKR docSettingsKR,
+             ITIntersectionFactory<Element, XYZ> pointIntersectionFactory)
         {
             _uiDoc = uiDoc;
             _doc = uiDoc.Document;
@@ -37,28 +40,14 @@ namespace DS.MEPCurveTraversability.Interactors
             _globalFilter = globalFilter;
             _docSettingsAR = docSettingsAR;
             _docSettingsKR = docSettingsKR;
-            _localARFilter = GetLocalFilter(allLoadedLinks, _docSettingsAR.Docs);
-            _localKRFilter = GetLocalFilter(allLoadedLinks, _docSettingsKR.Docs);
+            _pointIntersectionFactory = pointIntersectionFactory;
+            _localARFilter = _docSettingsAR.GetLocalFilter(globalFilter);
+            _localKRFilter = _docSettingsKR.GetLocalFilter(globalFilter);
         }
 
 
 
         #region Properties
-
-        /// <summary>
-        /// Ids to exclude from intersections.
-        /// </summary>
-        public List<ElementId> ExcludedElementIds { get; set; }
-
-        /// <summary>
-        /// Types to exclude from intersections.
-        /// </summary>
-        public List<Type> ExculdedTypes { get; set; }
-
-        /// <summary>
-        /// Ids to exclude from intersections.
-        /// </summary>
-        public List<BuiltInCategory> ExcludedCategories { get; set; }
 
         /// <summary>
         /// The core Serilog, used for writing log events.
@@ -89,9 +78,6 @@ namespace DS.MEPCurveTraversability.Interactors
                     _localARFilter,
                     _docSettingsAR.WallIntersectionSettings)
                 { 
-                    ExcludedElementIds = ExcludedElementIds, 
-                    ExculdedTypes = ExculdedTypes, 
-                    ExcludedCategories = ExcludedCategories,
                     WindowMessenger = WindowMessenger,
                     Logger = Logger,
                     TransactionFactory = null
@@ -99,13 +85,10 @@ namespace DS.MEPCurveTraversability.Interactors
             };
 
             if (_docSettingsAR.RoomTraversionSettings.CheckEndPoints)
-            {
+            {              
                 arValidators.Add(new PointRoomValidatorFactory(
-                    _uiDoc, _allLoadedLinks, _globalFilter, _localARFilter)
-                {
-                    ExcludedElementIds = ExcludedElementIds,
-                    ExculdedTypes = ExculdedTypes,
-                    ExcludedCategories = ExcludedCategories,
+                    _uiDoc, _allLoadedLinks, _globalFilter, _localARFilter, _pointIntersectionFactory)
+                {                   
                     ExcludeFields = _docSettingsAR.RoomTraversionSettings.ExcludeFields,
                     StrictFieldCompliance = _docSettingsAR.RoomTraversionSettings.StrictFieldCompliance,
                     WindowMessenger = WindowMessenger,
@@ -121,10 +104,7 @@ namespace DS.MEPCurveTraversability.Interactors
                     _allLoadedLinks,
                     _globalFilter,
                     _localARFilter)
-                {
-                    ExcludedElementIds = ExcludedElementIds,
-                    ExculdedTypes = ExculdedTypes,
-                    ExcludedCategories = ExcludedCategories,
+                {                 
                     ExcludeFields = _docSettingsAR.RoomTraversionSettings.ExcludeFields,
                     MinVolume = _docSettingsAR.RoomTraversionSettings.MinResidualVolume,
                     StrictFieldCompliance = _docSettingsAR.RoomTraversionSettings.StrictFieldCompliance,
@@ -141,10 +121,7 @@ namespace DS.MEPCurveTraversability.Interactors
               _allLoadedLinks,
               _localKRFilter,
               _docSettingsKR.WallIntersectionSettings)
-            {
-                ExcludedElementIds = ExcludedElementIds,
-                ExculdedTypes = ExculdedTypes,
-                ExcludedCategories = ExcludedCategories,
+            {              
                 WindowMessenger = WindowMessenger,
                 Logger = Logger,
                 TransactionFactory = null
@@ -153,16 +130,6 @@ namespace DS.MEPCurveTraversability.Interactors
 
             return this;
         }
-
-        private IElementMultiFilter GetLocalFilter(
-            IEnumerable<RevitLinkInstance> allDocLinks,
-            IEnumerable<Document> localDocs)
-        {
-            var settingsDoc = localDocs.FirstOrDefault(d => !d.IsLinked);
-            var settingsLinks = localDocs.Select(d => d.TryGetLink(allDocLinks)).Where(l => l != null);
-            return new ElementMutliFilter(settingsDoc, settingsLinks);
-        }
-
     }
 
 

@@ -1,5 +1,7 @@
 ﻿using Autodesk.Revit.DB;
 using OLMP.RevitAPI.Core.Extensions;
+using OLMP.RevitAPI.Tools;
+using Rhino.Geometry;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,7 +28,7 @@ namespace DS.MEPCurveTraversability.Interactors.Settings
         /// </summary>
         public void RefreshDocs()
         {
-            Docs = Docs?.Where(d => d.IsValidObject).ToList();         
+            Docs = Docs?.Where(d => d.IsValidObject).ToList();
         }
 
         /// <summary>
@@ -54,6 +56,18 @@ namespace DS.MEPCurveTraversability.Interactors.Settings
                 var lastFolderName = Path.GetFileName(Path.GetDirectoryName(path));
                 return fields.Any(f => lastFolderName.ToLower().Contains(f));
             }
+        }
+
+        /// <summary>
+        /// Get filter for <see cref="Docs"/>.
+        /// </summary>
+        /// <param name="globalFilter"></param>
+        /// <returns></returns>
+        public IDocumentFilter GetLocalFilter(IDocumentFilter globalFilter)
+        {
+            var localFilter=  globalFilter.Clone();
+            localFilter.Docs = Docs;
+            return localFilter;
         }
     }
 }

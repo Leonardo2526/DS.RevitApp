@@ -23,13 +23,13 @@ namespace DS.MEPCurveTraversability.Interactors
         private readonly UIDocument _uiDoc;
         private readonly Document _doc;
         private readonly IEnumerable<RevitLinkInstance> _allLoadedLinks;
-        private readonly IElementMultiFilter _localFilter;
+        private readonly IDocumentFilter _localFilter;
         private readonly IWallIntersectionSettings _wallIntersectionSettings;
 
         public WallIntersectionValidatorFactory(
             UIDocument uiDoc,
             IEnumerable<RevitLinkInstance> allLoadedLinks,
-            IElementMultiFilter localFilter,
+            IDocumentFilter localFilter,
             IWallIntersectionSettings wallIntersectionSettings)
         {
             _uiDoc = uiDoc;
@@ -39,22 +39,7 @@ namespace DS.MEPCurveTraversability.Interactors
             _wallIntersectionSettings = wallIntersectionSettings;
         }
 
-        #region Properties
-
-        /// <summary>
-        /// Ids to exclude from intersections.
-        /// </summary>
-        public List<ElementId> ExcludedElementIds { get; set; } 
-
-        /// <summary>
-        /// Types to exclude from intersections.
-        /// </summary>
-        public List<Type> ExculdedTypes { get; set; } 
-
-        /// <summary>
-        /// Ids to exclude from intersections.
-        /// </summary>
-        public List<BuiltInCategory> ExcludedCategories { get; set; }
+        #region Properties      
 
         /// <summary>
         /// The core Serilog, used for writing log events.
@@ -77,26 +62,12 @@ namespace DS.MEPCurveTraversability.Interactors
         public IValidator GetValidator()
         {
             //build solid element factory
-            var elementItersectionFactory = new SolidElementIntersectionFactory(_doc, _localFilter)
+            var elementItersectionFactory = 
+                new SolidElementIntersectionFactory(_doc, _allLoadedLinks, _localFilter)
             {
                 Logger = Logger, 
                 TransactionFactory = TransactionFactory 
-            };
-            if(ExcludedElementIds != null)
-            {
-                elementItersectionFactory.ExcludedElementIds.Clear();
-                elementItersectionFactory.ExcludedElementIds.AddRange(ExcludedElementIds);
-            }
-            if(ExcludedCategories is not null)
-            {
-                elementItersectionFactory.ExcludedCategories.Clear();
-                elementItersectionFactory.ExcludedCategories.AddRange(ExcludedCategories);
-            }
-            if (ExculdedTypes is not null)
-            {
-                elementItersectionFactory.ExculdedTypes.Clear();
-                elementItersectionFactory.ExculdedTypes.AddRange(ExculdedTypes);
-            }
+            };           
 
             //build filters
             Func<Wall, Vector3d, bool> directionFilter = null;

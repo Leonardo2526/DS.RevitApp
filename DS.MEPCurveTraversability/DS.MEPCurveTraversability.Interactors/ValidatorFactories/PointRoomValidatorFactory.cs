@@ -13,46 +13,36 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OLMP.RevitAPI.Tools.Geometry;
 
 namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
 {
     public class PointRoomValidatorFactory : IValidatorFactory
     {
         private readonly IEnumerable<RevitLinkInstance> _links;
-        private readonly IElementMultiFilter _globalFilter;
-        private readonly IElementMultiFilter _localFilter;
+        private readonly IDocumentFilter _globalFilter;
+        private readonly IDocumentFilter _localFilter;
+        private readonly ITIntersectionFactory<Element, XYZ> _pointIntersectionFactory;
         private readonly Document _doc;
 
         public PointRoomValidatorFactory(
             UIDocument uiDoc,
             IEnumerable<RevitLinkInstance> allLoadedlinks,
-            IElementMultiFilter globalFilter,
-            IElementMultiFilter localFilter
+            IDocumentFilter globalFilter,
+            IDocumentFilter localFilter,
+            ITIntersectionFactory<Element, XYZ> pointIntersectionFactory
             )
         {
             _doc = uiDoc.Document;
             _links = allLoadedlinks;
             _globalFilter = globalFilter;
             _localFilter = localFilter;
+            _pointIntersectionFactory = pointIntersectionFactory;
         }
 
-        #region Properties
+        #region Properties     
 
-        /// <summary>
-        /// Ids to exclude from intersections.
-        /// </summary>
-        public List<ElementId> ExcludedElementIds { get; set; }
-
-        /// <summary>
-        /// Types to exclude from intersections.
-        /// </summary>
-        public List<Type> ExculdedTypes { get; set; }
-
-        /// <summary>
-        /// Ids to exclude from intersections.
-        /// </summary>
-        public List<BuiltInCategory> ExcludedCategories { get; set; }
-
+    
         /// <summary>
         /// The core Serilog, used for writing log events.
         /// </summary>
@@ -73,7 +63,6 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
         /// </summary>
         public IEnumerable<string> ExcludeFields { get; set; }
 
-
         /// <summary>
         /// Specifies if room names should conatain content fields fully or not.
         /// </summary>
@@ -86,30 +75,18 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
         public IValidator GetValidator()
         {
             //get rooms
-            _localFilter.Reset();
-            _localFilter.SlowFilters.Add((new RoomFilter(), null));
-            var rooms = _localFilter.ApplyToAllDocs().
+            var roomDocFilter = _localFilter.Clone();
+            roomDocFilter.SlowFilters ??= new();
+            roomDocFilter.SlowFilters.Add((new RoomFilter(), null));
+            var rooms = roomDocFilter.ApplyToAllDocs().
                 SelectMany(kv => kv.Value.ToElements(kv.Key)).OfType<Room>();
-
-            var pointIntersectionFactory =
-                new ElementPointIntersectionFactory(_doc, _links, _globalFilter)
-                {
-                    Logger = Logger
-                };
-
-            if (ExcludedElementIds != null)
-            { pointIntersectionFactory.SetExcludedElementIds(ExcludedElementIds); }
-            if (ExcludedCategories != null)
-            { pointIntersectionFactory.SetExcludedCategories(ExcludedCategories); }
-            if (ExculdedTypes != null)
-            { pointIntersectionFactory.SetExcludedTypes(ExculdedTypes); }
-
+          
             return new PointRoomValidator(_doc, _links, rooms)
             {
                 Logger = Logger,
                 ExcludeFields = ExcludeFields,
                 WindowMessenger = WindowMessenger,
-                PointIntersectionFactory = pointIntersectionFactory,
+                PointIntersectionFactory = _pointIntersectionFactory,
                 StrictFieldCompliance = StrictFieldCompliance
             };
         }

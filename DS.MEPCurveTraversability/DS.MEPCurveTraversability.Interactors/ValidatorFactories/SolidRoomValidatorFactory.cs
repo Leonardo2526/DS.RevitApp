@@ -22,31 +22,16 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
     public class SolidRoomValidatorFactory(
         Document activeDoc,
         IEnumerable<RevitLinkInstance> links,
-        IElementMultiFilter globalFilter,
-        IElementMultiFilter localFilter
+        IDocumentFilter globalFilter,
+        IDocumentFilter localFilter
             ) : IValidatorFactory
     {
         private readonly Document _doc = activeDoc;
         private readonly IEnumerable<RevitLinkInstance> _links = links;
-        private readonly IElementMultiFilter _globalFilter = globalFilter;
-        private readonly IElementMultiFilter _localFilter = localFilter;
+        private readonly IDocumentFilter _globalFilter = globalFilter;
+        private readonly IDocumentFilter _localFilter = localFilter;
 
         #region Properties
-
-        /// <summary>
-        /// Ids to exclude from intersections.
-        /// </summary>
-        public List<ElementId> ExcludedElementIds { get; set; }
-
-        /// <summary>
-        /// Types to exclude from intersections.
-        /// </summary>
-        public List<Type> ExculdedTypes { get; set; }
-
-        /// <summary>
-        /// Ids to exclude from intersections.
-        /// </summary>
-        public List<BuiltInCategory> ExcludedCategories { get; set; }
 
         /// <summary>
         /// The core Serilog, used for writing log events.
@@ -86,35 +71,21 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
         public IValidator GetValidator()
         {
             //get rooms
-            _localFilter.Reset();           
-            _localFilter.SlowFilters.Add((new RoomFilter(), null));
-            var rooms = _localFilter.ApplyToAllDocs().SelectMany(kv => kv.Value.ToElements(kv.Key)).OfType<Room>();
+            var roomDocFilter = _localFilter.Clone();
+            roomDocFilter.SlowFilters ??= new();
+            roomDocFilter.SlowFilters.Add((new RoomFilter(), null));
+            var rooms = roomDocFilter.ApplyToAllDocs().SelectMany(kv => kv.Value.ToElements(kv.Key)).OfType<Room>();
 
             //build solid room factory
-            var solidRoomIntersectFactory = new SolidRoomIntersectionFactory(_doc, _links, _localFilter)
+            var solidRoomIntersectFactory = new SolidRoomIntersectionFactory(_doc, _links, roomDocFilter)
             { Logger = Logger, TransactionFactory = null };
 
             //build solid element factory
-            var elementItersectionFactory = new SolidElementIntersectionFactory(_doc, _localFilter)
+            var elementItersectionFactory = new SolidElementIntersectionFactory(_doc, _links, _localFilter)
             {
                 Logger = Logger,
                 TransactionFactory = TransactionFactory
-            };
-            if (ExcludedElementIds != null)
-            {
-                elementItersectionFactory.ExcludedElementIds.Clear();
-                elementItersectionFactory.ExcludedElementIds.AddRange(ExcludedElementIds);
-            }
-            if (ExcludedCategories is not null)
-            {
-                elementItersectionFactory.ExcludedCategories.Clear();
-                elementItersectionFactory.ExcludedCategories.AddRange(ExcludedCategories);
-            }
-            if (ExculdedTypes is not null)
-            {
-                elementItersectionFactory.ExculdedTypes.Clear();
-                elementItersectionFactory.ExculdedTypes.AddRange(ExculdedTypes);
-            }
+            };          
 
             var openingIntersectionFactory = new SolidOpeningIntersectionFactoty(_doc, _links, _globalFilter)
             { MinVolume = MinVolume };
