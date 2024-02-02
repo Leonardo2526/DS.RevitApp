@@ -28,7 +28,7 @@ public class ExternalCommand : IExternalCommand
         var uiDoc = uiApp.ActiveUIDocument;
 
         var doc = uiDoc.Document;
-        var allLoadedLinks = doc.GetLoadedLinks();
+        var allLoadedLinks = doc.GetLoadedLinks() ?? new List<RevitLinkInstance>();
         var allFilteredDocs = new List<Document>() { doc };
         allFilteredDocs.AddRange(allLoadedLinks.Select(l => l.GetLinkDocument()));
 
@@ -55,26 +55,17 @@ public class ExternalCommand : IExternalCommand
         if (new ElementSelector(uiDoc).Pick() is not MEPCurve mEPCurve)
         { return Result.Failed; }
 
-        var settingsKR = DocSettingsKR.GetInstance(doc, allLoadedLinks);
         var settingsAR = DocSettingsAR.GetInstance(doc, allLoadedLinks);
         settingsAR.RefreshDocs();
-
-        var exludedIds = new List<ElementId>() { mEPCurve.Id };
-
-        var pointIntersectionFactory =
-              new ElementPointIntersectionFactory(doc, allLoadedLinks, globalFilter)
-              {
-                  Logger = logger,
-                  ItemQuickFilters = [(new ExclusionFilter(exludedIds), null)]
-              };
+        var settingsKR = DocSettingsKR.GetInstance(doc, allLoadedLinks);
+        settingsKR.RefreshDocs();
 
         var validators = new ValidatorFactory(
             uiDoc,
             allLoadedLinks,
             globalFilter,
             settingsAR,
-            settingsKR,
-            pointIntersectionFactory)
+            settingsKR)
         {
             WindowMessenger = null,
             Logger = logger,
@@ -82,8 +73,7 @@ public class ExternalCommand : IExternalCommand
         }
             .Create();
 
-        //var iterator = validatorsSet.GetEnumerator();
-        var mEPCurveValidators = validators.OfType<IValidator<MEPCurve>>().GetEnumerator();
+        var mEPCurveValidators = validators.OfType<IValidator<MEPCurve>>();
         var validatorIterator = new ValidatorIterator<MEPCurve>(mEPCurveValidators)
         { Logger = logger, StopOnFirst = false };
 

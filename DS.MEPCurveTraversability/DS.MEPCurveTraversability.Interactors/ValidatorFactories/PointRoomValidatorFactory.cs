@@ -22,22 +22,19 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
         private readonly IEnumerable<RevitLinkInstance> _links;
         private readonly IDocumentFilter _globalFilter;
         private readonly IDocumentFilter _localFilter;
-        private readonly ITIntersectionFactory<Element, XYZ> _pointIntersectionFactory;
         private readonly Document _doc;
 
         public PointRoomValidatorFactory(
             UIDocument uiDoc,
             IEnumerable<RevitLinkInstance> allLoadedlinks,
             IDocumentFilter globalFilter,
-            IDocumentFilter localFilter,
-            ITIntersectionFactory<Element, XYZ> pointIntersectionFactory
+            IDocumentFilter localFilter
             )
         {
             _doc = uiDoc.Document;
             _links = allLoadedlinks;
             _globalFilter = globalFilter;
             _localFilter = localFilter;
-            _pointIntersectionFactory = pointIntersectionFactory;
         }
 
         #region Properties     
@@ -68,6 +65,16 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
         /// </summary>
         public bool StrictFieldCompliance { get; set; }
 
+        /// <summary>
+        /// A factory to check intersections of <see cref="Autodesk.Revit.DB.XYZ"/> point 
+        /// with <see cref="Autodesk.Revit.DB.Element"/>s.
+        /// <para>
+        /// Specify it if <see cref="Autodesk.Revit.DB.XYZ"/> point can be outside of the <see cref="Rooms"/>
+        /// but some other <see cref="Autodesk.Revit.DB.Element"/>s can contain it.
+        /// </para>
+        /// </summary>
+        public ITIntersectionFactory<Element, XYZ> PointIntersectionFactory { get; set; }
+
         #endregion
 
 
@@ -86,7 +93,7 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
                 Logger = Logger,
                 ExcludeFields = ExcludeFields,
                 WindowMessenger = WindowMessenger,
-                PointIntersectionFactory = _pointIntersectionFactory,
+                PointIntersectionFactory = PointIntersectionFactory,
                 StrictFieldCompliance = StrictFieldCompliance
             };
         }

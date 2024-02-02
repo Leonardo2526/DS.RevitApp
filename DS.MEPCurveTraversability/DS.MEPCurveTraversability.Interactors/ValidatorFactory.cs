@@ -7,7 +7,10 @@ using DS.MEPCurveTraversability.Interactors.ValidatorFactories;
 using OLMP.RevitAPI.Core.Extensions;
 using OLMP.RevitAPI.Tools;
 using OLMP.RevitAPI.Tools.Creation.Transactions;
+using OLMP.RevitAPI.Tools.Intersections;
+using Rhino.UI;
 using Serilog;
+using Serilog.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +25,6 @@ namespace DS.MEPCurveTraversability.Interactors
         private readonly IDocumentFilter _globalFilter;
         private readonly DocSettingsAR _docSettingsAR;
         private readonly DocSettingsKR _docSettingsKR;
-        private readonly ITIntersectionFactory<Element, XYZ> _pointIntersectionFactory;
         private readonly IDocumentFilter _localARFilter;
         private readonly IDocumentFilter _localKRFilter;
 
@@ -31,8 +33,7 @@ namespace DS.MEPCurveTraversability.Interactors
             IEnumerable<RevitLinkInstance> allLoadedLinks,
             IDocumentFilter globalFilter,
             DocSettingsAR docSettingsAR,
-            DocSettingsKR docSettingsKR,
-             ITIntersectionFactory<Element, XYZ> pointIntersectionFactory)
+            DocSettingsKR docSettingsKR)
         {
             _uiDoc = uiDoc;
             _doc = uiDoc.Document;
@@ -40,7 +41,6 @@ namespace DS.MEPCurveTraversability.Interactors
             _globalFilter = globalFilter;
             _docSettingsAR = docSettingsAR;
             _docSettingsKR = docSettingsKR;
-            _pointIntersectionFactory = pointIntersectionFactory;
             _localARFilter = _docSettingsAR.GetLocalFilter(globalFilter);
             _localKRFilter = _docSettingsKR.GetLocalFilter(globalFilter);
         }
@@ -67,44 +67,25 @@ namespace DS.MEPCurveTraversability.Interactors
         #endregion
 
 
-
         public ValidatorFactory Create()
         {
-            var arValidators = new List<IValidator>
-            {
-                new WallIntersectionValidatorFactory(
-                    _uiDoc,
-                    _allLoadedLinks,
-                    _localARFilter,
-                    _docSettingsAR.WallIntersectionSettings)
-                { 
-                    WindowMessenger = WindowMessenger,
-                    Logger = Logger,
-                    TransactionFactory = null
-                }.GetValidator()
-            };
+            WithARWallIntersectionValidator().
+                WithPointRoomValidator().
+                WithSolidRoomValidator().
+                WithKRWallIntersectionValidator();
+            return this;
+        }
 
-            if (_docSettingsAR.RoomTraversionSettings.CheckEndPoints)
-            {              
-                arValidators.Add(new PointRoomValidatorFactory(
-                    _uiDoc, _allLoadedLinks, _globalFilter, _localARFilter, _pointIntersectionFactory)
-                {                   
-                    ExcludeFields = _docSettingsAR.RoomTraversionSettings.ExcludeFields,
-                    StrictFieldCompliance = _docSettingsAR.RoomTraversionSettings.StrictFieldCompliance,
-                    WindowMessenger = WindowMessenger,
-                    Logger = Logger,
-                    TransactionFactory = null,
-                }.GetValidator());
-            }
-
+        public ValidatorFactory WithSolidRoomValidator()
+        {
             if (_docSettingsAR.RoomTraversionSettings.CheckSolid)
             {
-                arValidators.Add(new SolidRoomValidatorFactory(
+                Add(new SolidRoomValidatorFactory(
                      _doc,
                     _allLoadedLinks,
                     _globalFilter,
                     _localARFilter)
-                {                 
+                {
                     ExcludeFields = _docSettingsAR.RoomTraversionSettings.ExcludeFields,
                     MinVolume = _docSettingsAR.RoomTraversionSettings.MinResidualVolume,
                     StrictFieldCompliance = _docSettingsAR.RoomTraversionSettings.StrictFieldCompliance,
@@ -113,22 +94,80 @@ namespace DS.MEPCurveTraversability.Interactors
                     TransactionFactory = null,
                 }.GetValidator());
             }
-            AddRange(arValidators);
+            return this;
+        }
 
-            Add(
-            new WallIntersectionValidatorFactory(
-              _uiDoc,
-              _allLoadedLinks,
-              _localKRFilter,
-              _docSettingsKR.WallIntersectionSettings)
-            {              
+        public ValidatorFactory WithARWallIntersectionValidator()
+            => WithWallIntersectionValidator(_localARFilter,
+                _docSettingsAR.WallIntersectionSettings);
+
+        public ValidatorFactory WithKRWallIntersectionValidator()
+            => WithWallIntersectionValidator(_localKRFilter,
+                _docSettingsKR.WallIntersectionSettings);
+
+        private ValidatorFactory WithWallIntersectionValidator(
+            IDocumentFilter localFilter,
+            IWallIntersectionSettings wallIntersectionSettings)
+        {
+            Add(new WallIntersectionValidatorFactory(
+                                _uiDoc,
+                                _allLoadedLinks,
+                                localFilter,
+                                wallIntersectionSettings)
+            {
                 WindowMessenger = WindowMessenger,
                 Logger = Logger,
                 TransactionFactory = null
-            }.GetValidator()
-                );
-
+            }.GetValidator());
             return this;
+        }
+
+        public ValidatorFactory WithPointRoomValidator(bool canBetweenRooms = false)
+        {
+            if (_docSettingsAR.RoomTraversionSettings.CheckEndPoints)
+            {
+                var pointIntersectionFactory = canBetweenRooms ? 
+                    GetPointElementFactory(_doc, _allLoadedLinks, _localARFilter, Logger) : 
+                    null;
+                Add(new PointRoomValidatorFactory(
+                    _uiDoc, _allLoadedLinks, _globalFilter, _localARFilter)
+                {
+                    ExcludeFields = _docSettingsAR.RoomTraversionSettings.ExcludeFields,
+                    StrictFieldCompliance = _docSettingsAR.RoomTraversionSettings.StrictFieldCompliance,
+                    PointIntersectionFactory = pointIntersectionFactory,
+                    WindowMessenger = WindowMessenger,
+                    Logger = Logger,
+                    TransactionFactory = null,
+                }.GetValidator());
+            }
+            return this;
+        }
+
+        public ITIntersectionFactory<Element, XYZ> GetPointElementFactory(
+            Document doc,
+            IEnumerable<RevitLinkInstance> allLoadedLinks,
+            IDocumentFilter localFilter,
+            ILogger logger)
+        {
+            var types = new List<Type>()
+            {
+                typeof(Wall),
+                typeof(Opening),
+                typeof(Floor),
+                typeof(Ceiling)
+            };
+            var multiclassFilter = new ElementMulticlassFilter(types);
+
+            var arFilter = localFilter.Clone();
+            arFilter.QuickFilters ??= new();
+            arFilter.QuickFilters.Add((multiclassFilter, null));
+            var pointIntersectionFactory =
+            new ElementPointIntersectionFactory(doc, allLoadedLinks, localFilter)
+            {
+                Logger = logger,
+            };
+
+            return pointIntersectionFactory;
         }
     }
 
