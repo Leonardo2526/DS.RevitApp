@@ -2,7 +2,7 @@
 
 namespace DS.MEPCurveTraversability.Interactors
 {
-    internal class WallIntersectionSettings : IWallIntersectionSettings
+    public class WallIntersectionSettings : IWallIntersectionSettings
     {
         private static readonly double _mmToFeet =
             RhinoMath.UnitScale(UnitSystem.Millimeters, UnitSystem.Feet);

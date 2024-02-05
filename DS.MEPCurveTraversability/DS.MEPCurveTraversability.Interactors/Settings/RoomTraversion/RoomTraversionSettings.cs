@@ -7,7 +7,7 @@ using DS.ClassLib.VarUtils;
 namespace DS.MEPCurveTraversability.Interactors.Settings
 {
     /// <inheritdoc/>
-    internal class RoomTraversionSettings : IRoomTraversionSettings
+    public class RoomTraversionSettings : IRoomTraversionSettings
     {
         /// <summary>
         /// Default fields to exclude from rooms names.
@@ -19,6 +19,11 @@ namespace DS.MEPCurveTraversability.Interactors.Settings
 
         private static readonly double _mmToFeet =
           RhinoMath.UnitScale(UnitSystem.Millimeters, UnitSystem.Feet);
+
+        public RoomTraversionSettings()
+        {
+            
+        }
 
         /// <inheritdoc/>
         public bool CheckEndPoints { get; set; } = true;

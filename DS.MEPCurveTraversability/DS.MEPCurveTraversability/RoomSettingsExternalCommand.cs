@@ -1,6 +1,7 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using DS.MEPCurveTraversability.Interactors;
 using DS.MEPCurveTraversability.Interactors.Settings;
 using DS.MEPCurveTraversability.Presenters;
 using DS.MEPCurveTraversability.UI;
@@ -31,20 +32,10 @@ public class RoomSettingsExternalCommand : IExternalCommand
         _allDocs = doc.GetDocuments();
         var allDocNames = _allDocs.Select(d => d.Title);
 
-        _settings = DocSettingsAR.GetInstance(doc, links);
-        _settings.RefreshDocs();
+        var appContainer = AppSettings.AppContainer;
+        var settings = appContainer.GetInstance<DocSettingsAR>();
 
-        var targetDocNames = _settings.Docs.Select(d => d.Title);
-
-        var sourceDocNames = allDocNames.Except(targetDocNames);
-        var exchangeKRItemsViewModel = new ExchangeItemsViewModel(sourceDocNames, targetDocNames);
-        var checkDocsView = new CheckDocsConfigView(exchangeKRItemsViewModel);
-        checkDocsView.Closing += CheckDocsView_Closing;
-
-
-        var viewModel = new RoomTraversionViewModel(_settings.RoomTraversionSettings)
-        { Title = "АР" };
-        var view = new RoomTraversionView(viewModel, checkDocsView);
+        new ViewBuilder().ShowRoomSettingsView(doc, links, settings);
 
         return Result.Succeeded;
     }

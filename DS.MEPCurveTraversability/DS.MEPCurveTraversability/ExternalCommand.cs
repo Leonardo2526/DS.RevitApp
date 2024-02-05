@@ -34,6 +34,7 @@ public class ExternalCommand : IExternalCommand
 
         var logger = AppSettings.Logger;
         var messenger = AppSettings.Messenger;
+        var appContainer = AppSettings.AppContainer;
         var trf = new ContextTransactionFactory(doc, RevitContextOption.Inside);
 
         //create global filter
@@ -55,10 +56,12 @@ public class ExternalCommand : IExternalCommand
         if (new ElementSelector(uiDoc).Pick() is not MEPCurve mEPCurve)
         { return Result.Failed; }
 
-        var settingsAR = DocSettingsAR.GetInstance(doc, allLoadedLinks);
+        var settingsAR = appContainer.GetInstance<DocSettingsAR>();
         settingsAR.RefreshDocs();
-        var settingsKR = DocSettingsKR.GetInstance(doc, allLoadedLinks);
+        settingsAR.TrySetFilteredAutoDocs(doc, allLoadedLinks);
+        var settingsKR = appContainer.GetInstance<DocSettingsKR>();
         settingsKR.RefreshDocs();
+        settingsKR.TrySetFilteredAutoDocs(doc, allLoadedLinks);
 
         var validators = new ValidatorFactory(
             uiDoc,

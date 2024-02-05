@@ -13,6 +13,12 @@ namespace DS.MEPCurveTraversability.Interactors.Settings
     /// </summary>
     public abstract class DocSettingsBase
     {
+
+        public DocSettingsBase()
+        {
+            
+        }
+
         /// <summary>
         /// Fields to get <see cref="Document"/>s automatically.
         /// </summary>
@@ -22,6 +28,12 @@ namespace DS.MEPCurveTraversability.Interactors.Settings
         /// <see cref="Document"/>s to apply settings.
         /// </summary>
         public List<Document> Docs { get; protected set; }
+        
+        /// <summary>
+        /// Settings for check walls intersections.
+        /// </summary>
+        public IWallIntersectionSettings WallIntersectionSettings { get; set; } =
+            new WallIntersectionSettings();
 
         /// <summary>
         /// Refresh <see cref="Docs"/> to valid objects.
@@ -68,6 +80,23 @@ namespace DS.MEPCurveTraversability.Interactors.Settings
             var localFilter=  globalFilter.Clone();
             localFilter.Docs = Docs;
             return localFilter;
+        }
+      
+        /// <summary>
+        /// Try to set <see cref="Docs"/> automatically.
+        /// </summary>
+        /// <param name="activeDoc"></param>
+        /// <param name="allDocLinks"></param>
+        /// <returns></returns>
+        public DocSettingsBase TrySetFilteredAutoDocs(
+            Document activeDoc, 
+            IEnumerable<RevitLinkInstance> allDocLinks)
+        {
+            Docs ??= FilterByLastFolderName(
+                    activeDoc,
+                    allDocLinks,
+                    AutoDocsDetectionFields).ToList();
+            return this;
         }
     }
 }

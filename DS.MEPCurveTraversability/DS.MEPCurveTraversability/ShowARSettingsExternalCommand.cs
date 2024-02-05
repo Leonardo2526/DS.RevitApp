@@ -1,10 +1,12 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using DS.MEPCurveTraversability.Interactors;
 using DS.MEPCurveTraversability.Interactors.Settings;
 using DS.MEPCurveTraversability.Presenters;
 using DS.MEPCurveTraversability.UI;
 using OLMP.RevitAPI.Core.Extensions;
+using SimpleInjector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +17,6 @@ namespace DS.MEPCurveTraversability;
 [Transaction(TransactionMode.Manual)]
 public class ShowARSettingsExternalCommand : IExternalCommand
 {
-    private IEnumerable<Document> _allDocs;
-    private DocSettingsAR _settings;
-
     /// <inheritdoc />
     public Result Execute(ExternalCommandData commandData,
         ref string message, ElementSet elements)
@@ -28,36 +27,11 @@ public class ShowARSettingsExternalCommand : IExternalCommand
 
         var doc = uiDoc.Document;
         var links = doc.GetLoadedLinks2();
-        _allDocs = doc.GetDocuments();
-        var allDocNames = _allDocs.Select(d => d.Title);
+        var appContainer = AppSettings.AppContainer;
+        var settings = appContainer.GetInstance<DocSettingsAR>();
 
-        _settings = DocSettingsAR.GetInstance(doc, links);
-        _settings.RefreshDocs();
-
-        var targetDocNames = _settings.Docs.Select(d => d.Title);
-
-        var sourceDocNames = allDocNames.Except(targetDocNames);
-        var exchangeKRItemsViewModel = new ExchangeItemsViewModel(sourceDocNames, targetDocNames);
-        var checkDocsView = new CheckDocsConfigView(exchangeKRItemsViewModel);
-        checkDocsView.Closing += CheckDocsView_Closing;
-
-
-        var viewModel = new WallCheckerViewModel(_settings.WallIntersectionSettings)
-        { Title = "АР" };
-        var view = new WallIntersectionSettingsView(viewModel, checkDocsView);
+        new ViewBuilder().ShowSettingsView(doc, links, settings, "АР");
 
         return Result.Succeeded;
-    }
-
-    private void CheckDocsView_Closing(object sender, EventArgs e)
-    {
-        if (sender is not CheckDocsConfigView view) { return; }
-
-        var targedNames = view.ConfigViewModel.ObservableTarget;
-        var docs = _allDocs.Where(d => targedNames.Any(n => d.Title == n));
-        _settings.Docs.Clear();
-        _settings.Docs.AddRange(docs);
-
-        return;
     }
 }
