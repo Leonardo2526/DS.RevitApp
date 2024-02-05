@@ -27,7 +27,7 @@ public class ExternalCommand : IExternalCommand
         //var application = uiApp.Application;
         var uiDoc = uiApp.ActiveUIDocument;
 
-        var doc = uiDoc.Document;
+        var doc = uiDoc.Document;      
         var allLoadedLinks = doc.GetLoadedLinks() ?? new List<RevitLinkInstance>();
         var allFilteredDocs = new List<Document>() { doc };
         allFilteredDocs.AddRange(allLoadedLinks.Select(l => l.GetLinkDocument()));
@@ -57,10 +57,8 @@ public class ExternalCommand : IExternalCommand
         { return Result.Failed; }
 
         var settingsAR = appContainer.GetInstance<DocSettingsAR>();
-        settingsAR.RefreshDocs();
         settingsAR.TrySetFilteredAutoDocs(doc, allLoadedLinks);
         var settingsKR = appContainer.GetInstance<DocSettingsKR>();
-        settingsKR.RefreshDocs();
         settingsKR.TrySetFilteredAutoDocs(doc, allLoadedLinks);
 
         var validators = new ValidatorFactory(

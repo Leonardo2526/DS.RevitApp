@@ -36,14 +36,6 @@ namespace DS.MEPCurveTraversability.Interactors.Settings
             new WallIntersectionSettings();
 
         /// <summary>
-        /// Refresh <see cref="Docs"/> to valid objects.
-        /// </summary>
-        public void RefreshDocs()
-        {
-            Docs = Docs?.Where(d => d.IsValidObject).ToList();
-        }
-
-        /// <summary>
         /// Get <see cref="Document"/>s by <paramref name="detectionFields"/>.
         /// </summary>
         /// <param name="activeDoc"></param>
@@ -92,10 +84,14 @@ namespace DS.MEPCurveTraversability.Interactors.Settings
             Document activeDoc, 
             IEnumerable<RevitLinkInstance> allDocLinks)
         {
-            Docs ??= FilterByLastFolderName(
+            var allDocs = activeDoc.GetDocuments(allDocLinks);
+            var isValid = Docs is not null && 
+                Docs.TrueForAll(d => d.IsValidObject && allDocs.Any(ad => ad.Title == d.Title));
+
+            Docs = !isValid ? FilterByLastFolderName(
                     activeDoc,
                     allDocLinks,
-                    AutoDocsDetectionFields).ToList();
+                    AutoDocsDetectionFields).ToList() : Docs;
             return this;
         }
     }

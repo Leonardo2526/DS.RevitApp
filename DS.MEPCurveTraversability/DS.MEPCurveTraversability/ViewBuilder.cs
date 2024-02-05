@@ -23,7 +23,6 @@ namespace DS.MEPCurveTraversability.Interactors
             var allDocs = doc.GetDocuments();
             var allDocNames = allDocs.Select(d => d.Title);
 
-            settings.RefreshDocs();
             settings.TrySetFilteredAutoDocs(doc, allLoadedLinks);
 
             var targetDocNames = settings.Docs.Select(d => d.Title);
@@ -59,7 +58,6 @@ namespace DS.MEPCurveTraversability.Interactors
             var allDocs = doc.GetDocuments();
             var allDocNames = allDocs.Select(d => d.Title);
 
-            settings.RefreshDocs();
             settings.TrySetFilteredAutoDocs(doc, allLoadedLinks);
 
             var targetDocNames = settings.Docs.Select(d => d.Title);
