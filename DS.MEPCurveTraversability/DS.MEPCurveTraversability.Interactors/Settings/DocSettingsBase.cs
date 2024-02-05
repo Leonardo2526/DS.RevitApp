@@ -11,7 +11,7 @@ namespace DS.MEPCurveTraversability.Interactors.Settings
     /// <summary>
     /// The object that represent <see cref="Document"/>s settings.
     /// </summary>
-    public abstract class DocSettingsBase
+    public abstract class DocSettingsBase : ITraversabilitySettings
     {
 
         public DocSettingsBase()

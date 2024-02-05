@@ -24,10 +24,10 @@ public class ExternalCommand : IExternalCommand
         ref string message, ElementSet elements)
     {
         var uiApp = commandData.Application;
-        //var application = uiApp.Application;
+        var application = uiApp.Application;
         var uiDoc = uiApp.ActiveUIDocument;
 
-        var doc = uiDoc.Document;      
+        var doc = uiDoc.Document;
         var allLoadedLinks = doc.GetLoadedLinks() ?? new List<RevitLinkInstance>();
         var allFilteredDocs = new List<Document>() { doc };
         allFilteredDocs.AddRange(allLoadedLinks.Select(l => l.GetLinkDocument()));
@@ -46,7 +46,7 @@ public class ExternalCommand : IExternalCommand
             BuiltInCategory.OST_GenericModel,
             BuiltInCategory.OST_Massing
         };
-        var globalFilter = new DocumentFilter(allFilteredDocs, doc, allLoadedLinks);     
+        var globalFilter = new DocumentFilter(allFilteredDocs, doc, allLoadedLinks);
         globalFilter.QuickFilters =
         [
             (new ElementMulticategoryFilter(excludedCategories, true), null),
@@ -56,17 +56,23 @@ public class ExternalCommand : IExternalCommand
         if (new ElementSelector(uiDoc).Pick() is not MEPCurve mEPCurve)
         { return Result.Failed; }
 
-        var settingsAR = appContainer.GetInstance<DocSettingsAR>();
-        settingsAR.TrySetFilteredAutoDocs(doc, allLoadedLinks);
-        var settingsKR = appContainer.GetInstance<DocSettingsKR>();
-        settingsKR.TrySetFilteredAutoDocs(doc, allLoadedLinks);
+        var docIndexSettings = appContainer.GetInstance<DocIndexSettings>();
+        var settings = docIndexSettings.GetSettings(
+            doc,
+            application,
+            appContainer.GetInstance<DocSettingsAR>,
+            appContainer.GetInstance<DocSettingsKR>);
+        var docSettingsAR = settings.OfType<DocSettingsAR>().FirstOrDefault();
+        docSettingsAR.TrySetFilteredAutoDocs(doc, allLoadedLinks);
+        var docSettingsKR = settings.OfType<DocSettingsKR>().FirstOrDefault();
+        docSettingsKR.TrySetFilteredAutoDocs(doc, allLoadedLinks);
 
         var validators = new ValidatorFactory(
             uiDoc,
             allLoadedLinks,
             globalFilter,
-            settingsAR,
-            settingsKR)
+            docSettingsAR,
+            docSettingsKR)
         {
             WindowMessenger = null,
             Logger = logger,

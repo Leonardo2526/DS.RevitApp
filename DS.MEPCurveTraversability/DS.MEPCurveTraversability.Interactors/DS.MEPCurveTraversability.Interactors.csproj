@@ -73,7 +73,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DocIndexSettings.cs" />
     <Compile Include="Settings\DocSettingsAR.cs" />
+    <Compile Include="Settings\ITraversabilitySettings.cs" />
     <Compile Include="ValidatorFactory.cs" />
     <Compile Include="Settings\RoomTraversion\IRoomTraversionSettings.cs" />
     <Compile Include="Settings\WallIntersection\IWallIntersectionSettings.cs" />

@@ -8,6 +8,7 @@ using SimpleInjector;
 using System.Collections.Generic;
 using DS.MEPCurveTraversability.Interactors;
 using Rhino;
+using Autodesk.Revit.ApplicationServices;
 
 namespace DS.MEPCurveTraversability
 {
@@ -32,25 +33,18 @@ namespace DS.MEPCurveTraversability
         {
             var container = new Container();
 
-            container.RegisterInstance(new DocSettingsAR()
-            { 
+            container.RegisterInstance(new DocIndexSettings());
+            container.Register(() => new DocSettingsAR()
+            {
                 RoomTraversionSettings = new RoomTraversionSettings(),
                 WallIntersectionSettings = new WallIntersectionSettings
                 {
                     WallOffset = 200 * _mmToFeet,
                     InsertsOffset = 200 * _mmToFeet
                 },
-
                 AutoDocsDetectionFields = new List<string>() { "АР", "AR", "Тест" }
-            });
-
-            container.RegisterInstance(new DocSettingsKR()
-            {
-                WallIntersectionSettings = new WallIntersectionSettings()
-            });
-
-
-
+            }, Lifestyle.Transient);
+            container.Register(() => new DocSettingsKR(), Lifestyle.Transient);
             container.Verify();
 
             return container;

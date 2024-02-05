@@ -25,12 +25,22 @@ public class ShowARSettingsExternalCommand : IExternalCommand
         var application = uiApp.Application;
         var uiDoc = uiApp.ActiveUIDocument;
 
+        var docs = application.Documents;
         var doc = uiDoc.Document;
+        var code = doc.GetHashCode();
+
         var links = doc.GetLoadedLinks2();
         var appContainer = AppSettings.AppContainer;
-        var settings = appContainer.GetInstance<DocSettingsAR>();
 
-        new ViewBuilder().ShowSettingsView(doc, links, settings, "АР");
+        var docIndexSettings = appContainer.GetInstance<DocIndexSettings>();
+        var settings = docIndexSettings.GetSettings(
+            doc,
+            application,
+            appContainer.GetInstance<DocSettingsAR>,
+            appContainer.GetInstance<DocSettingsKR>);
+        var docSettingsAR = settings.OfType<DocSettingsAR>().FirstOrDefault();
+
+        new ViewBuilder().ShowSettingsView(doc, links, docSettingsAR, "АР");
 
         return Result.Succeeded;
     }
