@@ -78,7 +78,7 @@ namespace DS.MEPCurveTraversability.Interactors
 
         public ValidatorFactory WithSolidRoomValidator()
         {
-            if (_docSettingsAR.RoomTraversionSettings.CheckSolid)
+            if (_docSettingsAR.Docs.Count > 0 && _docSettingsAR.RoomTraversionSettings.CheckSolid)
             {
                 Add(new SolidRoomValidatorFactory(
                      _doc,
@@ -101,6 +101,7 @@ namespace DS.MEPCurveTraversability.Interactors
             => WithWallIntersectionValidator(_localARFilter,
                 _docSettingsAR.WallIntersectionSettings);
 
+
         public ValidatorFactory WithKRWallIntersectionValidator()
             => WithWallIntersectionValidator(_localKRFilter,
                 _docSettingsKR.WallIntersectionSettings);
@@ -109,25 +110,28 @@ namespace DS.MEPCurveTraversability.Interactors
             IDocumentFilter localFilter,
             IWallIntersectionSettings wallIntersectionSettings)
         {
-            Add(new WallIntersectionValidatorFactory(
-                                _uiDoc,
-                                _allLoadedLinks,
-                                localFilter,
-                                wallIntersectionSettings)
+            if (localFilter.Docs.Count > 0)
             {
-                WindowMessenger = WindowMessenger,
-                Logger = Logger,
-                TransactionFactory = null
-            }.GetValidator());
+                Add(new WallIntersectionValidatorFactory(
+                            _uiDoc,
+                            _allLoadedLinks,
+                            localFilter,
+                            wallIntersectionSettings)
+                {
+                    WindowMessenger = WindowMessenger,
+                    Logger = Logger,
+                    TransactionFactory = null
+                }.GetValidator());
+            }
             return this;
         }
 
         public ValidatorFactory WithPointRoomValidator(bool canBetweenRooms = false)
         {
-            if (_docSettingsAR.RoomTraversionSettings.CheckEndPoints)
+            if (_docSettingsAR.Docs.Count > 0 && _docSettingsAR.RoomTraversionSettings.CheckEndPoints)
             {
-                var pointIntersectionFactory = canBetweenRooms ? 
-                    GetPointElementFactory(_doc, _allLoadedLinks, _localARFilter, Logger) : 
+                var pointIntersectionFactory = canBetweenRooms ?
+                    GetPointElementFactory(_doc, _allLoadedLinks, _localARFilter, Logger) :
                     null;
                 Add(new PointRoomValidatorFactory(
                     _uiDoc, _allLoadedLinks, _globalFilter, _localARFilter)
