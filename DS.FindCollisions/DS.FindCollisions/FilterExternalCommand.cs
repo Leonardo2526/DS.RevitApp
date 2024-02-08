@@ -6,22 +6,17 @@ using MoreLinq;
 using OLMP.RevitAPI.Tools;
 using OLMP.RevitAPI.Tools.Creation.Transactions;
 using OLMP.RevitAPI.Tools.Extensions;
-using OLMP.RevitAPI.Tools.Filtering.Intersections;
-using OLMP.RevitAPI.Tools.Various;
+using OLMP.RevitAPI.Tools.Filtering;
 using Serilog;
-using Serilog.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
 
 namespace DS.FindCollisions
 {
     [Transaction(TransactionMode.Manual)]
-    public class ExternalCommand : IExternalCommand
+    public class FilterExternalCommand : IExternalCommand
     {
-        private ILogger _logger;
-
         public Autodesk.Revit.UI.Result Execute(ExternalCommandData commandData,
            ref string message, ElementSet elements)
         {
@@ -36,61 +31,37 @@ namespace DS.FindCollisions
             var allLinkDocs = allLoadedLinks.Select(l => l.GetLinkDocument());
             allFilteredDocs.AddRange(allLinkDocs);
 
-            _logger = AppSettings.Logger;
+            var logger = AppSettings.Logger;
             var messenger = AppSettings.Messenger;
             var appContainer = AppSettings.AppContainer;
             var trf = new ContextTransactionFactory(activeDoc, RevitContextOption.Inside);
 
-            //specify doc1
-            var docsToApply1 = new List<Document>();
-            docsToApply1.Add(activeDoc);
-            //docsToApply1.AddRange(allLinkDocs);
-            var elementFilter1 = OLMP.RevitAPI.Tools.Filtering.ElementFilterUtils
-              .CreateMEPCurveFilter(docsToApply1, activeDoc, allLoadedLinks);
-            var filteredElements1 = elementFilter1
+            var docsToApply = new List<Document>();
+            //docsToApply.Add(activeDoc);
+            docsToApply.AddRange(allLinkDocs);
+            var elementFilter = OLMP.RevitAPI.Tools.Filtering.ElementFilterUtils
+                .CreateHostInstFilter(docsToApply, activeDoc, allLoadedLinks);
+            var filteredElements = elementFilter
                 .Apply()
                 .FilteredElements;
-            var docElements1 = filteredElements1
-                .SelectMany(kv => kv.Value.ToElements(kv.Key));
+            var elements2 = filteredElements.SelectMany(kv => kv.Value.ToElements(kv.Key));
 
+            var typeFilter1 = 
+                new ElementMulticlassFilter(new List<Type>() { typeof(MEPCurve) });
+            var f1 = elementFilter.Clone().With(typeFilter1).Apply();
+            var mEPCurvesIds = f1.FilteredElements;
+            var mEPCurves = mEPCurvesIds.SelectMany(kv => kv.Value.ToElements(kv.Key));
 
-            //specify doc2
-            var docsToApply2 = new List<Document>();
-            docsToApply2.Add(activeDoc);
-            //docsToApply2.AddRange(allLinkDocs);
-            var elementFilter2 = OLMP.RevitAPI.Tools.Filtering.ElementFilterUtils
-            .CreateMEPCurveFilter(docsToApply2, activeDoc, allLoadedLinks);
-            var filteredElements2 = elementFilter2
-                .Apply()
-                .FilteredElements;
-            var docElements2 = filteredElements2
-                .SelectMany(kv => kv.Value.ToElements(kv.Key));
-           
-            //find intersections
-           var intersectionFactory = 
-                new BestDocIntersectionFactory(activeDoc, allLoadedLinks, filteredElements1)
-            { 
-                    Logger = _logger 
-                };
-            intersectionFactory.NotifyOnSetProcessName += IntersectionFactory_NotifyOnSetProcessName;
-            intersectionFactory.NotifyOnProcessUpdate += IntersectionFactory_NotifyOnProcessUpdate;
-            //return Autodesk.Revit.UI.Result.Succeeded;
+            var typeFilter2 =
+              new ElementMulticlassFilter(new List<Type>() { typeof(FamilyInstance) });
+            var f2 = elementFilter.Clone().With(typeFilter2).Apply();
+            var filteredFamInst = f2.FilteredElements;
+            var famInst = filteredFamInst.SelectMany(kv => kv.Value.ToElements(kv.Key));
 
-            var collisions = intersectionFactory.GetIntersections(filteredElements2);
-            PrintCollsions(collisions, _logger);
-            ShowCollisions(uiDoc, collisions);
+            var ids = mEPCurvesIds.SelectMany(e => e.Value).ToList();
+            uiDoc.Selection.SetElementIds(ids);
 
             return Autodesk.Revit.UI.Result.Succeeded;
-        }
-
-        private void IntersectionFactory_NotifyOnSetProcessName(string message)
-        {
-            _logger?.Information(message);
-        }
-
-        private void IntersectionFactory_NotifyOnProcessUpdate(string message, int i, int count)
-        {
-            _logger?.Information(message);
         }
 
         private static void ShowCollisions(UIDocument uiDoc, IEnumerable<(Element, Element)> collisions)
