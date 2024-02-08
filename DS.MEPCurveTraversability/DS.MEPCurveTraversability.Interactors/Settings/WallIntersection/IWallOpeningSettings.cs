@@ -1,4 +1,6 @@
-﻿namespace DS.MEPCurveTraversability.Interactors
+﻿using DS.MEPCurveTraversability.Interactors.Settings;
+
+namespace DS.MEPCurveTraversability.Interactors
 {
     /// <summary>
     /// Settings to check wall's opening that built from intersection object.

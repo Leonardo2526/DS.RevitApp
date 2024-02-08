@@ -33,9 +33,16 @@ public class RoomSettingsExternalCommand : IExternalCommand
         var allDocNames = _allDocs.Select(d => d.Title);
 
         var appContainer = AppSettings.AppContainer;
-        var settings = appContainer.GetInstance<DocSettingsAR>();
 
-        new ViewBuilder().ShowRoomSettingsView(doc, links, settings);
+        var docIndexSettings = appContainer.GetInstance<DocIndexSettings>();
+        var settings = docIndexSettings.GetSettings(
+            doc,
+            application,
+            appContainer.GetInstance<DocSettingsAR>,
+            appContainer.GetInstance<DocSettingsKR>);
+        var docSettingsAR = settings.OfType<DocSettingsAR>().FirstOrDefault();
+
+        new ViewBuilder().ShowRoomSettingsView(doc, links, docSettingsAR);
 
         return Result.Succeeded;
     }

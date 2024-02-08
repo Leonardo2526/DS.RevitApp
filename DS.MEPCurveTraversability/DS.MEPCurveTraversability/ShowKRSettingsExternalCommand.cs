@@ -30,9 +30,16 @@ public class ShowKRSettingsExternalCommand : IExternalCommand
         var doc = uiDoc.Document;
         var links = doc.GetLoadedLinks2();
         var appContainer = AppSettings.AppContainer;
-        var settings = appContainer.GetInstance<DocSettingsKR>();
 
-        new ViewBuilder().ShowSettingsView(doc, links, settings, "КР");
+        var docIndexSettings = appContainer.GetInstance<DocIndexSettings>();
+        var settings = docIndexSettings.GetSettings(
+            doc,
+            application,
+            appContainer.GetInstance<DocSettingsAR>,
+            appContainer.GetInstance<DocSettingsKR>);
+        var docSettingsKR = settings.OfType<DocSettingsKR>().FirstOrDefault();
+
+        new ViewBuilder().ShowSettingsView(doc, links, docSettingsKR, "КР");
 
         return Result.Succeeded;
     }

@@ -11,7 +11,7 @@ namespace DS.MEPCurveTraversability.Interactors.Settings
     /// <summary>
     /// The object that represent <see cref="Document"/>s settings.
     /// </summary>
-    public abstract class DocSettingsBase
+    public abstract class DocSettingsBase : ITraversabilitySettings
     {
 
         public DocSettingsBase()
@@ -34,14 +34,6 @@ namespace DS.MEPCurveTraversability.Interactors.Settings
         /// </summary>
         public IWallIntersectionSettings WallIntersectionSettings { get; set; } =
             new WallIntersectionSettings();
-
-        /// <summary>
-        /// Refresh <see cref="Docs"/> to valid objects.
-        /// </summary>
-        public void RefreshDocs()
-        {
-            Docs = Docs?.Where(d => d.IsValidObject).ToList();
-        }
 
         /// <summary>
         /// Get <see cref="Document"/>s by <paramref name="detectionFields"/>.
@@ -92,10 +84,14 @@ namespace DS.MEPCurveTraversability.Interactors.Settings
             Document activeDoc, 
             IEnumerable<RevitLinkInstance> allDocLinks)
         {
-            Docs ??= FilterByLastFolderName(
+            var allDocs = activeDoc.GetDocuments(allDocLinks);
+            var isValid = Docs is not null && 
+                Docs.TrueForAll(d => d.IsValidObject && allDocs.Any(ad => ad.Title == d.Title));
+
+            Docs = !isValid ? FilterByLastFolderName(
                     activeDoc,
                     allDocLinks,
-                    AutoDocsDetectionFields).ToList();
+                    AutoDocsDetectionFields).ToList() : Docs;
             return this;
         }
     }

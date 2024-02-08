@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+	<AddIn Type="Command">
+		<Name>DS.FindCollisionse</Name>
+		<FullClassName>DS.FindCollisions.ExternalCommand</FullClassName>
+		<Text>FindCollisions</Text>
+		<Description>Find collisions</Description>
+		<VisibilityMode>AlwaysVisible</VisibilityMode>
+		<Assembly>.\DS.FindCollisions\DS.FindCollisions.dll</Assembly>
+		<AddInId>b05b6fb4-48e6-45ae-894f-b9f3196df9aa</AddInId>
+		<VendorId>DS</VendorId>
+	</AddIn> 
+</RevitAddIns>
