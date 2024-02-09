@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OLMP.RevitAPI.Tools.Geometry;
+using DS.ClassLib.VarUtils.Intersections;
 
 namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
 {

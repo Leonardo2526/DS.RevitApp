@@ -2,6 +2,7 @@
 using Autodesk.Revit.UI;
 using DS.ClassLib.VarUtils;
 using DS.ClassLib.VarUtils.Collisons;
+using DS.ClassLib.VarUtils.Intersections;
 using DS.MEPCurveTraversability.Interactors.Settings;
 using DS.MEPCurveTraversability.Interactors.ValidatorFactories;
 using OLMP.RevitAPI.Core.Extensions;
