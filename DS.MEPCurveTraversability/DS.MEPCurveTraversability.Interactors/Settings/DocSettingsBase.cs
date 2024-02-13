@@ -57,6 +57,7 @@ namespace DS.MEPCurveTraversability.Interactors.Settings
             bool nameContainsField(Document doc, IEnumerable<string> fields)
             {
                 var path = doc.GetPathName();
+                if (string.IsNullOrEmpty(path)) { return false; }
                 var lastFolderName = Path.GetFileName(Path.GetDirectoryName(path));
                 return fields.Any(f => lastFolderName.ToLower().Contains(f));
             }
