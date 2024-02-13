@@ -18,18 +18,18 @@ using System.Text;
 
 namespace DS.MEPCurveTraversability.Interactors
 {
-    public class WallIntersectionValidatorFactory : IValidatorFactory<MEPCurve>
+    public class WallIntersectionValidatorFactory : IValidatorFactory
     {
         private readonly UIDocument _uiDoc;
         private readonly Document _doc;
         private readonly IEnumerable<RevitLinkInstance> _allLoadedLinks;
-        private readonly IElementMultiFilter _localFilter;
+        private readonly IDocumentFilter _localFilter;
         private readonly IWallIntersectionSettings _wallIntersectionSettings;
 
         public WallIntersectionValidatorFactory(
             UIDocument uiDoc,
             IEnumerable<RevitLinkInstance> allLoadedLinks,
-            IElementMultiFilter localFilter,
+            IDocumentFilter localFilter,
             IWallIntersectionSettings wallIntersectionSettings)
         {
             _uiDoc = uiDoc;
@@ -38,6 +38,8 @@ namespace DS.MEPCurveTraversability.Interactors
             _localFilter = localFilter;
             _wallIntersectionSettings = wallIntersectionSettings;
         }
+
+        #region Properties      
 
         /// <summary>
         /// The core Serilog, used for writing log events.
@@ -54,11 +56,18 @@ namespace DS.MEPCurveTraversability.Interactors
         /// </summary>
         public IWindowMessenger WindowMessenger { get; set; }
 
+        #endregion
+
         /// <inheritdoc/>
-        public IValidator<MEPCurve> GetValidator()
+        public IValidator GetValidator()
         {
-            var solidIntersectionFactory = new SolidElementIntersectionFactory(_doc, _localFilter)
-            { Logger = Logger, TransactionFactory = TransactionFactory };
+            //build solid element factory
+            var elementItersectionFactory = 
+                new SolidElementIntersectionFactory(_doc, _allLoadedLinks, _localFilter)
+            {
+                Logger = Logger, 
+                TransactionFactory = TransactionFactory 
+            };           
 
             //build filters
             Func<Wall, Vector3d, bool> directionFilter = null;
@@ -88,7 +97,7 @@ namespace DS.MEPCurveTraversability.Interactors
             return new WallIntersectionValidator(
               _uiDoc,
               _allLoadedLinks,
-              solidIntersectionFactory)
+              elementItersectionFactory)
             {
                 DirectionFilter = directionFilter,
                 OpeningFilter = openingFilter,

@@ -6,26 +6,30 @@ using DS.ClassLib.VarUtils.Collisons;
 using OLMP.RevitAPI.Tools;
 using OLMP.RevitAPI.Tools.Creation.Transactions;
 using OLMP.RevitAPI.Tools.Extensions;
+using OLMP.RevitAPI.Tools.Geometry.Solids;
 using OLMP.RevitAPI.Tools.Intersections;
 using OLMP.RevitAPI.Tools.Rooms.Traversability;
 using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using OLMP.RevitAPI.Tools.Geometry;
+using DS.ClassLib.VarUtils.Intersections;
 
 namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
 {
-    public class PointRoomValidatorFactory : IValidatorFactory<MEPCurve>
+    public class PointRoomValidatorFactory : IValidatorFactory
     {
         private readonly IEnumerable<RevitLinkInstance> _links;
-        private readonly IElementMultiFilter _globalFilter;
-        private readonly IElementMultiFilter _localFilter;
+        private readonly IDocumentFilter _globalFilter;
+        private readonly IDocumentFilter _localFilter;
         private readonly Document _doc;
 
         public PointRoomValidatorFactory(
-            UIDocument uiDoc, 
+            UIDocument uiDoc,
             IEnumerable<RevitLinkInstance> allLoadedlinks,
-            IElementMultiFilter globalFilter,
-            IElementMultiFilter localFilter
+            IDocumentFilter globalFilter,
+            IDocumentFilter localFilter
             )
         {
             _doc = uiDoc.Document;
@@ -34,6 +38,9 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
             _localFilter = localFilter;
         }
 
+        #region Properties     
+
+    
         /// <summary>
         /// The core Serilog, used for writing log events.
         /// </summary>
@@ -49,40 +56,45 @@ namespace DS.MEPCurveTraversability.Interactors.ValidatorFactories
         /// </summary>
         public IWindowMessenger WindowMessenger { get; set; }
 
-        public IEnumerable<ElementId> ExcludedIds = new List<ElementId>();
-
         /// <summary>
         /// Fields to exclude from <see cref="Room"/>s.
         /// </summary>
         public IEnumerable<string> ExcludeFields { get; set; }
-
 
         /// <summary>
         /// Specifies if room names should conatain content fields fully or not.
         /// </summary>
         public bool StrictFieldCompliance { get; set; }
 
+        /// <summary>
+        /// A factory to check intersections of <see cref="Autodesk.Revit.DB.XYZ"/> point 
+        /// with <see cref="Autodesk.Revit.DB.Element"/>s.
+        /// <para>
+        /// Specify it if <see cref="Autodesk.Revit.DB.XYZ"/> point can be outside of the <see cref="Rooms"/>
+        /// but some other <see cref="Autodesk.Revit.DB.Element"/>s can contain it.
+        /// </para>
+        /// </summary>
+        public ITIntersectionFactory<Element, XYZ> PointIntersectionFactory { get; set; }
+
+        #endregion
+
+
         /// <inheritdoc/>
-        public IValidator<MEPCurve> GetValidator()
+        public IValidator GetValidator()
         {
             //get rooms
-            _localFilter.Reset();
-            _localFilter.SlowFilters.Add((new RoomFilter(), null));
-            var rooms = _localFilter.ApplyToAllDocs().
+            var roomDocFilter = _localFilter.Clone();
+            roomDocFilter.SlowFilters ??= new();
+            roomDocFilter.SlowFilters.Add((new RoomFilter(), null));
+            var rooms = roomDocFilter.ApplyToAllDocs().
                 SelectMany(kv => kv.Value.ToElements(kv.Key)).OfType<Room>();
-
-            var pointIntersectionFactory =
-                new ElementPointIntersectionFactory(_doc, _links, _globalFilter)
-                {
-                    Logger = Logger
-                }.SetExcludedElementIds(ExcludedIds.ToList());
-
-            return new PointRoomTraversable(_doc, _links, rooms)
+          
+            return new PointRoomValidator(_doc, _links, rooms)
             {
                 Logger = Logger,
                 ExcludeFields = ExcludeFields,
                 WindowMessenger = WindowMessenger,
-                PointIntersectionFactory = pointIntersectionFactory, 
+                PointIntersectionFactory = PointIntersectionFactory,
                 StrictFieldCompliance = StrictFieldCompliance
             };
         }

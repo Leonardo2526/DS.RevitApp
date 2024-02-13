@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.MEPTools.App", "..\DS.MEPTools\DS.MEPTools.App\DS.MEPTools.App.csproj", "{B23201A8-CB98-463E-B603-B3E3EA9A2F80}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OLMP.RevitAPI.Core", "..\..\OLMP.RevitAPI\OLMP.RevitAPI.Core\OLMP.RevitAPI.Core.csproj", "{7E9115C0-EDDA-47B1-AD96-DD90309AF402}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{B23201A8-CB98-463E-B603-B3E3EA9A2F80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B23201A8-CB98-463E-B603-B3E3EA9A2F80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B23201A8-CB98-463E-B603-B3E3EA9A2F80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E9115C0-EDDA-47B1-AD96-DD90309AF402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E9115C0-EDDA-47B1-AD96-DD90309AF402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E9115C0-EDDA-47B1-AD96-DD90309AF402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E9115C0-EDDA-47B1-AD96-DD90309AF402}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
