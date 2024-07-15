@@ -6,7 +6,7 @@
     <LangVersion>latest</LangVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{12DA88A7-C723-438C-A2BE-5BF3B6F07EE1}</ProjectGuid>
+    <ProjectGuid>{06B2BD12-F81B-4B1F-9B6C-F3B61EE8A7F7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DS.MEPCurveTraversability.UI</RootNamespace>

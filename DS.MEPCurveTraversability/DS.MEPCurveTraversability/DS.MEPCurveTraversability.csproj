@@ -38,8 +38,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, PublicKeyToken=null" />
-    <Reference Include="MoreLinq, Version=4.1.0.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
-      <HintPath>..\packages\morelinq.4.1.0\lib\netstandard2.0\MoreLinq.dll</HintPath>
+    <Reference Include="MoreLinq, Version=4.2.0.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Olimproekt\MEPAutoCoordination\packages\morelinq.4.2.0\lib\netstandard2.0\MoreLinq.dll</HintPath>
     </Reference>
     <Reference Include="OLMP.RevitAPI.Core">
       <HintPath>..\..\..\OLMP.RevitAPI\OLMP.RevitAPI.Core\bin\Debug\OLMP.RevitAPI.Core.dll</HintPath>
@@ -131,8 +131,12 @@
       <Project>{adbccd01-0c09-4853-9d9b-12733d809962}</Project>
       <Name>DS.MEPCurveTraversability.Presenters</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DS.MEPCurveTraversability.UI\DS.MEPCurveTraversability.UI.csproj">
+    <ProjectReference Include="..\..\..\Olimproekt\MEPAutoCoordination\OLMP.MEPAC.UI\OLMP.MEPAC.UI.csproj">
       <Project>{12da88a7-c723-438c-a2be-5bf3b6f07ee1}</Project>
+      <Name>OLMP.MEPAC.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DS.MEPCurveTraversability.UI\DS.MEPCurveTraversability.UI.csproj">
+      <Project>{06b2bd12-f81b-4b1f-9b6c-f3b61ee8a7f7}</Project>
       <Name>DS.MEPCurveTraversability.UI</Name>
     </ProjectReference>
   </ItemGroup>
