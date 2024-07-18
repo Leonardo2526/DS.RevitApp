@@ -1,1 +1,1 @@
-﻿A project for creating a C# class library that targets on .Net Framework.
+﻿Представляет ViewModels для интерфейса программы "MEPCurveTraversability".

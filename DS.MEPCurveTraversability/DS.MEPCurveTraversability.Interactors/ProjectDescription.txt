@@ -1,1 +1,1 @@
-﻿A project for creating a C# class library that targets on .Net Framework.
+﻿Представляет различные варианты использования валидаторов для программы "MEPCurveTraversability".
